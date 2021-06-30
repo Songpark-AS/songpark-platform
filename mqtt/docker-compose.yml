@@ -28,6 +28,18 @@ services:
       - mqtt
     networks:
       - my-network
+  
+  socket:
+    build:
+      context: ./app-socket
+      dockerfile: Dockerfile
+    environment: 
+      - MQTT_HOST=mosquitto
+      - MQTT_PORT=8000
+    depends_on:
+      - mqtt
+    networks:
+      - my-network
 
 networks:
     my-network:
