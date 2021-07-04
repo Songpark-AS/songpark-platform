@@ -1,0 +1,5 @@
+{:http {:server-settings {:port 3000
+                          :join? true
+                          :http/cookies {:http-only true}}}
+ :google {:credentials-file "google-credentials.json"}
+ :carmine {:session {:pool {} :spec {}}}}
