@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="Leiningen: com.google.api.grpc/proto-google-cloud-speech-v1p1beta1:0.75.5">
-    <CLASSES>
-      <root url="jar://$MAVEN_REPOSITORY$/com/google/api/grpc/proto-google-cloud-speech-v1p1beta1/0.75.5/proto-google-cloud-speech-v1p1beta1-0.75.5.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>

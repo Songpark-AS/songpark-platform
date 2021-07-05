@@ -2,7 +2,7 @@
   (:require [platform.aws :as aws]
             [platform.config :refer [config]]
             [platform.database :as database]
-            [platform.google :as google]
+
             [platform.http.server :as http.server]
             [platform.logger :as logger]
             [platform.migrator :as migrator]

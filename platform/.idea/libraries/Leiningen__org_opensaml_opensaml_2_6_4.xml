@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="Leiningen: org.opensaml/opensaml:2.6.4">
-    <CLASSES>
-      <root url="jar://$MAVEN_REPOSITORY$/org/opensaml/opensaml/2.6.4/opensaml-2.6.4.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>

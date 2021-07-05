@@ -3,7 +3,7 @@
             [clojure.spec.alpha :as spec]
             [ez-database.core :as db]
             [ez-database.transform :as transform]
-    #_ [songpark.taxonomy.auth]))
+            [songpark.taxonomy.auth]))
 
 
 (transform/add :auth-user :auth.user/user

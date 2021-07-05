@@ -1,6 +1,6 @@
 (ns platform.model.locale
   (:require [ez-database.model :as model :refer [defmodel]]
-            #_ [songpark.taxonomy.locale]))
+            [songpark.taxonomy.locale]))
 
 (defmodel LocaleModel {:model {:table :locale_locale
                                :constraints #{[:= :id :locale/id]}}
