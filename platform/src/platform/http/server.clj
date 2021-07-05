@@ -27,8 +27,7 @@
                                        :http/cookies (:http/cookies server-settings)
                                        :frontend (:frontend config)
                                        :songpark/data {:database database
-                                                          :aws aws
-                                                          #_#_:google google}})]
+                                                          :aws aws}})]
             (assoc this
                    :started? true
                    :server server)))))

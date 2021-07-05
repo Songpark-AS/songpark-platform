@@ -9,7 +9,7 @@
                  [org.clojure/core.memoize "1.0.236"]
 
                  ;; songpark libs
-                 #_ [songpark/taxonomy "0.3.1-SNAPSHOT"]
+                 [songpark/taxonomy "0.1.1-SNAPSHOT"]
 
                  ;; routing
                  [metosin/reitit "0.4.2"]
@@ -69,9 +69,6 @@
                  ;; aws
                  [amazonica "0.3.153"]
 
-                 ;; google cloud
-                 [com.google.cloud/google-cloud-speech "1.22.5"]
-
                  ;; utils
                  [danlentz/clj-uuid "0.1.9"]
                  [com.cemerick/url "0.1.1"]
@@ -79,10 +76,11 @@
 
                  [emil0r/clj-oauth2 "0.6.0"]
 
-                 ; Feide SAML
-                 [metabase/saml20-clj "1.0.2" :exclusions [org.clojure/data.zip]]
-                 ; since saml20-clj's version is obsolete
-                 [org.clojure/data.zip "1.0.0"]]
+                 ;; Feide SAML
+                 ;[metabase/saml20-clj "1.0.2" :exclusions [org.clojure/data.zip]]
+                 ;; since saml20-clj's version is obsolete
+                 ;[org.clojure/data.zip "1.0.0"]
+                 ]
 
   :uberjar-name "platform.jar"
 

@@ -1,6 +1,7 @@
 (ns platform.api.auth
   (:require [platform.model.auth :as model.auth]
-            [taoensso.timbre :as log]))
+            [taoensso.timbre :as log]
+            [songpark.taxonomy.auth]))
 
 
 (defn login [{{db :database} :data {{:auth.user/keys [email password]} :body} :parameters}]

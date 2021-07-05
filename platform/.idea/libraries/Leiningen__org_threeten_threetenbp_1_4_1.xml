@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="Leiningen: org.threeten/threetenbp:1.4.1">
-    <CLASSES>
-      <root url="jar://$MAVEN_REPOSITORY$/org/threeten/threetenbp/1.4.1/threetenbp-1.4.1.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>

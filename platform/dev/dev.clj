@@ -2,9 +2,7 @@
   (:require [platform.init :as init]
             [platform.test.util :refer [seed-db!]]
             [ez-database.core :as db]
-            [taoensso.timbre :as log]
-            [platform.model.examination :as model.examination]
-            [platform.api.examination :as api.examination]))
+            [taoensso.timbre :as log]))
 
 (defn restart
   "stop and start songpark"
@@ -34,19 +32,4 @@
   ;; how to quickly test something in the database
   (let [db (get-in @init/system [:database])]
     (db/query db {:select [:*] :from [:assignment_assignment]}))
-
-  ;; examinations
-  (let [db (get-in @init/system [:database])]
-    (db/query db {:select [:e.id, :e.name, :e.pass_percentage]
-                  :from [[:examination_examination :e]]
-                  :order-by [[:e.id :asc]]}))
-
-  (let [db (get-in @init/system [:database])]
-    (model.examination/examinations db))
-
-  (let [db (get-in @init/system [:database])
-        d {:data {:database db}}]
-    (api.examination/examinations d))
-
-
   )

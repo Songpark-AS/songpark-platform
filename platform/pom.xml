@@ -243,11 +243,7 @@
       <artifactId>amazonica</artifactId>
       <version>0.3.153</version>
     </dependency>
-    <dependency>
-      <groupId>com.google.cloud</groupId>
-      <artifactId>google-cloud-speech</artifactId>
-      <version>1.22.5</version>
-    </dependency>
+
     <dependency>
       <groupId>danlentz</groupId>
       <artifactId>clj-uuid</artifactId>
