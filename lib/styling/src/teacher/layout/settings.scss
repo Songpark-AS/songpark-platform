@@ -1,0 +1,7 @@
+@use "colors" as *;
+.settings {
+    color: $white;
+    .ant-radio-inner::after {
+        background-color: $green;
+    }
+}

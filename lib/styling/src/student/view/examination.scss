@@ -1,0 +1,131 @@
+@keyframes fade-in {
+    0% { opacity: 0; }
+    100% { opacity: 1;}
+}
+
+.examination-card {
+    height: calc(75vh - 40px - 64px);
+//    height: 60vh;
+    display: grid;
+    grid-template-rows: 70% 15% 15%;
+    grid-row-gap: 3rem;
+    justify-items: center;
+    //    align-items:revert;
+    color: black;
+    animation: fade-in 1s forwards;
+    .ant-card-body {
+	border:none!important;
+    }
+
+    .title-display {
+	display: flex;
+	flex-flow: column;
+	justify-content: center;
+    }
+
+    .buttons-and-timer {
+	display: flex;
+	flex-flow: row;
+	align-items: center;
+
+	button {
+	    padding: 0 2rem;
+	    border-radius: 10px;
+	    background: transparent;
+	    border: 1px solid lightgrey;
+	    outline: none;
+	    color: black;
+
+	    &::after {
+	    content: '\2794';
+	    padding-left: 0.5rem;
+	    }
+
+	    &:hover,
+	    &:focus {
+		border-color: black;
+	    }
+	}
+    }
+}
+
+.question-card {
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    align-items: center;
+    flex-direction: column;  /* make main axis vertical */
+    justify-content: center; /* center items vertically, in this case */
+}
+.question-player {
+    height: 300px;
+    min-height: 300px;
+    background: yellow;
+ }
+.question-media {
+    width: 100px;
+    // background: yellow;
+    display: flex;
+    flex-grow: 0;
+    flex-direction: row;
+    justify-content: space-around;
+ }
+.question-progress {
+  background: rgba(255,255,255,0.1);
+  justify-content: flex-start;
+  border-radius: 100px;
+  border: 1px solid Gainsboro;
+  align-items: center;
+  position: relative;
+  padding: 0 0;
+  display: flex;
+  height: 40px;
+  width: 500px;
+}
+.question-progress-value {
+  animation: load 3s normal forwards;
+  box-shadow: 0 10px 40px -10px #fff;
+  border-radius: 100px;
+  background: #fff;
+  height: 30px;
+  width: 0;
+  background: lilac;
+}
+.question-actions {
+    //background: ivory;
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+
+    button {
+            width: 128px;
+            margin: 0 2em;
+    	    padding: 0 2rem;
+    	    border-radius: 10px;
+    	    background: transparent;
+    	    border: 1px solid lightgrey;
+    	    outline: none;
+    	    color: black;
+
+            &::after {
+                    content: '\2192'; // placeholder so text width always same
+                    padding-left: 0.5rem;
+            }
+    	    &:hover,
+    	    &:focus {
+    		border-color: black;
+    	    }
+    	}
+    button.repeat-button {
+        &::after {
+        	    content: '\27F2';
+        	    padding-left: 0.5rem;
+        }
+    }
+    button.next-button {
+        &::after {
+                content: '\2192';
+                padding-left: 0.5rem;
+        }
+    }
+}

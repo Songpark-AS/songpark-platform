@@ -1,0 +1,137 @@
+$blue: #1890FF;
+$white: #FFFFFF;
+$grey: #666666;
+
+.ant-select {
+    width: 100%;
+}
+
+.ant-layout-header {
+    .ant-menu {
+        line-height: inherit;
+    }
+}
+
+.ant-breadcrumb {
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+    background-color: #fafafa;
+    padding: 5px 20px 5px 10px;
+    margin-left: -10px;
+}
+
+.anticon-up-square,
+.anticon-down-square,
+.anticon-minus-circle,
+.anticon-plus-circle {
+    font-size: 1.5rem;
+    line-height: 1.5rem;
+}
+
+form > table,
+form > div > table {
+    width: 100%
+}
+
+
+.modules {
+    h4 {
+        font-size: 1rem;
+    }
+    .ant-card {
+        max-width: 1000px;
+    }
+}
+
+.add-component {
+    padding: 10px 0 10px 1rem;
+}
+.edit-buttons {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: flex-end;
+    margin: 2rem 0 0.5rem 0;
+    .ant-btn {
+        margin-left: 2rem;
+    }
+}
+
+
+.error {
+    color: red;
+}
+
+form.login {
+    display: flex;
+    justify-content: center;
+    margin-top: 200px;
+    > div {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    table {
+        margin-bottom: 20px;
+        align-self: stretch;
+    }
+    .ant-btn {
+        align-self: flex-end;
+        
+    }
+}
+
+
+.select-search-adapter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .tip {
+        margin: 0 0.5rem;
+        font-size: 1rem;
+        color: green;
+    }
+}
+
+
+.informational-popover {
+    max-width: 300px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+audio {
+    outline: none;
+}
+
+.examinations, .questions {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.serials {
+    a {
+        color: $white;
+        background-color: $grey;
+        padding: 4px 8px;
+        border-radius: 3px;
+        margin-right: 10px;
+        &.active {
+            background-color: $blue;
+        }
+    }
+}
+
+td.input {
+    .ant-btn {
+        margin-right: 1rem;
+    }
+}
+
+.words-component-csv-input {
+    textarea {
+        width: 100%;
+        height: 600px;
+    }
+}

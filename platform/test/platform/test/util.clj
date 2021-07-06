@@ -82,17 +82,23 @@
                              (mapv :id))
                         (catch Exception _
                           nil))]
-    (prn :migids!!!!! migration-ids)
-    (when migration-ids
+
+    (prn :got-migs!! migration-ids
+
+    (when (seq migration-ids)
+      (prn :migids-down!!!!! migration-ids)
       (apply migratus/down (migrator/get-migration-map ds) migration-ids))))
 
 
 (defn run-migrations! [db]
+  (prn :startmigmgr)
   (component/start (migrator/migration-manager {:database db})))
 
 
 (defn prepare-db! [db]
+  (prn :cleaning)
   (cleanup-db! db)
+  (prn :migging)
   (run-migrations! db))
 
 
@@ -100,6 +106,7 @@
   (log/info "Seeding the database")
   ;; skip spam
   (log/set-level! :warn)
+  (prn :prepping)
   (prepare-db! db)
 
   ;; add superuser

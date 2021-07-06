@@ -1,0 +1,46 @@
+@use "colors" as *;
+
+
+@keyframes dash {
+    to {
+	stroke-dashoffset: 0;
+    }
+}
+
+@keyframes filler-up {
+    to {
+	fill: $white;
+    }
+}
+
+@keyframes fade-in {
+    to {
+	opacity: 1;
+    }
+}
+
+.login-screen {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+
+    button {
+	display: block;
+	border-radius: 20px;
+	background: $bg-dark;
+	border: 1px solid $white;
+	color: $white;
+	opacity: 0;
+	animation: fade-in 1.5s ease-in;
+	animation-delay: 2s;
+	animation-fill-mode: forwards;
+	&:hover {
+	    background: $bg-light;
+	    color: $bg-dark;
+	    border-color: $white!important;
+	}
+    }
+}

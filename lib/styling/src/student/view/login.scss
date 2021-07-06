@@ -1,0 +1,19 @@
+.login-view {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    table {
+        td {
+            padding: 5px 10px;
+            input {
+                min-width: 200px;
+            }
+            text-align: left;
+        }
+    }
+    button {
+        margin-top: 2rem;
+        margin-left: 10px;
+    }
+}

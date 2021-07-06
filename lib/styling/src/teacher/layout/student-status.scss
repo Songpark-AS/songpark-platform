@@ -1,0 +1,23 @@
+@use "../colors" as *;
+
+
+.assignment-result {
+     display: flex;
+     // this css is neat but the same content gets handled by printJS to
+     // generate PDFs, and printJS does not reliably handle all CSS, including these.
+     //
+     //      div:first-child>span {
+     //          &::after {
+     //              content: ": ";
+     //          }
+     //      }
+     margin-bottom: 1rem;
+     span {
+        margin-right: 0.25rem;
+     }
+     //strong {
+     //          &::after {
+     //              content: ": ";
+     //          }
+     //}
+}

@@ -19,6 +19,7 @@
 (defrecord MigrationManager [database started?]
   component/Lifecycle
   (start [this]
+    (prn :mmstart! started?)
     (if started?
       this
       (let [this (assoc this :started? true)]
@@ -33,8 +34,10 @@
   
   IMigrator
   (migrate [this]
+    (prn :imig!! this (get-in database [:db-specs :default :datasource]))
     (if-let [ds (get-in database [:db-specs :default :datasource])]
       (let [mmap (get-migration-map ds)]
+        (prn :migmap!!!! mmap)
         (log/info "Starting migrations")
         (migratus/migrate mmap))
       (log/warn "No database found for migrations")))

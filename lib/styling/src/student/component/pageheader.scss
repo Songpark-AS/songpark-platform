@@ -1,0 +1,19 @@
+.ant-page-header-heading {
+    .ant-page-header-heading-extra {
+        .anticon-setting {
+            margin-top: 2px;
+            svg {
+                width: 24px;
+                height: 24px;
+            }
+        }
+    }
+}
+
+// Override ant design's extra. Will only 
+.ant-page-header-heading-extra {
+    float: right;
+    clear: unset;
+    width: auto;
+    padding-top: 0;
+}

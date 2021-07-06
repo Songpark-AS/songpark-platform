@@ -1,0 +1,46 @@
+VERSION.git
+logs/
+
+# platform
+/platform/target
+/platform/classes
+/platform/checkouts
+/platform/profiles.clj
+/platform/pom.xml
+/platform/pom.xml.asc
+/platform/*.jar
+/platform/*.class
+/platform/.lein-*
+/platform/.nrepl-port
+/platform/.docker
+/platform/logs
+/platform/dev/scratch*
+/platform/.docker/*
+/platform/.clj-kondo
+/platform/resources/google-credentials.json
+/platform/resources/config.edn
+/platform/resources/public/js
+/platform/resources/public/css
+
+# lib
+/lib/*/target
+/lib/*/classes
+/lib/*/checkouts
+/lib/*/profiles.clj
+/lib/*/pom.xml
+/lib/*/pom.xml.asc
+/lib/*/*.jar
+/lib/*/*.class
+/lib/*/.lein-*
+/lib/*/.nrepl-port
+/lib/*/node_modules
+/lib/*/resources/public/js/compiled
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
+
+**/.DS_Store
+**/.idea
+

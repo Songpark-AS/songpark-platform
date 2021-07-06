@@ -1,0 +1,127 @@
+@use "colors" as *;
+
+$grid-size: 24px;
+
+
+.tracks-tab {
+    background-color: $bg-dark;
+}
+
+.tracks {
+    margin-top: 2rem;
+    height: 10%;
+    border-radius: 8px;
+    background-color: $bg-dark!important;
+    left:0;
+
+    div[role=tablist] {
+        margin: 0;
+
+	.ant-tabs-nav-list {
+	    width: 100%;
+	    display: flex;
+	    flex-flow: row nowrap;
+	    justify-content: space-evenly;
+
+	    .ant-tabs-tab {
+		&:nth-of-type(n+1):not(:nth-of-type(3)) {
+		    border-right: 1px solid $bg-light!important;
+		}
+		&:first-of-type {
+		    border-radius: 8px 0 0 0;
+		}
+		&:nth-of-type(3) {
+		    border-radius: 0 8px 0 0;
+		}
+
+		div[role=tab] {
+		    text-align: center;
+		    width: 100%;
+		    color: $bg-dark;
+		    font-weight: 500;
+		    font-size: 0.8rem;
+		}
+	    }
+	}
+    }
+}
+
+
+.grid {
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 2rem;
+    .infos {
+        .info {
+            color: $grey;
+            border-bottom: 1px $light-grey solid;
+            min-width: 300px;
+            min-height: $grid-size + 1px;
+            border-right: 1px $light-grey solid;
+            padding: 0 15px;
+        }
+    }
+    .dimension-name {
+        padding: 6px;
+        > span {
+            color: $grey;
+        }
+    }
+    .cells-container {
+        overflow-x: scroll;
+        scroll-snap-type: x;
+        border-right: 1px solid $grey;
+        .cells {
+            display: flex;
+            flex-direction: row;
+            color: $grey;
+            .column-no {
+                border-right-color: transparent !important;
+            }
+
+            .cell {
+                min-width: $grid-size;
+                min-height: $grid-size;
+                line-height: $grid-size;
+                text-align: center;
+                border-right: 1px $light-grey solid;
+                border-bottom: 1px $light-grey solid;
+                > div {
+                    width: $grid-size;
+                    height: $grid-size;
+                    background: no-repeat center;
+	            box-sizing: content-box!important;
+                }
+
+                .sendable {
+                    background-size: 14px;
+                    background-image: url('../img/assignment-ready-yellow.svg');
+                }
+
+	        .sent {
+                    background-size: 14px;
+                    background-image: url('../img/assignment-sent-blue.svg');
+                }
+                .received {
+                    background-size: 14px;
+                    background-image: url('../img/assignment-done-blue.svg');
+                }
+
+	        .passed {
+                    background-color: $green;
+                }
+
+	        .failed {
+                    background-size: 14px;
+                    background-image: url('../img/assignment-failed-red.svg');
+                }
+
+                .clicked {
+                    border: 2px solid $clicked;
+                    width: $grid-size - 2px * 2;
+                    height: $grid-size - 2px * 2;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,174 @@
+@use "colors" as *;
+@use "../vendor/include-media" as *;
+
+.ant-modal {
+    &.scoring,
+    &.scoring-main {
+	width: 65%!important;
+	.ant-modal-body {
+	    margin: 0 auto;
+	    padding: 2rem;
+
+	    .no-scoring {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+
+		button {
+		    margin-top: 1rem;
+		}
+	    }
+
+	    .category-and-requirements {
+		font-size: 1rem;
+		margin-bottom: 2rem;
+	    }
+
+
+	    .queries-responses-progress {
+		display: flex;
+		flex-flow: row nowrap;
+		.responses {
+		    background: $bg-dark;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		padding: 1rem;
+		flex: 1 1 75%;
+
+		.query-posed {
+		    font-size: 1.5rem;
+		}
+
+		.response-audio {
+		    span[role=img] {
+			font-size: 2rem;
+			color: $grey-active;
+		    }
+		}
+
+		.query-count {
+		    padding-top: 1rem;
+		    width: 100%;
+		    text-align: center;
+		}
+		}
+	    }
+
+	    .ant-radio-group {
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+		flex: 1 1 25%;
+		@include media('<=1024px') {
+		    margin-left: 1rem;
+		}
+
+		div {
+		    div {
+			position: relative;
+
+			&:first-of-type {
+			    margin-bottom: 1rem;
+			}
+		    }
+
+		    .approved, .failed {
+			background: $bg-dark;
+			border-radius: 15px;
+			color: white;
+			width: 12em;
+			text-align: center;
+			border: none;
+		    }
+
+		    .green-check {
+			position: absolute;
+			top: 25%;
+			left: 23%;
+			z-index: 2;
+			width: 0;
+			height: 0;
+			pointer-events: none;
+			display: inline-block;
+			transform: rotate(45deg);
+			height: 12px;
+			width: 6px;
+			border-bottom: 3px solid #30C12F;
+			border-right: 3px solid #30C12F;
+		    }
+
+		    .red-fail {
+			position: absolute;
+		    top: 30%;
+		    left: 14%;
+		    z-index: 2;
+		    width: 0;
+		    height: 0;
+		    pointer-events: none;
+		    border-left: 6px solid transparent;
+		    border-right: 6px solid transparent;
+		    border-bottom: 10px solid #F5542E;
+		}
+
+		label span:last-child {
+		    display: inline-block;
+		    transform: translateY(2px);
+		}
+
+		.ant-radio-button-wrapper-checked {
+		    border: 3px solid white;
+		    & span:last-child {
+			transform: translateY(0px);
+
+			@include media('<=1024px') {
+			    transform: translateY(-2px);
+			}
+		    }
+		}
+		}
+	    }
+
+	.notes-and-buttons {
+	    margin-top: 2rem;
+
+	    .notes .ant-input {
+		border: none;
+		background: $bg-dark;
+		color: $grey-active;
+	    }
+
+	    ::placeholder {
+		color: $grey-inactive;
+	    }
+
+	    div:last-child {
+		margin-top: 2rem;
+		display: flex;
+		flex-flow: row nowrap;
+		justify-content: center;
+
+		button {
+		    margin-right: 1.25rem;
+		}
+	    }
+	}
+	}
+    }
+
+    &.scoring-main {
+	.ant-modal-header {
+	    border-bottom: 1px solid $grey-inactive;
+	}
+
+	.ant-modal-footer {
+	    display: none;
+	}
+
+	.ant-modal-body {
+	    	background: $bg-light;
+	}
+    }
+}

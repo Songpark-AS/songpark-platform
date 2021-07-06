@@ -163,3 +163,221 @@
 21-07-05 18:32:22 Kenneths-Air.fios-router.home INFO [com.zaxxer.hikari.HikariDataSource:352] - HikariPool-1 - Shutdown completed.
 21-07-05 18:32:22 Kenneths-Air.fios-router.home INFO [platform.database:97] - Closed datasource for :default
 21-07-05 18:32:22 Kenneths-Air.fios-router.home INFO [platform.init:46] - songpark platform is now shut down
+21-07-06 11:50:20 Kenneths-Air.fios-router.home INFO [platform.logger:19] - Starting Logger
+21-07-06 11:50:20 Kenneths-Air.fios-router.home INFO [platform.database:78] - Starting database
+21-07-06 11:50:20 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.HikariConfig:1020] - HikariPool-1 - configuration:
+21-07-06 11:50:20 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.HikariConfig:1052] - allowPoolSuspension.............false
+21-07-06 11:50:20 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.HikariConfig:1052] - autoCommit......................true
+21-07-06 11:50:20 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.HikariConfig:1052] - catalog.........................none
+21-07-06 11:50:20 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.HikariConfig:1052] - connectionInitSql...............none
+21-07-06 11:50:20 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.HikariConfig:1052] - connectionTestQuery.............none
+21-07-06 11:50:20 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.HikariConfig:1052] - connectionTimeout...............30000
+21-07-06 11:50:20 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.HikariConfig:1052] - dataSource......................none
+21-07-06 11:50:20 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.HikariConfig:1052] - dataSourceClassName............."org.postgresql.ds.PGSimpleDataSource"
+21-07-06 11:50:20 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.HikariConfig:1052] - dataSourceJNDI..................none
+21-07-06 11:50:20 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.HikariConfig:1052] - dataSourceProperties............{password=<masked>, databaseName=songpark, serverName=localhost, portNumber=5432}
+21-07-06 11:50:20 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.HikariConfig:1052] - driverClassName.................none
+21-07-06 11:50:20 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.HikariConfig:1052] - healthCheckProperties...........{}
+21-07-06 11:50:20 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.HikariConfig:1052] - healthCheckRegistry.............none
+21-07-06 11:50:20 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.HikariConfig:1052] - idleTimeout.....................600000
+21-07-06 11:50:20 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.HikariConfig:1052] - initializationFailTimeout.......1
+21-07-06 11:50:20 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.HikariConfig:1052] - isolateInternalQueries..........false
+21-07-06 11:50:20 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.HikariConfig:1052] - jdbcUrl.........................none
+21-07-06 11:50:20 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.HikariConfig:1052] - leakDetectionThreshold..........0
+21-07-06 11:50:20 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.HikariConfig:1052] - maxLifetime.....................1800000
+21-07-06 11:50:20 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.HikariConfig:1052] - maximumPoolSize.................3
+21-07-06 11:50:20 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.HikariConfig:1052] - metricRegistry..................none
+21-07-06 11:50:20 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.HikariConfig:1052] - metricsTrackerFactory...........none
+21-07-06 11:50:20 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.HikariConfig:1052] - minimumIdle.....................3
+21-07-06 11:50:20 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.HikariConfig:1052] - password........................<masked>
+21-07-06 11:50:20 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.HikariConfig:1052] - poolName........................"HikariPool-1"
+21-07-06 11:50:20 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.HikariConfig:1052] - readOnly........................false
+21-07-06 11:50:20 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.HikariConfig:1052] - registerMbeans..................false
+21-07-06 11:50:20 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.HikariConfig:1052] - scheduledExecutor...............none
+21-07-06 11:50:20 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.HikariConfig:1052] - schema..........................none
+21-07-06 11:50:20 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.HikariConfig:1052] - threadFactory...................internal
+21-07-06 11:50:20 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.HikariConfig:1052] - transactionIsolation............default
+21-07-06 11:50:20 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.HikariConfig:1052] - username........................"postgres"
+21-07-06 11:50:20 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.HikariConfig:1052] - validationTimeout...............5000
+21-07-06 11:50:20 Kenneths-Air.fios-router.home INFO [com.zaxxer.hikari.HikariDataSource:80] - HikariPool-1 - Starting...
+21-07-06 11:50:20 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:566] - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@85454c3
+21-07-06 11:50:20 Kenneths-Air.fios-router.home INFO [com.zaxxer.hikari.HikariDataSource:82] - HikariPool-1 - Start completed.
+21-07-06 11:50:20 Kenneths-Air.fios-router.home INFO [platform.migrator:25] - Starting MigrationManager
+21-07-06 11:50:20 Kenneths-Air.fios-router.home INFO [platform.migrator:38] - Starting migrations
+21-07-06 11:50:20 Kenneths-Air.fios-router.home INFO [migratus.core:286] - Starting migrations
+21-07-06 11:50:20 Kenneths-Air.fios-router.home INFO [migratus.database:286] - creating migration table 'migrations'
+21-07-06 11:50:20 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - Pool stats (total=1, active=1, idle=0, waiting=0)
+21-07-06 11:50:20 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:730] - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@bfc2c21
+21-07-06 11:50:20 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:730] - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@2429365a
+21-07-06 11:50:20 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - After adding stats (total=3, active=1, idle=2, waiting=0)
+21-07-06 11:50:20 Kenneths-Air.fios-router.home DEBUG [migratus.migrations:286] - Looking for migrations in #object[java.io.File 0x7ea1d67 /Users/kennethtilton/inonit/cantavi/songpark-platform/platform/resources/migrations]
+21-07-06 11:50:20 Kenneths-Air.fios-router.home INFO [migratus.core:286] - Ending migrations
+21-07-06 11:50:20 Kenneths-Air.fios-router.home INFO [platform.aws:30] - Starting AWS client
+21-07-06 11:50:20 Kenneths-Air.fios-router.home INFO [platform.http.server:22] - Starting HTTPServer
+21-07-06 11:50:50 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - Pool stats (total=3, active=0, idle=3, waiting=0)
+21-07-06 11:51:20 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - Pool stats (total=3, active=0, idle=3, waiting=0)
+21-07-06 11:51:50 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - Pool stats (total=3, active=0, idle=3, waiting=0)
+21-07-06 11:52:20 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - Pool stats (total=3, active=0, idle=3, waiting=0)
+21-07-06 11:52:50 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - Pool stats (total=3, active=0, idle=3, waiting=0)
+21-07-06 11:53:20 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - Pool stats (total=3, active=0, idle=3, waiting=0)
+21-07-06 11:53:50 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - Pool stats (total=3, active=0, idle=3, waiting=0)
+21-07-06 11:54:20 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - Pool stats (total=3, active=0, idle=3, waiting=0)
+21-07-06 11:54:50 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - Pool stats (total=3, active=0, idle=3, waiting=0)
+21-07-06 11:55:20 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - Pool stats (total=3, active=0, idle=3, waiting=0)
+21-07-06 11:55:50 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - Pool stats (total=3, active=0, idle=3, waiting=0)
+21-07-06 11:56:20 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - Pool stats (total=3, active=0, idle=3, waiting=0)
+21-07-06 11:56:50 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - Pool stats (total=3, active=0, idle=3, waiting=0)
+21-07-06 11:57:20 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - Pool stats (total=3, active=0, idle=3, waiting=0)
+21-07-06 11:57:50 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - Pool stats (total=3, active=0, idle=3, waiting=0)
+21-07-06 11:58:20 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - Pool stats (total=3, active=0, idle=3, waiting=0)
+21-07-06 11:58:50 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - Pool stats (total=3, active=0, idle=3, waiting=0)
+21-07-06 11:59:20 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - Pool stats (total=3, active=0, idle=3, waiting=0)
+21-07-06 11:59:51 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - Pool stats (total=3, active=0, idle=3, waiting=0)
+21-07-06 12:00:21 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - Pool stats (total=3, active=0, idle=3, waiting=0)
+21-07-06 12:00:51 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - Pool stats (total=3, active=0, idle=3, waiting=0)
+21-07-06 12:01:21 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - Pool stats (total=3, active=0, idle=3, waiting=0)
+21-07-06 12:01:51 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - Pool stats (total=3, active=0, idle=3, waiting=0)
+21-07-06 12:02:21 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - Pool stats (total=3, active=0, idle=3, waiting=0)
+21-07-06 12:02:51 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - Pool stats (total=3, active=0, idle=3, waiting=0)
+21-07-06 12:03:21 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - Pool stats (total=3, active=0, idle=3, waiting=0)
+21-07-06 12:21:44 Kenneths-Air.fios-router.home WARN [com.zaxxer.hikari.pool.HikariPool:787] - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=18m23s376ms).
+21-07-06 12:21:44 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - Pool stats (total=3, active=0, idle=3, waiting=0)
+21-07-06 12:22:14 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - Pool stats (total=3, active=0, idle=3, waiting=0)
+21-07-06 12:40:12 Kenneths-Air.fios-router.home WARN [com.zaxxer.hikari.pool.HikariPool:787] - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=17m57s768ms).
+21-07-06 12:40:12 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - Pool stats (total=3, active=0, idle=3, waiting=0)
+21-07-06 12:40:42 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - Pool stats (total=3, active=0, idle=3, waiting=0)
+21-07-06 12:58:57 Kenneths-Air.fios-router.home WARN [com.zaxxer.hikari.pool.HikariPool:787] - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=18m15s161ms).
+21-07-06 12:58:57 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - Pool stats (total=3, active=0, idle=3, waiting=0)
+21-07-06 13:07:48 Kenneths-Air.fios-router.home WARN [com.zaxxer.hikari.pool.HikariPool:787] - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=8m50s834ms).
+21-07-06 13:07:48 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - Pool stats (total=3, active=0, idle=3, waiting=0)
+21-07-06 13:08:18 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - Pool stats (total=3, active=0, idle=3, waiting=0)
+21-07-06 13:08:48 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - Pool stats (total=3, active=0, idle=3, waiting=0)
+21-07-06 13:09:18 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - Pool stats (total=3, active=0, idle=3, waiting=0)
+21-07-06 13:09:48 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - Pool stats (total=3, active=0, idle=3, waiting=0)
+21-07-06 13:10:18 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - Pool stats (total=3, active=0, idle=3, waiting=0)
+21-07-06 13:10:48 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - Pool stats (total=3, active=0, idle=3, waiting=0)
+21-07-06 13:11:18 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - Pool stats (total=3, active=0, idle=3, waiting=0)
+21-07-06 13:11:48 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - Pool stats (total=3, active=0, idle=3, waiting=0)
+21-07-06 13:12:18 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - Pool stats (total=3, active=0, idle=3, waiting=0)
+21-07-06 13:12:48 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - Pool stats (total=3, active=0, idle=3, waiting=0)
+21-07-06 13:13:18 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - Pool stats (total=3, active=0, idle=3, waiting=0)
+21-07-06 13:13:48 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - Pool stats (total=3, active=0, idle=3, waiting=0)
+21-07-06 13:14:18 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - Pool stats (total=3, active=0, idle=3, waiting=0)
+21-07-06 13:14:48 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - Pool stats (total=3, active=0, idle=3, waiting=0)
+21-07-06 13:15:18 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - Pool stats (total=3, active=0, idle=3, waiting=0)
+21-07-06 13:15:48 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - Pool stats (total=3, active=0, idle=3, waiting=0)
+21-07-06 13:16:19 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - Pool stats (total=3, active=0, idle=3, waiting=0)
+21-07-06 13:16:49 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - Pool stats (total=3, active=0, idle=3, waiting=0)
+21-07-06 13:17:19 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - Pool stats (total=3, active=0, idle=3, waiting=0)
+21-07-06 13:17:49 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - Pool stats (total=3, active=0, idle=3, waiting=0)
+21-07-06 13:18:19 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - Pool stats (total=3, active=0, idle=3, waiting=0)
+21-07-06 13:18:49 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - Pool stats (total=3, active=0, idle=3, waiting=0)
+21-07-06 13:19:19 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - Pool stats (total=3, active=0, idle=3, waiting=0)
+21-07-06 13:19:49 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - Pool stats (total=3, active=0, idle=3, waiting=0)
+21-07-06 13:20:19 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - Pool stats (total=3, active=0, idle=3, waiting=0)
+21-07-06 13:20:49 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - Pool stats (total=3, active=0, idle=3, waiting=0)
+21-07-06 13:21:19 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - Pool stats (total=3, active=0, idle=3, waiting=0)
+21-07-06 13:21:23 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.PoolBase:129] - HikariPool-1 - Closing connection org.postgresql.jdbc.PgConnection@bfc2c21: (connection has passed maxLifetime)
+21-07-06 13:21:23 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:730] - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@21bc56b0
+21-07-06 13:21:29 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.PoolBase:129] - HikariPool-1 - Closing connection org.postgresql.jdbc.PgConnection@85454c3: (connection has passed maxLifetime)
+21-07-06 13:21:29 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:730] - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@375e2c2e
+21-07-06 13:21:35 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.PoolBase:129] - HikariPool-1 - Closing connection org.postgresql.jdbc.PgConnection@2429365a: (connection has passed maxLifetime)
+21-07-06 13:21:35 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:730] - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@1b3df912
+21-07-06 13:21:49 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - Pool stats (total=3, active=0, idle=3, waiting=0)
+21-07-06 13:22:19 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - Pool stats (total=3, active=0, idle=3, waiting=0)
+21-07-06 13:22:49 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - Pool stats (total=3, active=0, idle=3, waiting=0)
+21-07-06 13:23:19 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - Pool stats (total=3, active=0, idle=3, waiting=0)
+21-07-06 13:23:49 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - Pool stats (total=3, active=0, idle=3, waiting=0)
+21-07-06 13:24:19 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - Pool stats (total=3, active=0, idle=3, waiting=0)
+21-07-06 13:24:49 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - Pool stats (total=3, active=0, idle=3, waiting=0)
+21-07-06 13:25:19 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - Pool stats (total=3, active=0, idle=3, waiting=0)
+21-07-06 13:25:49 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - Pool stats (total=3, active=0, idle=3, waiting=0)
+21-07-06 13:26:19 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - Pool stats (total=3, active=0, idle=3, waiting=0)
+21-07-06 13:26:49 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - Pool stats (total=3, active=0, idle=3, waiting=0)
+21-07-06 13:27:19 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - Pool stats (total=3, active=0, idle=3, waiting=0)
+21-07-06 13:27:49 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - Pool stats (total=3, active=0, idle=3, waiting=0)
+21-07-06 13:28:19 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - Pool stats (total=3, active=0, idle=3, waiting=0)
+21-07-06 13:28:49 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - Pool stats (total=3, active=0, idle=3, waiting=0)
+21-07-06 13:29:19 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - Pool stats (total=3, active=0, idle=3, waiting=0)
+21-07-06 13:29:49 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - Pool stats (total=3, active=0, idle=3, waiting=0)
+21-07-06 13:30:19 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - Pool stats (total=3, active=0, idle=3, waiting=0)
+21-07-06 13:30:49 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - Pool stats (total=3, active=0, idle=3, waiting=0)
+21-07-06 13:31:19 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - Pool stats (total=3, active=0, idle=3, waiting=0)
+21-07-06 13:31:49 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - Pool stats (total=3, active=0, idle=3, waiting=0)
+21-07-06 13:32:19 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - Pool stats (total=3, active=0, idle=3, waiting=0)
+21-07-06 13:32:49 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - Pool stats (total=3, active=0, idle=3, waiting=0)
+21-07-06 13:33:19 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - Pool stats (total=3, active=0, idle=3, waiting=0)
+21-07-06 13:33:49 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - Pool stats (total=3, active=0, idle=3, waiting=0)
+21-07-06 13:34:19 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - Pool stats (total=3, active=0, idle=3, waiting=0)
+21-07-06 13:34:50 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - Pool stats (total=3, active=0, idle=3, waiting=0)
+21-07-06 13:35:20 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - Pool stats (total=3, active=0, idle=3, waiting=0)
+21-07-06 13:35:50 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - Pool stats (total=3, active=0, idle=3, waiting=0)
+21-07-06 13:36:20 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - Pool stats (total=3, active=0, idle=3, waiting=0)
+21-07-06 13:36:34 Kenneths-Air.fios-router.home INFO [platform.init:42] - Shutting songpark platform down
+21-07-06 13:36:34 Kenneths-Air.fios-router.home INFO [platform.config:29] - Stopping ConfigManager
+21-07-06 13:36:34 Kenneths-Air.fios-router.home INFO [platform.config:30] - Unloading configuration
+21-07-06 13:36:34 Kenneths-Air.fios-router.home INFO [platform.logger:25] - Stopping Logger
+21-07-06 13:36:34 Kenneths-Air.fios-router.home INFO [platform.http.server:37] - Stopping HTTPServer
+21-07-06 13:36:34 Kenneths-Air.fios-router.home INFO [platform.aws:37] - Stopping AWS client
+21-07-06 13:36:34 Kenneths-Air.fios-router.home INFO [platform.migrator:31] - Stopping MigrationManager
+21-07-06 13:36:34 Kenneths-Air.fios-router.home INFO [platform.database:94] - Stopping database
+21-07-06 13:36:34 Kenneths-Air.fios-router.home INFO [com.zaxxer.hikari.HikariDataSource:350] - HikariPool-1 - Shutdown initiated...
+21-07-06 13:36:34 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - Before shutdown stats (total=3, active=0, idle=3, waiting=0)
+21-07-06 13:36:34 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.PoolBase:129] - HikariPool-1 - Closing connection org.postgresql.jdbc.PgConnection@21bc56b0: (connection evicted)
+21-07-06 13:36:34 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.PoolBase:129] - HikariPool-1 - Closing connection org.postgresql.jdbc.PgConnection@375e2c2e: (connection evicted)
+21-07-06 13:36:34 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.PoolBase:129] - HikariPool-1 - Closing connection org.postgresql.jdbc.PgConnection@1b3df912: (connection evicted)
+21-07-06 13:36:34 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - After shutdown stats (total=0, active=0, idle=0, waiting=0)
+21-07-06 13:36:34 Kenneths-Air.fios-router.home INFO [com.zaxxer.hikari.HikariDataSource:352] - HikariPool-1 - Shutdown completed.
+21-07-06 13:36:34 Kenneths-Air.fios-router.home INFO [platform.database:97] - Closed datasource for :default
+21-07-06 13:36:34 Kenneths-Air.fios-router.home INFO [platform.init:46] - songpark platform is now shut down
+21-07-06 15:32:54 Kenneths-Air.fios-router.home INFO [platform.logger:19] - Starting Logger
+21-07-06 15:32:54 Kenneths-Air.fios-router.home INFO [platform.database:78] - Starting database
+21-07-06 15:32:54 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.HikariConfig:1020] - HikariPool-1 - configuration:
+21-07-06 15:32:54 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.HikariConfig:1052] - allowPoolSuspension.............false
+21-07-06 15:32:54 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.HikariConfig:1052] - autoCommit......................true
+21-07-06 15:32:54 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.HikariConfig:1052] - catalog.........................none
+21-07-06 15:32:54 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.HikariConfig:1052] - connectionInitSql...............none
+21-07-06 15:32:54 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.HikariConfig:1052] - connectionTestQuery.............none
+21-07-06 15:32:54 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.HikariConfig:1052] - connectionTimeout...............30000
+21-07-06 15:32:54 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.HikariConfig:1052] - dataSource......................none
+21-07-06 15:32:54 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.HikariConfig:1052] - dataSourceClassName............."org.postgresql.ds.PGSimpleDataSource"
+21-07-06 15:32:54 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.HikariConfig:1052] - dataSourceJNDI..................none
+21-07-06 15:32:54 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.HikariConfig:1052] - dataSourceProperties............{password=<masked>, databaseName=songpark, serverName=localhost, portNumber=5432}
+21-07-06 15:32:54 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.HikariConfig:1052] - driverClassName.................none
+21-07-06 15:32:54 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.HikariConfig:1052] - healthCheckProperties...........{}
+21-07-06 15:32:54 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.HikariConfig:1052] - healthCheckRegistry.............none
+21-07-06 15:32:54 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.HikariConfig:1052] - idleTimeout.....................600000
+21-07-06 15:32:54 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.HikariConfig:1052] - initializationFailTimeout.......1
+21-07-06 15:32:54 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.HikariConfig:1052] - isolateInternalQueries..........false
+21-07-06 15:32:54 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.HikariConfig:1052] - jdbcUrl.........................none
+21-07-06 15:32:54 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.HikariConfig:1052] - leakDetectionThreshold..........0
+21-07-06 15:32:54 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.HikariConfig:1052] - maxLifetime.....................1800000
+21-07-06 15:32:54 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.HikariConfig:1052] - maximumPoolSize.................3
+21-07-06 15:32:54 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.HikariConfig:1052] - metricRegistry..................none
+21-07-06 15:32:54 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.HikariConfig:1052] - metricsTrackerFactory...........none
+21-07-06 15:32:54 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.HikariConfig:1052] - minimumIdle.....................3
+21-07-06 15:32:54 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.HikariConfig:1052] - password........................<masked>
+21-07-06 15:32:54 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.HikariConfig:1052] - poolName........................"HikariPool-1"
+21-07-06 15:32:54 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.HikariConfig:1052] - readOnly........................false
+21-07-06 15:32:54 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.HikariConfig:1052] - registerMbeans..................false
+21-07-06 15:32:54 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.HikariConfig:1052] - scheduledExecutor...............none
+21-07-06 15:32:54 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.HikariConfig:1052] - schema..........................none
+21-07-06 15:32:54 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.HikariConfig:1052] - threadFactory...................internal
+21-07-06 15:32:54 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.HikariConfig:1052] - transactionIsolation............default
+21-07-06 15:32:54 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.HikariConfig:1052] - username........................"postgres"
+21-07-06 15:32:54 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.HikariConfig:1052] - validationTimeout...............5000
+21-07-06 15:32:54 Kenneths-Air.fios-router.home INFO [com.zaxxer.hikari.HikariDataSource:80] - HikariPool-1 - Starting...
+21-07-06 15:32:54 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:566] - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@3e5b4881
+21-07-06 15:32:54 Kenneths-Air.fios-router.home INFO [com.zaxxer.hikari.HikariDataSource:82] - HikariPool-1 - Start completed.
+21-07-06 15:32:54 Kenneths-Air.fios-router.home INFO [platform.migrator:25] - Starting MigrationManager
+21-07-06 15:32:54 Kenneths-Air.fios-router.home INFO [platform.migrator:38] - Starting migrations
+21-07-06 15:32:54 Kenneths-Air.fios-router.home INFO [migratus.core:286] - Starting migrations
+21-07-06 15:32:54 Kenneths-Air.fios-router.home DEBUG [migratus.migrations:286] - Looking for migrations in #object[java.io.File 0xbeda0c4 /Users/kennethtilton/inonit/cantavi/songpark-platform/platform/resources/migrations]
+21-07-06 15:32:54 Kenneths-Air.fios-router.home INFO [migratus.core:286] - Ending migrations
+21-07-06 15:32:54 Kenneths-Air.fios-router.home INFO [platform.aws:30] - Starting AWS client
+21-07-06 15:32:54 Kenneths-Air.fios-router.home INFO [platform.http.server:22] - Starting HTTPServer
+21-07-06 15:32:54 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - Pool stats (total=1, active=0, idle=1, waiting=0)
+21-07-06 15:32:54 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:730] - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@7a12a49b
+21-07-06 15:32:54 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:730] - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@55c7b0dd
+21-07-06 15:32:54 Kenneths-Air.fios-router.home DEBUG [com.zaxxer.hikari.pool.HikariPool:417] - HikariPool-1 - After adding stats (total=3, active=0, idle=3, waiting=0)
+21-07-06 15:33:09 Kenneths-Air.fios-router.home INFO [platform.test.util:100] - Seeding the database

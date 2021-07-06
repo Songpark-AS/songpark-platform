@@ -11,9 +11,8 @@
 
 (comment
 
-  (migratus/create (migratus-config) "view-examination-expected-results-added-locale")
+  (migratus/create (migratus-config) "create-quint-table")
   (migratus/create (migratus-config) "view-student-history-added-locale")
-  (migratus/create (migratus-config) "view-assignment-student-locale")
   (migratus/migrate (migratus-config))
   (migratus/rollback (migratus-config))
   )

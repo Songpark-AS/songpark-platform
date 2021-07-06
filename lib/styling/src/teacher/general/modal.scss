@@ -1,0 +1,72 @@
+@use "../colors" as *;
+
+// .ant-modal.dark {
+//     color: $white;
+//     .ant-modal-content,
+//     .ant-modal-header {
+//         background-color: $light-grey;
+//     }
+//     .ant-modal-title {
+//         color: $white;
+//     }
+// }
+
+
+@use "colors" as *;
+
+.ant-modal {
+    .ant-modal-content {
+	background: $bg-light;
+	border-radius: 10px;
+	color: $white!important;
+
+	.ant-modal-header {
+	    background: inherit;
+	    border-radius: 10px 10px 0 0;
+	    text-align: center;
+	    border-color: transparent;
+
+	    &>div {
+		color: $white!important;
+	    }
+	}
+
+	.ant-modal-body {
+	    margin: 0 auto;
+	    width: 90%;
+	    background: $bg-dark;
+	    // Looks like inset shadow in design, but is that really a good idea?
+	    //box-shadow: inset 1px 1px 2px rgb(0 0 0 / 25%);
+
+	    h1,h2,h3,h4,h5,p,pre,div {
+		color: inherit;
+	    }
+
+	    .ant-checkbox-wrapper {
+		margin-right: 0.5rem;
+		color: inherit;
+		.ant-checkbox-inner {
+		    background-color: $bg-light;
+		    border-color: $bg-light;
+
+		}
+	    }
+	}
+
+	.ant-modal-footer {
+	    border-color: transparent;
+	    display: flex;
+	    flex-flow: row-reverse nowrap;
+	    justify-content: space-evenly;
+	    padding: 2rem 0;
+
+	    button {
+		flex: 0 1 25%;
+		border-radius: 20px;
+		background: $bg-dark;
+		border: 1px solid $white;
+		color: $white;
+	    }
+	}
+    }
+}

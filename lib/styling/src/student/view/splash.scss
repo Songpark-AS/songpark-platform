@@ -1,0 +1,78 @@
+.splash {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: transparent;
+    img {
+        width: 420px;
+        height: 208px;
+    }
+}
+
+.login-screen {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+
+    .login-view   {
+	width: inherit;
+	flex: 0 0 100%;
+	display: flex;
+	flex-flow: column nowrap;
+	align-items: center;
+
+	.login-logo {
+	    width: 208px;
+	    margin-top: 4rem;
+//	    padding-bottom: 4rem;
+
+
+	    svg {
+		display: block;
+		margin: 0 auto;
+
+		// .group-brand {
+		//     .path-k-brand {
+		// 	stroke-dasharray: 1972.28369140625;
+		// 	stroke-dashoffset: 1972.28369140625;
+		// 	animation: dash 5s linear, filler-up 2s linear;
+		// 	animation-delay: 0.5s, 2s;
+		// 	animation-fill-mode: forwards, forwards;
+		// 	stroke: white;
+		// 	fill: none;
+		//     }
+		// }
+
+		// .group-name {
+		//     .polygon-k, .path-o, .path-m,
+		//     .path-p, .path-e, .path-t,
+		//     .path-a-1, .path-n, .path-s,
+		//     .rect-i-dot, .rect-i, .path-a-2 {
+		// 	stroke: white;
+		// 	stroke-width: 0;
+		// 	fill: none;
+		// 	animation: filler-up 1.5s linear;
+		// 	animation-delay: 2.5s;
+		// 	animation-fill-mode: forwards;
+		//     }
+		// }
+	    }
+	}
+
+	button {
+	    flex: 0 1 25%;
+	    border-radius: 20px;
+	    background: white;
+	    border: 1px solid lightgrey;
+	    color: black;
+	    opacity: 0;
+	    animation: fade-in 1.5s ease-in;
+	    animation-delay: 4s;
+	    animation-fill-mode: forwards;
+	}
+    }
+}

@@ -1,0 +1,181 @@
+.info-text {
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+.no-assignment {
+}
+
+.no-assignment,
+.available-assignment {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-evenly;
+    align-content: center;
+    align-items: center;
+    height: 90%;
+    width: 95%;
+    margin: auto;
+    color: white;
+}
+.available-assignment {
+    background: white;
+    border-radius: 5px;
+    color: black;
+
+    div:first-child {
+    }
+
+    div:last-child {
+	button::after {
+	    content: '\2794';
+	    padding-left: 0.5rem;
+	}
+    }
+}
+
+
+.ant-modal-mask {
+    background: white!important;
+}
+
+.assignment-modal {
+    height: 100%;
+
+    .ant-modal-content {
+	//	height: 100vh;
+	box-shadow: none;
+	.ant-modal-header {
+	    border-bottom: none;
+	    .ant-modal-title {
+
+		.modal-header-content {
+		    display: flex;
+		    flex-flow: row nowrap;
+		    justify-content: flex-start;
+		    align-items: center;
+		    .black-logo {
+			flex: 0 0 1.75rem;
+			    margin: 0.5rem 0;
+			    width: 1.75rem;
+			    height: 1.75rem;
+			    //		    width: 32px;
+		    }
+		    .items-progress {
+			margin: 0.5rem 0;
+			width: 100%;
+			div {
+			    display: flex;
+			    flex-flow: row;
+			    justify-content: center;
+			    width: 100%;
+			    background: white;
+			    div {
+				width: 10px;
+				height: 10px;
+				margin: 0 0.25rem;
+				text-decoration: none;
+				border-radius: 30px;
+				border: 1px solid grey;
+				&.done-word {
+				    background: black;
+				}
+			    }
+			}
+		    }
+		}
+	    }
+	}
+
+	.ant-modal-footer {
+	    border: none;
+	    margin-top: 7rem;
+	    display: flex;
+	    flex-flow: row;
+
+	    .microphone-icon {
+		padding-left: 0.25rem;
+	    }
+
+	}
+    }
+}
+
+.exam-word {
+    color: red;
+}
+
+.exam-question {
+}
+
+
+@keyframes fade-in {
+    0% { opacity: 0; }
+    100% { opacity: 1;}
+}
+
+.reminder {
+    height: 60vh;
+    display: grid;
+    grid-template-rows: 10% 80% 10%;
+    grid-row-gap: 3rem;
+    justify-items: center;
+//    align-items:revert;
+    color: black;
+    animation: fade-in 1s forwards;
+
+    .reminder-title {
+//	padding: 3rem 0;
+	p {
+	    font-size: 2rem;
+	    font-weight: 600;
+	}
+    }
+
+    .reminder-icons {
+	width: 100%;
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: space-evenly;
+	align-items: center;
+	user-select: none;
+
+	div {
+	    flex: 0 0 18%;
+	    text-align: center;
+
+	    img {
+		width: 150px;
+	    }
+
+	    p {
+		padding-top: 1rem;
+		font-size: 1rem;
+		font-weight: 600;
+	    }
+	}
+    }
+
+    .reminder-button {
+//	padding: 8rem 0 0 0;
+
+	button {
+	    padding: 0 2rem;
+	    border-radius: 10px;
+	    background: transparent;
+	    border: 1px solid lightgrey;
+	    outline: none;
+
+	    &::after {
+		content: '\2794';
+		padding-left: 0.5rem;
+	    }
+
+	    &:hover,
+	    &:focus {
+		border-color: black;
+	    }
+	}
+    }
+}
+
