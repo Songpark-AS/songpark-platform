@@ -83,7 +83,7 @@
                         (catch Exception _
                           nil))]
 
-    (prn :got-migs!! migration-ids
+    (prn :got-migs!! migration-ids)
 
     (when (seq migration-ids)
       (prn :migids-down!!!!! migration-ids)
