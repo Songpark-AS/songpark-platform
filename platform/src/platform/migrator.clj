@@ -19,11 +19,12 @@
 (defrecord MigrationManager [database started?]
   component/Lifecycle
   (start [this]
-    (prn :mmstart! started?)
+    (prn :mmstart? started?)
     (if started?
       this
       (let [this (assoc this :started? true)]
         (log/info "Starting MigrationManager")
+        (prn :mmstart!!!!!!!!! this)
         (migrate this)
         this)))
   (stop [this]

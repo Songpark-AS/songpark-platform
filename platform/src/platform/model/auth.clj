@@ -51,6 +51,7 @@
 
 (defn add-user! [db user]
   (let [{:auth.user/keys [password active? first-name last-name email]} user]
+    (prn :adding-user!!!!!!!!! user db)
     (db/query! db {:insert-into :auth_user
                    :values [{:password (hashers/encrypt password)
                              :first_name first-name

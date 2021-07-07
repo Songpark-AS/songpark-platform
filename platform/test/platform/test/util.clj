@@ -91,7 +91,7 @@
 
 
 (defn run-migrations! [db]
-  (prn :startmigmgr)
+  (prn :startmigmgr {:database db})
   (component/start (migrator/migration-manager {:database db})))
 
 
@@ -108,6 +108,7 @@
   (log/set-level! :warn)
   (prn :prepping)
   (prepare-db! db)
+  (prn :prepped!!!!!!!)
 
   ;; add superuser
   (model.auth/add-user! db #:auth.user{:email "test@songpark.no" :first-name "Test" :last-name "McTest" :password "testme" :active? true})
