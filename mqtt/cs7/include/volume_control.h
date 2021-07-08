@@ -28,6 +28,6 @@
  *            -1 otherwise
  * =======================================================
  */
-int set_volume (void *volume_base, unsigned int gain, CHANNEL_ID channel);
+void set_volume ();
 
 #endif //VOLUME_CONTROL_H
