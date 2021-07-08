@@ -12,12 +12,13 @@ CREATE TABLE IF NOT EXISTS band (
     descr varchar(255)
 );
 --;;
-CREATE TABLE IF NOT EXISTS bandmbr (
-    userid INT NOT NULL,
-    bandid INT NOT NULL,
-    FOREIGN KEY(userid) 
+CREATE TABLE IF NOT EXISTS usr_band (
+    sid bigint NOT NULL UNIQUE DEFAULT nextval('sid_sequence'::regclass),    
+    usr_sid INT NOT NULL,
+    band_sid INT NOT NULL,
+    FOREIGN KEY(usr_sid) 
         REFERENCES usr(sid),
-    FOREIGN KEY(bandid)
+    FOREIGN KEY(band_sid)
         REFERENCES band(sid)
 );
 --;;
@@ -25,18 +26,19 @@ CREATE TABLE IF NOT EXISTS rec (
     sid bigint NOT NULL UNIQUE DEFAULT nextval('sid_sequence'::regclass),
     title varchar(63),
     descr varchar(255),
-    bandid INT NOT NULL,
-    FOREIGN KEY(bandid)
+    band_sid INT NOT NULL,
+    FOREIGN KEY(band_sid)
         REFERENCES band(sid)
 );
 --;;
-CREATE TABLE IF NOT EXISTS rating (
-    userid INT NOT NULL,
-    recid INT NOT NULL,
+CREATE TABLE IF NOT EXISTS rec_rating (
+    sid bigint NOT NULL UNIQUE DEFAULT nextval('sid_sequence'::regclass),
+    usr_sid INT NOT NULL,
+    rec_sid INT NOT NULL,
     stars INT,
-    FOREIGN KEY(userid)
+    FOREIGN KEY(usr_sid)
         REFERENCES usr(sid),
-    FOREIGN KEY(recid)
+    FOREIGN KEY(rec_sid)
         REFERENCES rec(sid)
 );
 --;;
@@ -47,13 +49,14 @@ CREATE TABLE IF NOT EXISTS tp (
     active boolean
 );
 --;;
-CREATE TABLE IF NOT EXISTS tpownr (
-    userid INT NOT NULL,
-    tpid INT NOT NULL,
+CREATE TABLE IF NOT EXISTS usr_tp (
+    sid bigint NOT NULL UNIQUE DEFAULT nextval('sid_sequence'::regclass),
+    usr_sid INT NOT NULL,
+    tp_sid INT NOT NULL,
     as_of TIMESTAMP NOT NULL,
-    FOREIGN KEY(userid)
+    FOREIGN KEY(usr_sid)
         REFERENCES usr(sid),
-    FOREIGN KEY(tpid)
+    FOREIGN KEY(tp_sid)
         REFERENCES tp(sid)
 );
 --;;
@@ -62,20 +65,21 @@ CREATE TABLE IF NOT EXISTS chat (
     title varchar(63)
 );
 --;;
-CREATE TABLE IF NOT EXISTS chatmbr (
-    userid INT NOT NULL,
-    chatid INT NOT NULL,
-    FOREIGN KEY(userid)
+CREATE TABLE IF NOT EXISTS usr_chat (
+    sid bigint NOT NULL UNIQUE DEFAULT nextval('sid_sequence'::regclass),
+    usr_sid INT NOT NULL,
+    chat_sid INT NOT NULL,
+    FOREIGN KEY(usr_sid)
         REFERENCES usr(sid),
-    FOREIGN KEY(chatid)
+    FOREIGN KEY(chat_sid)
         REFERENCES chat(sid)
 );
 --;;
 CREATE TABLE IF NOT EXISTS msg (
     sid bigint NOT NULL UNIQUE DEFAULT nextval('sid_sequence'::regclass),
     content varchar(255),
-    chatid INT NOT NULL,
-    FOREIGN KEY(chatid)
+    chat_sid INT NOT NULL,
+    FOREIGN KEY(chat_sid)
         REFERENCES chat(sid)
 );
 
