@@ -1,10 +1,11 @@
 (ns platform.http.route
   (:require [platform.api.auth :as api.auth]
             [platform.api.locale :as api.locale]
+            [platform.connection.initial :as connection.initial]
 
             [platform.http.html :refer [home]]
             [platform.http.middleware :as middleware :refer [wrap-authn
-                                                            wrap-authz]]
+                                                             wrap-authz]]
             [buddy.auth.middleware :refer [wrap-authentication
                                            wrap-authorization]]
             [clojure.spec.alpha :as spec]
@@ -92,6 +93,28 @@
                          {:status 200
                           :body ""})}}]]
 
+     ;; This is a hello world test
+     ["/clientconnect"
+      {:swagger {:tags ["helloworld"]}}
+      [""
+       {:get {:responses {200 {:body :http/empty?}}
+              :handler #'connection.initial/client-handler}}]]
+     
+     ;; This is a hello world test
+     ["/tpconnect"
+      {:swagger {:tags ["helloworld"]}}
+      [""
+       {:get {:responses {200 {:body :http/empty?}}
+              :handler #'connection.initial/tp-handler}}]]
+
+     ;; this is a test!
+     ["/health2"
+      {:swagger {:tags ["health2"]}}
+      [""
+       {:get {:responses {200 {:body :http/empty?}}
+              :handler (fn [_]
+                         {:status 200
+                          :body "Hello here is a body!"})}}]]
      ;; auth
      ["/auth"
       {:swagger {:tags ["auth"]}}
@@ -138,9 +161,7 @@
         {:get {:responses  {200 {:body :locale/locale}
                             404 {:body :http/empty?}}
                :parameters {:path {:locale-id string?}}
-               :handler    #'api.locale/by-id}}]]
-      ]
-     ]
+               :handler    #'api.locale/by-id}}]]]]
 
     {:exception pretty/exception
      ;;:compile r.coercion/compile-request-coercers
