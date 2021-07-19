@@ -99,7 +99,15 @@ void set_volume () {
 }
 
 void oled_print_message () {
-	printf("|======================Volume is Set======================|");
+	printf("|======================OLED print message======================|");
+}
+
+void oled_clear (){
+	printf("|======================OLED Clear======================|");
+}
+
+void unmap_device (){
+	printf("|======================Device unmapped======================|");
 }
 
 /*
@@ -289,7 +297,7 @@ void *ui_input_reader (void *data) {
         ui_vol_draw();
       }
       else if ( strcmp (c, "lfhe") == 0){
-          set_filter_type (filter_control_base_0, FILTER_HIGH_PASS, 1);
+        //   set_filter_type (filter_control_base_0, FILTER_HIGH_PASS, 1);
           params.filter_h_lpbk = 1;
           setting[6] = 1;
           oled_clear(zedboard_oled_params_0.base_address);
@@ -298,7 +306,7 @@ void *ui_input_reader (void *data) {
           ui_draw();
       }
       else if ( strcmp (c, "lfhd") == 0){
-          set_filter_type (filter_control_base_0, FILTER_HIGH_PASS, 0);
+        //   set_filter_type (filter_control_base_0, FILTER_HIGH_PASS, 0);
           params.filter_h_lpbk = 0;
           setting[6] = 0;
           oled_clear(zedboard_oled_params_0.base_address);
@@ -307,7 +315,7 @@ void *ui_input_reader (void *data) {
           ui_draw();
       }
       else if ( strcmp (c, "lfbe") == 0){
-          set_filter_type (filter_control_base_0, FILTER_BAND_PASS, 1);
+        //   set_filter_type (filter_control_base_0, FILTER_BAND_PASS, 1);
           params.filter_b_lpbk = 1;
           setting[5] = 1;
           oled_clear(zedboard_oled_params_0.base_address);
@@ -316,7 +324,7 @@ void *ui_input_reader (void *data) {
           ui_draw();
       }
       else if ( strcmp (c, "lfbd") == 0){
-          set_filter_type (filter_control_base_0, FILTER_BAND_PASS, 0);
+        //   set_filter_type (filter_control_base_0, FILTER_BAND_PASS, 0);
           params.filter_b_lpbk = 0;
           setting[5] = 0;
           oled_clear(zedboard_oled_params_0.base_address);
@@ -325,7 +333,7 @@ void *ui_input_reader (void *data) {
           ui_draw();
       }
       else if ( strcmp (c, "lfle") == 0){
-          set_filter_type (filter_control_base_0, FILTER_LOW_PASS, 1);
+        //   set_filter_type (filter_control_base_0, FILTER_LOW_PASS, 1);
           params.filter_l_lpbk = 1;
           setting[4] = 1;
           oled_clear(zedboard_oled_params_0.base_address);
@@ -334,7 +342,7 @@ void *ui_input_reader (void *data) {
           ui_draw();
       }
       else if ( strcmp (c, "lfld") == 0){
-          set_filter_type (filter_control_base_0, FILTER_LOW_PASS, 0);
+        //   set_filter_type (filter_control_base_0, FILTER_LOW_PASS, 0);
           params.filter_l_lpbk = 0;
           setting[4] = 0;
           oled_clear(zedboard_oled_params_0.base_address);
@@ -343,7 +351,7 @@ void *ui_input_reader (void *data) {
           ui_draw();
       }
       else if ( strcmp (c, "nfhe") == 0){
-          set_filter_type (filter_control_base_1, FILTER_HIGH_PASS, 1);
+        //   set_filter_type (filter_control_base_1, FILTER_HIGH_PASS, 1);
           params.filter_h_net = 1;
           setting[9] = 1;
           oled_clear(zedboard_oled_params_0.base_address);
@@ -352,7 +360,7 @@ void *ui_input_reader (void *data) {
           ui_draw();
       }
       else if ( strcmp (c, "nfhd") == 0){
-          set_filter_type (filter_control_base_1, FILTER_HIGH_PASS, 0);
+        //   set_filter_type (filter_control_base_1, FILTER_HIGH_PASS, 0);
           params.filter_h_net = 0;
           setting[9] = 0;
           oled_clear(zedboard_oled_params_0.base_address);
@@ -361,7 +369,7 @@ void *ui_input_reader (void *data) {
           ui_draw();
       }
       else if ( strcmp (c, "nfbe") == 0){
-          set_filter_type (filter_control_base_1, FILTER_BAND_PASS, 1);
+        //   set_filter_type (filter_control_base_1, FILTER_BAND_PASS, 1);
           params.filter_b_net = 1;
           setting[8] = 1;
           oled_clear(zedboard_oled_params_0.base_address);
@@ -370,7 +378,7 @@ void *ui_input_reader (void *data) {
           ui_draw();
       }
       else if ( strcmp (c, "nfbd") == 0){
-          set_filter_type (filter_control_base_1, FILTER_BAND_PASS, 0);
+        //   set_filter_type (filter_control_base_1, FILTER_BAND_PASS, 0);
           params.filter_b_net = 0;
           setting[8] = 0;
           oled_clear(zedboard_oled_params_0.base_address);
@@ -379,7 +387,7 @@ void *ui_input_reader (void *data) {
           ui_draw();
       }
       else if ( strcmp (c, "nfle") == 0){
-          set_filter_type (filter_control_base_1, FILTER_LOW_PASS, 1);
+        //   set_filter_type (filter_control_base_1, FILTER_LOW_PASS, 1);
           params.filter_l_net = 1;
           setting[7] = 1;
           oled_clear(zedboard_oled_params_0.base_address);
@@ -388,7 +396,7 @@ void *ui_input_reader (void *data) {
           ui_draw();
       }
       else if ( strcmp (c, "nfld") == 0){
-          set_filter_type (filter_control_base_1, FILTER_LOW_PASS, 0);
+        //   set_filter_type (filter_control_base_1, FILTER_LOW_PASS, 0);
           params.filter_l_net = 0;
           setting[7] = 0;
           ui_draw();
@@ -1334,9 +1342,9 @@ void *ui_input_reader (void *data) {
       else if(strcmp (c,"getpoutdly") == 0) {
 			//SET_STATUS("Enter payload length in 24 bit samples:\n");
 			//UDP header is 8 bytes
-			tmp = get_playout_delay(eth_to_audio_base_0);
-			printf("The current audio playout delay is:%d samples\n",(tmp));
-			printf("The current audio playout delay is:%f ms\n",(tmp/96.0));
+			// tmp = get_playout_delay(eth_to_audio_base_0);
+			// printf("The current audio playout delay is:%d samples\n",(tmp));
+			// printf("The current audio playout delay is:%f ms\n",(tmp/96.0));
 			oled_clear(zedboard_oled_params_0.base_address);
 			sprintf(&menuBuf[0], "%d samples", (tmp));
 			oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
@@ -1374,7 +1382,7 @@ void *ui_input_reader (void *data) {
       			//UDP header is 8 bytes
 
     	  printf("All reg values for the Eth to audio block\n");
-      			get_all_eth2audio(eth_to_audio_base_0);
+      			// get_all_eth2audio(eth_to_audio_base_0);
       			printf("The current audio sync time is:%f ms\n",(tmp/96.0));
       			oled_clear(zedboard_oled_params_0.base_address);
       			sprintf(&menuBuf[0], "TC:%d ", (tmp));
@@ -1386,7 +1394,7 @@ void *ui_input_reader (void *data) {
       else if(strcmp (c,"getrxtc") == 0) {
       			//SET_STATUS("Enter payload length in 24 bit samples:\n");
       			//UDP header is 8 bytes
-      			tmp =  get_rx_time_code(eth_to_audio_base_0);
+      			// tmp =  get_rx_time_code(eth_to_audio_base_0);
       			printf("The current audio rxtc is:%d samples\n",(tmp));
       			printf("The current audio rxtc is:%f ms\n",(tmp/96.0));
       			oled_clear(zedboard_oled_params_0.base_address);
@@ -1400,7 +1408,7 @@ void *ui_input_reader (void *data) {
       else if(strcmp (c,"getrxtceff") == 0) {
 				//SET_STATUS("Enter payload length in 24 bit samples:\n");
 				//UDP header is 8 bytes
-				tmp =  get_rx_time_code_eff(eth_to_audio_base_0);
+				// tmp =  get_rx_time_code_eff(eth_to_audio_base_0);
 				printf("The current audio rxtceff is:%d samples\n",(tmp));
 				printf("The current audio rxtceff is:%f ms\n",(tmp/96.0));
 				oled_clear(zedboard_oled_params_0.base_address);
@@ -1414,7 +1422,7 @@ void *ui_input_reader (void *data) {
       else if(strcmp (c,"getrxtcocc") == 0) {
 			//SET_STATUS("Enter payload length in 24 bit samples:\n");
 			//UDP header is 8 bytes
-			tmp =  get_rx_time_code_occ(eth_to_audio_base_0);
+			// tmp =  get_rx_time_code_occ(eth_to_audio_base_0);
 			printf("The current audio rxtc is:%d samples\n",(tmp));
 			oled_clear(zedboard_oled_params_0.base_address);
 			sprintf(&menuBuf[0], "rtcocc:%d smp", (tmp));
@@ -1490,7 +1498,7 @@ void *ui_input_reader (void *data) {
       else if(strcmp (c,"getfocc") == 0) {
 				//SET_STATUS("Enter payload length in 24 bit samples:\n");
 				//UDP header is 8 bytes
-				tmp = get_dac_fifo_occ(eth_to_audio_base_0);
+				// tmp = get_dac_fifo_occ(eth_to_audio_base_0);
 				printf("The current audio buf sample count is:%d samples\n",(tmp));
 
 				oled_clear(zedboard_oled_params_0.base_address);
@@ -1502,7 +1510,7 @@ void *ui_input_reader (void *data) {
 			  }
       else if(strcmp (c,"setcrwin") == 0) {
 
-          	  set_buf_corr_window(eth_to_audio_base_0,tmp);
+          	//   set_buf_corr_window(eth_to_audio_base_0,tmp);
           	  oled_clear(zedboard_oled_params_0.base_address);
       		sprintf(&menuBuf[0], "%s:%5d", "POUDLY", (tmp));
       		oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
@@ -1510,9 +1518,9 @@ void *ui_input_reader (void *data) {
             }
 
       else if ( strcmp (c, "tgsrcorr") == 0){
-			  clear_buf_corr(eth_to_audio_base_0);
+			//   clear_buf_corr(eth_to_audio_base_0);
 			  sleep(1);
-          	  set_buf_corr_on(eth_to_audio_base_0);
+          	//   set_buf_corr_on(eth_to_audio_base_0);
 			  printf("Toggle sample rate correction\n>");
 			  oled_clear(zedboard_oled_params_0.base_address);
 			  sprintf(&menuBuf[0], "%s", "SRCorr:ON");
@@ -1521,7 +1529,7 @@ void *ui_input_reader (void *data) {
 		  }
 
       else if ( strcmp (c, "setcoron") == 0){
-    	  set_buf_corr_on(eth_to_audio_base_0);
+    	//   set_buf_corr_on(eth_to_audio_base_0);
           	  printf("Enable sample rate correction\n>");
           	  oled_clear(zedboard_oled_params_0.base_address);
           	  sprintf(&menuBuf[0], "%s", "SRCorr:ON");
@@ -1532,7 +1540,7 @@ void *ui_input_reader (void *data) {
 
 
       else if ( strcmp (c, "setcoroff") == 0){
-          	  clear_buf_corr(eth_to_audio_base_0);
+          	//   clear_buf_corr(eth_to_audio_base_0);
 			  printf("Disable sample rate correction\n>");
 			  oled_clear(zedboard_oled_params_0.base_address);
 			  sprintf(&menuBuf[0], "%s", "SRCorr:OFF");
@@ -1541,7 +1549,7 @@ void *ui_input_reader (void *data) {
 		  }
       else if ( strcmp (c, "gete2astatus") == 0){
     	  	  printf("Eth to Audio ststus is::\n>");
-    	  	  get_e2a_status(eth_to_audio_base_0);
+    	  	//   get_e2a_status(eth_to_audio_base_0);
 
 			  oled_clear(zedboard_oled_params_0.base_address);
 			  sprintf(&menuBuf[0], "%s", "ETH2AUD:Status");
@@ -1704,7 +1712,7 @@ void *ui_input_reader (void *data) {
 			else if(strcmp (c,"getsqov") == 0) {//get_seq_pkts_rx
 
 			//				  tmp = get_pkts_dropped(packet_time_enforcer_base_0);
-							tmp = get_seq_pkts_ov(eth_packet_sequencer_base_0);
+							// tmp = get_seq_pkts_ov(eth_packet_sequencer_base_0);
 							  printf("The number of packets sqov is:%u\n",tmp);
 							  oled_clear(zedboard_oled_params_0.base_address);
 							sprintf(&menuBuf[0], "%s%d", "SOV:", (tmp));
@@ -2678,8 +2686,6 @@ void *button_function(void *arg)
 		printf("Got gpio btn interrupt\n");
 	}
 }
-
-
 
 
 char * print_ip(unsigned int ip, unsigned char * bytes)
