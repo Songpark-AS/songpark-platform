@@ -1,0 +1,22 @@
+DROP TABLE if exists usr CASCADE;
+--;;
+DROP TABLE if exists band CASCADE;
+--;;
+DROP TABLE if exists usr_band CASCADE;
+--;;
+DROP TABLE if exists rec CASCADE;
+--;;
+DROP TABLE if exists rec_rating CASCADE;
+--;;
+DROP TABLE if exists tp CASCADE;
+--;;
+DROP TABLE if exists usr_tp CASCADE;
+--;;
+DROP TABLE if exists chat CASCADE;
+--;;
+DROP TABLE if exists usr_chat CASCADE;
+--;;
+DROP TABLE if exists msg CASCADE;
+--;;
+DROP SEQUENCE if exists sid_sequence ;
+
