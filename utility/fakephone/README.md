@@ -29,6 +29,4 @@ Then, run the following command with your a valid tp nickname
 NOTE: You need some valid tp entries in the db to succeed
 
 Example:
-
-
-
+![image](doc/example_run.png)
