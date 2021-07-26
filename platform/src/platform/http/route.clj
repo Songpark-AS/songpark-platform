@@ -61,7 +61,36 @@
 (defn get-routes [settings]
   (ring/ring-handler
    (ring/router
-    [["/"
+    [;; ####################################################
+     ;; Songpark specific routes
+
+     ["/connect"
+
+      ;; client connections
+      ["/client"
+       ["/init"
+        {:swagger {:tags ["helloworld"]}}
+        [""
+         {:get {:responses {200 {:body :http/empty?}}
+                :handler #'connection.initial/client-init-connect-handler}}]]]
+
+     ;; tp connections
+      ["/tp"
+       ["/init"
+        {:swagger {:tags ["helloworld"]}}
+        [""
+         {:get {:responses {200 {:body :http/empty?}}
+                :handler #'connection.initial/tp-init-connect-handler}}]]]]
+     ["/testorama"
+      {:swagger {:tags ["helloworld"]}}
+      {:get {:responses {200 {:body :http/empty?}}
+             :handler (fn [_] {:status 200
+                       :body "ALL GOOD"})}}]
+
+     ;; ####################################################
+
+
+     ["/"
       {:get {:no-doc true
              :handler (fn [_]
                         {:status 200
@@ -93,28 +122,6 @@
                          {:status 200
                           :body ""})}}]]
 
-     ;; This is a hello world test
-     ["/clientconnect"
-      {:swagger {:tags ["helloworld"]}}
-      [""
-       {:get {:responses {200 {:body :http/empty?}}
-              :handler #'connection.initial/client-handler}}]]
-     
-     ;; This is a hello world test
-     ["/tpconnect"
-      {:swagger {:tags ["helloworld"]}}
-      [""
-       {:get {:responses {200 {:body :http/empty?}}
-              :handler #'connection.initial/tp-handler}}]]
-
-     ;; this is a test!
-     ["/health2"
-      {:swagger {:tags ["health2"]}}
-      [""
-       {:get {:responses {200 {:body :http/empty?}}
-              :handler (fn [_]
-                         {:status 200
-                          :body "Hello here is a body!"})}}]]
      ;; auth
      ["/auth"
       {:swagger {:tags ["auth"]}}

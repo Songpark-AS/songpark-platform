@@ -3,17 +3,7 @@
             [taoensso.timbre :as log]
             [songpark.taxonomy.auth]
             [yesql.core :refer [defqueries]]
-            [platform.connection.parsesql :as sql]
-            ))
- 
-(comment
-  (require '[yesql.core :refer [defqueries]])
-  (sql/usr-get-all)
-  (:e_mail (sql/usr-add<! {:e_mail "bsabla" :descr "blabla" :passwd "lala"}))
-  (sql/usr-clear!)
-  (sql/tp-activitation! {:tpid 19})
-  (sql/tp-deactivitation! {:tpid 19})
-  )
+            [platform.connection.parsesql :as sql]))
 
 (defn parse-int [s]
   (Integer. (re-find  #"\d+" s)))
@@ -22,15 +12,31 @@
   {:status 200
    :body (apply str items)})
 
-(defn tp-handler [input]
-  (let [params (:params input)]
-    (if (get params "tp-id")
-      (basic-return-message "You are tp. Your tp-id is: " (get params "tp-id"))
-      (basic-return-message "You are tp. You must provide tp-id"))))
+(defn- format-client-response-map [status username password]
+  (format "{:status \"%s\" :mqtt-username \"%s\" :mqtt-password \"%s\"}" status username password))
 
-(defn client-handler [input]
-  (let [params (:params input)]
-    (if (get params "tp-id")
-      (basic-return-message "You are client. You wish to connect to tp-id: " (get params "tp-id")
-                            ". Total db changes made: " (sql/tp-activitation! {:tpid (parse-int (get params "tp-id"))}))
-      (basic-return-message "You are client. You must provide tp-id. BSID: " (get params "BSID")))))
+(defn tp-init-connect-handler [input]
+  (let [tpid (get (:params input) "tpid")]
+    (if tpid
+      (let [rows-updated-on (sql/tp-set-on! {:tpid tpid})
+            rows-updated-available (sql/tp-set-available! {:tpid tpid})]        
+        {:status 200
+         :body (str "DB queried." 
+                    " Rows updated when setting tp-on condition:" rows-updated-on 
+                    "  Rows updated when setting tp-available condition:" rows-updated-available)})
+      {:status 400
+       :body "ERROR, I need tpid parameter in url"})))
+
+(defn client-init-connect-handler [input]
+  (let [nickname (get (:params input) "nickname")]
+    (if nickname
+      (let [tpid (:unique_id (first (sql/tpid-from-nick {:nickname nickname})))]
+        (if (and (:available_status (first (sql/tp-get-availability {:tpid tpid})))
+                (:on_status (first (sql/tp-get-on-status {:tpid tpid}))))
+        {:status 200
+         :body (format-client-response-map "success" "username" "password")}
+        {:status 200
+         :body (format-client-response-map "ERROR-tp-unavailable" nil nil)}))
+      
+      {:status 200
+       :body (format-client-response-map "ERROR-no-nickname" nil nil)})))

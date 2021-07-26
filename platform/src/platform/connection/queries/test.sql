@@ -1,19 +1,31 @@
--- name: usr-get-all
-SELECT * FROM usr;
-
--- name: usr-clear!
-DELETE FROM usr;
-
--- name: usr-add<!
-INSERT INTO usr (e_mail, descr, passwd)
-VALUES (:e_mail, :descr, :passwd);
-
--- name: tp-activitation!
+-- name: tp-set-on!
 UPDATE tp
-SET active = 'true'
-WHERE sid = :tpid;
+SET on_status = true
+WHERE unique_id = :tpid;
 
--- name: tp-deactivitation!
+-- name: tp-set-off!
 UPDATE tp
-SET active = 'false'
-WHERE sid = :tpid;
+SET on_status = false
+WHERE unique_id = :tpid;
+
+-- name: tp-set-available!
+UPDATE tp
+SET available_status = true
+WHERE unique_id = :tpid;
+
+-- name: tp-set-unavailable!
+UPDATE tp
+SET available_status=false
+WHERE unique_id = :tpid;
+
+-- name: tpid-from-nick
+SELECT unique_id FROM tp
+WHERE nickname = :nickname;
+
+-- name: tp-get-availability
+SELECT available_status FROM tp
+WHERE unique_id = :tpid;
+
+-- name: tp-get-on-status
+SELECT on_status FROM tp
+WHERE unique_id = :tpid;
