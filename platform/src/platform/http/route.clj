@@ -2,6 +2,7 @@
   (:require [platform.api.auth :as api.auth]
             [platform.api.locale :as api.locale]
             [platform.connection.initial :as connection.initial]
+            [platform.connection.exit :as connection.exit]
 
             [platform.http.html :refer [home]]
             [platform.http.middleware :as middleware :refer [wrap-authn
@@ -61,7 +62,8 @@
 (defn get-routes [settings]
   (ring/ring-handler
    (ring/router
-    [;; ####################################################
+    [
+     ;; ####################################################
      ;; Songpark specific routes
 
      ["/connect"
@@ -80,12 +82,17 @@
         {:swagger {:tags ["helloworld"]}}
         [""
          {:get {:responses {200 {:body :http/empty?}}
-                :handler #'connection.initial/tp-init-connect-handler}}]]]]
-     ["/testorama"
-      {:swagger {:tags ["helloworld"]}}
-      {:get {:responses {200 {:body :http/empty?}}
-             :handler (fn [_] {:status 200
-                       :body "ALL GOOD"})}}]
+                :handler #'connection.initial/tp-init-connect-handler}}]]
+       ["/disconnect"
+        {:swagger {:tags ["helloworld"]}}
+        ["" 
+         {:get {:responses {200 {:body :http/empty?}}
+                :handler #'connection.exit/tp-disconnect-handler}}]]
+       ["/turnoff"
+        {:swagger {:tags ["helloworld"]}}
+        [""
+         {:get {:responses {200 {:body :http/empty?}}
+                :handler #'connection.exit/tp-turnoff-handler}}]]]]
 
      ;; ####################################################
 

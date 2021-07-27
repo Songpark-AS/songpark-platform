@@ -29,3 +29,19 @@ WHERE unique_id = :tpid;
 -- name: tp-get-on-status
 SELECT on_status FROM tp
 WHERE unique_id = :tpid;
+
+-- name: tp-set-all-available!
+UPDATE tp
+SET available_status = true;
+
+-- name: tp-set-all-unavailable!
+UPDATE tp
+SET available_status = false;
+
+-- name: tp-set-all-off!
+UPDATE tp
+SET on_status = false;
+
+-- name: tp-set-all-on!
+UPDATE tp
+SET on_status = true;
