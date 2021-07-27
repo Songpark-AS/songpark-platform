@@ -1,0 +1,17 @@
+INSERT INTO tp (voip, ip, on_status, available_status, nickname, unique_id)
+VALUES ('0.0.0.0', '0.0.0.0', false, false, 'christians.dream', '0000'),
+		('0.0.0.1', '0.0.0.1', false, false, 'kenneths.dream', '0001'),
+		('0.0.1.0', '0.0.1.0', false, false, 'achims.dream', '0010'),
+        ('0.0.1.1', '0.0.1.1', false, false, 'sindres.dream', '0011'),
+        ('0.1.0.0', '0.1.0.0', false, false, 'markos.dream', '0100'),
+        ('0.1.0.1', '0.1.0.1', false, false, 'magnus.dream', '0101'),
+        ('0.1.1.0', '0.1.1.0', false, false, 'thanks.dream', '0110'),
+        ('0.1.1.1', '0.1.1.1', false, false, 'mortens.dream', '0111'),
+        ('1.0.0.0', '1.0.0.0', false, false, 'christians.hope', '1000'),
+        ('1.0.0.1', '1.0.0.1', false, false, 'kenneths.hope', '1001'),
+        ('1.0.1.0', '1.0.1.0', false, false, 'achims.hope', '1010'),
+        ('1.0.1.1', '1.0.1.1', false, false, 'sindres.hope', '1011'),
+        ('1.1.0.0', '1.1.0.0', false, false, 'markos.hope', '1100'),
+        ('1.1.0.1', '1.1.0.1', false, false, 'magnus.hope', '1101'),
+        ('1.1.1.0', '1.1.1.0', false, false, 'thanks.hope', '1110'),
+        ('1.1.1.1', '1.1.1.1', false, false, 'mortens.hope', '1111');
