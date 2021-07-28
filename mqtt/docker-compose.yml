@@ -40,6 +40,14 @@ services:
       - mqtt
     networks:
       - my-network
+  
+  postgres:
+    image: postgres
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
 
 networks:
     my-network:
