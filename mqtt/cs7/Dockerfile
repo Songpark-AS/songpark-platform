@@ -20,4 +20,5 @@ ARG OBJS=adau1761_controller.o zedboardOLED.o reg_io.o udpclient.o stream_contro
 
 # compilation process begins now
 RUN $CC $CFLAGS adau1761_controller.o zedboardOLED.o reg_io.o udpclient.o stream_control.o volume_control.o filter_control.o ui_control.o app_main.o -lrt -lpthread -o app
-CMD ["./app/app"]
+RUN ls 
+CMD ["qemu-arm-static"]
