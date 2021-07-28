@@ -10,7 +10,7 @@ WORKDIR /app/
 
 # variables for compilation process
 ARG CROSS_COMPILE?=arm-linux-gnueabihf-
-ARG APP_NAME?=app
+ARG APP_NAME=app
 ARG CC=arm-linux-gnueabihf-gcc
 ARG CCSIZE=arm-linux-gnueabihf-size
 ARG IDIR=/include
@@ -19,5 +19,5 @@ ARG LIBS=-lrt -lpthread
 ARG OBJS=adau1761_controller.o zedboardOLED.o reg_io.o udpclient.o stream_control.o volume_control.o filter_control.o ui_control.o app_main.o
 
 # compilation process begins now
-RUN $CC $CFLAGS $OBJS $LIBS -o $APP_NAME
-CMD ["./app"]
+RUN $CC $CFLAGS adau1761_controller.o zedboardOLED.o reg_io.o udpclient.o stream_control.o volume_control.o filter_control.o ui_control.o app_main.o -lrt -lpthread -o app
+CMD ["./app/app"]
