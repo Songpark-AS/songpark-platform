@@ -2,4 +2,11 @@
                           :join? true
                           :http/cookies {:http-only true}}}
  :google {:credentials-file "google-credentials.json"}
- :carmine {:session {:pool {} :spec {}}}}
+ :carmine {:session {:pool {} :spec {}}}
+ :database {:datasource {:default {:maximum-pool-size 3
+                                   :adapter "postgresql"
+                                   :username "postgres"
+                                   :password "postgres"
+                                   :database-name "postgres"
+                                   :server-name "localhost"
+                                   :port-number 5432}}}}
