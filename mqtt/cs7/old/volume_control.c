@@ -1,21 +1,17 @@
 /**
  * =====================================================================================
  *
- *       Filename:  volume_control.h
+ *       Filename:  volume_control.c
  *
  *    Description:  Volume control helper macros and functions
  *
  *         Author:  Thanx
  *   Organization:  Cantavi
  *
- *
  * =====================================================================================
  */
 
-#ifndef VOLUME_CONTROL_H
-#define VOLUME_CONTROL_H
-
-#include "reg_io.h"
+#include "include/volume_control.h"
 
 /**
  * =======================================================
@@ -28,6 +24,25 @@
  *            -1 otherwise
  * =======================================================
  */
-int set_volume (void *volume_base, unsigned int gain, CHANNEL_ID channel);
+int set_volume (void *volume_base, unsigned int gain, CHANNEL_ID channel) {
+  if (volume_base == NULL) {
+    return -1;
+  }
 
-#endif //VOLUME_CONTROL_H
+  if (channel == CHANNEL_ID_L) {
+    WriteReg (volume_base, VOLUME_CONTROL_REG0_OFFSET, (gain));
+  }
+  else if (channel == CHANNEL_ID_R) {
+    WriteReg (volume_base, VOLUME_CONTROL_REG1_OFFSET, (gain));
+  }else if (channel == 2) {
+	    WriteReg (volume_base, VOLUME_CONTROL_REG2_OFFSET, (gain));
+  }
+  else if (channel == 3) {
+		    WriteReg (volume_base, VOLUME_CONTROL_REG3_OFFSET, (gain));
+  }
+  else {
+    return -1;
+  }
+
+  return 0;
+}

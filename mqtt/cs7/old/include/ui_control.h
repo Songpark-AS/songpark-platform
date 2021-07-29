@@ -19,8 +19,6 @@
 #include <stdlib.h>
 #include <termios.h>
 #include <string.h>
-#include <mqueue.h>
-#include "reg_io.h"
 #include "stream_control.h"
 #include "filter_control.h"
 #include "volume_control.h"
@@ -71,8 +69,8 @@ dev_param volume_control_params_1;
 dev_param eth_to_audio_params_0;
 dev_param audio_to_eth_params_0;
 dev_param eth_packet_sequencer_params_0;
-dev_param full_udp_stack_ip_params_0;
-dev_param packet_time_enforcer_params_0;
+// dev_param full_udp_stack_ip_params_0;
+// dev_param packet_time_enforcer_params_0;
 dev_param adau1761_params_0;
 dev_param time_sync_params_0;
 
@@ -103,10 +101,6 @@ int GPIO_LED_5;
 int GPIO_LED_6;
 int GPIO_LED_7;
 
-pthread_t axi_to_net_mq_reader_thread;
-pthread_t axi_to_net_mq_writer_thread; // thread to write network audio data to fifo
-pthread_t net_to_axi_mq_reader_thread; // thread to write fifo audio data to axi audio
-pthread_t net_to_axi_mq_writer_thread;
 //pthread_t loopback_thread; // thread to loop back audio in to out through axi
 pthread_t ui_input_reader_thread; //main ui input reading thread
 pthread_t ui_draw_thread; // ui draw thread
@@ -157,18 +151,6 @@ unsigned sync_port;
 
 
 int quit_flag; // flag to control the threads
-
-mqd_t msgq_axi_to_net_r; // reader fifo descripter
-mqd_t msgq_axi_to_net_w; // writer fifo descripter
-struct mq_attr attr_axi_to_net_r; // reader fifo attributes
-struct mq_attr attr_axi_to_net_w; // writer fifo attributes
-
-
-
-mqd_t msgq_net_to_axi_r; // reader fifo descripter
-mqd_t msgq_net_to_axi_w; // writer fifo descripter
-struct mq_attr attr_net_to_axi_r; // reader fifo attributes
-struct mq_attr attr_net_to_axi_w; // writer fifo attributes
 
 /**
  * =======================================================
