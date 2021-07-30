@@ -21,15 +21,16 @@
           (db/tp-set-all-available!)
           (db/tp-set-all-on!)
           {:status 200
-           :body (str {:status "success"})})
+           :body (str {:status "success"
+                       :status-desc "Successfully updated the database. Every teleporter is now on and available"})})
         (let [rows-updated-on (db/tp-set-on! {:tpid tpid})
             rows-updated-available (db/tp-set-available! {:tpid tpid})]        
         {:status 200
-         :body (str "DB queried." 
-                    " Rows updated when setting tp-on condition:" rows-updated-on 
-                    "  Rows updated when setting tp-available condition:" rows-updated-available)}))
+         :body (str {:status "success"
+                     :status-desc (str "Successfully updated the database. Teleporter:" tpid " is now on and available.")})}))
       {:status 400
-       :body "ERROR, I need tpid parameter in url"})))
+       :body (str {:status nil
+                   :status-desc "ERROR. You need to add a \"tpid\" parameter to your request."})})))
 
 (defn client-init-connect-handler [input]
   (let [nickname (get (:params input) "nickname")]
@@ -40,9 +41,15 @@
           (do
             (db/tp-set-unavailable! {:tpid tpid})
             {:status 200
-             :body (str {:status "success" :mqtt-username "nameynamename" :mqtt-password "super-secret-password!" :tpid tpid})})
+             :body (str {:status "success" 
+                         :status-desc "Successfully established connection to a teleporter! "
+                         :mqtt-username "nameynamename" 
+                         :mqtt-password "super-secret-password!" 
+                         :tpid tpid})})
           {:status 200
-           :body (str {:status "ERROR-tp-unavailable"})}))
+           :body (str {:status nil
+                       :status-desc "ERROR. The teleporter you are trying to access is turned off and/or in use"})}))
       
       {:status 200
-       :body (str {:status "ERROR-no-nickname"})})))
+       :body (str {:status nil
+                   :status-desc "ERROR. You need to add a \"nickname\" parameter to your request."})})))
