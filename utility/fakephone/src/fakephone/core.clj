@@ -3,7 +3,7 @@
             [org.httpkit.client :as http]
             [clojure.edn :as edn]
             [clojure.data.json :as json]
-            [common.connect.client :as connect.client])
+            [common.platform.connect.client :as connect.client])
   (:gen-class))
 
 (def cli-options

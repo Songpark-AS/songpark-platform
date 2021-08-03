@@ -5,13 +5,6 @@
             [yesql.core :refer [defqueries]]
             [platform.connection.parsesql :as db]))
 
-(defn parse-int [s]
-  (Integer. (re-find  #"\d+" s)))
-
-(defn- basic-return-message [& items]
-  {:status 200
-   :body (apply str items)})
-
 
 (defn tp-init-connect-handler [input]
   (let [tpid (get (:params input) "tpid")]
@@ -36,20 +29,24 @@
   (let [nickname (get (:params input) "nickname")]
     (if nickname
       (let [tpid (:unique_id (first (db/tpid-from-nick {:nickname nickname})))]
-        (if (and (:available_status (first (db/tp-get-availability {:tpid tpid})))
-                 (:on_status (first (db/tp-get-on-status {:tpid tpid}))))
-          (do
+        (if (:on_status (first (db/tp-get-on-status {:tpid tpid}))) ;checks if tp is available
+          (if (:available_status (first (db/tp-get-availability {:tpid tpid}))) ;check if tp is on
+           (do
             (db/tp-set-unavailable! {:tpid tpid})
             {:status 200
              :body (str {:status "success" 
-                         :status-desc "Successfully established connection to a teleporter! "
+                         :status-desc (str "Successfully established connection to teleporter: " tpid)
                          :mqtt-username "nameynamename" 
                          :mqtt-password "super-secret-password!" 
                          :tpid tpid})})
-          {:status 200
+            {:status 400
+             :body (str {:status nil
+                         :status-desc "ERROR. The teleporter you are trying to access is in use"})}
+            )
+          {:status 400
            :body (str {:status nil
-                       :status-desc "ERROR. The teleporter you are trying to access is turned off and/or in use"})}))
+                       :status-desc "ERROR. The teleporter you are trying to access is turned off"})}))
       
-      {:status 200
+      {:status 400
        :body (str {:status nil
                    :status-desc "ERROR. You need to add a \"nickname\" parameter to your request."})})))
