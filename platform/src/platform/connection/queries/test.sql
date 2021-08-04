@@ -10,7 +10,7 @@ WHERE unique_id = :tpid;
 
 -- name: tp-set-available!
 UPDATE tp
-SET available_status = true
+SET available_status = true, uuid = :uuid
 WHERE unique_id = :tpid;
 
 -- name: tp-set-unavailable!
@@ -24,6 +24,10 @@ WHERE nickname = :nickname;
 
 -- name: tp-get-availability
 SELECT available_status FROM tp
+WHERE unique_id = :tpid;
+
+-- name: tp-get-uuid
+SELECT uuid FROM tp
 WHERE unique_id = :tpid;
 
 -- name: tp-get-on-status

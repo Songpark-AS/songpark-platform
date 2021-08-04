@@ -7,7 +7,9 @@
 
 
 (defn tp-init-connect-handler [input]
-  (let [tpid (get (:params input) "tpid")]
+  (let [parameters (:params input)
+        tpid (get parameters "tpid")
+        uuid (.toString (java.util.UUID/randomUUID))]
     (if tpid
       (if (= tpid "all")
         (do 
@@ -16,11 +18,11 @@
           {:status 200
            :body (str {:status "success"
                        :status-desc "Successfully updated the database. Every teleporter is now on and available"})})
-        (let [rows-updated-on (db/tp-set-on! {:tpid tpid})
-            rows-updated-available (db/tp-set-available! {:tpid tpid})]        
+        (do (db/tp-set-on! {:tpid tpid})
+            (db/tp-set-available! {:tpid tpid :uuid uuid})   
         {:status 200
          :body (str {:status "success"
-                     :status-desc (str "Successfully updated the database. Teleporter:" tpid " is now on and available.")})}))
+                     :status-desc (str "Successfully updated the database. Teleporter:" tpid " is now on and available. It has uuid: " uuid)})}))
       {:status 400
        :body (str {:status nil
                    :status-desc "ERROR. You need to add a \"tpid\" parameter to your request."})})))
@@ -28,17 +30,19 @@
 (defn client-init-connect-handler [input]
   (let [nickname (get (:params input) "nickname")]
     (if nickname
-      (let [tpid (:unique_id (first (db/tpid-from-nick {:nickname nickname})))]
+      (let [tpid (:unique_id (first (db/tpid-from-nick {:nickname nickname})))
+            uuid (first (db/tp-get-uuid {:tpid tpid}))]
         (if (:on_status (first (db/tp-get-on-status {:tpid tpid}))) ;checks if tp is available
           (if (:available_status (first (db/tp-get-availability {:tpid tpid}))) ;check if tp is on
            (do
             (db/tp-set-unavailable! {:tpid tpid})
             {:status 200
-             :body (str {:status "success" 
+             :body (str {:status "success"
                          :status-desc (str "Successfully established connection to teleporter: " tpid)
-                         :mqtt-username "nameynamename" 
-                         :mqtt-password "super-secret-password!" 
-                         :tpid tpid})})
+                         :mqtt-username "nameynamename"
+                         :mqtt-password "super-secret-password!"
+                         :tpid tpid
+                         :uuid uuid})})
             {:status 400
              :body (str {:status nil
                          :status-desc "ERROR. The teleporter you are trying to access is in use"})}
