@@ -1,10 +1,12 @@
 (ns platform.http.route
   (:require [platform.api.auth :as api.auth]
             [platform.api.locale :as api.locale]
+            [platform.connection.initial :as connection.initial]
+            [platform.connection.exit :as connection.exit]
 
             [platform.http.html :refer [home]]
             [platform.http.middleware :as middleware :refer [wrap-authn
-                                                            wrap-authz]]
+                                                             wrap-authz]]
             [buddy.auth.middleware :refer [wrap-authentication
                                            wrap-authorization]]
             [clojure.spec.alpha :as spec]
@@ -60,7 +62,42 @@
 (defn get-routes [settings]
   (ring/ring-handler
    (ring/router
-    [["/"
+    [
+     ;; ####################################################
+     ;; Songpark specific routes
+
+     ["/connect"
+
+      ;; client connections
+      ["/client"
+       ["/init"
+        {:swagger {:tags ["helloworld"]}}
+        [""
+         {:get {:responses {200 {:body :http/empty?}}
+                :handler #'connection.initial/client-init-connect-handler}}]]]
+
+     ;; tp connections
+      ["/tp"
+       ["/init"
+        {:swagger {:tags ["helloworld"]}}
+        [""
+         {:get {:responses {200 {:body :http/empty?}}
+                :handler #'connection.initial/tp-init-connect-handler}}]]
+       ["/disconnect"
+        {:swagger {:tags ["helloworld"]}}
+        ["" 
+         {:get {:responses {200 {:body :http/empty?}}
+                :handler #'connection.exit/tp-disconnect-handler}}]]
+       ["/turnoff"
+        {:swagger {:tags ["helloworld"]}}
+        [""
+         {:get {:responses {200 {:body :http/empty?}}
+                :handler #'connection.exit/tp-turnoff-handler}}]]]]
+
+     ;; ####################################################
+
+
+     ["/"
       {:get {:no-doc true
              :handler (fn [_]
                         {:status 200
@@ -138,9 +175,7 @@
         {:get {:responses  {200 {:body :locale/locale}
                             404 {:body :http/empty?}}
                :parameters {:path {:locale-id string?}}
-               :handler    #'api.locale/by-id}}]]
-      ]
-     ]
+               :handler    #'api.locale/by-id}}]]]]
 
     {:exception pretty/exception
      ;;:compile r.coercion/compile-request-coercers

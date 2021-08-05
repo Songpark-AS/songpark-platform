@@ -10,6 +10,7 @@
 
                  ;; songpark libs
                  [songpark/taxonomy "0.1.1-SNAPSHOT"]
+                 [songpark/common "0.1.0"]
 
                  ;; routing
                  [metosin/reitit "0.4.2"]
@@ -31,7 +32,7 @@
 
                  ;; redis support
                  [com.taoensso/carmine "2.19.1"]
-                 
+
                  ;; logging
                  [com.taoensso/timbre "4.10.0"]
                  [com.fzakaria/slf4j-timbre "0.3.12"]

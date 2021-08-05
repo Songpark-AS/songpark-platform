@@ -1,0 +1,856 @@
+; This is the Calva evaluation results output window.
+; TIPS: The keyboard shortcut `ctrl+alt+c o` shows and focuses this window
+;   when connected to a REPL session.
+; Please see https://calva.io/output/ for more info.
+; Happy coding! ♥️
+
+; Jacking in...
+; Starting Jack-in Terminal: lein update-in :dependencies conj '[nrepl,"0.8.3"]' -- update-in :plugins conj '[cider/cider-nrepl,"0.26.0"]' -- update-in '[:repl-options,:nrepl-middleware]' conj '["cider.nrepl/cider-middleware"]' -- repl :headless
+; Hooking up nREPL sessions...
+; Connected session: clj
+; TIPS: 
+;   - You can edit the contents here. Use it as a REPL if you like.
+;   - `alt+enter` evaluates the current top level form.
+;   - `ctrl+enter` evaluates the current form.
+;   - `alt+up` and `alt+down` traverse up and down the REPL command history
+;      when the cursor is after the last contents at the prompt
+;   - Clojure lines in stack traces are peekable and clickable.
+clj꞉fakephone.core꞉>  ; Use `alt+enter` to evaluate
+; Jack-in done.
+clj꞉fakephone.core꞉> 
+nil
+clj꞉fakephone.core꞉> 
+; Syntax error compiling at (core.clj:24:19).
+; Unable to resolve symbol: endpoint in this context
+clj꞉fakephone.core꞉> 
+#'fakephone.core/endpoint
+clj꞉fakephone.core꞉> 
+#'fakephone.core/nickname
+clj꞉fakephone.core꞉> 
+Trying the establish connection to :  http://localhost:3000/connect/client/init
+This is response  {"spec":"(spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true})","problems":[{"path":[],"pred":"clojure.string/blank?","val":"SUCCESS, tp available with tpid id21 MQTT-username: something, MQTT-password:something","via":["http/empty?"],"in":[]}],"type":"reitit.coercion/response-coercion","coercion":"spec","value":"SUCCESS, tp available with tpid id21 MQTT-username: something, MQTT-password:something","in":["response","body"]}
+This is response type  java.lang.String
+This is read-string type  clojure.lang.PersistentArrayMap
+nil
+clj꞉fakephone.core꞉> 
+Trying the establish connection to :  http://localhost:3000/connect/client/init
+This is response  {"spec":"(spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true})","problems":[{"path":[],"pred":"clojure.string/blank?","val":"SUCCESS, tp available with tpid id21 MQTT-username: something, MQTT-password:something","via":["http/empty?"],"in":[]}],"type":"reitit.coercion/response-coercion","coercion":"spec","value":"SUCCESS, tp available with tpid id21 MQTT-username: something, MQTT-password:something","in":["response","body"]}
+This is response type  java.lang.String
+This is read-string type  (spec problems type coercion value in)
+nil
+clj꞉fakephone.core꞉> 
+Trying the establish connection to :  http://localhost:3000/connect/client/init
+This is response  {"spec":"(spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true})","problems":[{"path":[],"pred":"clojure.string/blank?","val":"SUCCESS, tp available with tpid id21 MQTT-username: something, MQTT-password:something","via":["http/empty?"],"in":[]}],"type":"reitit.coercion/response-coercion","coercion":"spec","value":"SUCCESS, tp available with tpid id21 MQTT-username: something, MQTT-password:something","in":["response","body"]}
+This is response type  java.lang.String
+This is read-string type  nil
+nil
+clj꞉fakephone.core꞉> 
+Trying the establish connection to :  http://localhost:3000/connect/client/init
+This is response  {"spec":"(spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true})","problems":[{"path":[],"pred":"clojure.string/blank?","val":"SUCCESS, tp available with tpid id21 MQTT-username: something, MQTT-password:something","via":["http/empty?"],"in":[]}],"type":"reitit.coercion/response-coercion","coercion":"spec","value":"SUCCESS, tp available with tpid id21 MQTT-username: something, MQTT-password:something","in":["response","body"]}
+This is response json  {spec (spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true}), problems [{path [], pred clojure.string/blank?, val SUCCESS, tp available with tpid id21 MQTT-username: something, MQTT-password:something, via [http/empty?], in []}], type reitit.coercion/response-coercion, coercion spec, value SUCCESS, tp available with tpid id21 MQTT-username: something, MQTT-password:something, in [response body]}
+This is resonse json extracted  nil
+nil
+clj꞉fakephone.core꞉> 
+Trying the establish connection to :  http://localhost:3000/connect/client/init
+This is response  {"spec":"(spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true})","problems":[{"path":[],"pred":"clojure.string/blank?","val":"SUCCESS, tp available with tpid id21 MQTT-username: something, MQTT-password:something","via":["http/empty?"],"in":[]}],"type":"reitit.coercion/response-coercion","coercion":"spec","value":"SUCCESS, tp available with tpid id21 MQTT-username: something, MQTT-password:something","in":["response","body"]}
+This is response json  {spec (spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true}), problems [{path [], pred clojure.string/blank?, val SUCCESS, tp available with tpid id21 MQTT-username: something, MQTT-password:something, via [http/empty?], in []}], type reitit.coercion/response-coercion, coercion spec, value SUCCESS, tp available with tpid id21 MQTT-username: something, MQTT-password:something, in [response body]}
+This is resonse json extracted  nil
+nil
+clj꞉fakephone.core꞉> 
+Trying the establish connection to :  http://localhost:3000/connect/client/init
+This is response  {"spec":"(spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true})","problems":[{"path":[],"pred":"clojure.string/blank?","val":"SUCCESS, tp available with tpid id21 MQTT-username: something, MQTT-password:something","via":["http/empty?"],"in":[]}],"type":"reitit.coercion/response-coercion","coercion":"spec","value":"SUCCESS, tp available with tpid id21 MQTT-username: something, MQTT-password:something","in":["response","body"]}
+This is response json  {spec (spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true}), problems [{path [], pred clojure.string/blank?, val SUCCESS, tp available with tpid id21 MQTT-username: something, MQTT-password:something, via [http/empty?], in []}], type reitit.coercion/response-coercion, coercion spec, value SUCCESS, tp available with tpid id21 MQTT-username: something, MQTT-password:something, in [response body]}
+This is resonse json extracted  (spec problems type coercion value in)
+nil
+clj꞉fakephone.core꞉> 
+Trying the establish connection to :  http://localhost:3000/connect/client/init
+This is response  {"spec":"(spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true})","problems":[{"path":[],"pred":"clojure.string/blank?","val":"SUCCESS, tp available with tpid id21 MQTT-username: something, MQTT-password:something","via":["http/empty?"],"in":[]}],"type":"reitit.coercion/response-coercion","coercion":"spec","value":"SUCCESS, tp available with tpid id21 MQTT-username: something, MQTT-password:something","in":["response","body"]}
+This is response json  {spec (spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true}), problems [{path [], pred clojure.string/blank?, val SUCCESS, tp available with tpid id21 MQTT-username: something, MQTT-password:something, via [http/empty?], in []}], type reitit.coercion/response-coercion, coercion spec, value SUCCESS, tp available with tpid id21 MQTT-username: something, MQTT-password:something, in [response body]}
+Special  (spec problems type coercion value in)
+nil
+clj꞉fakephone.core꞉> 
+; Syntax error compiling at (core.clj:29:25).
+; Unable to resolve symbol: value in this context
+clj꞉fakephone.core꞉> 
+; Syntax error (ExceptionInfo) compiling quote at (core.clj:29:25).
+; Wrong number of args (2) passed to quote
+clj꞉fakephone.core꞉> 
+Trying the establish connection to :  http://localhost:3000/connect/client/init
+This is response  {"spec":"(spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true})","problems":[{"path":[],"pred":"clojure.string/blank?","val":"SUCCESS, tp available with tpid id21 MQTT-username: something, MQTT-password:something","via":["http/empty?"],"in":[]}],"type":"reitit.coercion/response-coercion","coercion":"spec","value":"SUCCESS, tp available with tpid id21 MQTT-username: something, MQTT-password:something","in":["response","body"]}
+This is response json  {spec (spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true}), problems [{path [], pred clojure.string/blank?, val SUCCESS, tp available with tpid id21 MQTT-username: something, MQTT-password:something, via [http/empty?], in []}], type reitit.coercion/response-coercion, coercion spec, value SUCCESS, tp available with tpid id21 MQTT-username: something, MQTT-password:something, in [response body]}
+Special  (spec problems type coercion value in)
+nil
+clj꞉fakephone.core꞉> 
+Trying the establish connection to :  http://localhost:3000/connect/client/init
+This is response  {"spec":"(spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true})","problems":[{"path":[],"pred":"clojure.string/blank?","val":"SUCCESS, tp available with tpid id21 MQTT-username: something, MQTT-password:something","via":["http/empty?"],"in":[]}],"type":"reitit.coercion/response-coercion","coercion":"spec","value":"SUCCESS, tp available with tpid id21 MQTT-username: something, MQTT-password:something","in":["response","body"]}
+This is response json  {spec (spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true}), problems [{path [], pred clojure.string/blank?, val SUCCESS, tp available with tpid id21 MQTT-username: something, MQTT-password:something, via [http/empty?], in []}], type reitit.coercion/response-coercion, coercion spec, value SUCCESS, tp available with tpid id21 MQTT-username: something, MQTT-password:something, in [response body]}
+; Execution error (IllegalArgumentException) at clojure.data.json/read-str (json.clj:411).
+; No value supplied for key: {:opts {:query-params {:nickname "bo"}, :method :get, :url "http://localhost:3000/connect/client/init"}, :body "{\"spec\":\"(spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true})\",\"problems\":[{\"path\":[],\"pred\":\"clojure.string/blank?\",\"val\":\"SUCCESS, tp available with tpid id21 MQTT-username: something, MQTT-password:something\",\"via\":[\"http/empty?\"],\"in\":[]}],\"type\":\"reitit.coercion/response-coercion\",\"coercion\":\"spec\",\"value\":\"SUCCESS, tp available with tpid id21 MQTT-username: something, MQTT-password:something\",\"in\":[\"response\",\"body\"]}", :headers {:access-control-allow-credentials "true", :content-length "451", :content-type "application/json;charset=utf-8", :date "Mon, 26 Jul 2021 10:07:00 GMT", :server "Jetty(9.4.22.v20191022)"}, :status 500}
+clj꞉fakephone.core꞉> 
+Trying the establish connection to :  http://localhost:3000/connect/client/init
+This is response  {"spec":"(spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true})","problems":[{"path":[],"pred":"clojure.string/blank?","val":"SUCCESS, tp available with tpid id21 MQTT-username: something, MQTT-password:something","via":["http/empty?"],"in":[]}],"type":"reitit.coercion/response-coercion","coercion":"spec","value":"SUCCESS, tp available with tpid id21 MQTT-username: something, MQTT-password:something","in":["response","body"]}
+This is response json  {spec (spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true}), problems [{path [], pred clojure.string/blank?, val SUCCESS, tp available with tpid id21 MQTT-username: something, MQTT-password:something, via [http/empty?], in []}], type reitit.coercion/response-coercion, coercion spec, value SUCCESS, tp available with tpid id21 MQTT-username: something, MQTT-password:something, in [response body]}
+; Execution error (IllegalArgumentException) at clojure.data.json/read-str (json.clj:411).
+; No value supplied for key: {:opts {:query-params {:nickname "bo"}, :method :get, :url "http://localhost:3000/connect/client/init"}, :body "{\"spec\":\"(spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true})\",\"problems\":[{\"path\":[],\"pred\":\"clojure.string/blank?\",\"val\":\"SUCCESS, tp available with tpid id21 MQTT-username: something, MQTT-password:something\",\"via\":[\"http/empty?\"],\"in\":[]}],\"type\":\"reitit.coercion/response-coercion\",\"coercion\":\"spec\",\"value\":\"SUCCESS, tp available with tpid id21 MQTT-username: something, MQTT-password:something\",\"in\":[\"response\",\"body\"]}", :headers {:access-control-allow-credentials "true", :content-length "451", :content-type "application/json;charset=utf-8", :date "Mon, 26 Jul 2021 10:07:14 GMT", :server "Jetty(9.4.22.v20191022)"}, :status 500}
+clj꞉fakephone.core꞉> 
+Trying the establish connection to :  http://localhost:3000/connect/client/init
+This is response  {"spec":"(spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true})","problems":[{"path":[],"pred":"clojure.string/blank?","val":"SUCCESS, tp available with tpid id21 MQTT-username: something, MQTT-password:something","via":["http/empty?"],"in":[]}],"type":"reitit.coercion/response-coercion","coercion":"spec","value":"SUCCESS, tp available with tpid id21 MQTT-username: something, MQTT-password:something","in":["response","body"]}
+This is response json  {spec (spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true}), problems [{path [], pred clojure.string/blank?, val SUCCESS, tp available with tpid id21 MQTT-username: something, MQTT-password:something, via [http/empty?], in []}], type reitit.coercion/response-coercion, coercion spec, value SUCCESS, tp available with tpid id21 MQTT-username: something, MQTT-password:something, in [response body]}
+; Execution error (IllegalArgumentException) at clojure.data.json/read-str (json.clj:411).
+; No value supplied for key: {:opts {:query-params {:nickname "bo"}, :method :get, :url "http://localhost:3000/connect/client/init"}, :body "{\"spec\":\"(spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true})\",\"problems\":[{\"path\":[],\"pred\":\"clojure.string/blank?\",\"val\":\"SUCCESS, tp available with tpid id21 MQTT-username: something, MQTT-password:something\",\"via\":[\"http/empty?\"],\"in\":[]}],\"type\":\"reitit.coercion/response-coercion\",\"coercion\":\"spec\",\"value\":\"SUCCESS, tp available with tpid id21 MQTT-username: something, MQTT-password:something\",\"in\":[\"response\",\"body\"]}", :headers {:access-control-allow-credentials "true", :content-length "451", :content-type "application/json;charset=utf-8", :date "Mon, 26 Jul 2021 10:07:46 GMT", :server "Jetty(9.4.22.v20191022)"}, :status 500}
+clj꞉fakephone.core꞉> 
+Trying the establish connection to :  http://localhost:3000/connect/client/init
+This is response  {"spec":"(spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true})","problems":[{"path":[],"pred":"clojure.string/blank?","val":"SUCCESS, tp available with tpid id21 MQTT-username: something, MQTT-password:something","via":["http/empty?"],"in":[]}],"type":"reitit.coercion/response-coercion","coercion":"spec","value":"SUCCESS, tp available with tpid id21 MQTT-username: something, MQTT-password:something","in":["response","body"]}
+This is response json  {spec (spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true}), problems [{path [], pred clojure.string/blank?, val SUCCESS, tp available with tpid id21 MQTT-username: something, MQTT-password:something, via [http/empty?], in []}], type reitit.coercion/response-coercion, coercion spec, value SUCCESS, tp available with tpid id21 MQTT-username: something, MQTT-password:something, in [response body]}
+; Execution error (IllegalArgumentException) at clojure.data.json/read-str (json.clj:411).
+; No value supplied for key: {:opts {:query-params {:nickname "bo"}, :method :get, :url "http://localhost:3000/connect/client/init"}, :body "{\"spec\":\"(spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true})\",\"problems\":[{\"path\":[],\"pred\":\"clojure.string/blank?\",\"val\":\"SUCCESS, tp available with tpid id21 MQTT-username: something, MQTT-password:something\",\"via\":[\"http/empty?\"],\"in\":[]}],\"type\":\"reitit.coercion/response-coercion\",\"coercion\":\"spec\",\"value\":\"SUCCESS, tp available with tpid id21 MQTT-username: something, MQTT-password:something\",\"in\":[\"response\",\"body\"]}", :headers {:access-control-allow-credentials "true", :content-length "451", :content-type "application/json;charset=utf-8", :date "Mon, 26 Jul 2021 10:07:58 GMT", :server "Jetty(9.4.22.v20191022)"}, :status 500}
+clj꞉fakephone.core꞉> 
+Trying the establish connection to :  http://localhost:3000/connect/client/init
+This is response  {"spec":"(spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true})","problems":[{"path":[],"pred":"clojure.string/blank?","val":"SUCCESS, tp available with tpid id21 MQTT-username: something, MQTT-password:something","via":["http/empty?"],"in":[]}],"type":"reitit.coercion/response-coercion","coercion":"spec","value":"SUCCESS, tp available with tpid id21 MQTT-username: something, MQTT-password:something","in":["response","body"]}
+This is response json  {spec (spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true}), problems [{path [], pred clojure.string/blank?, val SUCCESS, tp available with tpid id21 MQTT-username: something, MQTT-password:something, via [http/empty?], in []}], type reitit.coercion/response-coercion, coercion spec, value SUCCESS, tp available with tpid id21 MQTT-username: something, MQTT-password:something, in [response body]}
+Special  clojure.lang.APersistentMap$KeySeq
+nil
+clj꞉fakephone.core꞉> 
+Trying the establish connection to :  http://localhost:3000/connect/client/init
+This is response  {"spec":"(spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true})","problems":[{"path":[],"pred":"clojure.string/blank?","val":"SUCCESS, tp available with tpid id21 MQTT-username: something, MQTT-password:something","via":["http/empty?"],"in":[]}],"type":"reitit.coercion/response-coercion","coercion":"spec","value":"SUCCESS, tp available with tpid id21 MQTT-username: something, MQTT-password:something","in":["response","body"]}
+This is response json  {spec (spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true}), problems [{path [], pred clojure.string/blank?, val SUCCESS, tp available with tpid id21 MQTT-username: something, MQTT-password:something, via [http/empty?], in []}], type reitit.coercion/response-coercion, coercion spec, value SUCCESS, tp available with tpid id21 MQTT-username: something, MQTT-password:something, in [response body]}
+Special  spec
+nil
+clj꞉fakephone.core꞉> 
+Trying the establish connection to :  http://localhost:3000/connect/client/init
+This is response  {"spec":"(spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true})","problems":[{"path":[],"pred":"clojure.string/blank?","val":"SUCCESS, tp available with tpid id21 MQTT-username: something, MQTT-password:something","via":["http/empty?"],"in":[]}],"type":"reitit.coercion/response-coercion","coercion":"spec","value":"SUCCESS, tp available with tpid id21 MQTT-username: something, MQTT-password:something","in":["response","body"]}
+This is response json  {spec (spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true}), problems [{path [], pred clojure.string/blank?, val SUCCESS, tp available with tpid id21 MQTT-username: something, MQTT-password:something, via [http/empty?], in []}], type reitit.coercion/response-coercion, coercion spec, value SUCCESS, tp available with tpid id21 MQTT-username: something, MQTT-password:something, in [response body]}
+Special  java.lang.String
+nil
+clj꞉fakephone.core꞉> 
+Trying the establish connection to :  http://localhost:3000/connect/client/init
+This is response  {"spec":"(spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true})","problems":[{"path":[],"pred":"clojure.string/blank?","val":"SUCCESS, tp available with tpid id21 MQTT-username: something, MQTT-password:something","via":["http/empty?"],"in":[]}],"type":"reitit.coercion/response-coercion","coercion":"spec","value":"SUCCESS, tp available with tpid id21 MQTT-username: something, MQTT-password:something","in":["response","body"]}
+This is response json  {spec (spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true}), problems [{path [], pred clojure.string/blank?, val SUCCESS, tp available with tpid id21 MQTT-username: something, MQTT-password:something, via [http/empty?], in []}], type reitit.coercion/response-coercion, coercion spec, value SUCCESS, tp available with tpid id21 MQTT-username: something, MQTT-password:something, in [response body]}
+Special  SUCCESS, tp available with tpid id21 MQTT-username: something, MQTT-password:something
+nil
+clj꞉fakephone.core꞉> 
+Trying the establish connection to :  http://localhost:3000/connect/client/init
+This is response  {"spec":"(spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true})","problems":[{"path":[],"pred":"clojure.string/blank?","val":"SUCCESS, tp available with tpid id21 MQTT-username: something, MQTT-password:something","via":["http/empty?"],"in":[]}],"type":"reitit.coercion/response-coercion","coercion":"spec","value":"SUCCESS, tp available with tpid id21 MQTT-username: something, MQTT-password:something","in":["response","body"]}
+This is response json  {spec (spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true}), problems [{path [], pred clojure.string/blank?, val SUCCESS, tp available with tpid id21 MQTT-username: something, MQTT-password:something, via [http/empty?], in []}], type reitit.coercion/response-coercion, coercion spec, value SUCCESS, tp available with tpid id21 MQTT-username: something, MQTT-password:something, in [response body]}
+Special  java.lang.String
+nil
+clj꞉fakephone.core꞉> 
+Trying the establish connection to :  http://localhost:3000/connect/client/init
+This is response  {"type":"default","message":"class clojure.lang.PersistentArrayMap cannot be cast to class java.lang.CharSequence (clojure.lang.PersistentArrayMap is in unnamed module of loader 'app'; java.lang.CharSequence is in module java.base of loader 'bootstrap')","exception":"class java.lang.ClassCastException","uri":"/connect/client/init"}
+This is response json  {type default, message class clojure.lang.PersistentArrayMap cannot be cast to class java.lang.CharSequence (clojure.lang.PersistentArrayMap is in unnamed module of loader 'app'; java.lang.CharSequence is in module java.base of loader 'bootstrap'), exception class java.lang.ClassCastException, uri /connect/client/init}
+Special  nil
+nil
+clj꞉fakephone.core꞉> 
+Trying the establish connection to :  http://localhost:3000/connect/client/init
+This is response  {"type":"default","message":"class clojure.lang.PersistentArrayMap cannot be cast to class java.lang.CharSequence (clojure.lang.PersistentArrayMap is in unnamed module of loader 'app'; java.lang.CharSequence is in module java.base of loader 'bootstrap')","exception":"class java.lang.ClassCastException","uri":"/connect/client/init"}
+This is response json  {type default, message class clojure.lang.PersistentArrayMap cannot be cast to class java.lang.CharSequence (clojure.lang.PersistentArrayMap is in unnamed module of loader 'app'; java.lang.CharSequence is in module java.base of loader 'bootstrap'), exception class java.lang.ClassCastException, uri /connect/client/init}
+Special  java.lang.String
+nil
+clj꞉fakephone.core꞉> 
+Trying the establish connection to :  http://localhost:3000/connect/client/init
+This is response  {"type":"default","message":"class clojure.lang.PersistentArrayMap cannot be cast to class java.lang.CharSequence (clojure.lang.PersistentArrayMap is in unnamed module of loader 'app'; java.lang.CharSequence is in module java.base of loader 'bootstrap')","exception":"class java.lang.ClassCastException","uri":"/connect/client/init"}
+Special  java.lang.String
+nil
+clj꞉fakephone.core꞉> 
+Trying the establish connection to :  http://localhost:3000/connect/client/init
+This is response  {"type":"default","message":"class clojure.lang.PersistentArrayMap cannot be cast to class java.lang.CharSequence (clojure.lang.PersistentArrayMap is in unnamed module of loader 'app'; java.lang.CharSequence is in module java.base of loader 'bootstrap')","exception":"class java.lang.ClassCastException","uri":"/connect/client/init"}
+Special  {"type":"default","message":"class clojure.lang.PersistentArrayMap cannot be cast to class java.lang.CharSequence (clojure.lang.PersistentArrayMap is in unnamed module of loader 'app'; java.lang.CharSequence is in module java.base of loader 'bootstrap')","exception":"class java.lang.ClassCastException","uri":"/connect/client/init"}
+nil
+clj꞉fakephone.core꞉> 
+Trying the establish connection to :  http://localhost:3000/connect/client/init
+This is response  {"type":"default","message":"class clojure.lang.PersistentArrayMap cannot be cast to class java.lang.CharSequence (clojure.lang.PersistentArrayMap is in unnamed module of loader 'app'; java.lang.CharSequence is in module java.base of loader 'bootstrap')","exception":"class java.lang.ClassCastException","uri":"/connect/client/init"}
+Special  {type default, message class clojure.lang.PersistentArrayMap cannot be cast to class java.lang.CharSequence (clojure.lang.PersistentArrayMap is in unnamed module of loader 'app'; java.lang.CharSequence is in module java.base of loader 'bootstrap'), exception class java.lang.ClassCastException, uri /connect/client/init}
+nil
+clj꞉fakephone.core꞉> 
+Trying the establish connection to :  http://localhost:3000/connect/client/init
+This is response  {"type":"default","message":"class clojure.lang.PersistentArrayMap cannot be cast to class java.lang.CharSequence (clojure.lang.PersistentArrayMap is in unnamed module of loader 'app'; java.lang.CharSequence is in module java.base of loader 'bootstrap')","exception":"class java.lang.ClassCastException","uri":"/connect/client/init"}
+{"type" "default",
+ "message"
+ "class clojure.lang.PersistentArrayMap cannot be cast to class java.lang.CharSequence (clojure.lang.PersistentArrayMap is in unnamed module of loader 'app'; java.lang.CharSequence is in module java.base of loader 'bootstrap')",
+ "exception" "class java.lang.ClassCastException",
+ "uri" "/connect/client/init"}
+clj꞉fakephone.core꞉> 
+{:opts {:query-params {:nickname "bo"}, :method :get, :url "http://localhost:3000/connect/client/init"},
+ :body
+ "{\"type\":\"default\",\"message\":\"class clojure.lang.PersistentArrayMap cannot be cast to class java.lang.CharSequence (clojure.lang.PersistentArrayMap is in unnamed module of loader 'app'; java.lang.CharSequence is in module java.base of loader 'bootstrap')\",\"exception\":\"class java.lang.ClassCastException\",\"uri\":\"/connect/client/init\"}",
+ :headers
+ {:access-control-allow-credentials "true",
+  :content-length "333",
+  :content-type "application/json;charset=utf-8",
+  :date "Mon, 26 Jul 2021 10:38:11 GMT",
+  :server "Jetty(9.4.22.v20191022)"},
+ :status 500}
+clj꞉fakephone.core꞉> 
+; Syntax error compiling at (core.clj:27:34).
+; Unable to resolve symbol: response in this context
+clj꞉fakephone.core꞉> 
+Trying the establish connection to :  http://localhost:3000/connect/client/init
+This is response  {"type":"default","message":"class clojure.lang.PersistentArrayMap cannot be cast to class java.lang.CharSequence (clojure.lang.PersistentArrayMap is in unnamed module of loader 'app'; java.lang.CharSequence is in module java.base of loader 'bootstrap')","exception":"class java.lang.ClassCastException","uri":"/connect/client/init"}
+nil
+clj꞉fakephone.core꞉> 
+Trying the establish connection to :  http://localhost:3000/connect/client/init
+This is response  {:opts {:query-params {:nickname bo}, :method :get, :url http://localhost:3000/connect/client/init}, :body {"type":"default","message":"class clojure.lang.PersistentArrayMap cannot be cast to class java.lang.CharSequence (clojure.lang.PersistentArrayMap is in unnamed module of loader 'app'; java.lang.CharSequence is in module java.base of loader 'bootstrap')","exception":"class java.lang.ClassCastException","uri":"/connect/client/init"}, :headers {:access-control-allow-credentials true, :content-length 333, :content-type application/json;charset=utf-8, :date Mon, 26 Jul 2021 10:38:56 GMT, :server Jetty(9.4.22.v20191022)}, :status 500}
+nil
+clj꞉fakephone.core꞉> 
+Trying the establish connection to :  http://localhost:3000/connect/client/init
+This is response  {:opts {:query-params {:nickname bo}, :method :get, :url http://localhost:3000/connect/client/init}, :body {"type":"default","message":"class clojure.lang.PersistentArrayMap cannot be cast to class java.lang.CharSequence (clojure.lang.PersistentArrayMap is in unnamed module of loader 'app'; java.lang.CharSequence is in module java.base of loader 'bootstrap')","exception":"class java.lang.ClassCastException","uri":"/connect/client/init"}, :headers {:access-control-allow-credentials true, :content-length 333, :content-type application/json;charset=utf-8, :date Mon, 26 Jul 2021 10:40:02 GMT, :server Jetty(9.4.22.v20191022)}, :status 500}
+nil
+clj꞉fakephone.core꞉> 
+Trying the establish connection to :  http://localhost:3000/connect/client/init
+This is response  {:opts {:query-params {:nickname bo}, :method :get, :url http://localhost:3000/connect/client/init}, :body {"spec":"(spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true})","problems":[{"path":[],"pred":"clojure.string/blank?","val":"{:status success :mqtt-username username :mqtt-password password}","via":["http/empty?"],"in":[]}],"type":"reitit.coercion/response-coercion","coercion":"spec","value":"{:status success :mqtt-username username :mqtt-password password}","in":["response","body"]}, :headers {:access-control-allow-credentials true, :content-length 409, :content-type application/json;charset=utf-8, :date Mon, 26 Jul 2021 10:46:35 GMT, :server Jetty(9.4.22.v20191022)}, :status 500}
+nil
+clj꞉fakephone.core꞉> 
+Trying the establish connection to :  http://localhost:3000/connect/client/init
+This is response  {:opts {:query-params {:nickname bo}, :method :get, :url http://localhost:3000/connect/client/init}, :body {"spec":"(spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true})","problems":[{"path":[],"pred":"clojure.string/blank?","val":"{:status success :mqtt-username username :mqtt-password password}","via":["http/empty?"],"in":[]}],"type":"reitit.coercion/response-coercion","coercion":"spec","value":"{:status success :mqtt-username username :mqtt-password password}","in":["response","body"]}, :headers {:access-control-allow-credentials true, :content-length 409, :content-type application/json;charset=utf-8, :date Mon, 26 Jul 2021 10:46:56 GMT, :server Jetty(9.4.22.v20191022)}, :status 500}
+This is response json  {spec (spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true}), problems [{path [], pred clojure.string/blank?, val {:status success :mqtt-username username :mqtt-password password}, via [http/empty?], in []}], type reitit.coercion/response-coercion, coercion spec, value {:status success :mqtt-username username :mqtt-password password}, in [response body]}
+nil
+clj꞉fakephone.core꞉> 
+Trying the establish connection to :  http://localhost:3000/connect/client/init
+This is response  {:opts {:query-params {:nickname bo}, :method :get, :url http://localhost:3000/connect/client/init}, :body {"spec":"(spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true})","problems":[{"path":[],"pred":"clojure.string/blank?","val":"{:status success :mqtt-username username :mqtt-password password}","via":["http/empty?"],"in":[]}],"type":"reitit.coercion/response-coercion","coercion":"spec","value":"{:status success :mqtt-username username :mqtt-password password}","in":["response","body"]}, :headers {:access-control-allow-credentials true, :content-length 409, :content-type application/json;charset=utf-8, :date Mon, 26 Jul 2021 10:47:25 GMT, :server Jetty(9.4.22.v20191022)}, :status 500}
+This is response json  {spec (spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true}), problems [{path [], pred clojure.string/blank?, val {:status success :mqtt-username username :mqtt-password password}, via [http/empty?], in []}], type reitit.coercion/response-coercion, coercion spec, value {:status success :mqtt-username username :mqtt-password password}, in [response body]}
+; Execution error (ClassCastException) at fakephone.core/eval7750 (form-init10964825664566564597.clj:29).
+; class clojure.lang.PersistentArrayMap cannot be cast to class java.util.Map$Entry (clojure.lang.PersistentArrayMap is in unnamed module of loader 'app'; java.util.Map$Entry is in module java.base of loader 'bootstrap')
+clj꞉fakephone.core꞉> 
+Trying the establish connection to :  http://localhost:3000/connect/client/init
+This is response  {:opts {:query-params {:nickname bo}, :method :get, :url http://localhost:3000/connect/client/init}, :body {"spec":"(spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true})","problems":[{"path":[],"pred":"clojure.string/blank?","val":"{:status success :mqtt-username username :mqtt-password password}","via":["http/empty?"],"in":[]}],"type":"reitit.coercion/response-coercion","coercion":"spec","value":"{:status success :mqtt-username username :mqtt-password password}","in":["response","body"]}, :headers {:access-control-allow-credentials true, :content-length 409, :content-type application/json;charset=utf-8, :date Mon, 26 Jul 2021 10:47:36 GMT, :server Jetty(9.4.22.v20191022)}, :status 500}
+This is response json  {spec (spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true}), problems [{path [], pred clojure.string/blank?, val {:status success :mqtt-username username :mqtt-password password}, via [http/empty?], in []}], type reitit.coercion/response-coercion, coercion spec, value {:status success :mqtt-username username :mqtt-password password}, in [response body]}
+This is val  nil
+nil
+clj꞉fakephone.core꞉> 
+Trying the establish connection to :  http://localhost:3000/connect/client/init
+This is response  {:opts {:query-params {:nickname bo}, :method :get, :url http://localhost:3000/connect/client/init}, :body {"spec":"(spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true})","problems":[{"path":[],"pred":"clojure.string/blank?","val":"{:status success :mqtt-username username :mqtt-password password}","via":["http/empty?"],"in":[]}],"type":"reitit.coercion/response-coercion","coercion":"spec","value":"{:status success :mqtt-username username :mqtt-password password}","in":["response","body"]}, :headers {:access-control-allow-credentials true, :content-length 409, :content-type application/json;charset=utf-8, :date Mon, 26 Jul 2021 10:47:52 GMT, :server Jetty(9.4.22.v20191022)}, :status 500}
+This is response json  {spec (spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true}), problems [{path [], pred clojure.string/blank?, val {:status success :mqtt-username username :mqtt-password password}, via [http/empty?], in []}], type reitit.coercion/response-coercion, coercion spec, value {:status success :mqtt-username username :mqtt-password password}, in [response body]}
+This is val  (spec problems type coercion value in)
+nil
+clj꞉fakephone.core꞉> 
+Trying the establish connection to :  http://localhost:3000/connect/client/init
+This is response  {:opts {:query-params {:nickname bo}, :method :get, :url http://localhost:3000/connect/client/init}, :body {"spec":"(spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true})","problems":[{"path":[],"pred":"clojure.string/blank?","val":"{:status success :mqtt-username username :mqtt-password password}","via":["http/empty?"],"in":[]}],"type":"reitit.coercion/response-coercion","coercion":"spec","value":"{:status success :mqtt-username username :mqtt-password password}","in":["response","body"]}, :headers {:access-control-allow-credentials true, :content-length 409, :content-type application/json;charset=utf-8, :date Mon, 26 Jul 2021 10:48:21 GMT, :server Jetty(9.4.22.v20191022)}, :status 500}
+This is response json  {spec (spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true}), problems [{path [], pred clojure.string/blank?, val {:status success :mqtt-username username :mqtt-password password}, via [http/empty?], in []}], type reitit.coercion/response-coercion, coercion spec, value {:status success :mqtt-username username :mqtt-password password}, in [response body]}
+This is val  clojure.lang.MapEntry
+nil
+clj꞉fakephone.core꞉> 
+Trying the establish connection to :  http://localhost:3000/connect/client/init
+This is response  {:opts {:query-params {:nickname bo}, :method :get, :url http://localhost:3000/connect/client/init}, :body {"spec":"(spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true})","problems":[{"path":[],"pred":"clojure.string/blank?","val":"{:status success :mqtt-username username :mqtt-password password}","via":["http/empty?"],"in":[]}],"type":"reitit.coercion/response-coercion","coercion":"spec","value":"{:status success :mqtt-username username :mqtt-password password}","in":["response","body"]}, :headers {:access-control-allow-credentials true, :content-length 409, :content-type application/json;charset=utf-8, :date Mon, 26 Jul 2021 10:48:39 GMT, :server Jetty(9.4.22.v20191022)}, :status 500}
+This is response json  {spec (spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true}), problems [{path [], pred clojure.string/blank?, val {:status success :mqtt-username username :mqtt-password password}, via [http/empty?], in []}], type reitit.coercion/response-coercion, coercion spec, value {:status success :mqtt-username username :mqtt-password password}, in [response body]}
+This is val  clojure.lang.MapEntry
+nil
+clj꞉fakephone.core꞉> 
+Trying the establish connection to :  http://localhost:3000/connect/client/init
+This is response  {:opts {:query-params {:nickname bo}, :method :get, :url http://localhost:3000/connect/client/init}, :body {"spec":"(spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true})","problems":[{"path":[],"pred":"clojure.string/blank?","val":"{:status success :mqtt-username username :mqtt-password password}","via":["http/empty?"],"in":[]}],"type":"reitit.coercion/response-coercion","coercion":"spec","value":"{:status success :mqtt-username username :mqtt-password password}","in":["response","body"]}, :headers {:access-control-allow-credentials true, :content-length 409, :content-type application/json;charset=utf-8, :date Mon, 26 Jul 2021 10:49:41 GMT, :server Jetty(9.4.22.v20191022)}, :status 500}
+This is response json  {spec (spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true}), problems [{path [], pred clojure.string/blank?, val {:status success :mqtt-username username :mqtt-password password}, via [http/empty?], in []}], type reitit.coercion/response-coercion, coercion spec, value {:status success :mqtt-username username :mqtt-password password}, in [response body]}
+This is val  java.lang.String
+nil
+clj꞉fakephone.core꞉> 
+Trying the establish connection to :  http://localhost:3000/connect/client/init
+This is response  {:opts {:query-params {:nickname bo}, :method :get, :url http://localhost:3000/connect/client/init}, :body {"spec":"(spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true})","problems":[{"path":[],"pred":"clojure.string/blank?","val":"{:status success :mqtt-username username :mqtt-password password}","via":["http/empty?"],"in":[]}],"type":"reitit.coercion/response-coercion","coercion":"spec","value":"{:status success :mqtt-username username :mqtt-password password}","in":["response","body"]}, :headers {:access-control-allow-credentials true, :content-length 409, :content-type application/json;charset=utf-8, :date Mon, 26 Jul 2021 10:49:57 GMT, :server Jetty(9.4.22.v20191022)}, :status 500}
+This is response json  {spec (spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true}), problems [{path [], pred clojure.string/blank?, val {:status success :mqtt-username username :mqtt-password password}, via [http/empty?], in []}], type reitit.coercion/response-coercion, coercion spec, value {:status success :mqtt-username username :mqtt-password password}, in [response body]}
+This is val  (spec problems type coercion value in)
+nil
+clj꞉fakephone.core꞉> 
+Trying the establish connection to :  http://localhost:3000/connect/client/init
+This is response  {:opts {:query-params {:nickname bo}, :method :get, :url http://localhost:3000/connect/client/init}, :body {"spec":"(spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true})","problems":[{"path":[],"pred":"clojure.string/blank?","val":"{:status success :mqtt-username username :mqtt-password password}","via":["http/empty?"],"in":[]}],"type":"reitit.coercion/response-coercion","coercion":"spec","value":"{:status success :mqtt-username username :mqtt-password password}","in":["response","body"]}, :headers {:access-control-allow-credentials true, :content-length 409, :content-type application/json;charset=utf-8, :date Mon, 26 Jul 2021 10:50:09 GMT, :server Jetty(9.4.22.v20191022)}, :status 500}
+This is response json  {spec (spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true}), problems [{path [], pred clojure.string/blank?, val {:status success :mqtt-username username :mqtt-password password}, via [http/empty?], in []}], type reitit.coercion/response-coercion, coercion spec, value {:status success :mqtt-username username :mqtt-password password}, in [response body]}
+This is val  {:status success :mqtt-username username :mqtt-password password}
+nil
+clj꞉fakephone.core꞉> 
+Trying the establish connection to :  http://localhost:3000/connect/client/init
+This is response  {:opts {:query-params {:nickname bo}, :method :get, :url http://localhost:3000/connect/client/init}, :body {"spec":"(spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true})","problems":[{"path":[],"pred":"clojure.string/blank?","val":"{:status success :mqtt-username username :mqtt-password password}","via":["http/empty?"],"in":[]}],"type":"reitit.coercion/response-coercion","coercion":"spec","value":"{:status success :mqtt-username username :mqtt-password password}","in":["response","body"]}, :headers {:access-control-allow-credentials true, :content-length 409, :content-type application/json;charset=utf-8, :date Mon, 26 Jul 2021 10:50:37 GMT, :server Jetty(9.4.22.v20191022)}, :status 500}
+This is response json  {spec (spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true}), problems [{path [], pred clojure.string/blank?, val {:status success :mqtt-username username :mqtt-password password}, via [http/empty?], in []}], type reitit.coercion/response-coercion, coercion spec, value {:status success :mqtt-username username :mqtt-password password}, in [response body]}
+This is val  java.lang.String
+nil
+clj꞉fakephone.core꞉> 
+Trying the establish connection to :  http://localhost:3000/connect/client/init
+This is response  {:opts {:query-params {:nickname bo}, :method :get, :url http://localhost:3000/connect/client/init}, :body {"spec":"(spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true})","problems":[{"path":[],"pred":"clojure.string/blank?","val":"{:status success :mqtt-username username :mqtt-password password}","via":["http/empty?"],"in":[]}],"type":"reitit.coercion/response-coercion","coercion":"spec","value":"{:status success :mqtt-username username :mqtt-password password}","in":["response","body"]}, :headers {:access-control-allow-credentials true, :content-length 409, :content-type application/json;charset=utf-8, :date Mon, 26 Jul 2021 10:51:34 GMT, :server Jetty(9.4.22.v20191022)}, :status 500}
+This is response json  {spec (spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true}), problems [{path [], pred clojure.string/blank?, val {:status success :mqtt-username username :mqtt-password password}, via [http/empty?], in []}], type reitit.coercion/response-coercion, coercion spec, value {:status success :mqtt-username username :mqtt-password password}, in [response body]}
+; Execution error at clojure.data.json/read-key (json.clj:293).
+; JSON error (non-string key in object), found `:`, expected `"`
+clj꞉fakephone.core꞉> 
+Trying the establish connection to :  http://localhost:3000/connect/client/init
+This is response  {:opts {:query-params {:nickname bo}, :method :get, :url http://localhost:3000/connect/client/init}, :body {"spec":"(spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true})","problems":[{"path":[],"pred":"clojure.string/blank?","val":"{:status success :mqtt-username username :mqtt-password password}","via":["http/empty?"],"in":[]}],"type":"reitit.coercion/response-coercion","coercion":"spec","value":"{:status success :mqtt-username username :mqtt-password password}","in":["response","body"]}, :headers {:access-control-allow-credentials true, :content-length 409, :content-type application/json;charset=utf-8, :date Mon, 26 Jul 2021 10:52:08 GMT, :server Jetty(9.4.22.v20191022)}, :status 500}
+This is response json  {spec (spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true}), problems [{path [], pred clojure.string/blank?, val {:status success :mqtt-username username :mqtt-password password}, via [http/empty?], in []}], type reitit.coercion/response-coercion, coercion spec, value {:status success :mqtt-username username :mqtt-password password}, in [response body]}
+This is val  nil
+nil
+clj꞉fakephone.core꞉> 
+Trying the establish connection to :  http://localhost:3000/connect/client/init
+This is response  {:opts {:query-params {:nickname bo}, :method :get, :url http://localhost:3000/connect/client/init}, :body {"spec":"(spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true})","problems":[{"path":[],"pred":"clojure.string/blank?","val":"{:status success :mqtt-username username :mqtt-password password}","via":["http/empty?"],"in":[]}],"type":"reitit.coercion/response-coercion","coercion":"spec","value":"{:status success :mqtt-username username :mqtt-password password}","in":["response","body"]}, :headers {:access-control-allow-credentials true, :content-length 409, :content-type application/json;charset=utf-8, :date Mon, 26 Jul 2021 10:52:22 GMT, :server Jetty(9.4.22.v20191022)}, :status 500}
+This is response json  {spec (spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true}), problems [{path [], pred clojure.string/blank?, val {:status success :mqtt-username username :mqtt-password password}, via [http/empty?], in []}], type reitit.coercion/response-coercion, coercion spec, value {:status success :mqtt-username username :mqtt-password password}, in [response body]}
+This is val  (
+; Execution error (ClassCastException) at fakephone.core/eval7772 (form-init10964825664566564597.clj:29).
+; class java.lang.Character cannot be cast to class java.util.Map$Entry (java.lang.Character and java.util.Map$Entry are in module java.base of loader 'bootstrap')
+clj꞉fakephone.core꞉> 
+Trying the establish connection to :  http://localhost:3000/connect/client/init
+This is response  {:opts {:query-params {:nickname bo}, :method :get, :url http://localhost:3000/connect/client/init}, :body {"spec":"(spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true})","problems":[{"path":[],"pred":"clojure.string/blank?","val":"{:status success :mqtt-username username :mqtt-password password}","via":["http/empty?"],"in":[]}],"type":"reitit.coercion/response-coercion","coercion":"spec","value":"{:status success :mqtt-username username :mqtt-password password}","in":["response","body"]}, :headers {:access-control-allow-credentials true, :content-length 409, :content-type application/json;charset=utf-8, :date Mon, 26 Jul 2021 10:52:35 GMT, :server Jetty(9.4.22.v20191022)}, :status 500}
+This is response json  {spec (spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true}), problems [{path [], pred clojure.string/blank?, val {:status success :mqtt-username username :mqtt-password password}, via [http/empty?], in []}], type reitit.coercion/response-coercion, coercion spec, value {:status success :mqtt-username username :mqtt-password password}, in [response body]}
+This is val  java.lang.String
+nil
+clj꞉fakephone.core꞉> 
+Trying the establish connection to :  http://localhost:3000/connect/client/init
+This is response  {:opts {:query-params {:nickname bo}, :method :get, :url http://localhost:3000/connect/client/init}, :body {"spec":"(spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true})","problems":[{"path":[],"pred":"clojure.string/blank?","val":"{:status success :mqtt-username username :mqtt-password password}","via":["http/empty?"],"in":[]}],"type":"reitit.coercion/response-coercion","coercion":"spec","value":"{:status success :mqtt-username username :mqtt-password password}","in":["response","body"]}, :headers {:access-control-allow-credentials true, :content-length 409, :content-type application/json;charset=utf-8, :date Mon, 26 Jul 2021 10:52:50 GMT, :server Jetty(9.4.22.v20191022)}, :status 500}
+This is response json  {spec (spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true}), problems [{path [], pred clojure.string/blank?, val {:status success :mqtt-username username :mqtt-password password}, via [http/empty?], in []}], type reitit.coercion/response-coercion, coercion spec, value {:status success :mqtt-username username :mqtt-password password}, in [response body]}
+This is val  {:status success :mqtt-username username :mqtt-password password}
+nil
+clj꞉fakephone.core꞉> 
+Trying the establish connection to :  http://localhost:3000/connect/client/init
+This is response  {:opts {:query-params {:nickname bo}, :method :get, :url http://localhost:3000/connect/client/init}, :body {"spec":"(spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true})","problems":[{"path":[],"pred":"clojure.string/blank?","val":"{:status success :mqtt-username username :mqtt-password password}","via":["http/empty?"],"in":[]}],"type":"reitit.coercion/response-coercion","coercion":"spec","value":"{:status success :mqtt-username username :mqtt-password password}","in":["response","body"]}, :headers {:access-control-allow-credentials true, :content-length 409, :content-type application/json;charset=utf-8, :date Mon, 26 Jul 2021 10:53:20 GMT, :server Jetty(9.4.22.v20191022)}, :status 500}
+This is response json  {spec (spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true}), problems [{path [], pred clojure.string/blank?, val {:status success :mqtt-username username :mqtt-password password}, via [http/empty?], in []}], type reitit.coercion/response-coercion, coercion spec, value {:status success :mqtt-username username :mqtt-password password}, in [response body]}
+; Execution error at clojure.data.json/read-key (json.clj:293).
+; JSON error (non-string key in object), found `:`, expected `"`
+clj꞉fakephone.core꞉> 
+Trying the establish connection to :  http://localhost:3000/connect/client/init
+This is response  {:opts {:query-params {:nickname bo}, :method :get, :url http://localhost:3000/connect/client/init}, :body {"spec":"(spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true})","problems":[{"path":[],"pred":"clojure.string/blank?","val":"{:status success :mqtt-username username :mqtt-password password}","via":["http/empty?"],"in":[]}],"type":"reitit.coercion/response-coercion","coercion":"spec","value":"{:status success :mqtt-username username :mqtt-password password}","in":["response","body"]}, :headers {:access-control-allow-credentials true, :content-length 409, :content-type application/json;charset=utf-8, :date Mon, 26 Jul 2021 10:53:58 GMT, :server Jetty(9.4.22.v20191022)}, :status 500}
+This is response json  {spec (spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true}), problems [{path [], pred clojure.string/blank?, val {:status success :mqtt-username username :mqtt-password password}, via [http/empty?], in []}], type reitit.coercion/response-coercion, coercion spec, value {:status success :mqtt-username username :mqtt-password password}, in [response body]}
+; Execution error (EOFException) at clojure.data.json/slow-read-string (json.clj:85).
+; JSON error (end-of-file inside string)
+clj꞉fakephone.core꞉> 
+Trying the establish connection to :  http://localhost:3000/connect/client/init
+This is response  {:opts {:query-params {:nickname bo}, :method :get, :url http://localhost:3000/connect/client/init}, :body {"spec":"(spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true})","problems":[{"path":[],"pred":"clojure.string/blank?","val":"{:status success :mqtt-username username :mqtt-password password}","via":["http/empty?"],"in":[]}],"type":"reitit.coercion/response-coercion","coercion":"spec","value":"{:status success :mqtt-username username :mqtt-password password}","in":["response","body"]}, :headers {:access-control-allow-credentials true, :content-length 409, :content-type application/json;charset=utf-8, :date Mon, 26 Jul 2021 10:54:08 GMT, :server Jetty(9.4.22.v20191022)}, :status 500}
+This is response json  {spec (spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true}), problems [{path [], pred clojure.string/blank?, val {:status success :mqtt-username username :mqtt-password password}, via [http/empty?], in []}], type reitit.coercion/response-coercion, coercion spec, value {:status success :mqtt-username username :mqtt-password password}, in [response body]}
+This is val  {:status success :mqtt-username username :mqtt-password password}
+nil
+clj꞉fakephone.core꞉> 
+Trying the establish connection to :  http://localhost:3000/connect/client/init
+This is response  {:opts {:query-params {:nickname bo}, :method :get, :url http://localhost:3000/connect/client/init}, :body {"spec":"(spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true})","problems":[{"path":[],"pred":"clojure.string/blank?","val":"{:status success :mqtt-username username :mqtt-password password}","via":["http/empty?"],"in":[]}],"type":"reitit.coercion/response-coercion","coercion":"spec","value":"{:status success :mqtt-username username :mqtt-password password}","in":["response","body"]}, :headers {:access-control-allow-credentials true, :content-length 409, :content-type application/json;charset=utf-8, :date Mon, 26 Jul 2021 10:54:26 GMT, :server Jetty(9.4.22.v20191022)}, :status 500}
+This is response json  {spec (spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true}), problems [{path [], pred clojure.string/blank?, val {:status success :mqtt-username username :mqtt-password password}, via [http/empty?], in []}], type reitit.coercion/response-coercion, coercion spec, value {:status success :mqtt-username username :mqtt-password password}, in [response body]}
+This is val  java.lang.String
+nil
+clj꞉fakephone.core꞉> 
+Trying the establish connection to :  http://localhost:3000/connect/client/init
+This is response  {:opts {:query-params {:nickname bo}, :method :get, :url http://localhost:3000/connect/client/init}, :body {"spec":"(spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true})","problems":[{"path":[],"pred":"clojure.string/blank?","val":"{:status success :mqtt-username username :mqtt-password password}","via":["http/empty?"],"in":[]}],"type":"reitit.coercion/response-coercion","coercion":"spec","value":"{:status success :mqtt-username username :mqtt-password password}","in":["response","body"]}, :headers {:access-control-allow-credentials true, :content-length 409, :content-type application/json;charset=utf-8, :date Mon, 26 Jul 2021 10:54:53 GMT, :server Jetty(9.4.22.v20191022)}, :status 500}
+This is response json  {spec (spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true}), problems [{path [], pred clojure.string/blank?, val {:status success :mqtt-username username :mqtt-password password}, via [http/empty?], in []}], type reitit.coercion/response-coercion, coercion spec, value {:status success :mqtt-username username :mqtt-password password}, in [response body]}
+This is val  {:status success :mqtt-username username :mqtt-password password} "
+nil
+clj꞉fakephone.core꞉> 
+Trying the establish connection to :  http://localhost:3000/connect/client/init
+This is response  {:opts {:query-params {:nickname bo}, :method :get, :url http://localhost:3000/connect/client/init}, :body {"spec":"(spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true})","problems":[{"path":[],"pred":"clojure.string/blank?","val":"{:status success :mqtt-username username :mqtt-password password}","via":["http/empty?"],"in":[]}],"type":"reitit.coercion/response-coercion","coercion":"spec","value":"{:status success :mqtt-username username :mqtt-password password}","in":["response","body"]}, :headers {:access-control-allow-credentials true, :content-length 409, :content-type application/json;charset=utf-8, :date Mon, 26 Jul 2021 10:55:27 GMT, :server Jetty(9.4.22.v20191022)}, :status 500}
+This is response json  {spec (spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true}), problems [{path [], pred clojure.string/blank?, val {:status success :mqtt-username username :mqtt-password password}, via [http/empty?], in []}], type reitit.coercion/response-coercion, coercion spec, value {:status success :mqtt-username username :mqtt-password password}, in [response body]}
+This is val  java.lang.String
+nil
+clj꞉fakephone.core꞉> 
+Trying the establish connection to :  http://localhost:3000/connect/client/init
+This is response  {:opts {:query-params {:nickname bo}, :method :get, :url http://localhost:3000/connect/client/init}, :body {"spec":"(spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true})","problems":[{"path":[],"pred":"clojure.string/blank?","val":"{:status success :mqtt-username username :mqtt-password password}","via":["http/empty?"],"in":[]}],"type":"reitit.coercion/response-coercion","coercion":"spec","value":"{:status success :mqtt-username username :mqtt-password password}","in":["response","body"]}, :headers {:access-control-allow-credentials true, :content-length 409, :content-type application/json;charset=utf-8, :date Mon, 26 Jul 2021 10:56:28 GMT, :server Jetty(9.4.22.v20191022)}, :status 500}
+This is response json  {spec (spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true}), problems [{path [], pred clojure.string/blank?, val {:status success :mqtt-username username :mqtt-password password}, via [http/empty?], in []}], type reitit.coercion/response-coercion, coercion spec, value {:status success :mqtt-username username :mqtt-password password}, in [response body]}
+This is val  java.lang.String
+nil
+clj꞉fakephone.core꞉> 
+Trying the establish connection to :  http://localhost:3000/connect/client/init
+This is response  {:opts {:query-params {:nickname bo}, :method :get, :url http://localhost:3000/connect/client/init}, :body {"spec":"(spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true})","problems":[{"path":[],"pred":"clojure.string/blank?","val":"{:status success :mqtt-username username :mqtt-password password}","via":["http/empty?"],"in":[]}],"type":"reitit.coercion/response-coercion","coercion":"spec","value":"{:status success :mqtt-username username :mqtt-password password}","in":["response","body"]}, :headers {:access-control-allow-credentials true, :content-length 409, :content-type application/json;charset=utf-8, :date Mon, 26 Jul 2021 10:56:44 GMT, :server Jetty(9.4.22.v20191022)}, :status 500}
+This is response json  {spec (spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true}), problems [{path [], pred clojure.string/blank?, val {:status success :mqtt-username username :mqtt-password password}, via [http/empty?], in []}], type reitit.coercion/response-coercion, coercion spec, value {:status success :mqtt-username username :mqtt-password password}, in [response body]}
+This is val  () #function[clojure.core/get] {spec (spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true}), problems [{path [], pred clojure.string/blank?, val {:status success :mqtt-username username :mqtt-password password}, via [http/empty?], in []}], type reitit.coercion/response-coercion, coercion spec, value {:status success :mqtt-username username :mqtt-password password}, in [response body]} value
+nil
+clj꞉fakephone.core꞉> 
+Trying the establish connection to :  http://localhost:3000/connect/client/init
+This is response  {:opts {:query-params {:nickname bo}, :method :get, :url http://localhost:3000/connect/client/init}, :body {"spec":"(spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true})","problems":[{"path":[],"pred":"clojure.string/blank?","val":"{:status success :mqtt-username username :mqtt-password password}","via":["http/empty?"],"in":[]}],"type":"reitit.coercion/response-coercion","coercion":"spec","value":"{:status success :mqtt-username username :mqtt-password password}","in":["response","body"]}, :headers {:access-control-allow-credentials true, :content-length 409, :content-type application/json;charset=utf-8, :date Mon, 26 Jul 2021 10:56:51 GMT, :server Jetty(9.4.22.v20191022)}, :status 500}
+This is response json  {spec (spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true}), problems [{path [], pred clojure.string/blank?, val {:status success :mqtt-username username :mqtt-password password}, via [http/empty?], in []}], type reitit.coercion/response-coercion, coercion spec, value {:status success :mqtt-username username :mqtt-password password}, in [response body]}
+This is val  {:status success :mqtt-username username :mqtt-password password}
+nil
+clj꞉fakephone.core꞉> 
+"
+                                                                                                                               
+Trying the establish connection to :  http://localhost:3000/connect/client/init
+This is response  {:opts {:query-params {:nickname bo}, :method :get, :url http://localhost:3000/connect/client/init}, :body {"spec":"(spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true})","problems":[{"path":[],"pred":"clojure.string/blank?","val":"{:status success :mqtt-username username :mqtt-password password}","via":["http/empty?"],"in":[]}],"type":"reitit.coercion/response-coercion","coercion":"spec","value":"{:status success :mqtt-username username :mqtt-password password}","in":["response","body"]}, :headers {:access-control-allow-credentials true, :content-length 409, :content-type application/json;charset=utf-8, :date Mon, 26 Jul 2021 10:57:04 GMT, :server Jetty(9.4.22.v20191022)}, :status 500}
+This is response json  {spec (spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true}), problems [{path [], pred clojure.string/blank?, val {:status success :mqtt-username username :mqtt-password password}, via [http/empty?], in []}], type reitit.coercion/response-coercion, coercion spec, value {:status success :mqtt-username username :mqtt-password password}, in [response body]}
+This is val  {:status success :mqtt-username username :mqtt-password password}
+nil
+clj꞉fakephone.core꞉> 
+; Execution error at clojure.data.json/read-key (json.clj:293).
+; JSON error (non-string key in object), found `:`, expected `"`
+clj꞉fakephone.core꞉> 
+"{:status \"success\" :username \"username\" :password \"password\""
+clj꞉fakephone.core꞉> 
+; Execution error at clojure.data.json/read-key (json.clj:293).
+; JSON error (non-string key in object), found `s`, expected `"`
+clj꞉fakephone.core꞉> 
+; Execution error at clojure.data.json/read-key (json.clj:293).
+; JSON error (non-string key in object), found `:`, expected `"`
+clj꞉fakephone.core꞉> 
+{:status 1}
+clj꞉fakephone.core꞉> 
+{:status "Hey"}
+clj꞉fakephone.core꞉> 
+{:status Hey}
+clj꞉fakephone.core꞉> 
+Trying the establish connection to :  http://localhost:3000/connect/client/init
+This is response  {:opts {:query-params {:nickname bo}, :method :get, :url http://localhost:3000/connect/client/init}, :body {"spec":"(spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true})","problems":[{"path":[],"pred":"clojure.string/blank?","val":"{:status \"success\" :mqtt-username \"username\" :mqtt-password \"password\"}","via":["http/empty?"],"in":[]}],"type":"reitit.coercion/response-coercion","coercion":"spec","value":"{:status \"success\" :mqtt-username \"username\" :mqtt-password \"password\"}","in":["response","body"]}, :headers {:access-control-allow-credentials true, :content-length 433, :content-type application/json;charset=utf-8, :date Mon, 26 Jul 2021 11:01:25 GMT, :server Jetty(9.4.22.v20191022)}, :status 500}
+This is response json  {spec (spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true}), problems [{path [], pred clojure.string/blank?, val {:status "success" :mqtt-username "username" :mqtt-password "password"}, via [http/empty?], in []}], type reitit.coercion/response-coercion, coercion spec, value {:status "success" :mqtt-username "username" :mqtt-password "password"}, in [response body]}
+This is val  {:status "success" :mqtt-username "username" :mqtt-password "password"}
+nil
+clj꞉fakephone.core꞉> 
+Trying the establish connection to :  http://localhost:3000/connect/client/init
+This is response  {:opts {:query-params {:nickname bo}, :method :get, :url http://localhost:3000/connect/client/init}, :body {"spec":"(spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true})","problems":[{"path":[],"pred":"clojure.string/blank?","val":"{:status \"success\" :mqtt-username \"username\" :mqtt-password \"password\"}","via":["http/empty?"],"in":[]}],"type":"reitit.coercion/response-coercion","coercion":"spec","value":"{:status \"success\" :mqtt-username \"username\" :mqtt-password \"password\"}","in":["response","body"]}, :headers {:access-control-allow-credentials true, :content-length 433, :content-type application/json;charset=utf-8, :date Mon, 26 Jul 2021 11:01:38 GMT, :server Jetty(9.4.22.v20191022)}, :status 500}
+This is response json  {spec (spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true}), problems [{path [], pred clojure.string/blank?, val {:status "success" :mqtt-username "username" :mqtt-password "password"}, via [http/empty?], in []}], type reitit.coercion/response-coercion, coercion spec, value {:status "success" :mqtt-username "username" :mqtt-password "password"}, in [response body]}
+This is val  java.lang.String
+nil
+clj꞉fakephone.core꞉> 
+Trying the establish connection to :  http://localhost:3000/connect/client/init
+This is response  {:opts {:query-params {:nickname bo}, :method :get, :url http://localhost:3000/connect/client/init}, :body {"spec":"(spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true})","problems":[{"path":[],"pred":"clojure.string/blank?","val":"{:status \"success\" :mqtt-username \"username\" :mqtt-password \"password\"}","via":["http/empty?"],"in":[]}],"type":"reitit.coercion/response-coercion","coercion":"spec","value":"{:status \"success\" :mqtt-username \"username\" :mqtt-password \"password\"}","in":["response","body"]}, :headers {:access-control-allow-credentials true, :content-length 433, :content-type application/json;charset=utf-8, :date Mon, 26 Jul 2021 11:02:21 GMT, :server Jetty(9.4.22.v20191022)}, :status 500}
+This is response json  {spec (spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true}), problems [{path [], pred clojure.string/blank?, val {:status "success" :mqtt-username "username" :mqtt-password "password"}, via [http/empty?], in []}], type reitit.coercion/response-coercion, coercion spec, value {:status "success" :mqtt-username "username" :mqtt-password "password"}, in [response body]}
+This is val  success
+nil
+clj꞉fakephone.core꞉> 
+Trying the establish connection to :  http://localhost:3000/connect/client/init
+This is response  {:opts {:query-params {:nickname bo}, :method :get, :url http://localhost:3000/connect/client/init}, :body {"spec":"(spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true})","problems":[{"path":[],"pred":"clojure.string/blank?","val":"{:status \"success\" :mqtt-username \"username\" :mqtt-password \"password\"}","via":["http/empty?"],"in":[]}],"type":"reitit.coercion/response-coercion","coercion":"spec","value":"{:status \"success\" :mqtt-username \"username\" :mqtt-password \"password\"}","in":["response","body"]}, :headers {:access-control-allow-credentials true, :content-length 433, :content-type application/json;charset=utf-8, :date Mon, 26 Jul 2021 11:02:46 GMT, :server Jetty(9.4.22.v20191022)}, :status 500}
+This is response json  {spec (spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true}), problems [{path [], pred clojure.string/blank?, val {:status "success" :mqtt-username "username" :mqtt-password "password"}, via [http/empty?], in []}], type reitit.coercion/response-coercion, coercion spec, value {:status "success" :mqtt-username "username" :mqtt-password "password"}, in [response body]}
+This is val  true
+nil
+clj꞉fakephone.core꞉> 
+; Syntax error compiling at (core.clj:21:15).
+; No such namespace: cli
+clj꞉fakephone.core꞉> 
+; Syntax error compiling at (core.clj:22:18).
+; Unable to resolve symbol: input in this context
+clj꞉fakephone.core꞉> 
+Trying the establish connection to :  http://localhost:3000/connect/client/init
+This is response  {:opts {:query-params {:nickname bo}, :method :get, :url http://localhost:3000/connect/client/init}, :body {"spec":"(spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true})","problems":[{"path":[],"pred":"clojure.string/blank?","val":"{:status \"success\" :mqtt-username \"username\" :mqtt-password \"password\"}","via":["http/empty?"],"in":[]}],"type":"reitit.coercion/response-coercion","coercion":"spec","value":"{:status \"success\" :mqtt-username \"username\" :mqtt-password \"password\"}","in":["response","body"]}, :headers {:access-control-allow-credentials true, :content-length 433, :content-type application/json;charset=utf-8, :date Mon, 26 Jul 2021 11:05:44 GMT, :server Jetty(9.4.22.v20191022)}, :status 500}
+This is response json  {spec (spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true}), problems [{path [], pred clojure.string/blank?, val {:status "success" :mqtt-username "username" :mqtt-password "password"}, via [http/empty?], in []}], type reitit.coercion/response-coercion, coercion spec, value {:status "success" :mqtt-username "username" :mqtt-password "password"}, in [response body]}
+This is val  {:status success, :mqtt-username username, :mqtt-password password}
+nil
+clj꞉fakephone.core꞉> 
+Trying the establish connection to :  http://localhost:3000/connect/client/init
+This is response  {:opts {:query-params {:nickname bo}, :method :get, :url http://localhost:3000/connect/client/init}, :body {"spec":"(spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true})","problems":[{"path":[],"pred":"clojure.string/blank?","val":"{:status \"success\" :mqtt-username \"username\" :mqtt-password \"password\"}","via":["http/empty?"],"in":[]}],"type":"reitit.coercion/response-coercion","coercion":"spec","value":"{:status \"success\" :mqtt-username \"username\" :mqtt-password \"password\"}","in":["response","body"]}, :headers {:access-control-allow-credentials true, :content-length 433, :content-type application/json;charset=utf-8, :date Mon, 26 Jul 2021 11:05:54 GMT, :server Jetty(9.4.22.v20191022)}, :status 500}
+This is response json  {spec (spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true}), problems [{path [], pred clojure.string/blank?, val {:status "success" :mqtt-username "username" :mqtt-password "password"}, via [http/empty?], in []}], type reitit.coercion/response-coercion, coercion spec, value {:status "success" :mqtt-username "username" :mqtt-password "password"}, in [response body]}
+This is val  clojure.lang.PersistentArrayMap
+nil
+clj꞉fakephone.core꞉> 
+Trying the establish connection to :  http://localhost:3000/connect/client/init
+This is response  {:opts {:query-params {:nickname bo}, :method :get, :url http://localhost:3000/connect/client/init}, :body {"spec":"(spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true})","problems":[{"path":[],"pred":"clojure.string/blank?","val":"{:status \"success\" :mqtt-username \"username\" :mqtt-password \"password\"}","via":["http/empty?"],"in":[]}],"type":"reitit.coercion/response-coercion","coercion":"spec","value":"{:status \"success\" :mqtt-username \"username\" :mqtt-password \"password\"}","in":["response","body"]}, :headers {:access-control-allow-credentials true, :content-length 433, :content-type application/json;charset=utf-8, :date Mon, 26 Jul 2021 11:06:45 GMT, :server Jetty(9.4.22.v20191022)}, :status 500}
+This is response json  {spec (spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true}), problems [{path [], pred clojure.string/blank?, val {:status "success" :mqtt-username "username" :mqtt-password "password"}, via [http/empty?], in []}], type reitit.coercion/response-coercion, coercion spec, value {:status "success" :mqtt-username "username" :mqtt-password "password"}, in [response body]}
+This is status:  success
+This is username:  nil
+This is password:  nil
+nil
+clj꞉fakephone.core꞉> 
+Trying the establish connection to :  http://localhost:3000/connect/client/init
+This is response  {:opts {:query-params {:nickname bo}, :method :get, :url http://localhost:3000/connect/client/init}, :body {"spec":"(spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true})","problems":[{"path":[],"pred":"clojure.string/blank?","val":"{:status \"success\" :mqtt-username \"username\" :mqtt-password \"password\"}","via":["http/empty?"],"in":[]}],"type":"reitit.coercion/response-coercion","coercion":"spec","value":"{:status \"success\" :mqtt-username \"username\" :mqtt-password \"password\"}","in":["response","body"]}, :headers {:access-control-allow-credentials true, :content-length 433, :content-type application/json;charset=utf-8, :date Mon, 26 Jul 2021 11:07:25 GMT, :server Jetty(9.4.22.v20191022)}, :status 500}
+This is response json  {spec (spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true}), problems [{path [], pred clojure.string/blank?, val {:status "success" :mqtt-username "username" :mqtt-password "password"}, via [http/empty?], in []}], type reitit.coercion/response-coercion, coercion spec, value {:status "success" :mqtt-username "username" :mqtt-password "password"}, in [response body]}
+This is status:  success
+This is mqtt-username:  username
+This is mqtt-password:  password
+nil
+clj꞉fakephone.core꞉> 
+Trying the establish connection to :  http://localhost:3000/connect/client/init
+This is status:  success
+This is mqtt-username:  username
+This is mqtt-password:  password
+nil
+clj꞉fakephone.core꞉> 
+Trying the establish connection to :  http://localhost:3001/connect/client/init
+This is status:  success
+This is mqtt-username:  username
+This is mqtt-password:  password
+nil
+clj꞉fakephone.core꞉> 
+Trying the establish connection to :  http://localhost:3000/connect/client/init
+This is status:  success
+This is mqtt-username:  username
+This is mqtt-password:  password
+nil
+clj꞉fakephone.core꞉> 
+; Execution error (NullPointerException) at java.io.StringReader/<init> (StringReader.java:50).
+; null
+clj꞉fakephone.core꞉> 
+Trying the establish connection to :  http://localhost:3000/connect/client/init
+This is status:  success
+This is mqtt-username:  username
+This is mqtt-password:  password
+nil
+clj꞉fakephone.core꞉> 
+; Execution error (NullPointerException) at java.io.StringReader/<init> (StringReader.java:50).
+; null
+clj꞉fakephone.core꞉> 
+; Execution error (NullPointerException) at java.io.StringReader/<init> (StringReader.java:50).
+; null
+clj꞉fakephone.core꞉> 
+; Execution error (NullPointerException) at java.io.StringReader/<init> (StringReader.java:50).
+; null
+clj꞉fakephone.core꞉> 
+; Execution error (NullPointerException) at java.io.StringReader/<init> (StringReader.java:50).
+; null
+clj꞉fakephone.core꞉> 
+; Syntax error compiling at (core.clj:32:33).
+; Unable to resolve symbol: respond-params in this context
+clj꞉fakephone.core꞉> 
+Trying the establish connection to :  http://localhost:3001/connect/client/init
+response fail
+nil
+clj꞉fakephone.core꞉> 
+; Execution error (NullPointerException) at java.io.StringReader/<init> (StringReader.java:50).
+; null
+clj꞉fakephone.core꞉> 
+; Execution error (NullPointerException) at java.io.StringReader/<init> (StringReader.java:50).
+; null
+clj꞉fakephone.core꞉> 
+java.io.StringReader/<init> (StringReader.java:50)
+clojure.data.json/read-str (json.clj:419)
+clojure.data.json/read-str (json.clj:411)
+fakephone.core/eval7862 (form-init10964825664566564597.clj:30)
+fakephone.core/eval7862 (form-init10964825664566564597.clj:29)
+fakephone.core/eval7862 (form-init10964825664566564597.clj:21)
+clojure.lang.Compiler/eval (Compiler.java:7176)
+clojure.core/eval (core.clj:3214)
+clojure.core/eval (core.clj:3210)
+nrepl.middleware.interruptible-eval/evaluate (interruptible_eval.clj:87)
+clojure.core/apply (core.clj:665)
+clojure.core/with-bindings* (core.clj:1973)
+nrepl.middleware.interruptible-eval/evaluate (interruptible_eval.clj:87)
+clojure.main/repl (main.clj:414)
+clojure.main/repl (main.clj:435)
+clojure.main/repl (main.clj:345)
+nrepl.middleware.interruptible-eval/evaluate (interruptible_eval.clj:84)
+nrepl.middleware.interruptible-eval/evaluate (interruptible_eval.clj:56)
+nrepl.middleware.interruptible-eval/interruptible-eval (interruptible_eval.clj:152)
+nrepl.middleware.session/session-exec (session.clj:202)
+nrepl.middleware.session/session-exec (session.clj:201)
+java.lang.Thread/run (Thread.java:829)
+clj꞉fakephone.core꞉> 
+Trying the establish connection to :  http://localhost:3001/connect/client/init
+response nil
+nil
+clj꞉fakephone.core꞉> 
+Trying the establish connection to :  http://localhost:3001/connect/client/init
+response nil
+respond-params:  nil
+nil
+clj꞉fakephone.core꞉> 
+Trying the establish connection to :  http://localhost:3000/connect/client/init
+response nil
+respond-params:  nil
+nil
+clj꞉fakephone.core꞉> 
+nil
+clj꞉fakephone.core꞉> 
+Trying the establish connection to :  http://localhost:3000/connect/client/init
+response {:opts {:query-params {:nickname bo}, :method :get, :url http://localhost:3000/connect/client/init}, :body {"spec":"(spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true})","problems":[{"path":[],"pred":"clojure.string/blank?","val":"{:status \"success\" :mqtt-username \"username\" :mqtt-password \"password\"}","via":["http/empty?"],"in":[]}],"type":"reitit.coercion/response-coercion","coercion":"spec","value":"{:status \"success\" :mqtt-username \"username\" :mqtt-password \"password\"}","in":["response","body"]}, :headers {:access-control-allow-credentials true, :content-length 433, :content-type application/json;charset=utf-8, :date Mon, 26 Jul 2021 11:24:08 GMT, :server Jetty(9.4.22.v20191022)}, :status 500}
+respond-params:  {:status success, :mqtt-username username, :mqtt-password password}
+nil
+clj꞉fakephone.core꞉> 
+Trying the establish connection to :  http://localhost:3000/connect/client/init
+response {:opts {:query-params {:nickname bo}, :method :get, :url http://localhost:3000/connect/client/init}, :body {"spec":"(spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true})","problems":[{"path":[],"pred":"clojure.string/blank?","val":"{:status \"success\" :mqtt-username \"username\" :mqtt-password \"password\"}","via":["http/empty?"],"in":[]}],"type":"reitit.coercion/response-coercion","coercion":"spec","value":"{:status \"success\" :mqtt-username \"username\" :mqtt-password \"password\"}","in":["response","body"]}, :headers {:access-control-allow-credentials true, :content-length 433, :content-type application/json;charset=utf-8, :date Mon, 26 Jul 2021 11:24:20 GMT, :server Jetty(9.4.22.v20191022)}, :status 500}
+respond-params:  {:status success, :mqtt-username username, :mqtt-password password}
+This is status:  success
+This is mqtt-username:  username
+This is mqtt-password:  password
+nil
+clj꞉fakephone.core꞉> 
+; Execution error (NullPointerException) at java.io.StringReader/<init> (StringReader.java:50).
+; null
+clj꞉fakephone.core꞉> 
+; Syntax error compiling at (core.clj:1:7851).
+; Unable to resolve symbol: response in this context
+clj꞉fakephone.core꞉> 
+{:opts {:query-params {:nickname "bo"}, :method :get, :url "http://localhost:3000/connect/client/init"},
+ :body
+ "{\"spec\":\"(spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true})\",\"problems\":[{\"path\":[],\"pred\":\"clojure.string/blank?\",\"val\":\"{:status \\\"success\\\" :mqtt-username \\\"username\\\" :mqtt-password \\\"password\\\"}\",\"via\":[\"http/empty?\"],\"in\":[]}],\"type\":\"reitit.coercion/response-coercion\",\"coercion\":\"spec\",\"value\":\"{:status \\\"success\\\" :mqtt-username \\\"username\\\" :mqtt-password \\\"password\\\"}\",\"in\":[\"response\",\"body\"]}",
+ :headers
+ {:access-control-allow-credentials "true",
+  :content-length "433",
+  :content-type "application/json;charset=utf-8",
+  :date "Mon, 26 Jul 2021 11:24:46 GMT",
+  :server "Jetty(9.4.22.v20191022)"},
+ :status 500}
+clj꞉fakephone.core꞉> 
+; Execution error (NullPointerException) at java.io.StringReader/<init> (StringReader.java:50).
+; null
+clj꞉fakephone.core꞉> 
+#'fakephone.core/endpoint
+clj꞉fakephone.core꞉> 
+#'fakephone.core/endpoint
+clj꞉fakephone.core꞉> 
+{:opts {:query-params {:nickname "bo"}, :method :get, :url "http://localhost:3001/connect/client/init"}, :error #error {
+ :cause "Connection refused"
+ :via
+ [{:type java.net.ConnectException
+   :message "Connection refused"
+   :at [sun.nio.ch.SocketChannelImpl checkConnect "SocketChannelImpl.java" -2]}]
+ :trace
+ [[sun.nio.ch.SocketChannelImpl checkConnect "SocketChannelImpl.java" -2]
+  [sun.nio.ch.SocketChannelImpl finishConnect "SocketChannelImpl.java" 777]
+  [org.httpkit.client.HttpClient finishConnect "HttpClient.java" 390]
+  [org.httpkit.client.HttpClient run "HttpClient.java" 472]
+  [java.lang.Thread run "Thread.java" 829]]}}
+clj꞉fakephone.core꞉> 
+; Syntax error reading source at (REPL:30:87).
+; Unmatched delimiter: )
+clj꞉fakephone.core꞉> 
+Trying the establish connection to :  http://localhost:3001/connect/client/init
+response {:opts {:query-params {:nickname bo}, :method :get, :url http://localhost:3001/connect/client/init}, :error #error {
+ :cause Connection refused
+ :via
+ [{:type java.net.ConnectException
+   :message Connection refused
+   :at [sun.nio.ch.SocketChannelImpl checkConnect SocketChannelImpl.java -2]}]
+ :trace
+ [[sun.nio.ch.SocketChannelImpl checkConnect SocketChannelImpl.java -2]
+  [sun.nio.ch.SocketChannelImpl finishConnect SocketChannelImpl.java 777]
+  [org.httpkit.client.HttpClient finishConnect HttpClient.java 390]
+  [org.httpkit.client.HttpClient run HttpClient.java 472]
+  [java.lang.Thread run Thread.java 829]]}}
+nil
+clj꞉fakephone.core꞉> 
+Trying the establish connection to :  http://localhost:3001/connect/client/init
+response (:opts :error)
+nil
+clj꞉fakephone.core꞉> 
+Trying the establish connection to :  http://localhost:3000/connect/client/init
+response (:opts :body :headers :status)
+nil
+clj꞉fakephone.core꞉> 
+; Syntax error reading source at (REPL:31:88).
+; Unmatched delimiter: )
+clj꞉fakephone.core꞉> 
+Trying the establish connection to :  http://localhost:3000/connect/client/init
+response {:opts {:query-params {:nickname bo}, :method :get, :url http://localhost:3000/connect/client/init}, :body {"spec":"(spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true})","problems":[{"path":[],"pred":"clojure.string/blank?","val":"{:status \"success\" :mqtt-username \"username\" :mqtt-password \"password\"}","via":["http/empty?"],"in":[]}],"type":"reitit.coercion/response-coercion","coercion":"spec","value":"{:status \"success\" :mqtt-username \"username\" :mqtt-password \"password\"}","in":["response","body"]}, :headers {:access-control-allow-credentials true, :content-length 433, :content-type application/json;charset=utf-8, :date Mon, 26 Jul 2021 11:29:41 GMT, :server Jetty(9.4.22.v20191022)}, :status 500}
+respond-params:  {:status success, :mqtt-username username, :mqtt-password password}
+nil
+clj꞉fakephone.core꞉> 
+Trying the establish connection to :  http://localhost:3001/connect/client/init
+response {:opts {:query-params {:nickname bo}, :method :get, :url http://localhost:3001/connect/client/init}, :error #error {
+ :cause Connection refused
+ :via
+ [{:type java.net.ConnectException
+   :message Connection refused
+   :at [sun.nio.ch.SocketChannelImpl checkConnect SocketChannelImpl.java -2]}]
+ :trace
+ [[sun.nio.ch.SocketChannelImpl checkConnect SocketChannelImpl.java -2]
+  [sun.nio.ch.SocketChannelImpl finishConnect SocketChannelImpl.java 777]
+  [org.httpkit.client.HttpClient finishConnect HttpClient.java 390]
+  [org.httpkit.client.HttpClient run HttpClient.java 472]
+  [java.lang.Thread run Thread.java 829]]}}
+respond-params:  nil
+nil
+clj꞉fakephone.core꞉> 
+Trying the establish connection to :  http://localhost:3000/connect/client/init
+response {:opts {:query-params {:nickname bo}, :method :get, :url http://localhost:3000/connect/client/init}, :body {"spec":"(spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true})","problems":[{"path":[],"pred":"clojure.string/blank?","val":"{:status \"success\" :mqtt-username \"username\" :mqtt-password \"password\"}","via":["http/empty?"],"in":[]}],"type":"reitit.coercion/response-coercion","coercion":"spec","value":"{:status \"success\" :mqtt-username \"username\" :mqtt-password \"password\"}","in":["response","body"]}, :headers {:access-control-allow-credentials true, :content-length 433, :content-type application/json;charset=utf-8, :date Mon, 26 Jul 2021 12:29:34 GMT, :server Jetty(9.4.22.v20191022)}, :status 500}
+respond-params:  {:status success, :mqtt-username username, :mqtt-password password}
+nil
+clj꞉fakephone.core꞉> 
+Trying the establish connection to :  http://localhost:3000/connect/client/init
+response {:opts {:query-params {:nickname bo}, :method :get, :url http://localhost:3000/connect/client/init}, :body {"spec":"(spec-tools.core/spec {:spec clojure.string/blank?, :type nil, :leaf? true})","problems":[{"path":[],"pred":"clojure.string/blank?","val":"{:status \"success\" :mqtt-username \"username\" :mqtt-password \"password\"}","via":["http/empty?"],"in":[]}],"type":"reitit.coercion/response-coercion","coercion":"spec","value":"{:status \"success\" :mqtt-username \"username\" :mqtt-password \"password\"}","in":["response","body"]}, :headers {:access-control-allow-credentials true, :content-length 433, :content-type application/json;charset=utf-8, :date Mon, 26 Jul 2021 12:29:47 GMT, :server Jetty(9.4.22.v20191022)}, :status 500}
+respond-params:  {:status success, :mqtt-username username, :mqtt-password password}
+This is status:  success
+This is mqtt-username:  username
+This is mqtt-password:  password
+nil
+clj꞉fakephone.core꞉> 
+Trying the establish connection to :  http://localhost:3001/connect/client/init
+response {:opts {:query-params {:nickname bo}, :method :get, :url http://localhost:3001/connect/client/init}, :error #error {
+ :cause Connection refused
+ :via
+ [{:type java.net.ConnectException
+   :message Connection refused
+   :at [sun.nio.ch.SocketChannelImpl checkConnect SocketChannelImpl.java -2]}]
+ :trace
+ [[sun.nio.ch.SocketChannelImpl checkConnect SocketChannelImpl.java -2]
+  [sun.nio.ch.SocketChannelImpl finishConnect SocketChannelImpl.java 777]
+  [org.httpkit.client.HttpClient finishConnect HttpClient.java 390]
+  [org.httpkit.client.HttpClient run HttpClient.java 472]
+  [java.lang.Thread run Thread.java 829]]}}
+respond-params:  nil
+This is status:  nil
+This is mqtt-username:  nil
+This is mqtt-password:  nil
+nil
+clj꞉fakephone.core꞉> 
+Trying the establish connection to :  http://localhost:3001/connect/client/init
+response {:opts {:query-params {:nickname bo}, :method :get, :url http://localhost:3001/connect/client/init}, :error #error {
+ :cause Connection refused
+ :via
+ [{:type java.net.ConnectException
+   :message Connection refused
+   :at [sun.nio.ch.SocketChannelImpl checkConnect SocketChannelImpl.java -2]}]
+ :trace
+ [[sun.nio.ch.SocketChannelImpl checkConnect SocketChannelImpl.java -2]
+  [sun.nio.ch.SocketChannelImpl finishConnect SocketChannelImpl.java 777]
+  [org.httpkit.client.HttpClient finishConnect HttpClient.java 390]
+  [org.httpkit.client.HttpClient run HttpClient.java 472]
+  [java.lang.Thread run Thread.java 829]]}}
+respond-params:  nil
+This is status:  nil
+This is mqtt-username:  nil
+This is mqtt-password:  nil
+; Execution error (NullPointerException) at fakephone.core/eval7934 (form-init10964825664566564597.clj:35).
+; null
+clj꞉fakephone.core꞉> 
+Trying the establish connection to :  http://localhost:3001/connect/client/init
+response {:opts {:query-params {:nickname bo}, :method :get, :url http://localhost:3001/connect/client/init}, :error #error {
+ :cause Connection refused
+ :via
+ [{:type java.net.ConnectException
+   :message Connection refused
+   :at [sun.nio.ch.SocketChannelImpl checkConnect SocketChannelImpl.java -2]}]
+ :trace
+ [[sun.nio.ch.SocketChannelImpl checkConnect SocketChannelImpl.java -2]
+  [sun.nio.ch.SocketChannelImpl finishConnect SocketChannelImpl.java 777]
+  [org.httpkit.client.HttpClient finishConnect HttpClient.java 390]
+  [org.httpkit.client.HttpClient run HttpClient.java 472]
+  [java.lang.Thread run Thread.java 829]]}}
+respond-params:  nil
+This is status:  nil
+This is mqtt-username:  nil
+This is mqtt-password:  nil
+nil
+clj꞉fakephone.core꞉> 
+No response retrieved from endpoint. Endpoint URI might be invalid.
+nil
+clj꞉fakephone.core꞉> 
+; Execution error at clojure.data.json/-read (json.clj:364).
+; JSON error (unexpected character): E
+clj꞉fakephone.core꞉> 
+ERROR, tp unavailable or turned off
+Trying the establish connection to :  http://localhost:3000/connect/client/init
+response {:opts {:query-params {:nickname bi}, :method :get, :url http://localhost:3000/connect/client/init}, :body ERROR, tp unavailable or turned off, :headers {:access-control-allow-credentials true, :content-length 35, :date Mon, 26 Jul 2021 12:36:07 GMT, :server Jetty(9.4.22.v20191022)}, :status 400}
+respond-params:  nil
+This is status:  nil
+This is mqtt-username:  nil
+This is mqtt-password:  nil
+nil
+clj꞉fakephone.core꞉> 
+This is response body ERROR, tp unavailable or turned off
+Trying the establish connection to :  http://localhost:3000/connect/client/init
+response {:opts {:query-params {:nickname bi}, :method :get, :url http://localhost:3000/connect/client/init}, :body ERROR, tp unavailable or turned off, :headers {:access-control-allow-credentials true, :content-length 35, :date Mon, 26 Jul 2021 12:36:50 GMT, :server Jetty(9.4.22.v20191022)}, :status 400}
+respond-params:  nil
+This is status:  nil
+This is mqtt-username:  nil
+This is mqtt-password:  nil
+nil
+clj꞉fakephone.core꞉> 
+Connecting to endpoint: http://localhost:3000/connect/client/init
+ERROR: Tp can not be accessed
+Program end
+nil
+clj꞉fakephone.core꞉> 
+Connecting to endpoint: http://localhost:3000/connect/client/init
+SUCCESS: Tp is available, with the following MQTT credentials:
+MQTT-username:  nil
+MQTT-password:  nil
+Program end
+nil
+clj꞉fakephone.core꞉> 
+Connecting to endpoint: http://localhost:3000/connect/client/init
+SUCCESS: Tp is available, with the following MQTT credentials:
+MQTT-username:  nil
+MQTT-password:  nil
+Program end
+nil
+clj꞉fakephone.core꞉> 
+Connecting to endpoint: http://localhost:3000/connect/client/init
+SUCCESS: Tp is available, with the following MQTT credentials:
+MQTT-username:  nil
+MQTT-password:  nil
+Program end
+nil
+clj꞉fakephone.core꞉> 
+Connecting to endpoint: http://localhost:3000/connect/client/init
+Status:  success
+SUCCESS: Tp is available, with the following MQTT credentials:
+MQTT-username:  nil
+MQTT-password:  nil
+Program end
+nil
+clj꞉fakephone.core꞉> 
+Connecting to endpoint: http://localhost:3000/connect/client/init
+Status == status?  true
+SUCCESS: Tp is available, with the following MQTT credentials:
+MQTT-username:  nil
+MQTT-password:  nil
+Program end
+nil
+clj꞉fakephone.core꞉> 
+Connecting to endpoint: http://localhost:3000/connect/client/init
+Status == status?  nil
+SUCCESS: Tp is available, with the following MQTT credentials:
+MQTT-username:  nil
+MQTT-password:  nil
+Program end
+nil
+clj꞉fakephone.core꞉> 
+Connecting to endpoint: http://localhost:3000/connect/client/init
+{:status success, :mqtt-username username, :mqtt-password password}
+SUCCESS: Tp is available, with the following MQTT credentials:
+MQTT-username:  nil
+MQTT-password:  nil
+Program end
+nil
+clj꞉fakephone.core꞉> 
+Connecting to endpoint: http://localhost:3000/connect/client/init
+(:status :mqtt-username :mqtt-password)
+SUCCESS: Tp is available, with the following MQTT credentials:
+MQTT-username:  nil
+MQTT-password:  nil
+Program end
+nil
+clj꞉fakephone.core꞉> 
+Connecting to endpoint: http://localhost:3000/connect/client/init
+SUCCESS: Tp is available, with the following MQTT credentials:
+MQTT-username:  username
+MQTT-password:  password
+Program end
+nil
+clj꞉fakephone.core꞉> 
+; Execution error (NullPointerException) at java.io.StringReader/<init> (StringReader.java:50).
+; null
+clj꞉fakephone.core꞉> 
+; Syntax error compiling at (core.clj:35:5).
+; Unable to resolve symbol: status in this context
+clj꞉fakephone.core꞉> 
+Connecting to endpoint: http://localhost:3001/connect/client/init
+Program end
+nil
+clj꞉fakephone.core꞉> 
+Connecting to endpoint: http://localhost:3001/connect/client/init
+{:opts {:query-params {:nickname ba}, :method :get, :url http://localhost:3001/connect/client/init}, :error #error {
+ :cause Connection refused
+ :via
+ [{:type java.net.ConnectException
+   :message Connection refused
+   :at [sun.nio.ch.SocketChannelImpl checkConnect SocketChannelImpl.java -2]}]
+ :trace
+ [[sun.nio.ch.SocketChannelImpl checkConnect SocketChannelImpl.java -2]
+  [sun.nio.ch.SocketChannelImpl finishConnect SocketChannelImpl.java 777]
+  [org.httpkit.client.HttpClient finishConnect HttpClient.java 390]
+  [org.httpkit.client.HttpClient run HttpClient.java 472]
+  [java.lang.Thread run Thread.java 829]]}}
+Program end
+nil
+clj꞉fakephone.core꞉> 
+Connecting to endpoint: http://localhost:3001/connect/client/init
+(:opts :error)
+Program end
+nil
+clj꞉fakephone.core꞉> 
+Connecting to endpoint: http://localhost:3001/connect/client/init
+(:opts :error)
+Program end
+nil
+clj꞉fakephone.core꞉> 
+Program end
+nil
+clj꞉fakephone.core꞉> 
+Connecting to endpoint: http://localhost:3001/connect/client/init
+(:opts :error)
+ERROR: No status retrieved. Possibly bad endpoint
+nil
+clj꞉fakephone.core꞉> 
+Connecting to endpoint: http://localhost:3001/connect/client/init
+ERROR: No status retrieved. Possibly bad endpoint
+nil
+clj꞉fakephone.core꞉> 
+Connecting to endpoint: http://localhost:3000/connect/client/init
+ERROR: Tp can not be accessed
+nil
+clj꞉fakephone.core꞉> 
+Connecting to endpoint: http://localhost:3000/connect/client/init
+SUCCESS: Tp is available, with the following MQTT credentials:
+MQTT-username:  username
+MQTT-password:  password
+nil
+clj꞉fakephone.core꞉> 
+; Syntax error compiling at (core.clj:21:15).
+; No such namespace: cli
+clj꞉fakephone.core꞉> 
+nil
+clj꞉fakephone.core꞉> 
+; Syntax error compiling at (core.clj:21:15).
+; No such namespace: cli
+clj꞉fakephone.core꞉> 
+nil
+clj꞉fakephone.core꞉> 

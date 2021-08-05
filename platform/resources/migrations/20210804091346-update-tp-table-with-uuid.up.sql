@@ -1,0 +1,2 @@
+ALTER TABLE IF EXISTS tp
+ADD IF NOT EXISTS uuid text;
