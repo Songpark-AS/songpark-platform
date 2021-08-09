@@ -15,7 +15,8 @@
           (db/tp-set-available! {:tpid tpid :uuid uuid})
           {:status 200
            :body (str {:status "success"
-                       :status-desc (str "Successfully updated the database. Teleporter:" tpid " is now on and available. It has uuid: " uuid)})})
+                       :status-desc (str "Successfully updated the database. Teleporter:" tpid " is now on and available. It has uuid: " uuid)
+                       :uuid uuid})})
       {:status 400
        :body (str {:status nil
                    :status-desc "ERROR. You need to add a \"tpid\" parameter to your request."})})))
@@ -24,7 +25,7 @@
   (let [nickname (get (:params input) "nickname")]
     (if nickname
       (let [tpid (:unique_id (first (db/tpid-from-nick {:nickname nickname})))
-            uuid (first (db/tp-get-uuid {:tpid tpid}))]
+            uuid (:uuid (first (db/tp-get-uuid {:tpid "0000"})))]
         (if (:on_status (first (db/tp-get-on-status {:tpid tpid}))) ;checks if tp is available
           (if (:available_status (first (db/tp-get-availability {:tpid tpid}))) ;check if tp is on
             (do
