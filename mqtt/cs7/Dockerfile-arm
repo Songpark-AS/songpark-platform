@@ -1,0 +1,42 @@
+FROM mitchallen/pi-cross-compile
+
+USER root
+
+# RUN dpkg --add-architecture armhf
+# RUN dpkg --add-architecture arm64
+
+
+# RUN echo "deb [arch=amd64,i386] http://archive.ubuntu.com/ubuntu/ bionic main restricted universe multiverse"                > /etc/apt/sources.list && \
+#     echo "deb [arch=amd64,i386] http://archive.ubuntu.com/ubuntu/ bionic-updates main restricted universe multiverse"       >> /etc/apt/sources.list && \
+#     echo "deb [arch=amd64,i386] http://archive.ubuntu.com/ubuntu/ bionic-backports main restricted universe multiverse"     >> /etc/apt/sources.list && \
+#     echo "deb [arch=amd64,i386] http://security.ubuntu.com/ubuntu bionic-security main restricted universe multiverse"      >> /etc/apt/sources.list && \
+#     echo "deb [arch=armhf,arm64] http://ports.ubuntu.com/ubuntu-ports bionic main restricted universe multiverse"           >> /etc/apt/sources.list && \
+#     echo "deb [arch=armhf,arm64] http://ports.ubuntu.com/ubuntu-ports bionic-updates main restricted universe multiverse"   >> /etc/apt/sources.list && \
+#     echo "deb [arch=armhf,arm64] http://ports.ubuntu.com/ubuntu-ports bionic-backports main restricted universe multiverse" >> /etc/apt/sources.list
+
+# update and upgrade system
+RUN apt-get update && apt-get upgrade -qy && apt-get clean
+
+# RUN apt-get install -qy multiarch-support:armhf qemu-user-static && \
+    # apt-get install -qy libmxml1:armhf libfftw3-3:armhf liblo7:armhf libsndfile1:armhf zlib1g:armhf libstdc++6:armhf && \
+RUN apt-get -y install gcc-arm-linux-gnueabihf && \
+    apt-get install qemu-user-static -y && \
+    apt install qemu-system-arm qemu -y
+
+COPY . /app
+WORKDIR /app/
+
+# variables for compilation process
+ARG CROSS_COMPILE?=arm-linux-gnueabihf-
+ARG APP_NAME=app
+ARG CC=arm-linux-gnueabihf-gcc
+ARG CCSIZE=arm-linux-gnueabihf-size
+ARG IDIR=/include
+ARG CFLAGS=-I$IDIR --std=gnu99 -O0
+ARG LIBS=-lrt -lpthread
+ARG OBJS=adau1761_controller.o zedboardOLED.o reg_io.o udpclient.o stream_control.o volume_control.o filter_control.o ui_control.o app_main.o
+
+# compilation process begins now
+RUN $CC $CFLAGS adau1761_controller.o zedboardOLED.o reg_io.o udpclient.o stream_control.o volume_control.o filter_control.o ui_control.o app_main.o -lrt -lpthread -o app
+RUN ls 
+CMD ["qemu-arm-static", "-L", "/usr/arm-linux-gnueabi/", "./app"]

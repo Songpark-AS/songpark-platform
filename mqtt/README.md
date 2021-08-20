@@ -24,7 +24,13 @@ the directory /app-socket features an example Socket client application which is
 
 the directory /cs7 contains the actual C application, however this is a scripted down version of the application solely for the purposes of TP simulation via containerization. Feel free to test out some scripts using:
 
-`docker build -t cs7 . `
+1. Run `docker build -t cs7 . ` to build cs7 
+2. Run `docker run -it cs7 0 0 0 0 0 0` to get the interactive prompt to use cs7
+
+### Commands to run 
+1. `vgg <int>` increases and decreases volume wrt int
+2. `exit` exits the interactive prompt 
+3. `reboot now` reboots the entire engine 
 
 ## Running the Project 
 To run the MQTT server and all apps ensure that you have docker running then run the following command:

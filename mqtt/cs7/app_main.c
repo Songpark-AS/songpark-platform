@@ -27,7 +27,7 @@ int main (int argc, char *argv[]) {
 		printf ("Error Initializing Cantavi Streamer arguments too few!!!\n");
 		return EXIT_FAILURE;
 	}
-	ret = ui_init (argc, argv);
+	// ret = ui_init (argc, argv);
 
 	if (ret != 0) {
 		fprintf (stderr, "ui_init failed\n");
