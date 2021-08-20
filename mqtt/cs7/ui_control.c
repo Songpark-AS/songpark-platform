@@ -280,11 +280,11 @@ void *ui_input_reader (void *data) {
   unsigned char ipAddress[4];
   unsigned char macAddress[6];
 
-  oled_clear(zedboard_oled_params_0.base_address);
-  	sprintf(&menuBuf[0], "%s", "Welcome");
-  	oled_print_message(&menuBuf[0], 0, zedboard_oled_params_0.base_address);
-  	sprintf(&menuBuf[0], "%s-%s-", "Cantavi", "S");
-  	oled_print_message(&menuBuf[0], 2, zedboard_oled_params_0.base_address);
+//   oled_clear(zedboard_oled_params_0.base_address);
+//   	sprintf(&menuBuf[0], "%s", "Welcome");
+//   	oled_print_message(&menuBuf[0], 0, zedboard_oled_params_0.base_address);
+//   	sprintf(&menuBuf[0], "%s-%s-", "Cantavi", "S");
+//   	oled_print_message(&menuBuf[0], 2, zedboard_oled_params_0.base_address);
 
   	ui_draw();
   while (1) {
@@ -304,9 +304,9 @@ void *ui_input_reader (void *data) {
             set_volume (volume_control_base_1, params.vl_net*gain, CHANNEL_ID_L);
             set_volume (volume_control_base_1, params.vr_net*gain, CHANNEL_ID_R);
 
-            oled_clear(zedboard_oled_params_0.base_address);
-            sprintf(&menuBuf[0], "%s%3d", "VOL_GLOBAL", gain);
-            oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+            // oled_clear(zedboard_oled_params_0.base_address);
+            // sprintf(&menuBuf[0], "%s%3d", "VOL_GLOBAL", gain);
+            // oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
 
             update_leds();
             ui_vol_draw();
@@ -317,9 +317,9 @@ void *ui_input_reader (void *data) {
         set_volume (volume_control_base_0, params.v_global*gain, CHANNEL_ID_L);
         params.vl_lpbk = gain;
         setting[1] = params.vl_lpbk;
-        oled_clear(zedboard_oled_params_0.base_address);
-		sprintf(&menuBuf[0], "%s%3d", menuitem[0], setting[1]);
-		oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+        // oled_clear(zedboard_oled_params_0.base_address);
+		// sprintf(&menuBuf[0], "%s%3d", menuitem[0], setting[1]);
+		// oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
 
         ui_vol_draw();
       }
@@ -331,9 +331,9 @@ void *ui_input_reader (void *data) {
         params.vr_lpbk = gain;
         setting[0] = gain;
 
-        oled_clear(zedboard_oled_params_0.base_address);
-		sprintf(&menuBuf[0], "%s%3d", menuitem[1], setting[0]);
-		oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+        // oled_clear(zedboard_oled_params_0.base_address);
+		// sprintf(&menuBuf[0], "%s%3d", menuitem[1], setting[0]);
+		// oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
 
         ui_vol_draw();
       }
@@ -345,9 +345,9 @@ void *ui_input_reader (void *data) {
         params.vl_net = gain;
         setting[3] = gain;
 
-        oled_clear(zedboard_oled_params_0.base_address);
-		sprintf(&menuBuf[0], "%s%3d", menuitem[2], setting[3]);
-		oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+        // oled_clear(zedboard_oled_params_0.base_address);
+		// sprintf(&menuBuf[0], "%s%3d", menuitem[2], setting[3]);
+		// oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
 
         ui_vol_draw();
       }
@@ -358,108 +358,108 @@ void *ui_input_reader (void *data) {
         set_volume (volume_control_base_1, params.v_global*gain, CHANNEL_ID_R);
         params.vr_net = gain;
         setting[2] = gain;
-        oled_clear(zedboard_oled_params_0.base_address);
-		sprintf(&menuBuf[0], "%s%3d", menuitem[3], setting[2]);
-		oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+        // oled_clear(zedboard_oled_params_0.base_address);
+		// sprintf(&menuBuf[0], "%s%3d", menuitem[3], setting[2]);
+		// oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
         ui_vol_draw();
       }
       else if ( strcmp (c, "lfhe") == 0){
           set_filter_type (filter_control_base_0, FILTER_HIGH_PASS, 1);
           params.filter_h_lpbk = 1;
           setting[6] = 1;
-          oled_clear(zedboard_oled_params_0.base_address);
-          sprintf(&menuBuf[0], "%s%3d", menuitem[6], setting[5]);
-          oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+        //   oled_clear(zedboard_oled_params_0.base_address);
+        //   sprintf(&menuBuf[0], "%s%3d", menuitem[6], setting[5]);
+        //   oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
           ui_draw();
       }
       else if ( strcmp (c, "lfhd") == 0){
           set_filter_type (filter_control_base_0, FILTER_HIGH_PASS, 0);
           params.filter_h_lpbk = 0;
           setting[6] = 0;
-          oled_clear(zedboard_oled_params_0.base_address);
-          		sprintf(&menuBuf[0], "%s%3d", menuitem[6], setting[6]);
-          		oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+        //   oled_clear(zedboard_oled_params_0.base_address);
+        //   		sprintf(&menuBuf[0], "%s%3d", menuitem[6], setting[6]);
+        //   		oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
           ui_draw();
       }
       else if ( strcmp (c, "lfbe") == 0){
           set_filter_type (filter_control_base_0, FILTER_BAND_PASS, 1);
           params.filter_b_lpbk = 1;
           setting[5] = 1;
-          oled_clear(zedboard_oled_params_0.base_address);
-                    sprintf(&menuBuf[0], "%s%3d", menuitem[5], setting[5]);
-                    oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+        //   oled_clear(zedboard_oled_params_0.base_address);
+        //             sprintf(&menuBuf[0], "%s%3d", menuitem[5], setting[5]);
+        //             oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
           ui_draw();
       }
       else if ( strcmp (c, "lfbd") == 0){
           set_filter_type (filter_control_base_0, FILTER_BAND_PASS, 0);
           params.filter_b_lpbk = 0;
           setting[5] = 0;
-          oled_clear(zedboard_oled_params_0.base_address);
-                    sprintf(&menuBuf[0], "%s%3d", menuitem[5], setting[5]);
-                    oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+        //   oled_clear(zedboard_oled_params_0.base_address);
+        //             sprintf(&menuBuf[0], "%s%3d", menuitem[5], setting[5]);
+        //             oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
           ui_draw();
       }
       else if ( strcmp (c, "lfle") == 0){
           set_filter_type (filter_control_base_0, FILTER_LOW_PASS, 1);
           params.filter_l_lpbk = 1;
           setting[4] = 1;
-          oled_clear(zedboard_oled_params_0.base_address);
-                    sprintf(&menuBuf[0], "%s%3d", menuitem[4], setting[4]);
-                    oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+        //   oled_clear(zedboard_oled_params_0.base_address);
+        //             sprintf(&menuBuf[0], "%s%3d", menuitem[4], setting[4]);
+        //             oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
           ui_draw();
       }
       else if ( strcmp (c, "lfld") == 0){
           set_filter_type (filter_control_base_0, FILTER_LOW_PASS, 0);
           params.filter_l_lpbk = 0;
           setting[4] = 0;
-          oled_clear(zedboard_oled_params_0.base_address);
-                    sprintf(&menuBuf[0], "%s%3d", menuitem[4], setting[4]);
-                    oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+        //   oled_clear(zedboard_oled_params_0.base_address);
+        //             sprintf(&menuBuf[0], "%s%3d", menuitem[4], setting[4]);
+        //             oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
           ui_draw();
       }
       else if ( strcmp (c, "nfhe") == 0){
           set_filter_type (filter_control_base_1, FILTER_HIGH_PASS, 1);
           params.filter_h_net = 1;
           setting[9] = 1;
-          oled_clear(zedboard_oled_params_0.base_address);
-                    sprintf(&menuBuf[1], "%s%3d", menuitem[9], setting[9]);
-                    oled_print_message(&menuBuf[1], 1, zedboard_oled_params_0.base_address);
+        //   oled_clear(zedboard_oled_params_0.base_address);
+        //             sprintf(&menuBuf[1], "%s%3d", menuitem[9], setting[9]);
+        //             oled_print_message(&menuBuf[1], 1, zedboard_oled_params_0.base_address);
           ui_draw();
       }
       else if ( strcmp (c, "nfhd") == 0){
           set_filter_type (filter_control_base_1, FILTER_HIGH_PASS, 0);
           params.filter_h_net = 0;
           setting[9] = 0;
-          oled_clear(zedboard_oled_params_0.base_address);
-                    sprintf(&menuBuf[1], "%s%3d", menuitem[9], setting[9]);
-                    oled_print_message(&menuBuf[1], 1, zedboard_oled_params_0.base_address);
+        //   oled_clear(zedboard_oled_params_0.base_address);
+        //             sprintf(&menuBuf[1], "%s%3d", menuitem[9], setting[9]);
+        //             oled_print_message(&menuBuf[1], 1, zedboard_oled_params_0.base_address);
           ui_draw();
       }
       else if ( strcmp (c, "nfbe") == 0){
           set_filter_type (filter_control_base_1, FILTER_BAND_PASS, 1);
           params.filter_b_net = 1;
           setting[8] = 1;
-          oled_clear(zedboard_oled_params_0.base_address);
-                    sprintf(&menuBuf[1], "%s%3d", menuitem[8], setting[8]);
-                    oled_print_message(&menuBuf[1], 1, zedboard_oled_params_0.base_address);
+        //   oled_clear(zedboard_oled_params_0.base_address);
+        //             sprintf(&menuBuf[1], "%s%3d", menuitem[8], setting[8]);
+        //             oled_print_message(&menuBuf[1], 1, zedboard_oled_params_0.base_address);
           ui_draw();
       }
       else if ( strcmp (c, "nfbd") == 0){
           set_filter_type (filter_control_base_1, FILTER_BAND_PASS, 0);
           params.filter_b_net = 0;
           setting[8] = 0;
-          oled_clear(zedboard_oled_params_0.base_address);
-                    sprintf(&menuBuf[1], "%s%3d", menuitem[8], setting[8]);
-                    oled_print_message(&menuBuf[1], 1, zedboard_oled_params_0.base_address);
+        //   oled_clear(zedboard_oled_params_0.base_address);
+        //             sprintf(&menuBuf[1], "%s%3d", menuitem[8], setting[8]);
+        //             oled_print_message(&menuBuf[1], 1, zedboard_oled_params_0.base_address);
           ui_draw();
       }
       else if ( strcmp (c, "nfle") == 0){
           set_filter_type (filter_control_base_1, FILTER_LOW_PASS, 1);
           params.filter_l_net = 1;
           setting[7] = 1;
-          oled_clear(zedboard_oled_params_0.base_address);
-                    sprintf(&menuBuf[1], "%s%3d", menuitem[7], setting[7]);
-                    oled_print_message(&menuBuf[1], 1, zedboard_oled_params_0.base_address);
+        //   oled_clear(zedboard_oled_params_0.base_address);
+        //             sprintf(&menuBuf[1], "%s%3d", menuitem[7], setting[7]);
+        //             oled_print_message(&menuBuf[1], 1, zedboard_oled_params_0.base_address);
           ui_draw();
       }
       else if ( strcmp (c, "nfld") == 0){
@@ -480,9 +480,9 @@ void *ui_input_reader (void *data) {
 			printf("net_to_axi_mq_r_error count is::%d\n",net_to_axi_mq_r_error_count);
 			printf("net_read_error count is::%d\n",net_read_error_count);
 			printf("net_send_error count is::%d\n",net_send_error_count);
-			oled_clear(zedboard_oled_params_0.base_address);
-			sprintf(&menuBuf[0], "%s::%3d", menuitem[10], total_bytes_send_to_net);
-			oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+			// oled_clear(zedboard_oled_params_0.base_address);
+			// sprintf(&menuBuf[0], "%s::%3d", menuitem[10], total_bytes_send_to_net);
+			// oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
 			ui_draw();
 
       }
@@ -537,9 +537,9 @@ void *ui_input_reader (void *data) {
       else if ( strcmp (c, "areset") == 0){
     	  reset_adc_fifos(audio_to_eth_base_0);//LSB is left, MSB is Right
     	  printf("ADC audio FIFOs Reset\n");
-    	  oled_clear(zedboard_oled_params_0.base_address);
-    	  sprintf(&menuBuf[0], "%s", "ADC FIFOs Rst");
-    	  oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+    	//   oled_clear(zedboard_oled_params_0.base_address);
+    	//   sprintf(&menuBuf[0], "%s", "ADC FIFOs Rst");
+    	//   oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
     	  ui_draw();
       }
 
@@ -556,9 +556,9 @@ void *ui_input_reader (void *data) {
 
     	  reset_dac_fifos(eth_to_audio_base_0);//LSB is left, MSB is Right
     	  printf("DAC audio FIFOs Reset\n>");
-    	  oled_clear(zedboard_oled_params_0.base_address);
-    	  sprintf(&menuBuf[0], "%s", "DAC FIFOs Rst");
-    	  oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+    	//   oled_clear(zedboard_oled_params_0.base_address);
+    	//   sprintf(&menuBuf[0], "%s", "DAC FIFOs Rst");
+    	//   oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
     	  ui_draw();
       }
 
@@ -567,9 +567,9 @@ void *ui_input_reader (void *data) {
     	  reset_pkt_seq(eth_packet_sequencer_base_0);
 
           	  printf("PLC Pkt seq Reset\n>");
-          	  oled_clear(zedboard_oled_params_0.base_address);
-          	  sprintf(&menuBuf[0], "%s", "PKT SEQ Rst");
-          	  oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+          	//   oled_clear(zedboard_oled_params_0.base_address);
+          	//   sprintf(&menuBuf[0], "%s", "PKT SEQ Rst");
+          	//   oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
           	  ui_draw();
             }
 
@@ -579,9 +579,9 @@ void *ui_input_reader (void *data) {
 
 
 			  printf("Pkt timing unit reset\n>");
-			  oled_clear(zedboard_oled_params_0.base_address);
-			  sprintf(&menuBuf[0], "%s", "PKT TU Rst");
-			  oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+			//   oled_clear(zedboard_oled_params_0.base_address);
+			//   sprintf(&menuBuf[0], "%s", "PKT TU Rst");
+			//   oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
 			  ui_draw();
 		  }
       else if ( strcmp (c, "pbtrreset") == 0){
@@ -589,9 +589,9 @@ void *ui_input_reader (void *data) {
     	  	  	  reset_pkt_time_enf_rx(packet_time_enforcer_base_0);
 
       			  printf("Pkt timing unit reset rx\n>");
-      			  oled_clear(zedboard_oled_params_0.base_address);
-      			  sprintf(&menuBuf[0], "%s", "PKT TU RX Rst");
-      			  oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+      			//   oled_clear(zedboard_oled_params_0.base_address);
+      			//   sprintf(&menuBuf[0], "%s", "PKT TU RX Rst");
+      			//   oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
       			  ui_draw();
       		  }
       else if ( strcmp (c, "pbtoff") == 0){
@@ -599,9 +599,9 @@ void *ui_input_reader (void *data) {
     	  	  	  pkt_time_enf_disable(packet_time_enforcer_base_0);
 
       			  printf("Pkt timing unit disable\n>");
-      			  oled_clear(zedboard_oled_params_0.base_address);
-      			  sprintf(&menuBuf[0], "%s", "PKT TU OFF");
-      			  oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+      			//   oled_clear(zedboard_oled_params_0.base_address);
+      			//   sprintf(&menuBuf[0], "%s", "PKT TU OFF");
+      			//   oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
       			  ui_draw();
       		  }
 
@@ -610,9 +610,9 @@ void *ui_input_reader (void *data) {
           	  	  	  pkt_time_enf_enable(packet_time_enforcer_base_0);
 
             			  printf("Pkt timing unit enable\n>");
-            			  oled_clear(zedboard_oled_params_0.base_address);
-            			  sprintf(&menuBuf[0], "%s", "PKT TU ON");
-            			  oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+            			//   oled_clear(zedboard_oled_params_0.base_address);
+            			//   sprintf(&menuBuf[0], "%s", "PKT TU ON");
+            			//   oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
             			  ui_draw();
             		  }
 
@@ -622,9 +622,9 @@ void *ui_input_reader (void *data) {
           	  disble_pkt_seq(eth_packet_sequencer_base_0);
 
 			  printf("Pkt seq Disabled\n>");
-			  oled_clear(zedboard_oled_params_0.base_address);
-			  sprintf(&menuBuf[0], "%s", "PKT SEQ OFF");
-			  oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+			//   oled_clear(zedboard_oled_params_0.base_address);
+			//   sprintf(&menuBuf[0], "%s", "PKT SEQ OFF");
+			//   oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
 			  ui_draw();
 		  }
 
@@ -633,9 +633,9 @@ void *ui_input_reader (void *data) {
                 	  enable_pkt_seq(eth_packet_sequencer_base_0);
 
       			  printf("Pkt seq Enabled\n>");
-      			  oled_clear(zedboard_oled_params_0.base_address);
-      			  sprintf(&menuBuf[0], "%s", "PKT SEQ ON");
-      			  oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+      			//   oled_clear(zedboard_oled_params_0.base_address);
+      			//   sprintf(&menuBuf[0], "%s", "PKT SEQ ON");
+      			//   oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
       			  ui_draw();
       		  }
 
@@ -646,9 +646,9 @@ void *ui_input_reader (void *data) {
                 	      	 sleep(1);
                 	      	write_eth_param(full_udp_stack_ip_base_0, ETH_CONTROL_ID, buf&0xFFFFFFFD);
                 	      	printf("Stream core reset status was:0x%X\n>",buf);
-                	      	oled_clear(zedboard_oled_params_0.base_address);
-                	      	sprintf(&menuBuf[0], "%s", "Stream Core Rst");
-                	      	oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+                	      	// oled_clear(zedboard_oled_params_0.base_address);
+                	      	// sprintf(&menuBuf[0], "%s", "Stream Core Rst");
+                	      	// oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
                 	      	ui_draw();
                   }
             else if ( strcmp (c, "freset") == 0){
@@ -672,9 +672,9 @@ void *ui_input_reader (void *data) {
                	  printf("DAC audio FIFOs Reset\n>");
 
 
-               	 oled_clear(zedboard_oled_params_0.base_address);
-      			sprintf(&menuBuf[0], "%s", "Full Stream Rst");
-      			oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+               	//  oled_clear(zedboard_oled_params_0.base_address);
+      			// sprintf(&menuBuf[0], "%s", "Full Stream Rst");
+      			// oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
       			ui_draw();
                  }
 
@@ -697,18 +697,18 @@ void *ui_input_reader (void *data) {
 				  printf("ADC audio FIFOs Reset\n");
 				  reset_dac_fifos(eth_to_audio_base_0);//LSB is left, MSB is Right
 				  printf("DAC audio FIFOs Reset\n>");
-                     	 oled_clear(zedboard_oled_params_0.base_address);
-            			sprintf(&menuBuf[0], "%s", "RX re sync");
-            			oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+                     	//  oled_clear(zedboard_oled_params_0.base_address);
+            			// sprintf(&menuBuf[0], "%s", "RX re sync");
+            			// oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
             			ui_draw();
                        }
 
       else if ( strcmp (c, "strteston") == 0){
 			  set_test_mode_on(audio_to_eth_base_0);//wValue(7);
 			  printf("Put Audio to Ethernet IP in test mode\n");
-			  oled_clear(zedboard_oled_params_0.base_address);
-			  sprintf(&menuBuf[0], "%s", "Test Mode: ON");
-			oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+			//   oled_clear(zedboard_oled_params_0.base_address);
+			//   sprintf(&menuBuf[0], "%s", "Test Mode: ON");
+			// oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
 			ui_draw();
 		  }
       else if ( strcmp (c, "strtestm1") == 0){
@@ -731,34 +731,34 @@ void *ui_input_reader (void *data) {
       else if ( strcmp (c, "strtestm3") == 0){
 			  set_test_mode(audio_to_eth_base_0, 2);//wValue(10 down to 9);
 			  printf("Put Audio to Ethernet IP in test fixed L=0x00 R=0xFF mode\n");
-			  oled_clear(zedboard_oled_params_0.base_address);
-			  sprintf(&menuBuf[0], "%s", "L=0x00 R=0xFF");
-			 oled_print_message(&menuBuf[0], 2, zedboard_oled_params_0.base_address);
+			//   oled_clear(zedboard_oled_params_0.base_address);
+			//   sprintf(&menuBuf[0], "%s", "L=0x00 R=0xFF");
+			//  oled_print_message(&menuBuf[0], 2, zedboard_oled_params_0.base_address);
 			 ui_draw();
 			ui_draw();
 		  }
       else if ( strcmp (c, "strtestm4") == 0){
 			  set_test_mode(audio_to_eth_base_0, 3);//wValue(10 down to 9);
 			  printf("Put Audio to Ethernet IP in test bit flip mode\n");
-			  oled_clear(zedboard_oled_params_0.base_address);
-			  sprintf(&menuBuf[0], "%s", "LR FLIP");
-			  oled_print_message(&menuBuf[0], 2, zedboard_oled_params_0.base_address);
+			//   oled_clear(zedboard_oled_params_0.base_address);
+			//   sprintf(&menuBuf[0], "%s", "LR FLIP");
+			//   oled_print_message(&menuBuf[0], 2, zedboard_oled_params_0.base_address);
 			  ui_draw();
 		  }
       else if ( strcmp (c, "strtestm5") == 0){
      			  set_test_mode(audio_to_eth_base_0, 4);//wValue(10 down to 9);
      			  printf("Put Audio to Ethernet IP in test sine wave mode\n");
-     			  oled_clear(zedboard_oled_params_0.base_address);
-     			  sprintf(&menuBuf[0], "%s", "LR SQW");
-     			  oled_print_message(&menuBuf[0], 2, zedboard_oled_params_0.base_address);
+     			//   oled_clear(zedboard_oled_params_0.base_address);
+     			//   sprintf(&menuBuf[0], "%s", "LR SQW");
+     			//   oled_print_message(&menuBuf[0], 2, zedboard_oled_params_0.base_address);
      			  ui_draw();
      		  }
       else if ( strcmp (c, "strtestoff") == 0){
 			  set_test_mode_off(audio_to_eth_base_0);//wValue(7);
 			  printf("Put Audio to Ethernet IP in test mode\n");
-			  oled_clear(zedboard_oled_params_0.base_address);
-			  sprintf(&menuBuf[0], "%s", "Test Mode: OFF");
-			  oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+			//   oled_clear(zedboard_oled_params_0.base_address);
+			//   sprintf(&menuBuf[0], "%s", "Test Mode: OFF");
+			//   oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
 
 			ui_draw();
 			}
@@ -767,17 +767,17 @@ void *ui_input_reader (void *data) {
       else if ( strcmp (c, "sethdrstrip") == 0){//done
     	  set_rx_hdr_strip(eth_to_audio_base_0);//wValue(7);
 		  printf("Ethernet to Audio IP header strip on\n");
-		  oled_clear(zedboard_oled_params_0.base_address);
-		  sprintf(&menuBuf[0], "%s", "HDR Strip: ON");
-		  oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+		//   oled_clear(zedboard_oled_params_0.base_address);
+		//   sprintf(&menuBuf[0], "%s", "HDR Strip: ON");
+		//   oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
 		  ui_draw();
 	  }
       else if ( strcmp (c, "clearhdrstrip") == 0){//done
           	clear_rx_hdr_strip(eth_to_audio_base_0);//wValue(7);
 			printf("Ethernet to Audio IP header strip off\n");
-			oled_clear(zedboard_oled_params_0.base_address);
-			sprintf(&menuBuf[0], "%s", "HDR Strip: OFF");
-			oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+			// oled_clear(zedboard_oled_params_0.base_address);
+			// sprintf(&menuBuf[0], "%s", "HDR Strip: OFF");
+			// oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
 			ui_draw();
 		  }
 
@@ -785,9 +785,9 @@ void *ui_input_reader (void *data) {
       else if ( strcmp (c, "strxteston") == 0){
       			  set_xtest_mode_on(eth_to_audio_base_0);//wValue(7);
       			  printf("Put Ethernet to Audio IP in test mode\n");
-      			  oled_clear(zedboard_oled_params_0.base_address);
-      			  sprintf(&menuBuf[0], "%s", "xTest Mode: ON");
-      			oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+      			//   oled_clear(zedboard_oled_params_0.base_address);
+      			//   sprintf(&menuBuf[0], "%s", "xTest Mode: ON");
+      			// oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
       			ui_draw();
       		  }
             else if ( strcmp (c, "strxtestm1") == 0){
@@ -801,43 +801,43 @@ void *ui_input_reader (void *data) {
             else if ( strcmp (c, "strxtestm2") == 0){
       			  set_xtest_mode(eth_to_audio_base_0, 1);//wValue(10 down to 9);
       			  printf("Put Ethernet to Audio IP in test fixed LR=0x55 mode\n");
-      			  oled_clear(zedboard_oled_params_0.base_address);
-      			  sprintf(&menuBuf[0], "%s", "LR 0x555555");
-      			  oled_print_message(&menuBuf[0], 2, zedboard_oled_params_0.base_address);
+      			//   oled_clear(zedboard_oled_params_0.base_address);
+      			//   sprintf(&menuBuf[0], "%s", "LR 0x555555");
+      			//   oled_print_message(&menuBuf[0], 2, zedboard_oled_params_0.base_address);
       			  ui_draw();
       			ui_draw();
       		  }
             else if ( strcmp (c, "strxtestm3") == 0){
       			  set_xtest_mode(eth_to_audio_base_0, 2);//wValue(10 down to 9);
       			  printf("Put Ethernet to Audio IP in test fixed L=0x00 R=0xFF mode\n");
-      			  oled_clear(zedboard_oled_params_0.base_address);
-      			  sprintf(&menuBuf[0], "%s", "L=0x00 R=0xFF");
-      			 oled_print_message(&menuBuf[0], 2, zedboard_oled_params_0.base_address);
-      			 ui_draw();
+      			//   oled_clear(zedboard_oled_params_0.base_address);
+      			//   sprintf(&menuBuf[0], "%s", "L=0x00 R=0xFF");
+      			//  oled_print_message(&menuBuf[0], 2, zedboard_oled_params_0.base_address);
+      			//  ui_draw();
       			ui_draw();
       		  }
             else if ( strcmp (c, "strxtestm4") == 0){
       			  set_xtest_mode(eth_to_audio_base_0, 3);//wValue(10 down to 9);
       			  printf("Put Ethernet to Audio IP in test bit flip mode\n");
-      			  oled_clear(zedboard_oled_params_0.base_address);
-      			  sprintf(&menuBuf[0], "%s", "LR FLIP");
-      			  oled_print_message(&menuBuf[0], 2, zedboard_oled_params_0.base_address);
+      			//   oled_clear(zedboard_oled_params_0.base_address);
+      			//   sprintf(&menuBuf[0], "%s", "LR FLIP");
+      			//   oled_print_message(&menuBuf[0], 2, zedboard_oled_params_0.base_address);
       			  ui_draw();
       		  }
             else if ( strcmp (c, "strxtestm5") == 0){
            			  set_xtest_mode(eth_to_audio_base_0, 4);//wValue(10 down to 9);
            			  printf("Put Ethernet to Audio IP in test square wave mode\n");
-           			  oled_clear(zedboard_oled_params_0.base_address);
-           			  sprintf(&menuBuf[0], "%s", "LR SQR");
-           			  oled_print_message(&menuBuf[0], 2, zedboard_oled_params_0.base_address);
+           			//   oled_clear(zedboard_oled_params_0.base_address);
+           			//   sprintf(&menuBuf[0], "%s", "LR SQR");
+           			//   oled_print_message(&menuBuf[0], 2, zedboard_oled_params_0.base_address);
            			  ui_draw();
            		  }
             else if ( strcmp (c, "strxtestoff") == 0){
       			  set_xtest_mode_off(eth_to_audio_base_0);//wValue(7);
       			  printf("Put Ethernet to Audio IP in test mode\n");
-      			  oled_clear(zedboard_oled_params_0.base_address);
-      			  sprintf(&menuBuf[0], "%s", "xTest Mode: OFF");
-      			  oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+      			//   oled_clear(zedboard_oled_params_0.base_address);
+      			//   sprintf(&menuBuf[0], "%s", "xTest Mode: OFF");
+      			//   oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
 
       			ui_draw();
       			}
@@ -845,9 +845,9 @@ void *ui_input_reader (void *data) {
             	scanf ("%d",&tmp);
 			  set_tx_hdr_length(eth_to_audio_base_0, tmp);//wValue(7);
 			  printf("Set hdr length...\n");
-			  oled_clear(zedboard_oled_params_0.base_address);
-			  sprintf(&menuBuf[0], "%s%d", "HDR LEN:",tmp);
-			  oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+			//   oled_clear(zedboard_oled_params_0.base_address);
+			//   sprintf(&menuBuf[0], "%s%d", "HDR LEN:",tmp);
+			//   oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
 
 			ui_draw();
 			}
@@ -858,9 +858,9 @@ void *ui_input_reader (void *data) {
             	usleep(100);
             	time_sync_tx_en(full_udp_stack_ip_base_0);
 			  printf("Enable time sync...\n");
-			  oled_clear(zedboard_oled_params_0.base_address);
-			  sprintf(&menuBuf[0], "%s", "SYNC: ON");
-			  oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+			//   oled_clear(zedboard_oled_params_0.base_address);
+			//   sprintf(&menuBuf[0], "%s", "SYNC: ON");
+			//   oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
 			ui_draw();
 		  }
 
@@ -869,9 +869,9 @@ void *ui_input_reader (void *data) {
 				time_sync_off(time_sync_base_0);
 				//time_sync_tx_off(full_udp_stack_ip_base_0);
 			  printf("Disable time sync...\n");
-			  oled_clear(zedboard_oled_params_0.base_address);
-			  sprintf(&menuBuf[0], "%s", "SYNC: OFF");
-			  oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+			//   oled_clear(zedboard_oled_params_0.base_address);
+			//   sprintf(&menuBuf[0], "%s", "SYNC: OFF");
+			//   oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
 			ui_draw();
 		  }
             else if ( strcmp (c, "setsyncrst") == 0){
@@ -879,9 +879,9 @@ void *ui_input_reader (void *data) {
                                     	set_sync_rst(time_sync_base_0);
 
                         			  printf("Reset time sync...\n");
-                        			  oled_clear(zedboard_oled_params_0.base_address);
-                        			  sprintf(&menuBuf[0], "%s", "SYNC: RST");
-                        			  oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+                        			//   oled_clear(zedboard_oled_params_0.base_address);
+                        			//   sprintf(&menuBuf[0], "%s", "SYNC: RST");
+                        			//   oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
                         			ui_draw();
                         		  }
 
@@ -892,9 +892,9 @@ void *ui_input_reader (void *data) {
                         	set_sync_pkt_dly(time_sync_base_0,tmp);
 
             			  printf("Set time sync response wait delay...\n");
-            			  oled_clear(zedboard_oled_params_0.base_address);
-            			  sprintf(&menuBuf[0], "%s", "SYNC: DLY");
-            			  oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+            			//   oled_clear(zedboard_oled_params_0.base_address);
+            			//   sprintf(&menuBuf[0], "%s", "SYNC: DLY");
+            			//   oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
             			ui_draw();
             		  }
 
@@ -903,9 +903,9 @@ void *ui_input_reader (void *data) {
 					initiate_sync(time_sync_base_0);
 				  set_sync_on(audio_to_eth_base_0);
 				  printf("Enable time sync...\n");
-				  oled_clear(zedboard_oled_params_0.base_address);
-				  sprintf(&menuBuf[0], "%s", "SYNC: ON");
-				  oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+				//   oled_clear(zedboard_oled_params_0.base_address);
+				//   sprintf(&menuBuf[0], "%s", "SYNC: ON");
+				//   oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
 				ui_draw();
 			  }
 
@@ -913,9 +913,9 @@ void *ui_input_reader (void *data) {
 
 				  set_sync_off(audio_to_eth_base_0);
 				  printf("Disable time sync...\n");
-				  oled_clear(zedboard_oled_params_0.base_address);
-				  sprintf(&menuBuf[0], "%s", "SYNC: OFF");
-				  oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+				//   oled_clear(zedboard_oled_params_0.base_address);
+				//   sprintf(&menuBuf[0], "%s", "SYNC: OFF");
+				//   oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
 				ui_draw();
 			  }
 	else if ( strcmp (c, "tgsync") == 0){
@@ -924,27 +924,27 @@ void *ui_input_reader (void *data) {
 					sleep(1);
 					  set_sync_on(audio_to_eth_base_0);
 					  printf("Toggle time sync...\n");
-					  oled_clear(zedboard_oled_params_0.base_address);
-					  sprintf(&menuBuf[0], "%s", "SYNC: ON");
-					  oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+					//   oled_clear(zedboard_oled_params_0.base_address);
+					//   sprintf(&menuBuf[0], "%s", "SYNC: ON");
+					//   oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
 					ui_draw();
 				  }
       else if ( strcmp (c, "strpktcon") == 0){
 
 			  set_pcnt_mode_on(audio_to_eth_base_0);
 			  printf("Enable UDP packet count\n");
-			  oled_clear(zedboard_oled_params_0.base_address);
-			  sprintf(&menuBuf[0], "%s", "Pkt Count: ON");
-			  oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+			//   oled_clear(zedboard_oled_params_0.base_address);
+			//   sprintf(&menuBuf[0], "%s", "Pkt Count: ON");
+			//   oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
 			ui_draw();
 		  }
       else if ( strcmp (c, "strpktcoff") == 0){
 
 			  set_pcnt_mode_off(audio_to_eth_base_0);
 			  printf("Disable UDP packet count\n");
-			  oled_clear(zedboard_oled_params_0.base_address);
-			  sprintf(&menuBuf[0], "%s", "Pkt Count: OFF");
-			  oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+			//   oled_clear(zedboard_oled_params_0.base_address);
+			//   sprintf(&menuBuf[0], "%s", "Pkt Count: OFF");
+			//   oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
 			ui_draw();
 			}
 
@@ -952,35 +952,35 @@ void *ui_input_reader (void *data) {
 
       			  set_stream_send_on(audio_to_eth_base_0);
       			  printf("Enable UDP payload generation\n");
-      			oled_clear(zedboard_oled_params_0.base_address);
-      			sprintf(&menuBuf[0], "%s", "Pkt Send: ON");
-      			oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+      			// oled_clear(zedboard_oled_params_0.base_address);
+      			// sprintf(&menuBuf[0], "%s", "Pkt Send: ON");
+      			// oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
       			ui_draw();
       		  }
             else if ( strcmp (c, "strsndoff") == 0){
 
       			  set_stream_send_off(audio_to_eth_base_0);
       			  printf("Disable UDP payload generation \n");
-      			oled_clear(zedboard_oled_params_0.base_address);
-      			sprintf(&menuBuf[0], "%s", "Pkt Send: OFF");
-      			oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+      			// oled_clear(zedboard_oled_params_0.base_address);
+      			// sprintf(&menuBuf[0], "%s", "Pkt Send: OFF");
+      			// oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
       			ui_draw();
       			}
 
       else if ( strcmp (c, "strselarm") == 0){
           	  reset_dac_fifos(eth_to_audio_base_0);//LSB is left, MSB is Right
           	  printf("Play arm stream\n>");
-          	oled_clear(zedboard_oled_params_0.base_address);
-          	sprintf(&menuBuf[0], "%s", "Pkt Send: ARM");
-          	oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+          	// oled_clear(zedboard_oled_params_0.base_address);
+          	// sprintf(&menuBuf[0], "%s", "Pkt Send: ARM");
+          	// oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
           	ui_draw();
             }
       else if ( strcmp (c, "strseleth") == 0){
                	  reset_dac_fifos(eth_to_audio_base_0);//LSB is left, MSB is Right
                	  printf("Play Eth stream\n>");
-               	oled_clear(zedboard_oled_params_0.base_address);
-               	sprintf(&menuBuf[0], "%s", "Pkt Send: ETH");
-               	oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+               	// oled_clear(zedboard_oled_params_0.base_address);
+               	// sprintf(&menuBuf[0], "%s", "Pkt Send: ETH");
+               	// oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
                	ui_draw();
                  }
 
@@ -998,9 +998,9 @@ void *ui_input_reader (void *data) {
 //		initiate_sync(time_sync_base_0);
 //		set_sync_on(audio_to_eth_base_0);
 		printf("Enable time sync...\n");
-		oled_clear(zedboard_oled_params_0.base_address);
-		sprintf(&menuBuf[0], "%s", "UDP Send: ON");
-		oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+		// oled_clear(zedboard_oled_params_0.base_address);
+		// sprintf(&menuBuf[0], "%s", "UDP Send: ON");
+		// oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
 		ui_draw();
       }
 
@@ -1008,9 +1008,9 @@ void *ui_input_reader (void *data) {
           	  unsigned buf = read_eth_param (full_udp_stack_ip_base_0, ETH_CONTROL_REG_ID);
           	      	  write_eth_param(full_udp_stack_ip_base_0, ETH_CONTROL_ID, buf|0x04);
           	      	printf("Stream rx started status was:0x%X\n>",buf);
-          	      	oled_clear(zedboard_oled_params_0.base_address);
-          	      	sprintf(&menuBuf[0], "%s", "UDP Rx: ON");
-          	      	oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+          	      	// oled_clear(zedboard_oled_params_0.base_address);
+          	      	// sprintf(&menuBuf[0], "%s", "UDP Rx: ON");
+          	      	// oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
           	      	ui_draw();
             }
 
@@ -1020,18 +1020,18 @@ void *ui_input_reader (void *data) {
     	  set_sync_off(audio_to_eth_base_0);
     	  				  printf("Disable time sync...\n");
     	  write_eth_param(full_udp_stack_ip_base_0, ETH_CONTROL_ID, buf&0xFFFFFFFD);
-    	  oled_clear(zedboard_oled_params_0.base_address);
-    	  sprintf(&menuBuf[0], "%s", "UDP Send: OFF");
-    	  oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+    	//   oled_clear(zedboard_oled_params_0.base_address);
+    	//   sprintf(&menuBuf[0], "%s", "UDP Send: OFF");
+    	//   oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
     	  buf = read_eth_param (full_udp_stack_ip_base_0, ETH_CONTROL_REG_ID);
     	  printf("Stream tx stopped status was:0x%X\n>",buf);
             }
       else if ( strcmp (c, "strrxstop") == 0){
           	  unsigned buf = read_eth_param (full_udp_stack_ip_base_0, ETH_CONTROL_REG_ID);
           	  write_eth_param(full_udp_stack_ip_base_0, ETH_CONTROL_ID, buf&0xFFFFFFFB);
-          	  oled_clear(zedboard_oled_params_0.base_address);
-          	  sprintf(&menuBuf[0], "%s", "UDP Receive: OFF");
-          	  oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+          	//   oled_clear(zedboard_oled_params_0.base_address);
+          	//   sprintf(&menuBuf[0], "%s", "UDP Receive: OFF");
+          	//   oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
           	  printf("Stream rx stopped status was:0x%X\n>",buf);
                   }
       else if(strcmp (c,"strmac") == 0) {
@@ -1041,11 +1041,11 @@ void *ui_input_reader (void *data) {
 		  printf("\nMac Address: %02x. %02x. %02x. %02x. %02x. %02x\n",macAddress[0],macAddress[1],macAddress[2],macAddress[3],macAddress[4],macAddress[5]);
 		  //write_eth_mac(full_udp_stack_ip_base_0, MAC_ID, ((macAddress[0]<<40)|(macAddress[1]<<32)|macAddress[2]<<24)|(macAddress[3]<<16)|(macAddress[4]<<8)|(macAddress[5]));
 		  write_eth_mac(full_udp_stack_ip_base_0, MAC_ID, &macAddress[0]);
-		  oled_clear(zedboard_oled_params_0.base_address);
-		sprintf(&menuBuf[0], "%s", menuitem[11]);
-		oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
-		sprintf(&menuBuf[0], "%02x%02x%02x%02x%02x%02x",macAddress[0],macAddress[1],macAddress[2],macAddress[3],macAddress[4],macAddress[5]);
-		oled_print_message(&menuBuf[0], 2, zedboard_oled_params_0.base_address);
+		//   oled_clear(zedboard_oled_params_0.base_address);
+		// sprintf(&menuBuf[0], "%s", menuitem[11]);
+		// oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+		// sprintf(&menuBuf[0], "%02x%02x%02x%02x%02x%02x",macAddress[0],macAddress[1],macAddress[2],macAddress[3],macAddress[4],macAddress[5]);
+		// oled_print_message(&menuBuf[0], 2, zedboard_oled_params_0.base_address);
 
 		  ui_draw();
 	}
@@ -1056,11 +1056,11 @@ void *ui_input_reader (void *data) {
       		  printf("\nIp Address: %03d. %03d. %03d. %03d\n",ipAddress[0],ipAddress[1],ipAddress[2],ipAddress[3]);
       		  write_eth_param(full_udp_stack_ip_base_0, SYNC_IP_ID, (ipAddress[0]<<24)|(ipAddress[1]<<16)|(ipAddress[2]<<8)|(ipAddress[3]));
 
-      		  oled_clear(zedboard_oled_params_0.base_address);
-      		  sprintf(&menuBuf[0], "%s", menuitem[13]);
-      		  		oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
-      		  		sprintf(&menuBuf[0], "%s", ip);
-      		  		oled_print_message(&menuBuf[0], 2, zedboard_oled_params_0.base_address);
+      		//   oled_clear(zedboard_oled_params_0.base_address);
+      		//   sprintf(&menuBuf[0], "%s", menuitem[13]);
+      		//   		oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+      		//   		sprintf(&menuBuf[0], "%s", ip);
+      		//   		oled_print_message(&menuBuf[0], 2, zedboard_oled_params_0.base_address);
 
       		  ui_draw();
       	}
@@ -1072,11 +1072,11 @@ void *ui_input_reader (void *data) {
 		  printf("\nIp Address: %03d. %03d. %03d. %03d\n",ipAddress[0],ipAddress[1],ipAddress[2],ipAddress[3]);
 		  write_eth_param(full_udp_stack_ip_base_0, DEST_IP_ID, (ipAddress[0]<<24)|(ipAddress[1]<<16)|(ipAddress[2]<<8)|(ipAddress[3]));
 
-		  oled_clear(zedboard_oled_params_0.base_address);
-		  sprintf(&menuBuf[0], "%s", menuitem[13]);
-		  		oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
-		  		sprintf(&menuBuf[0], "%s", ip);
-		  		oled_print_message(&menuBuf[0], 2, zedboard_oled_params_0.base_address);
+		//   oled_clear(zedboard_oled_params_0.base_address);
+		//   sprintf(&menuBuf[0], "%s", menuitem[13]);
+		//   		oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+		//   		sprintf(&menuBuf[0], "%s", ip);
+		//   		oled_print_message(&menuBuf[0], 2, zedboard_oled_params_0.base_address);
 
 		  ui_draw();
 	}
@@ -1087,11 +1087,11 @@ void *ui_input_reader (void *data) {
       		  printf("\nIp Address: %03d. %03d. %03d. %03d\n",ipAddress[0],ipAddress[1],ipAddress[2],ipAddress[3]);
       		write_eth_param(full_udp_stack_ip_base_0, LOCAL_IP_ID, (ipAddress[0]<<24)|(ipAddress[1]<<16)|(ipAddress[2]<<8)|(ipAddress[3]));
 
-      		  oled_clear(zedboard_oled_params_0.base_address);
-      		sprintf(&menuBuf[0], "%s", menuitem[12]);
-      				oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
-      				sprintf(&menuBuf[0], "%s", ip);
-      				oled_print_message(&menuBuf[0], 2, zedboard_oled_params_0.base_address);
+      		//   oled_clear(zedboard_oled_params_0.base_address);
+      		// sprintf(&menuBuf[0], "%s", menuitem[12]);
+      		// 		oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+      		// 		sprintf(&menuBuf[0], "%s", ip);
+      		// 		oled_print_message(&menuBuf[0], 2, zedboard_oled_params_0.base_address);
 
       		  ui_draw();
       	}
@@ -1103,11 +1103,11 @@ void *ui_input_reader (void *data) {
       		  printf("\nIp Address: %03d. %03d. %03d. %03d\n",ipAddress[0],ipAddress[1],ipAddress[2],ipAddress[3]);
       		  write_eth_param(full_udp_stack_ip_base_0, SYNC_IP_ID, (ipAddress[0]<<24)|(ipAddress[1]<<16)|(ipAddress[2]<<8)|(ipAddress[3]));
 
-      		  oled_clear(zedboard_oled_params_0.base_address);
-      		  sprintf(&menuBuf[0], "%s", "SYNC_IP:");
-      		  		oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
-      		  		sprintf(&menuBuf[0], "%s", ip);
-      		  		oled_print_message(&menuBuf[0], 2, zedboard_oled_params_0.base_address);
+      		//   oled_clear(zedboard_oled_params_0.base_address);
+      		//   sprintf(&menuBuf[0], "%s", "SYNC_IP:");
+      		//   		oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+      		//   		sprintf(&menuBuf[0], "%s", ip);
+      		//   		oled_print_message(&menuBuf[0], 2, zedboard_oled_params_0.base_address);
 
       		  ui_draw();
       	}
@@ -1119,11 +1119,11 @@ void *ui_input_reader (void *data) {
            		  printf("\nIp Address: %03d. %03d. %03d. %03d\n",ipAddress[0],ipAddress[1],ipAddress[2],ipAddress[3]);
            		write_eth_param(full_udp_stack_ip_base_0, GTWAY_IP_ID, (ipAddress[0]<<24)|(ipAddress[1]<<16)|(ipAddress[2]<<8)|(ipAddress[3]));
 
-           		  oled_clear(zedboard_oled_params_0.base_address);
-           		sprintf(&menuBuf[0], "%s", menuitem[14]);
-           				oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
-           				sprintf(&menuBuf[0], "%s", ip);
-           				oled_print_message(&menuBuf[0], 2, zedboard_oled_params_0.base_address);
+           		//   oled_clear(zedboard_oled_params_0.base_address);
+           		// sprintf(&menuBuf[0], "%s", menuitem[14]);
+           		// 		oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+           		// 		sprintf(&menuBuf[0], "%s", ip);
+           		// 		oled_print_message(&menuBuf[0], 2, zedboard_oled_params_0.base_address);
 
            		  ui_draw();
            	}
@@ -1134,11 +1134,11 @@ void *ui_input_reader (void *data) {
 		  printf("\nIp Address: %03d. %03d. %03d. %03d\n",ipAddress[0],ipAddress[1],ipAddress[2],ipAddress[3]);
 		  write_eth_param(full_udp_stack_ip_base_0, MASK_IP_ID, (ipAddress[0]<<24)|(ipAddress[1]<<16)|(ipAddress[2]<<8)|(ipAddress[3]));
 
-		  oled_clear(zedboard_oled_params_0.base_address);
-		  sprintf(&menuBuf[0], "%s", menuitem[15]);
-		  		oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
-		  		sprintf(&menuBuf[0], "%s", ip);
-		  		oled_print_message(&menuBuf[0], 2, zedboard_oled_params_0.base_address);
+		//   oled_clear(zedboard_oled_params_0.base_address);
+		//   sprintf(&menuBuf[0], "%s", menuitem[15]);
+		//   		oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+		//   		sprintf(&menuBuf[0], "%s", ip);
+		//   		oled_print_message(&menuBuf[0], 2, zedboard_oled_params_0.base_address);
 		  ui_draw();
      }
 
@@ -1161,11 +1161,11 @@ void *ui_input_reader (void *data) {
                     scanf ("%d",&dest_port);
                     write_eth_param(full_udp_stack_ip_base_0, SYNC_PORT_ID, dest_port);
 
-                    oled_clear(zedboard_oled_params_0.base_address);
-                    sprintf(&menuBuf[0], "%s", "SYNC PORT");
-                    		  		oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
-                    		  		sprintf(&menuBuf[0], "%d", dest_port);
-                    		  		oled_print_message(&menuBuf[0], 2, zedboard_oled_params_0.base_address);
+                    // oled_clear(zedboard_oled_params_0.base_address);
+                    // sprintf(&menuBuf[0], "%s", "SYNC PORT");
+                    // 		  		oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+                    // 		  		sprintf(&menuBuf[0], "%d", dest_port);
+                    // 		  		oled_print_message(&menuBuf[0], 2, zedboard_oled_params_0.base_address);
                     ui_draw();
                   }
       else if(strcmp (c,"strnsp") == 0) {//cant set speed
@@ -1182,9 +1182,9 @@ void *ui_input_reader (void *data) {
        		}
 
 
-      		  oled_clear(zedboard_oled_params_0.base_address);
-      		sprintf(&menuBuf[0], "%s%s", menuitem[12], ip);
-      		oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+      		//   oled_clear(zedboard_oled_params_0.base_address);
+      		// sprintf(&menuBuf[0], "%s%s", menuitem[12], ip);
+      		// oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
 
       		  ui_draw();
       	}
@@ -1201,9 +1201,9 @@ void *ui_input_reader (void *data) {
                     //write_eth_param(full_udp_stack_ip_base_0, PKT_LEN_ID, ((tmp*3) +8));//+8 done in fpga
                     //write_audio_to_eth_param(audio_to_eth_base_0, PAYLEN_REG_ID, tmp*3);
                     set_stream_plen(audio_to_eth_base_0,tmp);
-                    oled_clear(zedboard_oled_params_0.base_address);
-            		sprintf(&menuBuf[0], "Pkt Length:%5d", (tmp));
-            		oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+                    // oled_clear(zedboard_oled_params_0.base_address);
+            		// sprintf(&menuBuf[0], "Pkt Length:%5d", (tmp));
+            		// oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
                     ui_draw();
                   }
 
@@ -1212,9 +1212,9 @@ void *ui_input_reader (void *data) {
                           scanf ("%d",&tmp);
 
                           set_stream_porder(eth_packet_sequencer_base_0,tmp);
-                          oled_clear(zedboard_oled_params_0.base_address);
-                  		sprintf(&menuBuf[0], "Pkt Seq Odr:%d", (tmp));
-                  		oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+                        //   oled_clear(zedboard_oled_params_0.base_address);
+                  		// sprintf(&menuBuf[0], "Pkt Seq Odr:%d", (tmp));
+                  		// oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
                           ui_draw();
                         }
 //      else if(strcmp (c,"setsqwdly") == 0) {//PKT_WAIT_DELAY
@@ -1232,19 +1232,19 @@ void *ui_input_reader (void *data) {
                                       scanf ("%d",&tmp);
 
                                       set_stream_pkt_wait(eth_packet_sequencer_base_0,tmp*(0x40));//in micro seconds
-                                      oled_clear(zedboard_oled_params_0.base_address);
-                              		sprintf(&menuBuf[0], "Pkt Seq WDly:%d us", (tmp));
-                              		oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+                                    //   oled_clear(zedboard_oled_params_0.base_address);
+                              		// sprintf(&menuBuf[0], "Pkt Seq WDly:%d us", (tmp));
+                              		// oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
                                       ui_draw();
                                     }
       else if(strcmp (c,"setsqsdly") == 0) {//PKT_SEND_DELAY
 
                                       scanf ("%d",&tmp);
 
-                                      set_stream_pkt_send_delay(eth_packet_sequencer_base_0,tmp*(0x40));//in micro seconds
-                                      oled_clear(zedboard_oled_params_0.base_address);
-                              		sprintf(&menuBuf[0], "Pkt Seq SDly:%d us", (tmp));
-                              		oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+                                    //   set_stream_pkt_send_delay(eth_packet_sequencer_base_0,tmp*(0x40));//in micro seconds
+                                    //   oled_clear(zedboard_oled_params_0.base_address);
+                              		// sprintf(&menuBuf[0], "Pkt Seq SDly:%d us", (tmp));
+                              		// oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
                                       ui_draw();
                                     }
 
@@ -1261,9 +1261,9 @@ void *ui_input_reader (void *data) {
 				}
 
 				set_stream_rx_pkt_size(eth_packet_sequencer_base_0,(tmp-2));//in bytes
-				oled_clear(zedboard_oled_params_0.base_address);
-				sprintf(&menuBuf[0], "PLC pSz:%d", ((tmp-2)));
-				oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+				// oled_clear(zedboard_oled_params_0.base_address);
+				// sprintf(&menuBuf[0], "PLC pSz:%d", ((tmp-2)));
+				// oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
 				ui_draw();
 			  }
 
@@ -1275,9 +1275,9 @@ void *ui_input_reader (void *data) {
 
 				set_stream_rx_buf_lim(eth_packet_sequencer_base_0,tmp);//in micro seconds
 				set_stream_rx_buf_lim2(eth_to_audio_base_0,tmp);//in micro seconds
-				oled_clear(zedboard_oled_params_0.base_address);
-				sprintf(&menuBuf[0], "PoBlim:%d ", (tmp));
-				oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+				// oled_clear(zedboard_oled_params_0.base_address);
+				// sprintf(&menuBuf[0], "PoBlim:%d ", (tmp));
+				// oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
 				ui_draw();
 			  }
 
@@ -1287,9 +1287,9 @@ void *ui_input_reader (void *data) {
       				//UDP header is 8 bytes
       				scanf ("%d",&tmp);
       				set_stream_rx_buf_dlim(eth_to_audio_base_0,tmp);//in micro seconds
-      				oled_clear(zedboard_oled_params_0.base_address);
-      				sprintf(&menuBuf[0], "Dlim:%d ", (tmp));
-      				oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+      				// oled_clear(zedboard_oled_params_0.base_address);
+      				// sprintf(&menuBuf[0], "Dlim:%d ", (tmp));
+      				// oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
       				ui_draw();
       			  }
 
@@ -1298,9 +1298,9 @@ void *ui_input_reader (void *data) {
             				//UDP header is 8 bytes
             				scanf ("%d",&tmp);
             				set_stream_rx_buf_slack(eth_to_audio_base_0,tmp);//in micro seconds
-            				oled_clear(zedboard_oled_params_0.base_address);
-            				sprintf(&menuBuf[0], "BSlk:%d ", (tmp));
-            				oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+            				// oled_clear(zedboard_oled_params_0.base_address);
+            				// sprintf(&menuBuf[0], "BSlk:%d ", (tmp));
+            				// oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
             				ui_draw();
             			  }
       else if(strcmp (c,"setbdlm") == 0) {
@@ -1308,9 +1308,9 @@ void *ui_input_reader (void *data) {
                   				//UDP header is 8 bytes
                   				scanf ("%d",&tmp);
                   				set_stream_rx_buf_docc_lim(eth_to_audio_base_0,tmp);//in micro seconds
-                  				oled_clear(zedboard_oled_params_0.base_address);
-                  				sprintf(&menuBuf[0], "Bdoc:%d ", (tmp));
-                  				oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+                  				// oled_clear(zedboard_oled_params_0.base_address);
+                  				// sprintf(&menuBuf[0], "Bdoc:%d ", (tmp));
+                  				// oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
                   				ui_draw();
                   			  }
       else if(strcmp (c,"setprdly") == 0) {
@@ -1319,9 +1319,9 @@ void *ui_input_reader (void *data) {
      				scanf ("%d",&tmp);
 
      				set_plc_replace_delay(eth_packet_sequencer_base_0,tmp);//in clocks
-     				oled_clear(zedboard_oled_params_0.base_address);
-     				sprintf(&menuBuf[0], "RepDly:%d ", (tmp));
-     				oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+     				// oled_clear(zedboard_oled_params_0.base_address);
+     				// sprintf(&menuBuf[0], "RepDly:%d ", (tmp));
+     				// oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
      				ui_draw();
      			  }
       else if(strcmp (c,"setsqlkdly") == 0) {
@@ -1329,50 +1329,50 @@ void *ui_input_reader (void *data) {
            				//UDP header is 8 bytes
            				scanf ("%d",&tmp);
            				set_seq_replace_lock_delay(eth_packet_sequencer_base_0,tmp);//in clocks
-           				oled_clear(zedboard_oled_params_0.base_address);
-           				sprintf(&menuBuf[0], "SQLkDly:%d ", (tmp));
-           				oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+           				// oled_clear(zedboard_oled_params_0.base_address);
+           				// sprintf(&menuBuf[0], "SQLkDly:%d ", (tmp));
+           				// oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
            				ui_draw();
            			  }
       else if(strcmp (c,"sqwon") == 0) {
 							  //SET_STATUS("Enter payload length in 24 bit samples:\n");
 
 							  set_stream_pkt_wait_enable(eth_packet_sequencer_base_0);//in micro seconds
-							  oled_clear(zedboard_oled_params_0.base_address);
-							sprintf(&menuBuf[0], "Pkt Seq Dly:CUS");
-							oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+							//   oled_clear(zedboard_oled_params_0.base_address);
+							// sprintf(&menuBuf[0], "Pkt Seq Dly:CUS");
+							// oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
 							  ui_draw();
 							}
       else if(strcmp (c,"sqwoff") == 0) {
 
 							set_stream_pkt_wait_disable(eth_packet_sequencer_base_0);//in micro seconds
-							oled_clear(zedboard_oled_params_0.base_address);
-							sprintf(&menuBuf[0], "Pkt Seq Dly:DFT");
-							oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+							// oled_clear(zedboard_oled_params_0.base_address);
+							// sprintf(&menuBuf[0], "Pkt Seq Dly:DFT");
+							// oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
 							ui_draw();
 						  }
       else if(strcmp (c,"sqsdon") == 0) {
 
       							  set_stream_pkt_send_delay_enable(eth_packet_sequencer_base_0);//in micro seconds
-      							  oled_clear(zedboard_oled_params_0.base_address);
-      							sprintf(&menuBuf[0], "Pkt Seq Dly:CUS");
-      							oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+      							//   oled_clear(zedboard_oled_params_0.base_address);
+      							// sprintf(&menuBuf[0], "Pkt Seq Dly:CUS");
+      							// oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
       							  ui_draw();
       							}
             else if(strcmp (c,"sqsdoff") == 0) {
 
       							set_stream_pkt_send_delay_disable(eth_packet_sequencer_base_0);//in micro seconds
-      							oled_clear(zedboard_oled_params_0.base_address);
-      							sprintf(&menuBuf[0], "Pkt Seq Dly:DFT");
-      							oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+      							// oled_clear(zedboard_oled_params_0.base_address);
+      							// sprintf(&menuBuf[0], "Pkt Seq Dly:DFT");
+      							// oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
       							ui_draw();
       						  }
             else if(strcmp (c,"plcoff") == 0) {
 
             	    set_plc_disable(eth_to_audio_base_0);//in micro seconds
 					oled_clear(zedboard_oled_params_0.base_address);
-					sprintf(&menuBuf[0], "PLC:OFF");
-					oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+					// sprintf(&menuBuf[0], "PLC:OFF");
+					// oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
 					ui_draw();
 				  }
             else if(strcmp (c,"plcon") == 0) {
@@ -1393,17 +1393,17 @@ void *ui_input_reader (void *data) {
                           sleep(1);
                           reset_dac_fifos(eth_to_audio_base_0);//LSB is left, MSB is Right
 
-                          oled_clear(zedboard_oled_params_0.base_address);
-                  		sprintf(&menuBuf[0], "%s:%5d", menuitem[27], (tmp));
-                  		oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+                        //   oled_clear(zedboard_oled_params_0.base_address);
+                  		// sprintf(&menuBuf[0], "%s:%5d", menuitem[27], (tmp));
+                  		// oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
                           ui_draw();
                         }
       else if(strcmp (c,"setpoutdly") == 0) {
     	  scanf ("%d",&tmp);
     	  set_playout_delay(eth_to_audio_base_0,tmp*96);
-    	  oled_clear(zedboard_oled_params_0.base_address);
-		sprintf(&menuBuf[0], "%s:%5d", "POUDLY", (tmp));
-		oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+    	//   oled_clear(zedboard_oled_params_0.base_address);
+		// sprintf(&menuBuf[0], "%s:%5d", "POUDLY", (tmp));
+		// oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
 		ui_draw();
       }
       else if(strcmp (c,"getpoutdly") == 0) {
@@ -1412,11 +1412,11 @@ void *ui_input_reader (void *data) {
 			tmp = get_playout_delay(eth_to_audio_base_0);
 			printf("The current audio playout delay is:%d samples\n",(tmp));
 			printf("The current audio playout delay is:%f ms\n",(tmp/96.0));
-			oled_clear(zedboard_oled_params_0.base_address);
-			sprintf(&menuBuf[0], "%d samples", (tmp));
-			oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
-			sprintf(&menuBuf[0], "%d ms", (tmp/96));
-			oled_print_message(&menuBuf[0], 2, zedboard_oled_params_0.base_address);
+			// oled_clear(zedboard_oled_params_0.base_address);
+			// sprintf(&menuBuf[0], "%d samples", (tmp));
+			// oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+			// sprintf(&menuBuf[0], "%d ms", (tmp/96));
+			// oled_print_message(&menuBuf[0], 2, zedboard_oled_params_0.base_address);
 			ui_draw();
 		  }
 
@@ -1425,11 +1425,11 @@ void *ui_input_reader (void *data) {
       			//UDP header is 8 bytes
       			tmp = get_instant_playout_time(eth_to_audio_base_0);
       			printf("The current audio playout time is:%f ms\n",(tmp/96.0));
-      			oled_clear(zedboard_oled_params_0.base_address);
-      			sprintf(&menuBuf[0], "TCO:%d ", (tmp));
-      			oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
-      			sprintf(&menuBuf[0], "%d ms", (tmp/96));
-      			oled_print_message(&menuBuf[0], 2, zedboard_oled_params_0.base_address);
+      			// oled_clear(zedboard_oled_params_0.base_address);
+      			// sprintf(&menuBuf[0], "TCO:%d ", (tmp));
+      			// oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+      			// sprintf(&menuBuf[0], "%d ms", (tmp/96));
+      			// oled_print_message(&menuBuf[0], 2, zedboard_oled_params_0.base_address);
       			ui_draw();
       		  }
       else if(strcmp (c,"getsynctime") == 0) {
@@ -1437,11 +1437,11 @@ void *ui_input_reader (void *data) {
 			//UDP header is 8 bytes
 			tmp = get_sync_time(eth_to_audio_base_0);
 			printf("The current audio sync time is:%f ms\n",(tmp/96.0));
-			oled_clear(zedboard_oled_params_0.base_address);
-			sprintf(&menuBuf[0], "TC:%d ", (tmp));
-			oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
-			sprintf(&menuBuf[0], "%d ms", (tmp/96));
-			oled_print_message(&menuBuf[0], 2, zedboard_oled_params_0.base_address);
+			// oled_clear(zedboard_oled_params_0.base_address);
+			// sprintf(&menuBuf[0], "TC:%d ", (tmp));
+			// oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+			// sprintf(&menuBuf[0], "%d ms", (tmp/96));
+			// oled_print_message(&menuBuf[0], 2, zedboard_oled_params_0.base_address);
 			ui_draw();
 		  }
       else if(strcmp (c,"getalle2a") == 0) {
@@ -1451,11 +1451,11 @@ void *ui_input_reader (void *data) {
     	  printf("All reg values for the Eth to audio block\n");
       			get_all_eth2audio(eth_to_audio_base_0);
       			printf("The current audio sync time is:%f ms\n",(tmp/96.0));
-      			oled_clear(zedboard_oled_params_0.base_address);
-      			sprintf(&menuBuf[0], "TC:%d ", (tmp));
-      			oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
-      			sprintf(&menuBuf[0], "%d ms", (tmp/96));
-      			oled_print_message(&menuBuf[0], 2, zedboard_oled_params_0.base_address);
+      			// oled_clear(zedboard_oled_params_0.base_address);
+      			// sprintf(&menuBuf[0], "TC:%d ", (tmp));
+      			// oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+      			// sprintf(&menuBuf[0], "%d ms", (tmp/96));
+      			// oled_print_message(&menuBuf[0], 2, zedboard_oled_params_0.base_address);
       			ui_draw();
       		  }
       else if(strcmp (c,"getrxtc") == 0) {
@@ -1464,11 +1464,11 @@ void *ui_input_reader (void *data) {
       			tmp =  get_rx_time_code(eth_to_audio_base_0);
       			printf("The current audio rxtc is:%d samples\n",(tmp));
       			printf("The current audio rxtc is:%f ms\n",(tmp/96.0));
-      			oled_clear(zedboard_oled_params_0.base_address);
-      			sprintf(&menuBuf[0], "rtc:%d smp", (tmp));
-      			oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
-      			sprintf(&menuBuf[0], "rtc:%d ms", (tmp/96));
-      			oled_print_message(&menuBuf[0], 2, zedboard_oled_params_0.base_address);
+      			// oled_clear(zedboard_oled_params_0.base_address);
+      			// sprintf(&menuBuf[0], "rtc:%d smp", (tmp));
+      			// oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+      			// sprintf(&menuBuf[0], "rtc:%d ms", (tmp/96));
+      			// oled_print_message(&menuBuf[0], 2, zedboard_oled_params_0.base_address);
       			ui_draw();
       		  }
 
@@ -1478,11 +1478,11 @@ void *ui_input_reader (void *data) {
 				tmp =  get_rx_time_code_eff(eth_to_audio_base_0);
 				printf("The current audio rxtceff is:%d samples\n",(tmp));
 				printf("The current audio rxtceff is:%f ms\n",(tmp/96.0));
-				oled_clear(zedboard_oled_params_0.base_address);
-				sprintf(&menuBuf[0], "rtc:%d smp", (tmp));
-				oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
-				sprintf(&menuBuf[0], "rtc:%d ms", (tmp/96));
-				oled_print_message(&menuBuf[0], 2, zedboard_oled_params_0.base_address);
+				// oled_clear(zedboard_oled_params_0.base_address);
+				// sprintf(&menuBuf[0], "rtc:%d smp", (tmp));
+				// oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+				// sprintf(&menuBuf[0], "rtc:%d ms", (tmp/96));
+				// oled_print_message(&menuBuf[0], 2, zedboard_oled_params_0.base_address);
 				ui_draw();
 			  }
 
@@ -1491,18 +1491,18 @@ void *ui_input_reader (void *data) {
 			//UDP header is 8 bytes
 			tmp =  get_rx_time_code_occ(eth_to_audio_base_0);
 			printf("The current audio rxtc is:%d samples\n",(tmp));
-			oled_clear(zedboard_oled_params_0.base_address);
-			sprintf(&menuBuf[0], "rtcocc:%d smp", (tmp));
-			oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+			// oled_clear(zedboard_oled_params_0.base_address);
+			// sprintf(&menuBuf[0], "rtcocc:%d smp", (tmp));
+			// oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
 
 			ui_draw();
 		  }
       else if(strcmp (c,"setlooplimit") == 0) {
           	  scanf ("%d",&tmp);
           	  set_loop_limit(eth_to_audio_base_0,tmp);
-          	  oled_clear(zedboard_oled_params_0.base_address);
-      		sprintf(&menuBuf[0], "%s:%5d", "LOOPLIM", (tmp));
-      		oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+          	//   oled_clear(zedboard_oled_params_0.base_address);
+      		// sprintf(&menuBuf[0], "%s:%5d", "LOOPLIM", (tmp));
+      		// oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
       		ui_draw();
             }
       else if(strcmp (c,"gettcvars") == 0) {
@@ -1532,9 +1532,9 @@ void *ui_input_reader (void *data) {
 //			tmp =  get_rx_time_code_occ(eth_to_audio_base_0);
 //			printf("The current audio rxtc occ is:%d\n",(tmp));
 
-			oled_clear(zedboard_oled_params_0.base_address);
-			sprintf(&menuBuf[0], "tsyncvars");
-			oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+			// oled_clear(zedboard_oled_params_0.base_address);
+			// sprintf(&menuBuf[0], "tsyncvars");
+			// oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
 
 			ui_draw();
 		  }
@@ -1543,9 +1543,9 @@ void *ui_input_reader (void *data) {
       			//UDP header is 8 bytes
       			tmp = get_instant_playout_reads(eth_to_audio_base_0);
       			printf("The current audio playout reads is:%d samples\n",(tmp));
-      			oled_clear(zedboard_oled_params_0.base_address);
-      			sprintf(&menuBuf[0], "%d samples", (tmp));
-      			oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+      			// oled_clear(zedboard_oled_params_0.base_address);
+      			// sprintf(&menuBuf[0], "%d samples", (tmp));
+      			// oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
       			ui_draw();
       		  }
       else if(strcmp (c,"getpoutw") == 0) {
@@ -1554,10 +1554,10 @@ void *ui_input_reader (void *data) {
       			tmp = get_instant_playout_writes(eth_to_audio_base_0);
       			printf("The current audio playout writes is:%d samples\n",(tmp));
 
-      			oled_clear(zedboard_oled_params_0.base_address);
-      			sprintf(&menuBuf[0], "%d samples", (tmp));
-      			oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
-      			oled_print_message(&menuBuf[1], 2, zedboard_oled_params_0.base_address);
+      			// oled_clear(zedboard_oled_params_0.base_address);
+      			// sprintf(&menuBuf[0], "%d samples", (tmp));
+      			// oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+      			// oled_print_message(&menuBuf[1], 2, zedboard_oled_params_0.base_address);
       			ui_draw();
       		  }
 
@@ -1568,19 +1568,19 @@ void *ui_input_reader (void *data) {
 				tmp = get_dac_fifo_occ(eth_to_audio_base_0);
 				printf("The current audio buf sample count is:%d samples\n",(tmp));
 
-				oled_clear(zedboard_oled_params_0.base_address);
-				sprintf(&menuBuf[0], "BUF OCC::");
-				sprintf(&menuBuf[1], "%d samples", (tmp));
-				oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
-				oled_print_message(&menuBuf[1], 2, zedboard_oled_params_0.base_address);
+				// oled_clear(zedboard_oled_params_0.base_address);
+				// sprintf(&menuBuf[0], "BUF OCC::");
+				// sprintf(&menuBuf[1], "%d samples", (tmp));
+				// oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+				// oled_print_message(&menuBuf[1], 2, zedboard_oled_params_0.base_address);
 				ui_draw();
 			  }
       else if(strcmp (c,"setcrwin") == 0) {
 
           	  set_buf_corr_window(eth_to_audio_base_0,tmp);
-          	  oled_clear(zedboard_oled_params_0.base_address);
-      		sprintf(&menuBuf[0], "%s:%5d", "POUDLY", (tmp));
-      		oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+          	//   oled_clear(zedboard_oled_params_0.base_address);
+      		// sprintf(&menuBuf[0], "%s:%5d", "POUDLY", (tmp));
+      		// oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
       		ui_draw();
             }
 
@@ -1589,18 +1589,18 @@ void *ui_input_reader (void *data) {
 			  sleep(1);
           	  set_buf_corr_on(eth_to_audio_base_0);
 			  printf("Toggle sample rate correction\n>");
-			  oled_clear(zedboard_oled_params_0.base_address);
-			  sprintf(&menuBuf[0], "%s", "SRCorr:ON");
-			  oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+			//   oled_clear(zedboard_oled_params_0.base_address);
+			//   sprintf(&menuBuf[0], "%s", "SRCorr:ON");
+			//   oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
 			  ui_draw();
 		  }
 
       else if ( strcmp (c, "setcoron") == 0){
     	  set_buf_corr_on(eth_to_audio_base_0);
           	  printf("Enable sample rate correction\n>");
-          	  oled_clear(zedboard_oled_params_0.base_address);
-          	  sprintf(&menuBuf[0], "%s", "SRCorr:ON");
-          	  oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+          	//   oled_clear(zedboard_oled_params_0.base_address);
+          	//   sprintf(&menuBuf[0], "%s", "SRCorr:ON");
+          	//   oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
           	  ui_draw();
             }
 
@@ -1609,18 +1609,18 @@ void *ui_input_reader (void *data) {
       else if ( strcmp (c, "setcoroff") == 0){
           	  clear_buf_corr(eth_to_audio_base_0);
 			  printf("Disable sample rate correction\n>");
-			  oled_clear(zedboard_oled_params_0.base_address);
-			  sprintf(&menuBuf[0], "%s", "SRCorr:OFF");
-			  oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+			//   oled_clear(zedboard_oled_params_0.base_address);
+			//   sprintf(&menuBuf[0], "%s", "SRCorr:OFF");
+			//   oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
 			  ui_draw();
 		  }
       else if ( strcmp (c, "gete2astatus") == 0){
     	  	  printf("Eth to Audio ststus is::\n>");
     	  	  get_e2a_status(eth_to_audio_base_0);
 
-			  oled_clear(zedboard_oled_params_0.base_address);
-			  sprintf(&menuBuf[0], "%s", "ETH2AUD:Status");
-			  oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+			//   oled_clear(zedboard_oled_params_0.base_address);
+			//   sprintf(&menuBuf[0], "%s", "ETH2AUD:Status");
+			//   oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
 			  ui_draw();
 		  }
 
@@ -1632,11 +1632,11 @@ void *ui_input_reader (void *data) {
       		read_eth_mac(full_udp_stack_ip_base_0, MAC_ID,&ip[0]);
       		//printf("\nMAC Address:");
 //      		      		   print_mac(tmp, ip);
-      		  oled_clear(zedboard_oled_params_0.base_address);
-      		sprintf(&menuBuf[0], "%s", menuitem[11]);
-      		oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
-      		sprintf(&menuBuf[0], "%s", ip);
-      		oled_print_message(&menuBuf[0], 2, zedboard_oled_params_0.base_address);
+      		//   oled_clear(zedboard_oled_params_0.base_address);
+      		// sprintf(&menuBuf[0], "%s", menuitem[11]);
+      		// oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+      		// sprintf(&menuBuf[0], "%s", ip);
+      		// oled_print_message(&menuBuf[0], 2, zedboard_oled_params_0.base_address);
 
       		  ui_draw();
       	}
@@ -1649,11 +1649,11 @@ void *ui_input_reader (void *data) {
       		  tmp=read_eth_param(full_udp_stack_ip_base_0, DEST_IP_ID);
       		printf("\nDest Ip Address:");
       		   print_ip(tmp, ip);
-      		  oled_clear(zedboard_oled_params_0.base_address);
-      		  sprintf(&menuBuf[0], "%s", menuitem[13]);
-      		  		oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
-      		  		sprintf(&menuBuf[0], "%s", ip);
-      		  		oled_print_message(&menuBuf[0], 2, zedboard_oled_params_0.base_address);
+      		//   oled_clear(zedboard_oled_params_0.base_address);
+      		//   sprintf(&menuBuf[0], "%s", menuitem[13]);
+      		//   		oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+      		//   		sprintf(&menuBuf[0], "%s", ip);
+      		//   		oled_print_message(&menuBuf[0], 2, zedboard_oled_params_0.base_address);
 
       		  ui_draw();
       	}
@@ -1661,11 +1661,11 @@ void *ui_input_reader (void *data) {
 
             		tmp = read_eth_param(full_udp_stack_ip_base_0, LOCAL_IP_ID);
             		printf("\nLocal Ip Address:");print_ip(tmp, &ip[0]);
-            		  oled_clear(zedboard_oled_params_0.base_address);
-            		sprintf(&menuBuf[0], "%s", menuitem[12]);
-            				oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
-            				sprintf(&menuBuf[0], "%s", ip);
-            				oled_print_message(&menuBuf[0], 2, zedboard_oled_params_0.base_address);
+            		//   oled_clear(zedboard_oled_params_0.base_address);
+            		// sprintf(&menuBuf[0], "%s", menuitem[12]);
+            		// 		oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+            		// 		sprintf(&menuBuf[0], "%s", ip);
+            		// 		oled_print_message(&menuBuf[0], 2, zedboard_oled_params_0.base_address);
 
             		  ui_draw();
             	}
@@ -1677,11 +1677,11 @@ void *ui_input_reader (void *data) {
                  		      		printf("\nGateway Ip Address:");
                  		      		  print_ip(tmp, ip);
 
-                 		  oled_clear(zedboard_oled_params_0.base_address);
-                 		sprintf(&menuBuf[0], "%s", menuitem[14]);
-                 				oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
-                 				sprintf(&menuBuf[0], "%s", ip);
-                 				oled_print_message(&menuBuf[0], 2, zedboard_oled_params_0.base_address);
+                 		//   oled_clear(zedboard_oled_params_0.base_address);
+                 		// sprintf(&menuBuf[0], "%s", menuitem[14]);
+                 		// 		oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+                 		// 		sprintf(&menuBuf[0], "%s", ip);
+                 		// 		oled_print_message(&menuBuf[0], 2, zedboard_oled_params_0.base_address);
 
                  		  ui_draw();
                  	}
@@ -1690,22 +1690,22 @@ void *ui_input_reader (void *data) {
       		  tmp=read_eth_param(full_udp_stack_ip_base_0, MASK_IP_ID);
       		printf("\nMask Ip Address:");
       		  print_ip(tmp, ip);
-      		  oled_clear(zedboard_oled_params_0.base_address);
-      		  sprintf(&menuBuf[0], "%s", menuitem[15]);
-      		  		oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
-      		  		sprintf(&menuBuf[0], "%s", ip);
-      		  		oled_print_message(&menuBuf[0], 2, zedboard_oled_params_0.base_address);
+      		//   oled_clear(zedboard_oled_params_0.base_address);
+      		//   sprintf(&menuBuf[0], "%s", menuitem[15]);
+      		//   		oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+      		//   		sprintf(&menuBuf[0], "%s", ip);
+      		//   		oled_print_message(&menuBuf[0], 2, zedboard_oled_params_0.base_address);
       		  ui_draw();
            }
 
             else if(strcmp (c,"getport") == 0) {
             	dest_port = read_eth_param(full_udp_stack_ip_base_0, DEST_PORT_ID);
             	printf("The port is:%d\n",dest_port);
-                    oled_clear(zedboard_oled_params_0.base_address);
-                    sprintf(&menuBuf[0], "%s", menuitem[16]);
-					oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
-					sprintf(&menuBuf[0], "%d", dest_port);
-					oled_print_message(&menuBuf[0], 2, zedboard_oled_params_0.base_address);
+                    // oled_clear(zedboard_oled_params_0.base_address);
+                    // sprintf(&menuBuf[0], "%s", menuitem[16]);
+					// oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+					// sprintf(&menuBuf[0], "%d", dest_port);
+					// oled_print_message(&menuBuf[0], 2, zedboard_oled_params_0.base_address);
                     ui_draw();
                   }
 
@@ -1713,18 +1713,18 @@ void *ui_input_reader (void *data) {
 
                           tmp = get_stream_plen(audio_to_eth_base_0);
                           printf("The udp payload size is:%d\n",tmp);
-                          oled_clear(zedboard_oled_params_0.base_address);
-                  		sprintf(&menuBuf[0], "%s%5d", menuitem[25], (tmp));
-                  		oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+                        //   oled_clear(zedboard_oled_params_0.base_address);
+                  		// sprintf(&menuBuf[0], "%s%5d", menuitem[25], (tmp));
+                  		// oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
                           ui_draw();
                         }
             else if(strcmp (c,"getporder") == 0) {
 
 				  tmp = get_stream_porder(eth_packet_sequencer_base_0);
 				  printf("The udp packet sequencer order is:%d\n",tmp);
-				  oled_clear(zedboard_oled_params_0.base_address);
-				sprintf(&menuBuf[0], "%s%5d", menuitem[26], (tmp));
-				oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+				//   oled_clear(zedboard_oled_params_0.base_address);
+				// sprintf(&menuBuf[0], "%s%5d", menuitem[26], (tmp));
+				// oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
 				  ui_draw();
 				}
             else if(strcmp (c,"getpdrop") == 0) {
@@ -1732,9 +1732,9 @@ void *ui_input_reader (void *data) {
 //				  tmp = get_pkts_dropped(packet_time_enforcer_base_0);
             	tmp = get_pkts_dropped(eth_packet_sequencer_base_0);
 				  printf("The number of packets dropped is:%u\n",tmp);
-				  oled_clear(zedboard_oled_params_0.base_address);
-				sprintf(&menuBuf[0], "%s%d", "NPD:", (tmp));
-				oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+				//   oled_clear(zedboard_oled_params_0.base_address);
+				// sprintf(&menuBuf[0], "%s%d", "NPD:", (tmp));
+				// oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
 				  ui_draw();
 				}
             else if(strcmp (c,"getpreplaced") == 0) {
@@ -1742,18 +1742,18 @@ void *ui_input_reader (void *data) {
             //				  tmp = get_pkts_dropped(packet_time_enforcer_base_0);
                         	tmp = get_pkts_replaced(eth_packet_sequencer_base_0);
             				  printf("The number of packets replaced is:%u\n",tmp);
-            				  oled_clear(zedboard_oled_params_0.base_address);
-            				sprintf(&menuBuf[0], "%s%d", "NPR:", (tmp));
-            				oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+            				//   oled_clear(zedboard_oled_params_0.base_address);
+            				// sprintf(&menuBuf[0], "%s%d", "NPR:", (tmp));
+            				// oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
             				  ui_draw();
             				}
             else if(strcmp (c,"getsqgs") == 0) {
 
 				  tmp = get_seq_gs(eth_packet_sequencer_base_0);
 				  printf("The udp packet sequencer gs is:%08x\n",tmp);
-				  oled_clear(zedboard_oled_params_0.base_address);
-				sprintf(&menuBuf[0], "%s%5d", "GST:", (tmp));
-				oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+				//   oled_clear(zedboard_oled_params_0.base_address);
+				// sprintf(&menuBuf[0], "%s%5d", "GST:", (tmp));
+				// oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
 				  ui_draw();
 				}
 			else if(strcmp (c,"getsqrx") == 0) {
@@ -1761,9 +1761,9 @@ void *ui_input_reader (void *data) {
 //				  tmp = get_pkts_dropped(packet_time_enforcer_base_0);
 				tmp = get_seq_pkts_rx(eth_packet_sequencer_base_0);
 				  printf("The number of packets sqrx is:%u\n",tmp);
-				  oled_clear(zedboard_oled_params_0.base_address);
-				sprintf(&menuBuf[0], "%s%d", "SRX:", (tmp));
-				oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+				//   oled_clear(zedboard_oled_params_0.base_address);
+				// sprintf(&menuBuf[0], "%s%d", "SRX:", (tmp));
+				// oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
 				  ui_draw();
 				}
 			else if(strcmp (c,"getsqtx") == 0) {//get_seq_pkts_rx
@@ -1771,9 +1771,9 @@ void *ui_input_reader (void *data) {
 //				  tmp = get_pkts_dropped(packet_time_enforcer_base_0);
 				tmp = get_seq_pkts_tx(eth_packet_sequencer_base_0);
 				  printf("The number of packets sqtx is:%u\n",tmp);
-				  oled_clear(zedboard_oled_params_0.base_address);
-				sprintf(&menuBuf[0], "%s%d", "STX:", (tmp));
-				oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+				//   oled_clear(zedboard_oled_params_0.base_address);
+				// sprintf(&menuBuf[0], "%s%d", "STX:", (tmp));
+				// oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
 				  ui_draw();
 				}
 			else if(strcmp (c,"getsqov") == 0) {//get_seq_pkts_rx
@@ -1781,9 +1781,9 @@ void *ui_input_reader (void *data) {
 			//				  tmp = get_pkts_dropped(packet_time_enforcer_base_0);
 							tmp = get_seq_pkts_ov(eth_packet_sequencer_base_0);
 							  printf("The number of packets sqov is:%u\n",tmp);
-							  oled_clear(zedboard_oled_params_0.base_address);
-							sprintf(&menuBuf[0], "%s%d", "SOV:", (tmp));
-							oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+							//   oled_clear(zedboard_oled_params_0.base_address);
+							// sprintf(&menuBuf[0], "%s%d", "SOV:", (tmp));
+							// oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
 							  ui_draw();
 							}
             else if(strcmp (c,"setptl1") == 0) {//spkt2pkt
@@ -1793,18 +1793,18 @@ void *ui_input_reader (void *data) {
 				//write_eth_param(full_udp_stack_ip_base_0, PKT_LEN_ID, ((tmp*3) +8));//+8 done in fpga
 				//write_audio_to_eth_param(audio_to_eth_base_0, PAYLEN_REG_ID, tmp*3);
 				set_spkt_to_pkt_delay_limit(packet_time_enforcer_base_0,tmp);//just sample clock counts no need to multiply by 2
-				oled_clear(zedboard_oled_params_0.base_address);
-				sprintf(&menuBuf[0], "Buffer2Drop:%d", (tmp));
-				oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+				// oled_clear(zedboard_oled_params_0.base_address);
+				// sprintf(&menuBuf[0], "Buffer2Drop:%d", (tmp));
+				// oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
 				ui_draw();
 			  }
 
             else if(strcmp (c,"setptpidl") == 0) {//spkt2pkt_locked
             				scanf ("%d",&tmp);
             				set_spkt_to_pkt_locked_delay_limit(packet_time_enforcer_base_0,tmp);//just sample clock counts no need to multiply by 2
-            				oled_clear(zedboard_oled_params_0.base_address);
-            				sprintf(&menuBuf[0], "BL2Drop:%d", (tmp));
-            				oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+            				// oled_clear(zedboard_oled_params_0.base_address);
+            				// sprintf(&menuBuf[0], "BL2Drop:%d", (tmp));
+            				// oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
             				ui_draw();
             			  }
 
@@ -1813,9 +1813,9 @@ void *ui_input_reader (void *data) {
 			  scanf ("%d",&tmp);//in milliseconds
 
 			  set_accum_pkt_to_pkt_delay_limit(packet_time_enforcer_base_0,tmp);//just sample clock counts no need to multiply by 2
-			  oled_clear(zedboard_oled_params_0.base_address);
-			  sprintf(&menuBuf[0], "BufferA2Drop:%d", (tmp));
-			  oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+			//   oled_clear(zedboard_oled_params_0.base_address);
+			//   sprintf(&menuBuf[0], "BufferA2Drop:%d", (tmp));
+			//   oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
 			  ui_draw();
 			}
 
@@ -1824,9 +1824,9 @@ void *ui_input_reader (void *data) {
 			  tmp = get_pkts_drop_spkt_limit(packet_time_enforcer_base_0);
 			  printf("The delayed pkt2pkt drop limit is:%d\n",(tmp));
 			  printf("The delayed pkt2pkt drop limit is:%u ms\n",(tmp/(96)));//just sample clock counts no need to multiply by 2
-			  oled_clear(zedboard_oled_params_0.base_address);
-			  sprintf(&menuBuf[0], "%s%10u", "PDLM:", (tmp));
-			  oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+			//   oled_clear(zedboard_oled_params_0.base_address);
+			//   sprintf(&menuBuf[0], "%s%10u", "PDLM:", (tmp));
+			//   oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
 			  ui_draw();
 			}
             else if(strcmp (c,"getptpidl") == 0) {
@@ -1834,9 +1834,9 @@ void *ui_input_reader (void *data) {
 			  tmp = get_pkts_drop_spkt_locked_limit(packet_time_enforcer_base_0);
 			  printf("The delayed pkt2pkt secondary drop limit is:%d\n",(tmp));
 			  printf("The delayed pkt2pkt secondary drop limit is:%u ms\n",(tmp/(96)));//just sample clock counts no need to multiply by 2
-			  oled_clear(zedboard_oled_params_0.base_address);
-			  sprintf(&menuBuf[0], "%s%10u", "PDSLM:", (tmp));
-			  oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+			//   oled_clear(zedboard_oled_params_0.base_address);
+			//   sprintf(&menuBuf[0], "%s%10u", "PDSLM:", (tmp));
+			//   oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
 			  ui_draw();
 			}
             else if(strcmp (c,"getptl2") == 0) {
@@ -1844,9 +1844,9 @@ void *ui_input_reader (void *data) {
 			  tmp = get_pkts_adrop_spkt_limit(packet_time_enforcer_base_0);
 			  printf("The delayed pkt running drop limit is:%d\n",(tmp));
 			  printf("The delayed pkt running drop limit is:%u ms\n",(tmp/(96)));
-			  oled_clear(zedboard_oled_params_0.base_address);
-			sprintf(&menuBuf[0], "%s%10u", "RDLM:", (tmp));
-			oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+			//   oled_clear(zedboard_oled_params_0.base_address);
+			// sprintf(&menuBuf[0], "%s%10u", "RDLM:", (tmp));
+			// oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
 			  ui_draw();
 			}
 
@@ -1854,9 +1854,9 @@ void *ui_input_reader (void *data) {
 
 			  tmp = get_pkts_ptrx_lock(packet_time_enforcer_base_0);
 			  printf("The packet timming unit lock status is:%08X\n",tmp);
-			  oled_clear(zedboard_oled_params_0.base_address);
-			sprintf(&menuBuf[0], "%s%d", "LOCK:", (tmp));
-			oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+			//   oled_clear(zedboard_oled_params_0.base_address);
+			// sprintf(&menuBuf[0], "%s%d", "LOCK:", (tmp));
+			// oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
 			  ui_draw();
 			}
 
@@ -1865,18 +1865,18 @@ void *ui_input_reader (void *data) {
 
             	pkt_to_pkt_locked_drop_enable(packet_time_enforcer_base_0);
             			  printf("The packet timming unit pid tatus is on.\n");
-            			  oled_clear(zedboard_oled_params_0.base_address);
-            			sprintf(&menuBuf[0], "%s", "PID:ON");
-            			oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+            			//   oled_clear(zedboard_oled_params_0.base_address);
+            			// sprintf(&menuBuf[0], "%s", "PID:ON");
+            			// oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
             			  ui_draw();
             			}
             else if(strcmp (c,"ptpidoff") == 0) {
 
                         	pkt_to_pkt_locked_drop_disable(packet_time_enforcer_base_0);
                         			  printf("The packet timming unit pid tatus is off.\n");
-                        			  oled_clear(zedboard_oled_params_0.base_address);
-                        			sprintf(&menuBuf[0], "%s", "PID:OFF");
-                        			oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+                        			//   oled_clear(zedboard_oled_params_0.base_address);
+                        			// sprintf(&menuBuf[0], "%s", "PID:OFF");
+                        			// oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
                         			  ui_draw();
                         			}
             else if(strcmp (c,"getptstatus") == 0) {
@@ -1885,9 +1885,9 @@ void *ui_input_reader (void *data) {
             			  tmp = get_pkts_pt_disable(packet_time_enforcer_base_0);
 
             			  printf("The packet timming unit status is:%08X\n",tmp==0?1:0);
-            			  oled_clear(zedboard_oled_params_0.base_address);
-            			sprintf(&menuBuf[0], "%s%d", "PBT:", (tmp));
-            			oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+            			//   oled_clear(zedboard_oled_params_0.base_address);
+            			// sprintf(&menuBuf[0], "%s%d", "PBT:", (tmp));
+            			// oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
             			  ui_draw();
             			}
 
@@ -1895,9 +1895,9 @@ void *ui_input_reader (void *data) {
 
 			  tmp = set_pkts_ptrx_lock(packet_time_enforcer_base_0, 1);
 			  printf("The packet timming unit lock status is:%08X\n",tmp);
-			  oled_clear(zedboard_oled_params_0.base_address);
-			sprintf(&menuBuf[0], "%s%10u", "LOCK:", (tmp));
-			oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+			//   oled_clear(zedboard_oled_params_0.base_address);
+			// sprintf(&menuBuf[0], "%s%10u", "LOCK:", (tmp));
+			// oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
 			  ui_draw();
 			}
 
@@ -1905,18 +1905,18 @@ void *ui_input_reader (void *data) {
 
             			  tmp = set_pkts_pt_accum(packet_time_enforcer_base_0, 1);
             			  printf("The packet timming unit accum status is:%08X\n",tmp);
-            			  oled_clear(zedboard_oled_params_0.base_address);
-            			sprintf(&menuBuf[0], "%s%10u", "ACCUM:", (tmp));
-            			oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+            			//   oled_clear(zedboard_oled_params_0.base_address);
+            			// sprintf(&menuBuf[0], "%s%10u", "ACCUM:", (tmp));
+            			// oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
             			  ui_draw();
             			}
             else if(strcmp (c,"clrptaccum") == 0) {
 
 			  tmp = set_pkts_pt_accum(packet_time_enforcer_base_0, 0);
 			  printf("The packet timming unit accum status is:%08X\n",tmp);
-			  oled_clear(zedboard_oled_params_0.base_address);
-			sprintf(&menuBuf[0], "%s%10u", "ACCUM:", (tmp));
-			oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+			//   oled_clear(zedboard_oled_params_0.base_address);
+			// sprintf(&menuBuf[0], "%s%10u", "ACCUM:", (tmp));
+			// oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
 			  ui_draw();
 			}
 
@@ -1925,9 +1925,9 @@ void *ui_input_reader (void *data) {
 
 			  tmp = get_pkts_pt_accum(packet_time_enforcer_base_0);
 			  printf("The packet timming unit accum status is:%08X\n",tmp);
-			  oled_clear(zedboard_oled_params_0.base_address);
-			sprintf(&menuBuf[0], "%s%10u", "ACCUM:", (tmp));
-			oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+			//   oled_clear(zedboard_oled_params_0.base_address);
+			// sprintf(&menuBuf[0], "%s%10u", "ACCUM:", (tmp));
+			// oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
 			  ui_draw();
 			}
 
@@ -1935,9 +1935,9 @@ void *ui_input_reader (void *data) {
 
 			  tmp = set_pkts_ptrx_lock(packet_time_enforcer_base_0, 0);
 			  printf("The packet timming unit lock status is:%u\n",tmp);
-			  oled_clear(zedboard_oled_params_0.base_address);
-			sprintf(&menuBuf[0], "%s%10u", "LOCK:", (tmp));
-			oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+			//   oled_clear(zedboard_oled_params_0.base_address);
+			// sprintf(&menuBuf[0], "%s%10u", "LOCK:", (tmp));
+			// oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
 			  ui_draw();
 			}
 
@@ -1945,18 +1945,18 @@ void *ui_input_reader (void *data) {
 
 				  tmp = get_stream_blen(eth_to_audio_base_0);
 				  printf("The audio rx buff sample count is:%d\n",tmp);
-				  oled_clear(zedboard_oled_params_0.base_address);
-				sprintf(&menuBuf[0], "%s%d", "RXBOCP:", (tmp));
-				oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+				//   oled_clear(zedboard_oled_params_0.base_address);
+				// sprintf(&menuBuf[0], "%s%d", "RXBOCP:", (tmp));
+				// oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
 				  ui_draw();
 				}
             else if(strcmp (c,"getbrdly") == 0) {
 
 			  tmp = get_stream_readout_delay(eth_to_audio_base_0);
 			  printf("The current audio rx buff readout delay is:%f ms\n",(tmp/96.0));
-			  oled_clear(zedboard_oled_params_0.base_address);
-			sprintf(&menuBuf[0], "%s%d", "BRDLY:", (tmp));
-			oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+			//   oled_clear(zedboard_oled_params_0.base_address);
+			// sprintf(&menuBuf[0], "%s%d", "BRDLY:", (tmp));
+			// oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
 			  ui_draw();
 			}
 
@@ -1964,9 +1964,9 @@ void *ui_input_reader (void *data) {
 
 		  tmp = get_stream_net_delay(packet_time_enforcer_base_0);
 		  printf("The current audio network delay is:%f ms\n",(tmp/96.0));
-		  oled_clear(zedboard_oled_params_0.base_address);
-		  sprintf(&menuBuf[0], "%s%d", "NETDLY:", (tmp));
-		  oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+		//   oled_clear(zedboard_oled_params_0.base_address);
+		//   sprintf(&menuBuf[0], "%s%d", "NETDLY:", (tmp));
+		//   oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
 		  ui_draw();
 		}
 
@@ -1974,9 +1974,9 @@ void *ui_input_reader (void *data) {
 
 		  tmp = get_stream_pktbuild_delay(packet_time_enforcer_base_0);
 		  printf("The current audio pkt build delay is:%f ms\n",(tmp/96.0));
-		  oled_clear(zedboard_oled_params_0.base_address);
-		  sprintf(&menuBuf[0], "%s%d", "PKTBUILD:", (tmp));
-		  oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+		//   oled_clear(zedboard_oled_params_0.base_address);
+		//   sprintf(&menuBuf[0], "%s%d", "PKTBUILD:", (tmp));
+		//   oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
 		  ui_draw();
 		}
 
@@ -1985,9 +1985,9 @@ void *ui_input_reader (void *data) {
 
 				  tmp = get_stream_spkt_delay(packet_time_enforcer_base_0);
 				  printf("The current audio pkt to pkt delay is:%f ms\n",(tmp/96.0));
-				  oled_clear(zedboard_oled_params_0.base_address);
-				  sprintf(&menuBuf[0], "%s%d", "PKTBUILD:", (tmp));
-				  oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+				//   oled_clear(zedboard_oled_params_0.base_address);
+				//   sprintf(&menuBuf[0], "%s%d", "PKTBUILD:", (tmp));
+				//   oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
 				  ui_draw();
 				}
 
@@ -1996,9 +1996,9 @@ void *ui_input_reader (void *data) {
 
 			  tmp = get_stream_accum_pkt_delay(packet_time_enforcer_base_0);
 			  printf("The current audio pkt accum delay is:%f ms\n",(tmp/96.0));
-			  oled_clear(zedboard_oled_params_0.base_address);
-			  sprintf(&menuBuf[0], "%s%d", "PKTBUILD:", (tmp));
-			  oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+			//   oled_clear(zedboard_oled_params_0.base_address);
+			//   sprintf(&menuBuf[0], "%s%d", "PKTBUILD:", (tmp));
+			//   oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
 			  ui_draw();
 			}
 
@@ -2010,9 +2010,9 @@ void *ui_input_reader (void *data) {
 			scanf ("%d",&tmp);
 		  tmp = set_stream_net_delay(packet_time_enforcer_base_0,tmp);
 		  printf("The current audio network delay is:%d sample counts\n",(tmp));
-		  oled_clear(zedboard_oled_params_0.base_address);
-		  sprintf(&menuBuf[0], "%s%d", "NETDLY:", (tmp));
-		  oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+		//   oled_clear(zedboard_oled_params_0.base_address);
+		//   sprintf(&menuBuf[0], "%s%d", "NETDLY:", (tmp));
+		//   oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
 		  ui_draw();
 		}
 
@@ -2020,9 +2020,9 @@ void *ui_input_reader (void *data) {
 			scanf ("%d",&tmp);
 		  tmp = set_stream_pktbuild_delay(packet_time_enforcer_base_0, tmp);
 		  printf("The current audio pkt build delay is:%d sample clocks\n",(tmp));
-		  oled_clear(zedboard_oled_params_0.base_address);
-		  sprintf(&menuBuf[0], "%s%d", "PKTBUILD:", (tmp));
-		  oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+		//   oled_clear(zedboard_oled_params_0.base_address);
+		//   sprintf(&menuBuf[0], "%s%d", "PKTBUILD:", (tmp));
+		//   oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
 		  ui_draw();
 		}
 
@@ -2032,18 +2032,18 @@ void *ui_input_reader (void *data) {
 
 					  tmp = set_pkts_pt_diff_status(packet_time_enforcer_base_0, 1);
 					  printf("The packet timming unit diff status is:%08X\n",tmp);
-					  oled_clear(zedboard_oled_params_0.base_address);
-					sprintf(&menuBuf[0], "%s%u", "ACCUM:", (tmp));
-					oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+					//   oled_clear(zedboard_oled_params_0.base_address);
+					// sprintf(&menuBuf[0], "%s%u", "ACCUM:", (tmp));
+					// oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
 					  ui_draw();
 					}
 		else if(strcmp (c,"ptdfoff") == 0) {
 
 		  tmp = set_pkts_pt_diff_status(packet_time_enforcer_base_0, 0);
 		  printf("The packet timming unit diff status is:%08X\n",tmp);
-		  oled_clear(zedboard_oled_params_0.base_address);
-		sprintf(&menuBuf[0], "%s%10u", "ACCUM:", (tmp));
-		oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+		//   oled_clear(zedboard_oled_params_0.base_address);
+		// sprintf(&menuBuf[0], "%s%10u", "ACCUM:", (tmp));
+		// oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
 		  ui_draw();
 		}
 
@@ -2052,9 +2052,9 @@ void *ui_input_reader (void *data) {
 
 		  tmp = get_pkts_pt_diff_status(packet_time_enforcer_base_0);
 		  printf("The packet timming unit diff status is:%08X\n",tmp);
-		  oled_clear(zedboard_oled_params_0.base_address);
-		sprintf(&menuBuf[0], "%s%u", "ACCUM:", (tmp));
-		oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+		//   oled_clear(zedboard_oled_params_0.base_address);
+		// sprintf(&menuBuf[0], "%s%u", "ACCUM:", (tmp));
+		// oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
 		  ui_draw();
 		}
 
@@ -2064,9 +2064,9 @@ void *ui_input_reader (void *data) {
 		  scanf ("%d",&tmp);//in milliseconds
 
 		  set_diff_pkt_to_pkt_delay_limit(packet_time_enforcer_base_0,tmp);//just sample clock counts no need to multiply by 2
-		  oled_clear(zedboard_oled_params_0.base_address);
-		sprintf(&menuBuf[0], "BufferA2Drop:%d", (tmp));
-		oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+		//   oled_clear(zedboard_oled_params_0.base_address);
+		// sprintf(&menuBuf[0], "BufferA2Drop:%d", (tmp));
+		// oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
 		  ui_draw();
 		}
 
@@ -2075,9 +2075,9 @@ void *ui_input_reader (void *data) {
 		  tmp = get_diff_pkt_to_pkt_delay_limit(packet_time_enforcer_base_0);
 		  printf("The delayed diff pkt2pkt drop limit is:%d\n",(tmp));
 		  printf("The delayed diff pkt2pkt drop limit is:%u ms\n",(tmp/(96)));//just sample clock counts no need to multiply by 2
-		  oled_clear(zedboard_oled_params_0.base_address);
-		sprintf(&menuBuf[0], "%s%u", "PDLM:", (tmp));
-		oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+		//   oled_clear(zedboard_oled_params_0.base_address);
+		// sprintf(&menuBuf[0], "%s%u", "PDLM:", (tmp));
+		// oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
 		  ui_draw();
 		}
 
@@ -2087,9 +2087,9 @@ void *ui_input_reader (void *data) {
 				  tmp = get_diff_pkt_to_pkt_delay(packet_time_enforcer_base_0);
 				  printf("The diff pkt2pkt drop is:%d\n",(tmp));
 				  printf("The diff pkt2pkt drop is:%u ms\n",(tmp/(96)));//just sample clock counts no need to multiply by 2
-				  oled_clear(zedboard_oled_params_0.base_address);
-				sprintf(&menuBuf[0], "%s%u", "PDLM:", (tmp));
-				oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+				//   oled_clear(zedboard_oled_params_0.base_address);
+				// sprintf(&menuBuf[0], "%s%u", "PDLM:", (tmp));
+				// oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
 				  ui_draw();
 				}
 
@@ -2098,9 +2098,9 @@ void *ui_input_reader (void *data) {
 			  //SET_STATUS("Enter payload length in 24 bit samples:\n");
 
 			  tmp = get_out_exec_state(eth_packet_sequencer_base_0);//in micro seconds
-			  oled_clear(zedboard_oled_params_0.base_address);
-			sprintf(&menuBuf[0], "OXecS=%d",tmp);
-			oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+			//   oled_clear(zedboard_oled_params_0.base_address);
+			// sprintf(&menuBuf[0], "OXecS=%d",tmp);
+			// oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
 			  ui_draw();
 		}
 
@@ -2109,9 +2109,9 @@ void *ui_input_reader (void *data) {
 					  //SET_STATUS("Enter payload length in 24 bit samples:\n");
 
 					  tmp = get_in_exec_state(eth_packet_sequencer_base_0);//in micro seconds
-					  oled_clear(zedboard_oled_params_0.base_address);
-					sprintf(&menuBuf[0], "IXecS=%d",tmp);
-					oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
+					//   oled_clear(zedboard_oled_params_0.base_address);
+					// sprintf(&menuBuf[0], "IXecS=%d",tmp);
+					// oled_print_message(&menuBuf[0], 1, zedboard_oled_params_0.base_address);
 					  ui_draw();
 				}
 
@@ -2220,22 +2220,22 @@ void *ui_input_reader (void *data) {
 		  set_volume (volume_control_base_1, params.vr_net*gain, CHANNEL_ID_R);
 		  update_leds();
 
-		  oled_clear(zedboard_oled_params_0.base_address);
-		sprintf(&menuBuf[0], "%s", "  BYE   ");
-		oled_print_message(&menuBuf[0], 0, zedboard_oled_params_0.base_address);
-		sprintf(&menuBuf[1], "%s-%s-", "Cantavi", "S");
-		oled_print_message(&menuBuf[0], 2, zedboard_oled_params_0.base_address);
+		//   oled_clear(zedboard_oled_params_0.base_address);
+		// sprintf(&menuBuf[0], "%s", "  BYE   ");
+		// oled_print_message(&menuBuf[0], 0, zedboard_oled_params_0.base_address);
+		// sprintf(&menuBuf[1], "%s-%s-", "Cantavi", "S");
+		// oled_print_message(&menuBuf[0], 2, zedboard_oled_params_0.base_address);
 		ui_exit ();
         SET_STATUS("Shutting down audio.\nClosing app\n");
         exit(0);
       }
       else {
         SET_STATUS("Invalid Command\n");
-        oled_clear(zedboard_oled_params_0.base_address);
-		sprintf(&menuBuf[0], "%s", "  INVALID  ");
-		oled_print_message(&menuBuf[0], 0, zedboard_oled_params_0.base_address);
-		sprintf(&menuBuf[0], "%s", "  Command  ");
-		oled_print_message(&menuBuf[0], 2, zedboard_oled_params_0.base_address);
+        // oled_clear(zedboard_oled_params_0.base_address);
+		// sprintf(&menuBuf[0], "%s", "  INVALID  ");
+		// oled_print_message(&menuBuf[0], 0, zedboard_oled_params_0.base_address);
+		// sprintf(&menuBuf[0], "%s", "  Command  ");
+		// oled_print_message(&menuBuf[0], 2, zedboard_oled_params_0.base_address);
 
         ui_draw();
       }
