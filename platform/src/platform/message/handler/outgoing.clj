@@ -14,6 +14,10 @@
   (log/debug :outgoing (str "Unsubscribing from " (keys topics)))
   (.unsubscribe mqtt topics))
 
+(defmethod outgoing :teleporter.msg/info [{:message/keys [topic body]
+                                           :keys [mqtt]}]
+  (.publish! mqtt topic body))
+
 (defmethod outgoing :default [message]
   (let [msg-type (:message/type message)]
     (throw (ex-info (str "No message handler exist for message type " msg-type) message))))
