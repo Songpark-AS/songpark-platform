@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="Leiningen: ez-database:0.8.1">
-    <CLASSES>
-      <root url="jar://$MAVEN_REPOSITORY$/ez-database/ez-database/0.8.1/ez-database-0.8.1.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>
