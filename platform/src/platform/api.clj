@@ -4,13 +4,13 @@
             [platform.message.handler.incoming :as handler.incoming]
             [platform.message.handler.outgoing :as handler.outgoing]))
 
-(def ^:private store (atom nil))
+(defonce ^:private store (atom nil))
 
 (defn send-message! [msg]
   (let [api @store
         injections (-> api
                        (select-keys (:injection-ks api))
-                       (assoc :api api))]    
+                       (assoc :api api))]
     (.send-message! (:messenger injections) msg)))
 
 (defrecord ApiManager [injection-ks started? mqtt]
@@ -35,3 +35,11 @@
 
 (defn api-manager [settings]
   (map->ApiManager settings))
+
+
+
+
+
+(comment
+
+  )

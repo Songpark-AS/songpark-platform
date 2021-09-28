@@ -3,8 +3,7 @@
             [taoensso.timbre :as log]
             [songpark.common.taxonomy.teleporter]
             [platform.db.store :as db]
-            [platform.api :refer [send-message!]]
-            [platform.message.handler.outgoing :as handler]))
+            [platform.api :refer [send-message!]]))
 
 (defn- ns-uuid<- [name]
   (uuid/v5 uuid/+namespace-url+ name))

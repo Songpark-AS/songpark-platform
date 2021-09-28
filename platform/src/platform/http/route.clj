@@ -3,6 +3,7 @@
             #_[platform.api.locale :as api.locale]
             [platform.api.teleporter :as api.teleporter]
             [platform.api.jam :as api.jam]
+            [platform.api.app :as api.app]
             [platform.http.html :refer [home]]
             [platform.http.middleware :as middleware :refer [wrap-authn
                                                              wrap-authz]]
@@ -114,6 +115,12 @@
          :delete {:responses {200 {:body :http/empty?}}
                   :parameters {:body (spec/keys :req [:teleporter/mac])}
                   :handler #'api.teleporter/terminate}}]]
+      ["/app"
+       {:swagger {:tags ["app"]}}
+       [""
+        {:get {:responses {200 {:body any? #_(spec/keys :req [:teleporter/uuid
+                                                              :teleporter/nickname])}}               
+               :handler #'api.app/connect}}]]
       ["/jam"
        {:swagger {:tags ["jam"]}}
        [""
