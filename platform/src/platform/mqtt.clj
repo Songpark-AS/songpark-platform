@@ -2,7 +2,7 @@
   (:require [com.stuartsierra.component :as component]
             [cognitect.transit :as transit]
             [taoensso.timbre :as log]
-            [songpark.common.protocol.mqtt :refer [IMqttManager]]
+            [songpark.common.protocol.mqtt.manager :as protocol.mqtt.manager]
             [platform.mqtt.client :as mqtt.client]
             [songpark.common.communication :refer [write-handlers]]
             [platform.message :refer [handle-message]])
@@ -52,7 +52,7 @@
             (.disconnect (:client this)))
           (assoc this :started? false))))
 
-  IMqttManager
+  protocol.mqtt.manager/IMqttManager
   (subscribe [this topics]
     (subscribe* this topics))
   (unsubscribe [this topics]
@@ -62,7 +62,3 @@
 
 (defn mqtt-manager [settings]
   (map->MQTTManager settings))
-
-
-
-

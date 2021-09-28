@@ -1,7 +1,7 @@
 (ns platform.mqtt.client
   (:require [clojurewerkz.machine-head.client :as mh]
             [taoensso.timbre :as log]
-            [songpark.common.protocol.mqtt :refer [IMqttClient]]))
+            [songpark.common.protocol.mqtt.client :as protocol.mqtt.client]))
 
 
 (def ^:private default-options
@@ -19,7 +19,7 @@
       (merge {:opts connect-options})))
 
 (defrecord MqttClient [config client]
-  IMqttClient
+  protocol.mqtt.client/IMqttClient
   (connect [this]
     ;; only used for when/if client was disconnected after initial creation
     (log/info "Connecting to broker")
