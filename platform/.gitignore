@@ -2,4 +2,4 @@
 .vscode/
 .lein-repl-history
 pom.xml
-.lsp/
+.lsp/target/*

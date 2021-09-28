@@ -14,7 +14,7 @@
 (defn stop-server [server]
   (.stop server))
 
-(defrecord HTTPServer [started? server-settings server database store aws #_google]
+(defrecord HTTPServer [started? server-settings server]
   component/Lifecycle
   (start [this]
     (if started?
@@ -22,12 +22,11 @@
       (do (log/info "Starting HTTPServer")
           (let [session-backend (backends/session {:unauthorized-handler unauthorized-handler})
                 server (create-server server-settings
-                                      {:store store
+                                      {;;:store store
                                        :authz.backend/session session-backend
                                        :http/cookies (:http/cookies server-settings)
                                        :frontend (:frontend config)
-                                       :songpark/data {:database database
-                                                          :aws aws}})]
+                                       :songpark/data {}})]
             (assoc this
                    :started? true
                    :server server)))))

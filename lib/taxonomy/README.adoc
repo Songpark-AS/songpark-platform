@@ -1,7 +1,0 @@
-# taxonomy
-
-Taxonomy library for the Kompetensia project. Gather all specs here.
-
-## License
-
-Copyright © 2020 Kompetensia

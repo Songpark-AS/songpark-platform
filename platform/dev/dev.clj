@@ -1,7 +1,7 @@
 (ns dev
   (:require [platform.init :as init]
-            [platform.test.util :refer [seed-db!]]
-            [ez-database.core :as db]
+            #_[platform.test.util :refer [seed-db!]]
+            #_[ez-database.core :as db]
             [taoensso.timbre :as log]))
 
 (defn restart
@@ -16,14 +16,15 @@
   (init/stop)
   (init/init))
 
-(defn reseed
-  ";; seed database"
-  []
-  (let [db (get-in @init/system [:database])]
-    (seed-db! db)))
+#_(defn reseed
+    ";; seed database"
+    []
+    (let [db (get-in @init/system [:database])]
+      (seed-db! db)))
 
-(comment
+(comment  
   ;; stop and start songpark
+  (init/stop)
   (restart)
 
   ;; seed database
@@ -32,4 +33,5 @@
   ;; how to quickly test something in the database
   (let [db (get-in @init/system [:database])]
     (db/query db {:select [:*] :from [:assignment_assignment]}))
+
   )
