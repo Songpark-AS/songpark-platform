@@ -11,7 +11,7 @@
         injections (-> api
                        (select-keys (:injection-ks api))
                        (assoc :api api))]
-    (.send-message! (:messenger injections) msg)))
+    (.send-message! (:message-service injections) msg)))
 
 (defrecord ApiManager [injection-ks started? mqtt]
   component/Lifecycle
@@ -42,4 +42,8 @@
 
 (comment
 
+
   )
+
+
+

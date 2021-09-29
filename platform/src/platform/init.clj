@@ -21,11 +21,11 @@
                   :config core-config
                   :http-server (http.server/http-server (:http config))
                   :mqtt-manager (mqtt/mqtt-manager (:mqtt config))
-                  :messenger-service (component/using (message/message-service
-                                                       {:injection-ks [:mqtt]})
-                                                      {:mqtt :mqtt-manager})
-                  :api-manager (component/using (api/api-manager {:injection-ks [:messenger]})
-                                                {:messenger :messenger-service})]
+                  :message-service (component/using (message/message-service
+                                                     {:injection-ks [:mqtt]})
+                                                    {:mqtt :mqtt-manager})
+                  :api-manager (component/using (api/api-manager {:injection-ks [:message-service]})
+                                                [:message-service])]
                  extra-components))))
 
 (defonce system (atom nil))

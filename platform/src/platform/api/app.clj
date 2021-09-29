@@ -15,12 +15,36 @@
                  (db/rd [:teleporter]))]        
     (if-not (empty? tps)
       {:status 200
-       :body (first (map #(update-in random-tps [(rand-int 3)]
-                                     assoc
-                                     :teleporter/mac (:teleporter/mac %)
-                                     :teleporter/uuid (:teleporter/uuid %)) tps))}
+       :body (->> (repeatedly 2 #(rand-nth random-tps))
+                  (map-indexed (fn [idx m]
+                                 (merge (nth tps idx) m)))         
+                  (apply merge random-tps)
+                  shuffle)}
       {:status 400
        :body {:error/message "No available teleporters"}})))
 
 
 
+(comment
+
+  (first (map #(update-in (random-teleporters 7) [(rand-int 7)]
+                          assoc
+                          :teleporter/mac (:teleporter/mac %)
+                          :teleporter/uuid (:teleporter/uuid %)) (map (fn [[k v]]
+                                                                        (merge v {:teleporter/mac k}))
+                                                                      (db/rd [:teleporter]))))
+  
+
+
+  
+  (let [tps (map (fn [[k v]]
+                   (merge v {:teleporter/mac k}))
+                 (db/rd [:teleporter]))
+        rtp (random-teleporters 7)]
+    (->> (repeatedly 2 #(rand-nth rtp))
+         (map-indexed (fn [idx m]
+                        (merge (nth tps idx) m)))         
+         (apply merge rtp)
+         shuffle))
+
+  )

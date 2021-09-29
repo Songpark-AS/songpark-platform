@@ -8,16 +8,16 @@
 (defonce ^:private store (atom nil))
 
 (defn handle-message [msg]
-  (let [messenger @store
-        injections (-> messenger
-                       (select-keys (:injection-ks messenger))
-                       (assoc :messenger messenger))]    
+  (let [message-service @store
+        injections (-> message-service
+                       (select-keys (:injection-ks message-service))
+                       (assoc :message-service message-service))]    
     (handler.incoming/incoming (merge msg injections))))
 
-(defn send-message!* [messenger msg]
-  (let [injections (-> messenger
-                       (select-keys (:injection-ks messenger))
-                       (assoc :messenger messenger))]
+(defn send-message!* [message-service msg]
+  (let [injections (-> message-service
+                       (select-keys (:injection-ks message-service))
+                       (assoc :message-service message-service))]
     (handler.outgoing/outgoing (merge msg injections))))
 
 (defrecord MessageService [injection-ks started? mqtt]
