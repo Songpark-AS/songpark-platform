@@ -26,7 +26,7 @@
   (let [uuids (-> parameters :body)
         jam-id (uuid/v4)]
     (db/wr [:jam jam-id] (->> uuids (map :teleporter/uuid)))
-    (if uuids
+    (if-not (empty? uuids)
       (do
         (doseq  [topic (keys (jam-topics jam-id))]
           (send-message! {:message/type :teleporter.msg/info
