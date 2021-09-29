@@ -18,6 +18,9 @@
                                            :keys [mqtt]}]
   (.publish! mqtt topic body))
 
-(defmethod outgoing :default [message]
-  (let [msg-type (:message/type message)]
-    (throw (ex-info (str "No message handler exist for message type " msg-type) message))))
+(defmethod outgoing :default [{:message/keys [type] :as message}]
+  (throw
+   (ex-info (str "No message handler defined for message type " type) message)))
+
+
+

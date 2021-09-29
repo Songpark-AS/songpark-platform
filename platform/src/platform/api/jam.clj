@@ -26,15 +26,13 @@
   (let [uuids (-> parameters :body)
         jam-id (uuid/v4)]
     (db/wr [:jam jam-id] (->> uuids (map :teleporter/uuid)))
-    (log/debug ::jam-after-dbwr (db/rd [:jam]))
     (if uuids
       (do
-        (log/debug :uuids uuids)
         (doseq  [topic (keys (jam-topics jam-id))]
-          (log/debug ::topic topic)
           (send-message! {:message/type :teleporter.msg/info
                           :message/topic topic 
-                          :message/body {:jam/uuid jam-id}}))
+                          :message/body {:jam/status true
+                                         :jam/topic jam-id}}))
         {:status 200
          :body {:jam/uuid jam-id}})
       {:status 400

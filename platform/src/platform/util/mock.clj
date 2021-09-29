@@ -2,7 +2,7 @@
   (:require [clj-uuid :as uuid]))
 
 (defn nickname []
-  (let [nouns #{"Hope" "Dream" "Party" "Jam"}
+  (let [nouns ["Hope" "Dream" "Party" "Jam"]
         persons ["Mathias" "Achim" "Magnus" "Thor_Atle" "Christian" "Jan_William" "Sindre" "Ronny" "Emil" "Kenneth" "Thanks" "Alf-Gunnar" "Daniel"]
         person (rand-nth persons)
         person-last-letter (clojure.string/join (take-last 1 person))
@@ -20,3 +20,9 @@
 (defn random-teleporters [n]
   (let [nicks (->> (distinct (nicknames (* n 10))) (take n))]
     (mapv #(teleporter-factory %) nicks)))
+
+(comment
+  
+
+  
+  )
