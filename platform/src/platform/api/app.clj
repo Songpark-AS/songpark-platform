@@ -7,47 +7,31 @@
             [platform.api :refer [send-message!]]
             [platform.message.handler.outgoing :as handler]))
 
+(defn- unique-teleporters [tps n]
+  (let [rtp (random-teleporters n)
+        rtp-m (reduce-kv (fn [m _ v] (assoc m (:teleporter/uuid v) v)) {} rtp)
+        sel-rtp (take (count tps) (shuffle rtp))
+        rtp-m2 (apply (partial dissoc rtp-m) (into #{} (map :teleporter/uuid sel-rtp)))]
+    (->> sel-rtp
+         (map-indexed (fn [idx m]
+                        (merge (nth tps idx) m)))
+         (concat (vals rtp-m2))
+         shuffle)))
+
 ;; Highly ad hoc!
 (defn connect [request]
-  (let [random-tps (random-teleporters 7)
-        tps (map (fn [[k v]]
+  (let [tps (map (fn [[k v]]
                    (merge v {:teleporter/mac k}))
                  (db/rd [:teleporter]))]        
     (if-not (empty? tps)
       {:status 200
-       :body (->> (repeatedly 2 #(rand-nth random-tps))
-                  (map-indexed (fn [idx m]
-                                 (merge (nth tps idx) m)))         
-                  (apply merge random-tps)
-                  shuffle)}
+       :body (unique-teleporters tps 7)}
       {:status 400
        :body {:error/message "No available teleporters"}})))
 
 
 
 (comment
-
-  (first (map #(update-in (random-teleporters 7) [(rand-int 7)]
-                          assoc
-                          :teleporter/mac (:teleporter/mac %)
-                          :teleporter/uuid (:teleporter/uuid %)) (map (fn [[k v]]
-                                                                        (merge v {:teleporter/mac k}))
-                                                                      (db/rd [:teleporter]))))
   
-
-
   
-  (let [tps (map (fn [[k v]]
-                   (merge v {:teleporter/mac k}))
-                 (db/rd [:teleporter]))
-        rtp (random-teleporters 7)]
-    (->> (take 2 (shuffle rtp))
-         (map-indexed (fn [idx m]
-                        (merge (nth tps idx) m)))         
-         (apply merge rtp)
-         shuffle
-         (filter :teleporter/mac)
-         (map :teleporter/uuid)
-         ))
-
   )
