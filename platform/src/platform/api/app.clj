@@ -41,10 +41,13 @@
                    (merge v {:teleporter/mac k}))
                  (db/rd [:teleporter]))
         rtp (random-teleporters 7)]
-    (->> (repeatedly 2 #(rand-nth rtp))
+    (->> (take 2 (shuffle rtp))
          (map-indexed (fn [idx m]
                         (merge (nth tps idx) m)))         
          (apply merge rtp)
-         shuffle))
+         shuffle
+         (filter :teleporter/mac)
+         (map :teleporter/uuid)
+         ))
 
   )
