@@ -1,13 +1,17 @@
 (ns platform.init
-  (:require [platform.config :refer [config]]
+  (:require [songpark.common.impl.message.service :as message]
+            [songpark.common.impl.mqtt.manager :as mqtt]
+            [com.stuartsierra.component :as component]
+            [taoensso.timbre :as log]
+            [platform.config :refer [config]]
             [platform.db.store :refer [rd wr]]
             [platform.http.server :as http.server]
             [platform.logger :as logger]
-            [platform.message :as message]
-            [platform.mqtt :as mqtt]
+            #_[platform.message :as message]
+            #_[platform.mqtt :as mqtt]            
             [platform.api :as api]
-            [com.stuartsierra.component :as component]
-            [taoensso.timbre :as log]))
+            [platform.message.handler.incoming :as handler.incoming]
+            [platform.message.handler.outgoing :as handler.outgoing]))
 
 (defn- system-map [extra-components]
   (let [;; logger and config are started this way so that we can ensure
@@ -22,7 +26,9 @@
                   :http-server (http.server/http-server (:http config))
                   :mqtt-manager (mqtt/mqtt-manager (:mqtt config))
                   :message-service (component/using (message/message-service
-                                                     {:injection-ks [:mqtt]})
+                                                     {:injection-ks [:mqtt]
+                                                      :handlers {:incoming handler.incoming/incoming
+                                                                 :outgoing handler.outgoing/outgoing}})
                                                     {:mqtt :mqtt-manager})
                   :api-manager (component/using (api/api-manager {:injection-ks [:message-service]})
                                                 [:message-service])]

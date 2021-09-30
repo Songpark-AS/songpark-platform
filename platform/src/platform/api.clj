@@ -1,8 +1,6 @@
 (ns platform.api
   (:require [com.stuartsierra.component :as component]
-            [taoensso.timbre :as log]
-            [platform.message.handler.incoming :as handler.incoming]
-            [platform.message.handler.outgoing :as handler.outgoing]))
+            [taoensso.timbre :as log]))
 
 (defonce ^:private store (atom nil))
 

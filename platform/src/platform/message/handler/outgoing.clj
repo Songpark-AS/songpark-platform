@@ -16,7 +16,7 @@
 
 (defmethod outgoing :teleporter.msg/info [{:message/keys [topic body]
                                            :keys [mqtt]}]
-  (.publish! mqtt topic body))
+  (.publish mqtt topic body))
 
 (defmethod outgoing :default [{:message/keys [type] :as message}]
   (throw
