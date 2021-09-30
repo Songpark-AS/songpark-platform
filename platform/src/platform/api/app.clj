@@ -14,7 +14,7 @@
         rtp-m2 (apply (partial dissoc rtp-m) (into #{} (map :teleporter/uuid sel-rtp)))]
     (->> sel-rtp
          (map-indexed (fn [idx m]
-                        (merge (nth tps idx) m)))
+                        (merge (nth tps idx) (select-keys m [:teleporter/nickname]))))         
          (concat (vals rtp-m2))
          shuffle)))
 
@@ -32,6 +32,18 @@
 
 
 (comment
+  (map (fn [[k v]]
+         (merge v {:teleporter/mac k}))
+       (db/rd [:teleporter]))
   
-  
+  (let [tps (map (fn [[k v]]
+                   (merge v {:teleporter/mac k}))
+                 (db/rd [:teleporter]))]
+    (->> (unique-teleporters tps 7)
+         (map :teleporter/uuid)))
+
+  (unique-teleporters (map (fn [[k v]]
+                             (merge v {:teleporter/mac k}))
+                           (db/rd [:teleporter])) 6)
+
   )
