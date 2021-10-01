@@ -6,7 +6,7 @@
             [taoensso.timbre.appenders.3rd-party.sentry :refer [sentry-appender]]
             [vlaaad.reveal.ext :as rx]))
 
-(defn reaveal-tap-fn [data]
+(defn reveal-tap-fn [data]
   (tap> (rx/as data
                (rx/raw-string
                 (format "[%1$tH:%1$tM:%1$tS.%1$tL %2$s:%3$s]: %4$s"
