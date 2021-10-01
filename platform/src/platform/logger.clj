@@ -4,9 +4,9 @@
             [taoensso.timbre :as log]
             [taoensso.timbre.appenders.3rd-party.rotor :refer [rotor-appender]]
             [taoensso.timbre.appenders.3rd-party.sentry :refer [sentry-appender]]
-            [vlaaad.reveal.ext :as rx]))
+            #_[vlaaad.reveal.ext :as rx]))
 
-(defn reveal-tap-fn [data]
+#_(defn reveal-tap-fn [data]
   (tap> (rx/as data
                (rx/raw-string
                 (format "[%1$tH:%1$tM:%1$tS.%1$tL %2$s:%3$s]: %4$s"
@@ -33,7 +33,7 @@
                                                                    :backlog 100})}
                                           (if (:log? sentry-settings)
                                             {:raven (sentry-appender (:dsn sentry-settings))})
-                                          (if reveal?
+                                          #_(if reveal?
                                             {:println {:enabled? false}
                                              :reveal {:enabled? true
                                                       :fn reveal-tap-fn}}))})
@@ -53,7 +53,3 @@
 
 
 
-(commment
- (merge {:a 1} {:b 2} {:c 3})
-
- )
