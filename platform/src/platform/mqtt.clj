@@ -66,7 +66,7 @@
 
 
 (comment
-
-
+  (<-transit {:message/type :teleporter.msg/info
+              :message/body "This is a message"})
   
   )

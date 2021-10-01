@@ -51,5 +51,3 @@
 (defn logger [settings]
   (map->Logger settings))
 
-
-
