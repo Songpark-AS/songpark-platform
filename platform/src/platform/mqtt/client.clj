@@ -5,10 +5,10 @@
 
 
 (def ^:private default-options
-  {:on-connect-complete (fn [& args] (println "Connection completed." args))
-   :on-connection-lost (fn [& args] (println "Connection lost." args))
-   :on-delivery-complete (fn [& args] (println "Delivery completed." args))
-   :on-unhandled-message (fn [& args] (println "Unhandled message encountered." args))})
+  {:on-connect-complete (fn [& args] (log/debug ::MqttClient "Connection completed." args))
+   :on-connection-lost (fn [& args] (log/debug ::MqttClient "Connection lost." args))
+   :on-delivery-complete (fn [& args] (log/debug ::MqttClient "Delivery completed." args))
+   :on-unhandled-message (fn [& args] (log/debug ::MqttClient "Unhandled message encountered." args))})
 
 (defn- gen-uri-string [{:keys [scheme host port]}]
   (str scheme "://" host ":" port))
@@ -45,6 +45,7 @@
 
 (defn create [config]
   (log/debug "Connecting to broker")
+  (log/debug (gen-paho-options config))
   (map->MqttClient {:config config
                     :client (mh/connect (gen-uri-string config)
                                         (gen-paho-options config))}))

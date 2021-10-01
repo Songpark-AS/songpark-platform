@@ -40,7 +40,7 @@
     (if started?
       this      
       (do
-        (log/info "Starting MQTTManager")          
+        (log/debug "Starting MQTTManager")
         (assoc this
                :started? true
                :client (mqtt.client/create config)))))
@@ -48,7 +48,7 @@
   (stop [this]
     (if-not started?
       this
-      (do (log/info "Stopping MQTTManager")
+      (do (log/debug "Stopping MQTTManager")
           (when (.connected? (:client this))            
             (.disconnect (:client this)))
           (assoc this :started? false))))

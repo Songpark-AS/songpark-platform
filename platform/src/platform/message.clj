@@ -20,7 +20,7 @@
                        (assoc :message-service message-service))]
     (handler.outgoing/outgoing (merge msg injections))))
 
-(defrecord MessageService [injection-ks started? mqtt]
+(defrecord MessageService [injection-ks started? mqtt-manager]
   component/Lifecycle
   (start [this]
     (if started?
@@ -46,3 +46,10 @@
 
 (defn message-service [settings]
   (map->MessageService settings))
+
+
+
+(comment
+  (prn @store)
+
+  )
