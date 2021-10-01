@@ -1,14 +1,14 @@
 (ns platform.init
-  (:require [songpark.common.impl.message.service :as message]
-            [songpark.common.impl.mqtt.manager :as mqtt]
+  (:require #_[songpark.common.impl.message.service :as message]
+            #_[songpark.common.impl.mqtt.manager :as mqtt]
             [com.stuartsierra.component :as component]
             [taoensso.timbre :as log]
             [platform.config :refer [config]]
             [platform.db.store :refer [rd wr]]
             [platform.http.server :as http.server]
             [platform.logger :as logger]
-            #_[platform.message :as message]
-            #_[platform.mqtt :as mqtt]            
+            [platform.message :as message]
+            [platform.mqtt :as mqtt]            
             [platform.api :as api]
             [platform.message.handler.incoming :as handler.incoming]
             [platform.message.handler.outgoing :as handler.outgoing]))
@@ -26,10 +26,8 @@
                   :http-server (http.server/http-server (:http config))
                   :mqtt-manager (mqtt/mqtt-manager (:mqtt config))
                   :message-service (component/using (message/message-service
-                                                     {:injection-ks [:mqtt]
-                                                      :handlers {:incoming handler.incoming/incoming
-                                                                 :outgoing handler.outgoing/outgoing}})
-                                                    {:mqtt :mqtt-manager})
+                                                     {:injection-ks [:mqtt-manager]})
+                                                    [:mqtt-manager])
                   :api-manager (component/using (api/api-manager {:injection-ks [:message-service]})
                                                 [:message-service])]
                  extra-components))))

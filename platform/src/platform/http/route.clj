@@ -110,7 +110,8 @@
        {:swagger {:tags ["teleporter"]}}
        [""
         {:put {:responses {200 {:body (spec/keys :req [:teleporter/uuid])}}
-               :parameters {:body (spec/keys :req [:teleporter/mac])}
+               :parameters {:body (spec/keys :req [:teleporter/mac
+                                                   :teleporter/nickname])}
                :handler #'api.teleporter/init}
          :delete {:responses {200 {:body :http/empty?}}
                   :parameters {:body (spec/keys :req [:teleporter/mac])}

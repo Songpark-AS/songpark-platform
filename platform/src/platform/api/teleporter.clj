@@ -9,13 +9,13 @@
   (uuid/v5 uuid/+namespace-url+ name))
 
 (defn init [{:keys [data parameters]}]
-  (let [mac (-> parameters :body :teleporter/mac)
+  (let [{:teleporter/keys [mac nickname]} (:body parameters)
         uuid (ns-uuid<- mac)]
     (if mac
       (do
         (db/wr [:teleporter mac] {:teleporter/uuid uuid
-                                  ;; TODO: deal with nickname
-                                  :teleporter/nickname nil})
+                                  :teleporter/mac mac
+                                  :teleporter/nickname nickname})
         (send-message! {:message/type :platform.cmd/subscribe
                         :message/topics {(str uuid) 0}})
         {:status 200
@@ -28,6 +28,7 @@
 
 
 (comment
-
+  (log/debug (db/rd [:teleporter]))
+  
 
   )

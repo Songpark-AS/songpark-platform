@@ -5,7 +5,7 @@
 (defmulti incoming :message/type)
 
 (defmethod incoming :teleporter.cmd/disconnect [{:message/keys [topic]
-                                                 :keys [message-service mqtt]}]
+                                                 :keys [message-service mqtt-manager]}]
   ;; remove teleporter from global store
   ;; send a service response to topic (might be jam)
   )
@@ -22,11 +22,7 @@
 
 
 (comment
-  (let [{:message/keys [type]
-         :keys [message-service mqtt]} {:message/type :test
-                                        :message-service {}
-                                        :mqtt {}}]
-    [type message-service mqtt])
+
   
 
   )
