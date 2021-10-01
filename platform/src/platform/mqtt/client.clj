@@ -14,7 +14,7 @@
   (str scheme "://" host ":" port))
 
 (defn- gen-paho-options [{:keys [client-id options connect-options]}]
-  (-> {:client-id client-id}
+  (-> {:client-id (or client-id (mh/generate-id))}
       (merge (or options default-options))
       (merge {:opts connect-options})))
 
@@ -22,7 +22,7 @@
   protocol.mqtt.client/IMqttClient
   (connect [this]
     ;; only used for when/if client was disconnected after initial creation
-    (log/info "Connecting to broker")
+    (log/debug "Connecting to broker")
     (.connect (:client this)))
 
   (connected? [this]
@@ -32,7 +32,7 @@
     (mh/publish (:client this) topic message))
 
   (disconnect [this]
-    (log/info "Disconnecting from broker")
+    (log/debug "Disconnecting from broker")
     (mh/disconnect (:client this)))
 
   (subscribe [this topics on-message]
@@ -44,7 +44,7 @@
       (mh/unsubscribe (:client this) topics))))
 
 (defn create [config]
-  (log/info "Connecting to broker")
+  (log/debug "Connecting to broker")
   (map->MqttClient {:config config
                     :client (mh/connect (gen-uri-string config)
                                         (gen-paho-options config))}))

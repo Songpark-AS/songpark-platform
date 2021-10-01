@@ -36,18 +36,18 @@
 
 (defn stop []
   (when-not (nil? @system)
-    (log/info "Shutting down Songpark Platform")
+    (log/debug "Shutting down Songpark Platform")
     (try (component/stop @system)
          (catch Throwable t
            (log/error "Tried to shut down Songpark Platform. Got" t)))
-    (log/info "Songpark Platform is now shut down")
+    (log/debug "Songpark Platform is now shut down")
     (reset! system nil)))
 
 (defn init [& extra-components]
   (if @system
-    (log/info "Songpark Platform already running")
+    (log/debug "Songpark Platform already running")
     (do
-      (log/info "Starting Songpark Platform")
+      (log/debug "Starting Songpark Platform")
       ;; start the system
       (reset! system (component/start (system-map extra-components)))
 
