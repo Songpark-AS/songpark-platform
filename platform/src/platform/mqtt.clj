@@ -23,13 +23,12 @@
     (catch Exception e (do (log/warn "Message not in transit format")
                            (apply str (map char b))))))
 
-(defn on-message [^String topic _ ^bytes payload]
-  (->> (merge {:message/meta {:origin :mqtt :topic topic}}  
-              (<-transit payload)
-              {:mqtt-manager mqtt-manager})
-       (.send-message! (:message-service @store))))
-
 (defn- subscribe* [{:keys [client] :as mqtt-manager} topics]
+  (letfn [(on-message [^String topic _ ^bytes payload]
+            (->> (merge {:message/meta {:origin :mqtt :topic topic}}  
+                        (<-transit payload)
+                        {:mqtt-manager mqtt-manager})
+                 (.send-message! (:message-service @store))))])
   (.subscribe client topics on-message))
 
 (defn- unsubscribe* [{:keys [client] :as mqtt-manager} topics]
