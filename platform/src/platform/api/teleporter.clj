@@ -17,7 +17,7 @@
                                   :teleporter/mac mac
                                   :teleporter/nickname nickname})
         (send-message! {:message/type :platform.cmd/subscribe
-                        :message/topics {(str uuid) 0}})
+                        :message/body {:mqtt/topics {(str uuid) 0}}})
         {:status 200
          :body {:teleporter/uuid uuid}})
       {:status 400
@@ -29,6 +29,12 @@
 
 (comment
   (log/debug (db/rd [:teleporter]))
-  
+
+
+  (db/rd [:teleporter])
+
+  (init {:data nil
+         :parameters {:body {:teleporter/mac "78:8a:20:fe:79:be"
+                             :teleporter/nickname "zedboard-01"}}})
 
   )

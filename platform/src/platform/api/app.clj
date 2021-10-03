@@ -4,8 +4,7 @@
             [songpark.common.taxonomy.teleporter]
             [platform.util.mock :refer [random-teleporters]]
             [platform.db.store :as db]
-            [platform.api :refer [send-message!]]
-            [platform.message.handler.outgoing :as handler]))
+            [platform.api :refer [send-message!]]))
 
 (defn- unique-teleporters [tps n]
   (let [rtp (random-teleporters (- n (count tps)))]
@@ -25,5 +24,6 @@
 
 
 (comment
-  (vec (concat (random-teleporters 5) [1 2 3]))
+
+  
   )

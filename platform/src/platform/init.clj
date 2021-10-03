@@ -1,7 +1,5 @@
 (ns platform.init
-  (:require #_[songpark.common.impl.message.service :as message]
-            #_[songpark.common.impl.mqtt.manager :as mqtt]
-            [com.stuartsierra.component :as component]
+  (:require [com.stuartsierra.component :as component]
             [taoensso.timbre :as log]
             [platform.config :refer [config]]
             [platform.db.store :refer [rd wr]]
@@ -9,9 +7,7 @@
             [platform.logger :as logger]
             [platform.message :as message]
             [platform.mqtt :as mqtt]            
-            [platform.api :as api]
-            [platform.message.handler.incoming :as handler.incoming]
-            [platform.message.handler.outgoing :as handler.outgoing]))
+            [platform.api :as api]))
 
 (defn- system-map [extra-components]
   (let [;; logger and config are started this way so that we can ensure
@@ -24,19 +20,21 @@
            (into [:logger logger
                   :config core-config
                   :http-server (http.server/http-server (:http config))
-                  :mqtt-manager (mqtt/mqtt-manager (:mqtt config))
-                  :message-service (component/using (message/message-service
-                                                     {:injection-ks [:mqtt-manager]})
-                                                    [:mqtt-manager])
-                  :api-manager (component/using (api/api-manager {:injection-ks [:message-service]})
-                                                [:message-service])]
+                  :message-service (message/message-service (:message config))
+                  :mqtt-manager (component/using
+                                 (mqtt/mqtt-manager (merge (:mqtt config)
+                                                           {:injection-ks [:message-service]}))
+                                 [:message-service])                  
+                  :api-manager (component/using (api/api-manager
+                                                 {:injection-ks [:message-service :mqtt-manager]})
+                                                [:message-service :mqtt-manager])]
                  extra-components))))
 
 (defonce system (atom nil))
 
 (defn stop []
   (when-not (nil? @system)
-    (log/debug "Shutting down Songpark Platform")
+    (log/info "Shutting down Songpark Platform")
     (try (component/stop @system)
          (catch Throwable t
            (log/error "Tried to shut down Songpark Platform. Got" t)))
@@ -45,9 +43,9 @@
 
 (defn init [& extra-components]
   (if @system
-    (log/debug "Songpark Platform already running")
+    (log/info "Songpark Platform already running")
     (do
-      (log/debug "Starting Songpark Platform")
+      (log/info "Starting Songpark Platform")
       ;; start the system
       (reset! system (component/start (system-map extra-components)))
 

@@ -22,8 +22,8 @@
                  [digest "1.4.9"]
 
                  ;; http
-                 [ring "1.8.0"]
-                 [ring/ring-jetty-adapter "1.8.0"]
+                 [ring "1.9.4"]
+                 [ring/ring-jetty-adapter "1.9.4"]
                  [ring-cors "0.1.13"]
 
                  ;; data format
@@ -38,7 +38,7 @@
 
                  ;; logging
                  [com.taoensso/timbre "5.1.2"]
-                 [com.fzakaria/slf4j-timbre "0.3.12"]
+                 [com.fzakaria/slf4j-timbre "0.3.21"]
                  [raven-clj "1.6.0"]                 
                  
                  ;; configuration

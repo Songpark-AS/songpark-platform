@@ -15,6 +15,7 @@
                                           "org.opensaml.*"}
                                   :allow #{"*"}}})
   (init/stop)
+  (Thread/sleep 500)
   (init/init))
 
 #_(defn reseed
@@ -27,12 +28,14 @@
   ;; stop and start songpark
   (init/stop)
   (restart)
-
+  
   ;; seed database
-  (reseed)
+  ;;(reseed)
 
   ;; how to quickly test something in the database
   (let [db (get-in @init/system [:database])]
     (db/query db {:select [:*] :from [:assignment_assignment]}))
+
+
   
   )

@@ -5,13 +5,14 @@
 (defonce ^:private store (atom nil))
 
 (defn send-message! [msg]
+  (log/debug ::send-message! msg)
   (let [api @store
         injections (-> api
                        (select-keys (:injection-ks api))
                        (assoc :api api))]
-    (.send-message! (:message-service injections) msg)))
+    (.send-message! (:message-service injections) (merge msg injections))))
 
-(defrecord ApiManager [injection-ks started? mqtt]
+(defrecord ApiManager [injection-ks started? message-service mqtt-manager]
   component/Lifecycle
   (start [this]
     (if started?
@@ -35,12 +36,10 @@
   (map->ApiManager settings))
 
 
-
-
-
 (comment
-
-
+  (-> (select-keys @store (:injection-ks @store)))
+  (send-message! {:message/type :platform.cmd/subscribe
+                  :message/body {:mqtt/topics {"4577bed8-08b7-54cf-ae89-2061ef434b2f" 0}}})
   )
 
 

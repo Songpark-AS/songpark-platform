@@ -23,9 +23,9 @@
           (let [session-backend (backends/session {:unauthorized-handler unauthorized-handler})
                 server (create-server server-settings
                                       {;;:store store
-                                       :authz.backend/session session-backend
+                                       ;;:authz.backend/session session-backend
                                        :http/cookies (:http/cookies server-settings)
-                                       :frontend (:frontend config)
+                                       ;;:frontend (:frontend config)
                                        :songpark/data {}})]
             (assoc this
                    :started? true
