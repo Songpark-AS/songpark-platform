@@ -37,10 +37,9 @@
                  ;; [com.taoensso/carmine "2.19.1"]
 
                  ;; logging
-                 [com.taoensso/timbre "4.10.0"]
+                 [com.taoensso/timbre "5.1.2"]
                  [com.fzakaria/slf4j-timbre "0.3.12"]
-                 [raven-clj "1.6.0"]
-                 ;; [vlaaad/reveal "1.3.221"]
+                 [raven-clj "1.6.0"]                 
                  
                  ;; configuration
                  [cprop "0.1.11"]

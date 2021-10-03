@@ -2,8 +2,7 @@
                           :join? false
                           :http/cookies {:http-only true}}}
  :logger {:sentry-settings {:log? false
-                            :dsn ""}
-          :reveal? false}
+                            :dsn ""}}
  :mqtt {:config {:scheme "tcp"
                  :host "127.0.0.1"
                  :port 1883

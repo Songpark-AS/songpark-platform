@@ -9,10 +9,11 @@
   []
   ;; set the log level to info or jetty will spam your REPL console,
   ;; significantly slowing down responses
-  (log/merge-config! {:level        :debug
-                      :ns-blacklist ["org.eclipse.jetty.*"
-                                     "io.grpc.netty.shaded.io.netty.*"
-                                     "org.opensaml.*"]})
+  (log/merge-config! {:min-level :debug
+                      :ns-filter {:deny #{"org.eclipse.jetty.*"
+                                          "io.grpc.netty.shaded.io.netty.*"
+                                          "org.opensaml.*"}
+                                  :allow #{"*"}}})
   (init/stop)
   (init/init))
 
@@ -33,5 +34,5 @@
   ;; how to quickly test something in the database
   (let [db (get-in @init/system [:database])]
     (db/query db {:select [:*] :from [:assignment_assignment]}))
-
+  
   )
