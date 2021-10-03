@@ -23,7 +23,6 @@
           (let [new-this (assoc this
                                 :started? true)]
             (reset! store new-this)
-            (log/info ::MessageService new-this)
             new-this))))
   
   (stop [this]
