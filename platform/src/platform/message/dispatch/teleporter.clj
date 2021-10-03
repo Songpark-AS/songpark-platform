@@ -2,6 +2,8 @@
   (:require [platform.message.dispatch.interface :as message]
             [taoensso.timbre :as log]))
 
+
+
 (defmethod message/dispatch :teleporter.cmd/disconnect [{:message/keys [body]
                                                          :keys [message-service mqtt-manager]}]
   ;; remove teleporter from global store

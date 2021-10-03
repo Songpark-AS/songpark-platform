@@ -17,7 +17,7 @@
                                   :teleporter/mac mac
                                   :teleporter/nickname nickname})
         (send-message! {:message/type :platform.cmd/subscribe
-                        :message/body {:mqtt/topics {(str uuid) 0}}})
+                        :message/meta {:mqtt/topics {(str uuid) 0}}})
         {:status 200
          :body {:teleporter/uuid uuid}})
       {:status 400

@@ -7,11 +7,11 @@
             [platform.api :refer [send-message!]]))
 
 
-(defn- jam-topics [jam-id]
+(defn- members [jam-id]
   (let [uuids (db/rd [:jam jam-id])]
     (->> uuids
-         (map #(hash-map (str %) 0))
-         (into {}))))
+         (mapv #(str %)))))
+
 
 ;; on connection, the frontend sends a request to start
 ;; a jam session with a given collection of teleporter uuids.
@@ -28,11 +28,12 @@
     (db/wr [:jam jam-id] (->> uuids (map :teleporter/uuid)))
     (if-not (empty? uuids)
       (do
-        (doseq  [topic (keys (jam-topics jam-id))]
-          (send-message! {:message/type :teleporter.msg/info
-                          :message/topic topic 
-                          :message/body {:jam/status true
-                                         :jam/topic jam-id}}))
+        (send-message! {:message/type :jam.cmd/start
+                        :message/body {:jam/status true
+                                       :jam/topic (str jam-id)
+                                       :jam/members (members jam-id)}
+                        :message/meta {:mqtt/topic (str jam-id)
+                                       :origin :platform}})
         {:status 200
          :body {:jam/uuid jam-id}})
       {:status 400
@@ -43,6 +44,8 @@
     (db/wr [:jam] dissoc jam-id)
     {:status 200
      :body ""}))
+
+
 
 (comment
   (let [jam-id (first (keys (db/rd [:jam])))]

@@ -2,10 +2,9 @@
   (:require [platform.message.dispatch.interface :as message]
             [taoensso.timbre :as log]            ))
 
-(defmethod message/dispatch :platform.cmd/subscribe [{:message/keys [body]
+(defmethod message/dispatch :platform.cmd/subscribe [{:message/keys [meta]
                                                       :keys [mqtt-manager] :as message}]
-  (log/debug (:client mqtt-manager))
-  (let [topics (:mqtt/topics body)]
+  (let [topics (:mqtt/topics meta)]
     (log/debug :dispatch (str "Subscribing to " (keys topics)))
     (.subscribe mqtt-manager topics)))
 

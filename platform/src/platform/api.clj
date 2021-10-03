@@ -5,7 +5,6 @@
 (defonce ^:private store (atom nil))
 
 (defn send-message! [msg]
-  (log/debug ::send-message! msg)
   (let [api @store
         injections (-> api
                        (select-keys (:injection-ks api))
@@ -39,7 +38,7 @@
 (comment
   (-> (select-keys @store (:injection-ks @store)))
   (send-message! {:message/type :platform.cmd/subscribe
-                  :message/body {:mqtt/topics {"4577bed8-08b7-54cf-ae89-2061ef434b2f" 0}}})
+                  :message/meta {:mqtt/topics {"4577bed8-08b7-54cf-ae89-2061ef434b2f" 0}}})
   )
 
 

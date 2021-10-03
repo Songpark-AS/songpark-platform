@@ -28,8 +28,8 @@
             (->> (merge {:message/meta {:origin :mqtt :topic topic}}  
                         (<-transit payload)
                         {:mqtt-manager mqtt-manager})
-                 (.send-message! (:message-service @store))))])
-  (.subscribe client topics on-message))
+                 (.send-message! (:message-service @store))))]
+    (.subscribe client topics on-message)))
 
 (defn- unsubscribe* [{:keys [client] :as mqtt-manager} topics]
   (.unsubscribe client topics))

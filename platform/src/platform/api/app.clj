@@ -25,5 +25,7 @@
 
 (comment
 
+  (db/rd [:teleporter])
+  (db/rd [:jam]) 
   
   )

@@ -8,7 +8,6 @@
 (defonce ^:private store (atom nil))
 
 (defn send-message!* [message-service msg]
-  (log/debug ::send-message!* msg)
   (let [injections (-> message-service
                        (select-keys (:injection-ks message-service))
                        (assoc :message-service message-service))]
