@@ -124,7 +124,7 @@
       ["/jam"
        {:swagger {:tags ["jam"]}}
        [""
-        {:put {:responses {200 {:body :jam/uuid}}
+        {:put {:responses {200 {:body :jam/response}}
                :parameters {:body :teleporter/uuids}
                :handler #'api.jam/connect}
          :delete {:responses {200 {:body :http/empty?}}

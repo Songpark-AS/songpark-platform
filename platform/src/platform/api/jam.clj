@@ -35,7 +35,8 @@
                         :message/meta {:mqtt/topic (str jam-id)
                                        :origin :platform}})
         {:status 200
-         :body {:jam/uuid jam-id}})
+         :body {:jam/uuid jam-id
+                :jam/status true}})
       {:status 400
        :body {:error/message "Invalid: No members in jam"}})))
 

@@ -15,7 +15,6 @@
                                           "org.opensaml.*"}
                                   :allow #{"*"}}})
   (init/stop)
-  (Thread/sleep 500)
   (init/init))
 
 #_(defn reseed
@@ -28,7 +27,6 @@
   ;; stop and start songpark
   (init/stop)
   (restart)
-  
   ;; seed database
   ;;(reseed)
 
