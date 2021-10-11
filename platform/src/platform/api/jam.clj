@@ -42,7 +42,7 @@
 
 (defn stop [{:keys [data parameters]}]
   (let [jam-id (-> parameters :body :jam/uuid)
-        res (->> (db/wr [:jam] dissoc jam-id) :jam keys (filter #{jam-id}))]        
+        res (->> (db/wr [:jam] jam-id dissoc) :jam keys (filter #{jam-id}))]        
     (if (empty? res)
       {:status 200
        :body ""}
@@ -53,8 +53,7 @@
 
 (comment
   (let [jam-id (first (keys (db/rd [:jam])))]
-    (keys (jam-topics jam-id))
-    )
+    (keys (jam-topics jam-id)))
 
   (db/rd [:teleporter])
   (db/rd [:jam])
