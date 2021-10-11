@@ -109,10 +109,12 @@
       ["/teleporter"
        {:swagger {:tags ["teleporter"]}}
        [""
-        {:put {:responses {200 {:body (spec/keys :req [:teleporter/uuid])}}
+        {:put {:responses {200 {:body (spec/keys :req [:teleporter/uuid])}
+                           400 {:body :error/error}}
                :parameters {:body :teleporter/init}
                :handler #'api.teleporter/init}
-         :delete {:responses {200 {:body :http/empty?}}
+         :delete {:responses {200 {:body :http/empty?}
+                              400 {:body :error/error}}
                   :parameters {:body (spec/keys :req [:teleporter/mac])}
                   :handler #'api.teleporter/terminate}}]]
       ["/app"
@@ -124,10 +126,11 @@
       ["/jam"
        {:swagger {:tags ["jam"]}}
        [""
-        {:put {:responses {200 {:body :jam/response}}
+        {:put {:responses {201 {:body :jam/response}
+                           400 {:body :error/error}}
                :parameters {:body :teleporter/uuids}
                :handler #'api.jam/start}
-         :delete {:responses {200 {:body :http/empty?}
+         :delete {:responses {204 {:body :http/empty?}
                               400 {:body :error/error}}
                   :parameters {:body (spec/keys :req [:jam/uuid])}
                   :handler #'api.jam/stop}}]]
