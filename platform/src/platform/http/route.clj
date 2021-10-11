@@ -127,7 +127,8 @@
         {:put {:responses {200 {:body :jam/response}}
                :parameters {:body :teleporter/uuids}
                :handler #'api.jam/start}
-         :delete {:responses {200 {:body :http/empty?}}
+         :delete {:responses {200 {:body :http/empty?}
+                              400 {:body :error/error}}
                   :parameters {:body (spec/keys :req [:jam/uuid])}
                   :handler #'api.jam/stop}}]]
       ]]

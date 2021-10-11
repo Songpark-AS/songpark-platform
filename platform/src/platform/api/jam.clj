@@ -40,6 +40,9 @@
       {:status 400
        :body {:error/message "Invalid: No members in jam"}})))
 
+;; Does not check whether or not the jam actually
+;; exists, so it will return 200 no matter what. It
+;; will however delete the jam if it exists.
 (defn stop [{:keys [data parameters]}]
   (let [jam-id (-> parameters :body :jam/uuid)
         res (->> (db/wr [:jam] jam-id dissoc) :jam keys (filter #{jam-id}))]        
@@ -54,9 +57,10 @@
 (comment
   (let [jam-id (first (keys (db/rd [:jam])))]
     (keys (jam-topics jam-id)))
-
+  
   (db/rd [:teleporter])
-  (db/rd [:jam])
-
+  (db/rd [:jam])  
+  
   )
+
 
