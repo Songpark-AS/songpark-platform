@@ -126,10 +126,10 @@
        [""
         {:put {:responses {200 {:body :jam/response}}
                :parameters {:body :teleporter/uuids}
-               :handler #'api.jam/connect}
+               :handler #'api.jam/start}
          :delete {:responses {200 {:body :http/empty?}}
                   :parameters {:body (spec/keys :req [:jam/uuid])}
-                  :handler #'api.jam/disconnect}}]]
+                  :handler #'api.jam/stop}}]]
       ]]
 
     {:exception pretty/exception
