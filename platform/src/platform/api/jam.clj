@@ -43,7 +43,7 @@
 (defn stop [{:keys [data parameters]}]
   (let [jam-id (-> parameters :body :jam/uuid)
         res (->> (db/wr [:jam] dissoc jam-id) :jam keys (filter #{jam-id}))]        
-    (if-not (empty? res)
+    (if (empty? res)
       {:status 200
        :body ""}
       {:status 400
