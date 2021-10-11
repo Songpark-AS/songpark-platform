@@ -34,7 +34,7 @@
                                        :jam/members (members jam-id)}
                         :message/meta {:mqtt/topic (str jam-id)
                                        :origin :platform}})
-        {:status 200
+        {:status 201
          :body {:jam/uuid jam-id
                 :jam/status true}})
       {:status 400
@@ -47,7 +47,7 @@
   (let [jam-id (-> parameters :body :jam/uuid)
         res (->> (db/wr [:jam] jam-id dissoc) :jam keys (filter #{jam-id}))]        
     (if (empty? res)
-      {:status 200
+      {:status 204
        :body ""}
       {:status 400
        :body {:error/message "Could not stop jam"}})))
