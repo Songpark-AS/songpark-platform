@@ -38,7 +38,7 @@ spec:
               secretKeyRef:
                 name: songpark-mqtt
                 key: mqtt-username
-          - name: MQTT__CONFIG_CONNECT_OPTIONS__PASSWORD
+          - name: MQTT__CONFIG__CONNECT_OPTIONS__PASSWORD
             valueFrom:
               secretKeyRef:
                 name: songpark-mqtt
