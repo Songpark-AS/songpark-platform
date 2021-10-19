@@ -23,12 +23,22 @@ spec:
         ports:
         - containerPort: 3000
         env:
-          - name: MQTT_USERNAME
+          - name: MQTT__CONFIG__HOST
+            valueFrom:
+              secretKeyRef:
+                name: songpark-mqtt
+                key: mqtt-host
+          - name: MQTT__CONFIG__PORT
+            valueFrom:
+              secretKeyRef:
+                name: songpark-mqtt
+                key: mqtt-port
+          - name: MQTT__CONFIG__CONNECT_OPTIONS__USERNAME
             valueFrom:
               secretKeyRef:
                 name: songpark-mqtt
                 key: mqtt-username
-          - name: MQTT_PASSWORD
+          - name: MQTT__CONFIG_CONNECT_OPTIONS__PASSWORD
             valueFrom:
               secretKeyRef:
                 name: songpark-mqtt
