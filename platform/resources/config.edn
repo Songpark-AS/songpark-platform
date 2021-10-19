@@ -1,3 +1,14 @@
 {:http {:server-settings {:port 3000
-                          :join? true
-                          :http/cookies {:http-only true}}}}
+                          :join? false
+                          :http/cookies {:http-only true}}}
+ :logger {:sentry-settings {:log? false
+                            :dsn ""}}
+ :mqtt {:config {:scheme "tcp"
+                 :host "127.0.0.1"
+                 :port 1883
+                 :client-id "songpark-platform-be7a"
+                 :connect-options {:auto-reconnect true
+                                   :keep-alive-interval 60
+                                   ;; :username "tpx"
+                                   ;;:password "SecretPass"
+                                   }}}}
