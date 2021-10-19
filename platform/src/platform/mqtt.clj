@@ -9,6 +9,7 @@
 
 
 (defonce ^:private store (atom nil))
+(defonce ^:private counter (atom 0))
 
 ;; transit reader/writer from/to string, since
 ;; mosquitto does not know anything about transit
@@ -35,7 +36,8 @@
   (.unsubscribe client topics))
 
 (defn- publish* [{:keys [client] :as mqtt-manager} topic msg]
-  (.publish client topic (->transit msg)))
+  (.publish client topic (->transit (assoc msg :message/id @counter)))
+  (swap! counter inc))
 
 (defrecord MQTTManager [injection-ks started? config message-service]
   component/Lifecycle
