@@ -9,17 +9,17 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: songpark-platform-app
+      app: songpark-platform
   replicas: 1
   template:
     metadata:
       labels:
-        app: songpark-platform-app
+        app: songpark-platform
     spec:
       containers:
       - image: 523581807964.dkr.ecr.eu-central-1.amazonaws.com/songpark-platform:latest
         imagePullPolicy: Always
-        name: songpark-platform-app
+        name: songpark-platform
         ports:
         - containerPort: 3000
         env:
@@ -54,7 +54,7 @@ spec:
     targetPort: 3000
     protocol: TCP
   selector:
-    app: songpark-platform-app
+    app: songpark-platform
   type: LoadBalancer
 ---
 apiVersion: networking.k8s.io/v1
@@ -79,6 +79,6 @@ spec:
         pathType: ImplementationSpecific
         backend:
           service:
-            name: songpark-platform-app
+            name: songpark-platform
             port:
               number: 80
