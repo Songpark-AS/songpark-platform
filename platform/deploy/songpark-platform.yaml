@@ -1,0 +1,74 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: songpark-platform
+  namespace: internal
+  labels:
+    customer: songpark
+    purpose: production
+spec:
+  selector:
+    matchLabels:
+      app: songpark-platform-app
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: songpark-platform-app
+    spec:
+      containers:
+      - image: 523581807964.dkr.ecr.eu-central-1.amazonaws.com/songpark-platform:latest
+        imagePullPolicy: Always
+        name: songpark-platform-app
+        ports:
+        - containerPort: 3000
+        env:
+          - name: MQTT_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: songpark-mqtt
+                key: mqtt-username
+          - name: MQTT_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: songpark-mqtt
+                key: mqtt-password
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: songpark-platform
+spec:
+  ports:
+  - port: 80
+    targetPort: 3000
+    protocol: TCP
+  selector:
+    app: songpark-platform-app
+  type: LoadBalancer
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: songpark-platform
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    cert-manager.k8s.io/issuer: "letsencrypt-prod"
+    kubernetes.io/tls-acme: "true"
+
+spec:
+  tls:
+  - hosts:
+    - spp.inonit.no
+    secretName: spp-inonit-no-tls
+  rules:
+  - host: spp.inonit.no
+    http:
+      paths:
+      - path: /
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: songpark-platform-app
+            port:
+              number: 80
