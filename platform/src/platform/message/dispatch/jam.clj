@@ -14,6 +14,7 @@
     (send-message! {:message/type :platform.cmd/subscribe
                     :message/meta {:mqtt/topics {topic 0}}})
     (doseq [member members]
+      (log/debug "Publishing :jam.cmd/start to " member)
       (.publish mqtt-manager member {:message/type :jam.cmd/start
                                      :message/body body
                                      :message/meta {:mqtt/topic member
