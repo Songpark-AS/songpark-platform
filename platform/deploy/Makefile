@@ -12,6 +12,9 @@ tag: build aws-pw
 push: tag
 	docker push 523581807964.dkr.ecr.eu-central-1.amazonaws.com/songpark-platform:latest
 
+remove:
+	kubectl delete -f songpark-platform.yaml
+
 deploy: tag
 	kubectl apply -f songpark-platform.yaml
 
