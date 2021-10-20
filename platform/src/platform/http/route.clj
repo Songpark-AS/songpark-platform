@@ -1,7 +1,6 @@
 (ns platform.http.route
   (:require #_[platform.api.auth :as api.auth]
             #_[platform.api.locale :as api.locale]
-            [platform.auth :refer [backend]]
             [platform.api.teleporter :as api.teleporter]
             [platform.api.jam :as api.jam]
             [platform.api.app :as api.app]
@@ -99,7 +98,7 @@
      ;; auth     
      ["/api"
       ;; everything under /api needs to be authenticated
-      {:middleware [[wrap-authn]]}
+      ;;{:middleware [[wrap-authn]]}
       ["/echo"
        {:swagger {:tags ["testing"]}
         :post {:responses {200 {:body any?}}
@@ -164,7 +163,7 @@
                          ;; exception handling
                          ;;exception/exception-middleware
                          middleware/wrap-exceptions
-                         [wrap-authentication backend]
+                         #_[wrap-authentication (:authz.platform/session settings)]
                          #_[wrap-authorization (:authz.platform/session settings)]
 
                          ;; decoding request body

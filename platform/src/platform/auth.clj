@@ -1,5 +1,4 @@
-(ns platform.auth
-  (:require [buddy.auth.backends :as backends]))
+(ns platform.auth)
 
 (defn get-credentials
   ([request]
@@ -24,19 +23,3 @@
 
 (defn auth-user? [request]
   (contains? (get-in request [:session :identity]) :auth.user/id))
-
-
-;; Super basic authentication
-
-^:private (def super-secret-creds (atom {:username "songpark"
-                                         :password "N0xLE1aD3VhtHtEaK7CyTqOufm3UNtMGSuWaLtjW"}))
-
-(defn my-authfn
-  [request authdata]
-  (let [username (:username authdata)
-        password (:password authdata)]
-    (and (= username (:username @super-secret-creds)) (= password (:password @super-secret-creds)))
-    ))
-
-(def backend (backends/basic {:realm "SongparkApi"
-                              :authfn my-authfn}))
