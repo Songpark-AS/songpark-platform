@@ -4,7 +4,7 @@
  :logger {:sentry-settings {:log? false
                             :dsn ""}}
  :mqtt {:config {:scheme "tcp"
-                 :host "127.0.0.1"
+                 :host "10.100.200.8"
                  :port 1883
                  :client-id "songpark-platform-be7a"
                  :connect-options {:auto-reconnect true
@@ -12,6 +12,8 @@
                                    ;; :username "tpx"
                                    ;;:password "SecretPass"
                                    }}}
+ :sips {#uuid "844ac6ff-e9a2-57ac-b91a-41cf4e6d74c8" "sip:9115@voip1.inonit.no"
+        #uuid "f7a21b06-014d-5444-88d7-0374a661d2de" "sip:9114@voip1.inonit.no"}
  :database {:datasource {:kamailio {:maximum-pool-size 3
                                     :adapter "mysql"
                                     :username "kamailio_admin"
