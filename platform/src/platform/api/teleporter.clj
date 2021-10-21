@@ -2,19 +2,22 @@
   (:require [clj-uuid :as uuid]
             [taoensso.timbre :as log]
             [songpark.common.taxonomy.teleporter]
-            [platform.db.store :as db]
-            [platform.api :refer [send-message!]]))
+            [platform.api :refer [send-message!]]
+            [platform.config :refer [config]]
+            [platform.db.store :as db]))
 
 (defn- ns-uuid<- [name]
   (uuid/v5 uuid/+namespace-url+ name))
 
 (defn init [{:keys [data parameters]}]
   (let [{:teleporter/keys [mac nickname]} (:body parameters)
-        uuid (ns-uuid<- mac)]
+        uuid (ns-uuid<- mac)
+        sips (:sips config)]
     (if mac
       (do
         (db/wr [:teleporter mac] {:teleporter/uuid uuid
                                   :teleporter/mac mac
+                                  :teleporter/sip (sips uuid)
                                   :teleporter/nickname nickname})
         (send-message! {:message/type :platform.cmd/subscribe
                         :message/meta {:mqtt/topics {(str uuid) 0}}})
