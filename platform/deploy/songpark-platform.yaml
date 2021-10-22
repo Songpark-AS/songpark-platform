@@ -67,7 +67,7 @@ metadata:
     nginx.ingress.kubernetes.io/auth-type: "basic"
     nginx.ingress.kubernetes.io/auth-secret: "songpark-platform-basic-auth"
     kubernetes.io/ingress.class: "nginx"
-    cert-manager.k8s.io/issuer: "letsencrypt-prod"
+    cert-manager.io/cluster-issuer: "letsencrypt"
     kubernetes.io/tls-acme: "true"
 
 spec:
