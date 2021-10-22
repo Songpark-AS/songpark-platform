@@ -16,26 +16,18 @@
 
 (comment
   (rd [:teleporter])
-  (wr [:teleporter "mac"] {:tp/id 3234})
-  (wr [:teleporter] "mac" dissoc)
-  (wr [:teleporter "e4:95:6e:43:fe:9b"] {:teleporter/mac "e4:95:6e:43:fe:9b"
-                                         :teleporter/uuid #uuid "844ac6ff-e9a2-57ac-b91a-41cf4e6d74c8"
-                                         :teleporter/nickname "zedboard-2"
-                                         :teleporter/sip "sip:9115@voip1.inonit.no"})
-  (wr [:teleporter "74:da:88:c2:14:b4" :teleporter/sip] "sip:9114@voip1.inonit.no")
+  (wr [:teleporter] {"74:da:88:c2:14:b4" #:teleporter{:uuid #uuid "f7a21b06-014d-5444-88d7-0374a661d2de",
+                                                      :mac "74:da:88:c2:14:b4",
+                                                      :sip "sip:9114@voip1.inonit.no",
+                                                      :nickname "zedboard-01"},
+                     "b8:08:cf:30:6e:64" #:teleporter{:uuid #uuid "41077c69-4aba-53ee-b2e1-3bfca8629255",
+                                                      :mac "b8:08:cf:30:6e:64",
+                                                      :sip "sip:9115@voip1.inonit.no",
+                                                      :nickname "zedboard-02"}})
 
-  (reset! state {:teleporter {"74:da:88:c2:14:b4" #:teleporter{:uuid #uuid "f7a21b06-014d-5444-88d7-0374a661d2de",
-                                                               :mac "74:da:88:c2:14:b4",
-                                                               :nickname "zedboard-01"
-                                                               :sip "sip:9114@voip1.inonit.no"}
-                              "e4:95:6e:43:fe:9b" {:teleporter/mac "e4:95:6e:43:fe:9b"
-                                                   :teleporter/uuid #uuid "844ac6ff-e9a2-57ac-b91a-41cf4e6d74c8"
-                                                   :teleporter/nickname "zedboard-2"
-                                                   :teleporter/sip "sip:9115@voip1.inonit.no"
-                                                   }},
-                 
-                 :jam {}})
 
   (println @state)
+  (reset! state {:teleporter {}
+                 :jam {}})
 
   (swap! state update-in [:teleporter] dissoc "mac"))
