@@ -1,0 +1,13 @@
+= Songpark Platform
+
+Cloud platform/backend for the Songpark audio collaboration system.
+
+- xref:development.adoc[Development]
+- xref:deployment.adoc[Deployment]
+- xref:tests.adoc[Tests]
+- xref:secrets.adoc[Secrets]
+- xref:architecture.adoc[Architecture]
+- xref:adr.adoc[ADR]
+- xref:system-landscape.adoc[System landscape]
+- xref:logging.adoc[Logging]
+- xref:configuration.adoc[Configuration]
