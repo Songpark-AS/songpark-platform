@@ -1,21 +1,25 @@
 (defproject songpark/platform "0.1.0-SNAPSHOT"
 
   :description "platform for songpark"
+
   :url "https://git.inonit.no/inonit/cantavi/songpark-platform"
+
   :license {:name ""
             :url ""}
+
   :repositories [["songpark" {:url "https://nexus.inonit.no/repository/songpark"
-                               :username [:gpg :env/nexus_username]
-                               :password [:gpg :env/nexus_password]}]
+                              :username [:gpg :env/nexus_username]
+                              :password [:gpg :env/nexus_password]}]
                  ["external" {:url "https://nexus.inonit.no/repository/maven-external"
                               :username [:gpg :env/nexus_username]
                               :password [:gpg :env/nexus_password]}]]
+
   :deploy-repositories [["releases" {:url "https://nexus.inonit.no/repository/songpark-platform-releases"
-                                                     :username [:gpg :env/nexus_username]
-                                                     :password [:gpg :env/nexus_password]}]
+                                     :username [:gpg :env/nexus_username]
+                                     :password [:gpg :env/nexus_password]}]
                         ["snapshots" {:url "https://nexus.inonit.no/repository/songpark-platform-snapshots"
-                                                      :username [:gpg :env/nexus_username]
-                                                      :password [:gpg :env/nexus_password]}]]
+                                      :username [:gpg :env/nexus_username]
+                                      :password [:gpg :env/nexus_password]}]]
 
   :dependencies [[org.clojure/clojure "1.10.1"]
                  [org.clojure/core.match "1.0.0"]
