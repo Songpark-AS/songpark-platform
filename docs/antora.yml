@@ -1,0 +1,5 @@
+name: songpark-platform
+title: Songpark Platform
+version: 'master'
+nav:
+- modules/ROOT/nav.adoc

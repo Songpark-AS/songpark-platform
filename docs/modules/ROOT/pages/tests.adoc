@@ -1,0 +1,15 @@
+= Tests
+
+No Automated test are implemented at the moment.
+
+== Testing procedures
+
+Nothing yet.
+
+== General testing
+
+Nothing yet.
+
+== Automatic testing
+
+Nothing yet.
