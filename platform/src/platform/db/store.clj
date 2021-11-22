@@ -16,9 +16,18 @@
 
 (comment
   (rd [:teleporter])
-  (wr [:teleporter "mac"] {:tp/id 3234})
-  (wr [:teleporter] "mac" dissoc)
+  (wr [:teleporter] {"74:da:88:c2:14:b4" #:teleporter{:uuid #uuid "f7a21b06-014d-5444-88d7-0374a661d2de",
+                                                      :mac "74:da:88:c2:14:b4",
+                                                      :sip "sip:9114@voip1.inonit.no",
+                                                      :nickname "zedboard-01"},
+                     "b8:08:cf:30:6e:64" #:teleporter{:uuid #uuid "41077c69-4aba-53ee-b2e1-3bfca8629255",
+                                                      :mac "b8:08:cf:30:6e:64",
+                                                      :sip "sip:9115@voip1.inonit.no",
+                                                      :nickname "zedboard-02"}})
 
-  (swap! state update-in [:teleporter] dissoc "mac")
-  
-  )
+
+  (println @state)
+  (reset! state {:teleporter {}
+                 :jam {}})
+
+  (swap! state update-in [:teleporter] dissoc "mac"))

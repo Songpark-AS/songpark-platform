@@ -3,6 +3,12 @@
                           :http/cookies {:http-only true}}}
  :logger {:sentry-settings {:log? false
                             :dsn ""}}
+ :sips {#uuid "41077c69-4aba-53ee-b2e1-3bfca8629255" "sip:9115@voip1.inonit.no"
+        #uuid "f7a21b06-014d-5444-88d7-0374a661d2de" "sip:9114@voip1.inonit.no"
+        ;; TP A
+        #uuid "ad6fc5b7-c52c-5941-bfb7-cf4fb4189775" "sip:9200@voip1.inonit.no"
+        ;; TP B
+        #uuid "7fdf0551-b5fc-557d-bddc-2ca5b1cdfaa6" "sip:9201@voip1.inonit.no"}
  :mqtt {:config {:scheme "tcp"
                  :host "127.0.0.1"
                  :port 1883

@@ -11,6 +11,6 @@
 (defmethod message/dispatch :platform.cmd/unsubscribe [{:message/keys [body]
                                                         :keys [mqtt-manager]}]
   (let [topics (:mqtt/topics body)]
-    (log/debug :dispatch (str "Unsubscribing from " (keys topics)))
+    (log/debug :dispatch (str "Unsubscribing from " topics))
     (.unsubscribe mqtt-manager topics)))
 

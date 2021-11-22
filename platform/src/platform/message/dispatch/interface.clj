@@ -7,5 +7,5 @@
   (log/debug :dispatch.debug body))
 
 (defmethod dispatch :default [{:message/keys [type] :as message}]
-  (throw
-   (ex-info (str "No message dispatch defined for message type " type) message)))
+  (log/warn
+   (str "No message dispatch defined for message type " type) message))

@@ -1,25 +1,34 @@
 (ns platform.message.dispatch.jam
-  (:require [platform.message.dispatch.interface :as message]
-            [taoensso.timbre :as log]
-            [platform.api :refer [send-message!]]))
+  (:require [platform.api :refer [send-message!]]
+            [platform.data :as data]
+            [platform.message.dispatch.interface :as message]
+            [taoensso.timbre :as log]))
 
-(defmethod message/dispatch :jam.cmd/start [{:message/keys [body meta]
+(defmethod message/dispatch :jam.cmd/start [{:message/keys [body]
                                              :keys [message-service mqtt-manager]}]
-  (let [members (:jam/members body)]
+  (data/set-jam-id! (:jam/topic body))
+  (let [members (:jam/members body)
+        topic (data/get-jam)]
     (log/debug members)
-    (log/debug (str "Subscribing to " (:jam/topic body)))
+    (log/debug (str "Subscribing to " topic))
     (send-message! {:message/type :platform.cmd/subscribe
-                    :message/meta {:mqtt/topics {(str (:jam/topic body)) 0}}})
+                    :message/meta {:mqtt/topics {topic 0}}})
     (doseq [member members]
-      (.publish mqtt-manager member {:message/type :debug
+      (log/debug "Publishing :jam.cmd/start to " member)
+      (.publish mqtt-manager member {:message/type :jam.cmd/start
                                      :message/body body
                                      :message/meta {:mqtt/topic member
                                                     :origin :platform}}))))
 
-(defmethod message/dispatch :jam.cmd/stop [{:message/keys [body]
+(defmethod message/dispatch :jam.cmd/stop [{:message/keys [body meta]
                                             :keys [mqtt-manager]}]
-  (log/debug :dispatch (str "Unsubscribing from " (keys (:mqtt/topics body))))
-  #_(.publish mqtt-manager topics body)
-  #_(Thread/sleep 5000)
-  #_(.unsubscribe mqtt-manager topics))
+  (let [jam-topic (data/get-jam)
+        teleporters-topic (data/get-jam-teleporters)]
+    (log/debug :dispatch (str "Unsubscribing from " jam-topic))
+    
+    (.publish mqtt-manager teleporters-topic {:message/type :jam.cmd/stop
+                                              :message/body body
+                                              :message/meta meta})
+    (.unsubscribe mqtt-manager [jam-topic])
+    (data/clear-jam-id!)))
 
