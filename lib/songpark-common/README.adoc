@@ -1,3 +1,0 @@
-= Kompetansia/common
-
-To install `lein with-profile build install`.

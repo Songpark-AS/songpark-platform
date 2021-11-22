@@ -2,15 +2,37 @@
 
   :description "platform for songpark"
 
+  :url "https://git.inonit.no/inonit/cantavi/songpark-platform"
+
+  :license {:name ""
+            :url ""}
+
+  :repositories [["songpark" {:url "https://nexus.inonit.no/repository/songpark"
+                              :username [:gpg :env/nexus_username]
+                              :password [:gpg :env/nexus_password]}]
+                 ["external" {:url "https://nexus.inonit.no/repository/maven-external"
+                              :username [:gpg :env/nexus_username]
+                              :password [:gpg :env/nexus_password]}]]
+
+  :deploy-repositories [["releases" {:url "https://nexus.inonit.no/repository/songpark-platform-releases"
+                                     :username [:gpg :env/nexus_username]
+                                     :password [:gpg :env/nexus_password]}]
+                        ["snapshots" {:url "https://nexus.inonit.no/repository/songpark-platform-snapshots"
+                                      :username [:gpg :env/nexus_username]
+                                      :password [:gpg :env/nexus_password]}]]
+
   :dependencies [[org.clojure/clojure "1.10.1"]
                  [org.clojure/core.match "1.0.0"]
+                 [org.clojure/core.async "1.3.618"]
 
                  ;; memoization
                  [org.clojure/core.memoize "1.0.236"]
 
-                 ;; songpark libs
-                 [songpark/taxonomy "0.1.1-SNAPSHOT"]
-                 [songpark/common "0.1.0"]
+                 ;; songpark
+                 [songpark/common "0.1.1-SNAPSHOT"]
+
+                 ;; mqtt
+                 [clojurewerkz/machine_head "1.0.0"]
 
                  ;; routing
                  [metosin/reitit "0.4.2"]
@@ -19,8 +41,8 @@
                  [digest "1.4.9"]
 
                  ;; http
-                 [ring "1.8.0"]
-                 [ring/ring-jetty-adapter "1.8.0"]
+                 [ring "1.9.4"]
+                 [ring/ring-jetty-adapter "1.9.4"]
                  [ring-cors "0.1.13"]
 
                  ;; data format
@@ -31,13 +53,13 @@
                  [com.stuartsierra/component "1.0.0"]
 
                  ;; redis support
-                 [com.taoensso/carmine "2.19.1"]
+                 ;; [com.taoensso/carmine "2.19.1"]
 
                  ;; logging
-                 [com.taoensso/timbre "4.10.0"]
-                 [com.fzakaria/slf4j-timbre "0.3.12"]
-                 [raven-clj "1.6.0"]
-
+                 [com.taoensso/timbre "5.1.2"]
+                 [com.fzakaria/slf4j-timbre "0.3.21"]
+                 [raven-clj "1.6.0"]                 
+                 
                  ;; configuration
                  [cprop "0.1.11"]
 
@@ -52,14 +74,16 @@
                  [me.raynes/fs "1.4.6"]
 
                  ;; database
-                 [ez-database "0.8.1"]
-                 [honeysql "0.9.10"]
+                 [ez-database "0.8.2"]
+                 [seancorfield/next.jdbc "1.2.659"]                 
                  [org.postgresql/postgresql "42.2.8"]
+                 [mysql/mysql-connector-java "8.0.26"]
                  [hikari-cp "2.9.0"]
+                 [com.github.seancorfield/honeysql "2.0.783"]
                  [yesql "0.5.3"]
 
                  ;; database migrations
-                 [migratus "1.2.6"]
+                 ;; [migratus "1.2.6"]
 
                  ;; http
                  [http-kit "2.3.0"]
@@ -68,19 +92,19 @@
                  [hiccup "1.0.5"]
 
                  ;; aws
-                 [amazonica "0.3.153"]
+                 ;; [amazonica "0.3.153"]
 
                  ;; utils
                  [danlentz/clj-uuid "0.1.9"]
                  [com.cemerick/url "0.1.1"]
                  [tick "0.4.23-alpha"]
 
-                 [emil0r/clj-oauth2 "0.6.0"]
+                 ;; [emil0r/clj-oauth2 "0.6.0"]
 
                  ;; Feide SAML
-                 ;[metabase/saml20-clj "1.0.2" :exclusions [org.clojure/data.zip]]
+                                        ;[metabase/saml20-clj "1.0.2" :exclusions [org.clojure/data.zip]]
                  ;; since saml20-clj's version is obsolete
-                 ;[org.clojure/data.zip "1.0.0"]
+                                        ;[org.clojure/data.zip "1.0.0"]
                  ]
 
   :uberjar-name "platform.jar"

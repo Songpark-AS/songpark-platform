@@ -1,9 +1,9 @@
 (ns platform.test.util
-  (:require [platform.aws :as aws]
-            [platform.database :as database]
+  (:require #_[platform.aws :as aws]
+            #_[platform.database :as database]
 
-            [platform.migrator :as migrator]
-            [platform.model.auth :as model.auth]
+            #_[platform.migrator :as migrator]
+            #_[platform.model.auth :as model.auth]
             [buddy.core.codecs.base64 :refer [encode decode]]
             [cprop.source :refer [from-system-props from-env]]
             [clojure.edn :as edn]

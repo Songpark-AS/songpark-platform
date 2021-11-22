@@ -12,8 +12,8 @@
   (start [this]
     (if started?
       this
-      (do (log/info "Starting ConfigManager")
-          (log/info "Loading configuration")
+      (do (log/debug "Starting ConfigManager")
+          (log/debug "Loading configuration")
           (let [path (or config-path "config.edn")]
             (alter-var-root #'config (fn [_]
                                        (load-config
@@ -26,8 +26,8 @@
   (stop [this]
     (if-not started?
       this
-      (do (log/info "Stopping ConfigManager")
-          (log/info "Unloading configuration")
+      (do (log/debug "Stopping ConfigManager")
+          (log/debug "Unloading configuration")
           (alter-var-root #'config (fn [_] nil))
           (assoc this
                  :started? false)))))

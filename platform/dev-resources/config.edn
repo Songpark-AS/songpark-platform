@@ -1,26 +1,31 @@
 {:http {:server-settings {:port 3000
                           :join? false
                           :http/cookies {:http-only true}}}
- :aws {:access-key-id "abc"
-       :secret-access-key "123",
-       :region "eu-central-1"
-       :songpark {:bucket-name "songpark-test"}}
- :oauth {:id "10bb5f8e-1d8f-4d6b-a963-589b83df7daf"
-         :secret "a981ecd9-1164-441e-9f20-05ac29ac9a6e"
-         :redirect-url "http://localhost:3000/oauth"
-         :scope ["userinfo-title" "userid" "openid" "groups-org" "userinfo-name" "email"]
-         :app-url "http://localhost:8700/index-browser.html"}
- :google {:credentials-file "google-credentials.json"
-          :sample-rate-hertz 44100}
  :logger {:sentry-settings {:log? false
-                            :dsn "https://1d8c8c3629d04753af7aa097af707be0@o19823.ingest.sentry.io/5244907"}}
- :database {:datasource {:default {:maximum-pool-size 3
-                                   :adapter "postgresql"
-                                   :username "postgres"
-                                   :password "postgres"
-                                   :database-name "postgres"
-                                   :server-name "localhost"
-                                   :port-number 5432}}}
- :informational {:base-url "http://localhost:3000/static/files/"}
- :carmine {:pool {} :spec {}}
- :frontend {:communication-manager {:url "http://localhost:3000"}}}
+                            :dsn ""}}
+ :mqtt {:config {:scheme "tcp"
+                 :host "10.100.200.8"
+                 :port 1883
+                 :client-id "songpark-platform-be7a"
+                 :connect-options {:auto-reconnect true
+                                   :keep-alive-interval 60
+                                   ;; :username "tpx"
+                                   ;;:password "SecretPass"
+                                   }}}
+ :sips {#uuid "41077c69-4aba-53ee-b2e1-3bfca8629255" "sip:9115@voip1.inonit.no"
+        #uuid "f7a21b06-014d-5444-88d7-0374a661d2de" "sip:9114@voip1.inonit.no"}
+ :database {:datasource {:kamailio {:maximum-pool-size 3
+                                    :adapter "mysql"
+                                    :username "kamailio_admin"
+                                    :password "mysql"
+                                    :database-name ""
+                                    :server-name "localhost"
+                                    :port-number 3306}}}
+ :voip {:server "voip1.inonit.no"
+        :accounts {#uuid "1d84be2b-44d1-5da8-91ae-a9b97f133cb9" {:name :tp-01
+                                                                 :voip/username "9111"
+                                                                 :voip/password "ufd682?7"}
+                   ;; TODO: change this based on mac address of other tp
+                   #uuid "1d84be2b-44d1-5da8-91ae-a9b97f133c00" {:name :tp-02
+                                                                 :voip/username "9112"
+                                                                 :voip/password "sT-hjjd?kd"}}}}

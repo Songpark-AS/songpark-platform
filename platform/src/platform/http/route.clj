@@ -1,9 +1,9 @@
 (ns platform.http.route
-  (:require [platform.api.auth :as api.auth]
-            [platform.api.locale :as api.locale]
-            [platform.connection.initial :as connection.initial]
-            [platform.connection.exit :as connection.exit]
-
+  (:require #_[platform.api.auth :as api.auth]
+            #_[platform.api.locale :as api.locale]
+            [platform.api.teleporter :as api.teleporter]
+            [platform.api.jam :as api.jam]
+            [platform.api.app :as api.app]
             [platform.http.html :refer [home]]
             [platform.http.middleware :as middleware :refer [wrap-authn
                                                              wrap-authz]]
@@ -12,8 +12,8 @@
             [clojure.spec.alpha :as spec]
             [cognitect.transit :as transit]
             [muuntaja.core :as m]
-            [songpark.taxonomy.error]
-            [songpark.taxonomy.http]
+            [songpark.common.taxonomy.error]
+            [songpark.common.taxonomy.http]
             [ring.middleware.content-type :refer [wrap-content-type]]
             [ring.middleware.cookies :refer [wrap-cookies]]
             [ring.middleware.cors :refer [wrap-cors]]
@@ -62,41 +62,7 @@
 (defn get-routes [settings]
   (ring/ring-handler
    (ring/router
-    [
-     ;; ####################################################
-     ;; Songpark specific routes
-
-     ["/connect"
-
-      ;; client connections
-      ["/client"
-       ["/init"
-        {:swagger {:tags ["helloworld"]}}
-        [""
-         {:get {:responses {200 {:body :http/empty?}}
-                :handler #'connection.initial/client-init-connect-handler}}]]]
-
-     ;; tp connections
-      ["/tp"
-       ["/init"
-        {:swagger {:tags ["helloworld"]}}
-        [""
-         {:get {:responses {200 {:body :http/empty?}}
-                :handler #'connection.initial/tp-init-connect-handler}}]]
-       ["/disconnect"
-        {:swagger {:tags ["helloworld"]}}
-        ["" 
-         {:get {:responses {200 {:body :http/empty?}}
-                :handler #'connection.exit/tp-disconnect-handler}}]]
-       ["/turnoff"
-        {:swagger {:tags ["helloworld"]}}
-        [""
-         {:get {:responses {200 {:body :http/empty?}}
-                :handler #'connection.exit/tp-turnoff-handler}}]]]]
-
-     ;; ####################################################
-
-
+    [     
      ["/"
       {:get {:no-doc true
              :handler (fn [_]
@@ -129,25 +95,10 @@
                          {:status 200
                           :body ""})}}]]
 
-     ;; auth
-     ["/auth"
-      {:swagger {:tags ["auth"]}}
-      [""
-       {:get {:responses {200 {:body :auth/user}
-                          400 {:body :error/error}}
-              :handler #'api.auth/user}}]
-      ["/login"
-       {:post {:responses {200 {:body :auth/user}
-                           401 {:body :error/error}}
-               :parameters {:body :auth/auth}
-               :handler #'api.auth/login}}]
-      ["/logout"
-       {:post {:responses {200 {:body :http/empty?}}
-               :handler #'api.auth/logout}}]]
-
+     ;; auth     
      ["/api"
       ;; everything under /api needs to be authenticated
-      {:middleware [[wrap-authn]]}
+      ;;{:middleware [[wrap-authn]]}
       ["/echo"
        {:swagger {:tags ["testing"]}
         :post {:responses {200 {:body any?}}
@@ -155,27 +106,35 @@
                           {:status 200
                            :body (or (:body-params req) {:failed true})})}}]
 
-      ;; locale
-      ["/locale"
-       {:middleware [[wrap-authz #{:admin}]]
-        :swagger {:tags ["locale"]}}
+      ["/teleporter"
+       {:swagger {:tags ["teleporter"]}}
        [""
-        {:get  {:responses {200 {:body :locale/locales}}
-                :handler   #'api.locale/locales}
-         :post {:responses  {204 {:body :http/empty?}
-                             404 {:body :http/empty?}}
-                :parameters {:body :locale/locale}
-                :handler    #'api.locale/update-locale}
-         :put {:responses {201 {:body :locale/locale}
+        {:put {:responses {200 {:body (spec/keys :req [:teleporter/uuid])}
                            400 {:body :error/error}}
-               :parameters {:body :locale/locale}
-               :handler #'api.locale/create-locale}}]
-
-       ["/:locale-id"
-        {:get {:responses  {200 {:body :locale/locale}
-                            404 {:body :http/empty?}}
-               :parameters {:path {:locale-id string?}}
-               :handler    #'api.locale/by-id}}]]]]
+               :parameters {:body :teleporter/init}
+               :handler #'api.teleporter/init}
+         :delete {:responses {200 {:body :http/empty?}
+                              400 {:body :error/error}}
+                  :parameters {:body (spec/keys :req [:teleporter/mac])}
+                  :handler #'api.teleporter/terminate}}]]
+      ["/app"
+       {:swagger {:tags ["app"]}}
+       [""
+        {:get {:responses {200 {:body any? #_(spec/keys :req [:teleporter/uuid
+                                                              :teleporter/nickname])}}               
+               :handler #'api.app/connect}}]]
+      ["/jam"
+       {:swagger {:tags ["jam"]}}
+       [""
+        {:put {:responses {201 {:body :jam/response}
+                           400 {:body :error/error}}
+               :parameters {:body :teleporter/uuids}
+               :handler #'api.jam/start}
+         :delete {:responses {204 {:body :http/empty?}
+                              400 {:body :error/error}}
+                  :parameters {:body (spec/keys :req [:jam/uuid])}
+                  :handler #'api.jam/stop}}]]
+      ]]
 
     {:exception pretty/exception
      ;;:compile r.coercion/compile-request-coercers
@@ -187,12 +146,11 @@
                           :access-control-allow-methods [:get :post :options :put :delete]]
 
                          [middleware/inject-data (:songpark/data settings)]
-                         [wrap-session {:store (:store settings)
-                                        :cookie-attrs (:http/cookies settings)}]
+                         #_[wrap-session {:store (:store settings)
+                                          :cookie-attrs (:http/cookies settings)}]
 
-                         #_[middleware/wrap-debug-inject {:session {:identity {:teacher/id 1
-                                                                               :school/id 1
-                                                                               :authz/credentials #{:teacher}}}}]
+                         [middleware/wrap-debug-inject {:session {:identity {:teleporter/id 1
+                                                                             :authz/credentials #{:teleporter}}}}]
 
                          ;; swagger feature
                          swagger/swagger-feature
@@ -205,8 +163,8 @@
                          ;; exception handling
                          ;;exception/exception-middleware
                          middleware/wrap-exceptions
-                         [wrap-authentication (:authz.platform/session settings)]
-                         [wrap-authorization (:authz.platform/session settings)]
+                         #_[wrap-authentication (:authz.platform/session settings)]
+                         #_[wrap-authorization (:authz.platform/session settings)]
 
                          ;; decoding request body
                          muuntaja/format-request-middleware

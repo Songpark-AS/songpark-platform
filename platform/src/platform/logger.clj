@@ -5,6 +5,7 @@
             [taoensso.timbre.appenders.3rd-party.rotor :refer [rotor-appender]]
             [taoensso.timbre.appenders.3rd-party.sentry :refer [sentry-appender]]))
 
+
 (defrecord Logger [started? sentry-settings]
   component/Lifecycle
   (start [this]
@@ -29,3 +30,4 @@
 
 (defn logger [settings]
   (map->Logger settings))
+
