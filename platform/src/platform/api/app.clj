@@ -14,8 +14,10 @@
 (defn connect [request]
   (let [tps (mapv (fn [[k v]]
                     (merge v {:teleporter/mac k}))
-                  (db/rd [:teleporter]))]        
-    (if-not (empty? tps)
+                  (db/rd [:teleporter]))]
+    {:status 200
+     :body []}
+    #_(if-not (empty? tps)
       {:status 200
        :body (unique-teleporters tps 7)}
       {:status 400
