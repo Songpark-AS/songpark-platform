@@ -1,9 +1,9 @@
 (ns platform.http.route
-  (:require #_[platform.api.auth :as api.auth]
-            #_[platform.api.locale :as api.locale]
-            [platform.api.teleporter :as api.teleporter]
+  (:require [platform.api.app :as api.app]
             [platform.api.jam :as api.jam]
-            [platform.api.app :as api.app]
+            [platform.api.teleporter :as api.teleporter]
+            [platform.api.version :as api.version]
+            
             [platform.http.html :refer [home]]
             [platform.http.middleware :as middleware :refer [wrap-authn
                                                              wrap-authz]]
@@ -94,6 +94,12 @@
               :handler (fn [_]
                          {:status 200
                           :body ""})}}]]
+
+     ["/version"
+      {:swagger {:tags ["version"]}}
+      [""
+       {:get {:responses {200 {:body map?}}
+              :handler #'api.version/get-version}}]]
 
      ;; auth     
      ["/api"
