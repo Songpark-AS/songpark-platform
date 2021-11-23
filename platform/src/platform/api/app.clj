@@ -16,7 +16,7 @@
                     (merge v {:teleporter/mac k}))
                   (db/rd [:teleporter]))]
     {:status 200
-     :body []}
+     :body tps}
     #_(if-not (empty? tps)
       {:status 200
        :body (unique-teleporters tps 7)}
