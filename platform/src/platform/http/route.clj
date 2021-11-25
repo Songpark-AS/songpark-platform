@@ -117,7 +117,8 @@
        [""
         {:put {:responses {200 {:body (spec/keys :req [:teleporter/uuid])}
                            400 {:body :error/error}}
-               :parameters {:body :teleporter/init}
+               :parameters {:body any? ;;:teleporter/init
+                            }
                :handler #'api.teleporter/init}
          :delete {:responses {200 {:body :http/empty?}
                               400 {:body :error/error}}

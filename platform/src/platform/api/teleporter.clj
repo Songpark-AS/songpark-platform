@@ -10,7 +10,7 @@
   (uuid/v5 uuid/+namespace-url+ name))
 
 (defn init [{:keys [data parameters]}]
-  (let [{:teleporter/keys [mac nickname]} (:body parameters)
+  (let [{:teleporter/keys [mac nickname tpx-version bp-version fpga-version]} (:body parameters)
         uuid (ns-uuid<- mac)
         sips (:sips config)]
     (if mac
@@ -18,7 +18,10 @@
         (db/wr [:teleporter mac] {:teleporter/uuid uuid
                                   :teleporter/mac mac
                                   :teleporter/sip (sips uuid)
-                                  :teleporter/nickname nickname})
+                                  :teleporter/nickname nickname
+                                  :teleporter/tpx-version tpx-version
+                                  :teleporter/bp-version bp-version
+                                  :teleporter/fpga-version fpga-version})
         (send-message! {:message/type :platform.cmd/subscribe
                         :message/meta {:mqtt/topics {(str uuid) 0}}})
         {:status 200
@@ -26,7 +29,7 @@
       {:status 400
        :body {:error/message "Illegal MAC address"}})))
 
-(defn terminate [{:keys [mac]}teleporter]
+(defn terminate [{:keys [mac]} teleporter]
   (db/wr [:teleporter] mac dissoc))
 
 
