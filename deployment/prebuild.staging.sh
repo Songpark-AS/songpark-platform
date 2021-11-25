@@ -1,15 +1,15 @@
 #!/bin/bash
 
-DEPLOYMENTDIR=deployment
-BACKEND=platform
+DEPLOYMENT_DIR=deployment
+PROJECT_DIR=platform
 PROJECT_NAME=songpark-platform
 
 echo "Copying configuration files"
-cp $DEPLOYMENTDIR/config.staging.edn $BACKEND/resources/config.edn
+cp $DEPLOYMENT_DIR/config.staging.edn $PROJECT_DIR/resources/config.edn
 
 echo "Copying VERSION.git to resources folder"
-cp VERSION.git $BACKEND/resources/VERSION.git
+cp VERSION.git $PROJECT_DIR/resources/VERSION.git
 
 echo "Compiling $PROJECT_NAME"
-(cd $BACKEND && lein uberjar)
+(cd $PROJECT_DIR && lein uberjar)
 

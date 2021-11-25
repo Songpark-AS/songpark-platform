@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 
-DEPLOYMENTDIR=deployment
-TEMPLATEFILE=songpark-platform.template.yaml
-YMLFILE=songpark-platform.yaml
+DEPLOYMENT_DIR=deployment
+TEMPLATE_FILE=songpark-platform.template.yaml
+YAML_FILE=songpark-platform.yaml
 TAG=$1
 VERSION=$2
 
 echo "Copying template file"
-cp $DEPLOYMENTDIR/$TEMPLATEFILE $DEPLOYMENTDIR/$YMLFILE
+cp $DEPLOYMENT_DIR/$TEMPLATE_FILE $DEPLOYMENT_DIR/$YAML_FILE
 
 echo "Updating variables"
-sed -i '' 's/VAR__VERSION/'"$VERSION"'/g' $DEPLOYMENTDIR/$YMLFILE
-sed -i '' 's/VAR__TAG/'"$TAG"'/g' $DEPLOYMENTDIR/$YMLFILE
+sed -i '' 's/VAR__VERSION/'"$VERSION"'/g' $DEPLOYMENT_DIR/$YAML_FILE
+sed -i '' 's/VAR__TAG/'"$TAG"'/g' $DEPLOYMENT_DIR/$YAML_FILE

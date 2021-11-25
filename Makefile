@@ -56,7 +56,7 @@ build-dev: prebuild-dev docker-build docker-tag-version docker-tag-dev
 build-production: prebuild-production docker-build docker-tag-version docker-tag-production
 
 
-# 
+# prebuilds
 
 prebuild-staging:
 	@echo "Prebuilding staging"
@@ -120,14 +120,59 @@ docker-build:
 		-t $(LOCAL_BUILD_NAME):$(VERSION) \
 		.
 
+# k8s
+
 kube-prep-staging:
-	@echo "Preparing k8s deployment file"
+	@echo "Preparing k8s staging deployment file"
 	sh $(DEPLOYMENTDIR)/k8s.prep.sh staging $(VERSION)
 
-kube-remove:
-	@echo "Deleting from k8s"
+kube-prep-production:
+	@echo "Preparing k8s production deployment file"
+	sh $(DEPLOYMENTDIR)/k8s.prep.sh production $(VERSION)
+
+kube-prep-dev:
+	@echo "Preparing k8s dev deployment file"
+	sh $(DEPLOYMENTDIR)/k8s.prep.sh dev $(VERSION)
+
+kube-prep-debug:
+	@echo "Preparing k8s debug deployment file"
+	sh $(DEPLOYMENTDIR)/k8s.prep.sh debug $(VERSION)
+
+
+kube-remove-staging: kube-prep-staging
+	@echo "Deleting staging from k8s"
 	kubectl delete -f $(DEPLOYMENTDIR)/$(PROJECT_NAME).yaml
 
-kube-deploy:
-	@echo @echo "Deploying to k8s"
+kube-deploy-staging: kube-prep-staging
+	@echo "Deploying staging to k8s"
 	kubectl apply -f $(DEPLOYMENTDIR)/$(PROJECT_NAME).yaml
+
+kube-remove-production: kube-prep-production
+	@echo "Deleting production from k8s"
+	kubectl delete -f $(DEPLOYMENTDIR)/$(PROJECT_NAME).yaml
+
+kube-deploy-production: kube-prep-production
+	@echo "Deploying production to k8s"
+	kubectl apply -f $(DEPLOYMENTDIR)/$(PROJECT_NAME).yaml
+
+kube-remove-dev: kube-prep-dev
+	@echo "Deleting dev from k8s"
+	kubectl delete -f $(DEPLOYMENTDIR)/$(PROJECT_NAME).yaml
+
+kube-deploy-dev: kube-prep-dev
+	@echo "Deploying dev to k8s"
+	kubectl apply -f $(DEPLOYMENTDIR)/$(PROJECT_NAME).yaml
+
+kube-remove-debug: kube-prep-debug
+	@echo "Deleting debug from k8s"
+	kubectl delete -f $(DEPLOYMENTDIR)/$(PROJECT_NAME).yaml
+
+kube-deploy-debug: kube-prep-debug
+	@echo "Deploying debug to k8s"
+	kubectl apply -f $(DEPLOYMENTDIR)/$(PROJECT_NAME).yaml
+
+
+all-staging: build-staging kube-deploy-staging
+all-production: build-production kube-deploy-production
+all-dev: build-dev kube-deploy-dev
+all-debug: build-debug kube-deploy-debug
