@@ -17,3 +17,4 @@ sed -i -e 's/VAR__TAG/'"$TAG"'/g' $DEPLOYMENT_DIR/$YAML_FILE
 sed -i -e 's/VAR__NAMESPACE/'"$NAMESPACE"'/g' $DEPLOYMENT_DIR/$YAML_FILE
 sed -i -e 's/VAR__HOSTNAME/'"$HOSTNAME"'/g' $DEPLOYMENT_DIR/$YAML_FILE
 
+sed -i -e 's/spp-production\.inonit\.no/'"spp.inonit.no"'/g' $DEPLOYMENT_DIR/$YAML_FILE
