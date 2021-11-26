@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: songpark-platform
-  namespace: internal
+  namespace: VAR__NAMESPACE
   labels:
     customer: songpark
     purpose: VAR__TAG
@@ -50,7 +50,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: songpark-platform
-  namespace: internal
+  namespace: VAR__NAMESPACE
 spec:
   ports:
   - port: 80
@@ -64,7 +64,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: songpark-platform
-  namespace: internal
+  namespace: VAR__NAMESPACE
   annotations:
     # nginx.ingress.kubernetes.io/auth-type: "basic"
     # nginx.ingress.kubernetes.io/auth-secret: "songpark-platform-basic-auth"
@@ -75,10 +75,10 @@ metadata:
 spec:
   tls:
   - hosts:
-    - spp.inonit.no
+    - VAR__HOSTNAME
     secretName: spp-inonit-no-tls
   rules:
-  - host: spp.inonit.no
+  - host: VAR__HOSTNAME
     http:
       paths:
       - path: /
