@@ -23,7 +23,7 @@
                                   :teleporter/bp-version bp-version
                                   :teleporter/fpga-version fpga-version})
         (send-message! {:message/type :platform.cmd/subscribe
-                        :message/meta {:mqtt/topics {(str uuid) 0}}})
+                        :message/meta {:mqtt/topics {(str uuid) 0 (str uuid "/heartbeat") 0}}})
         {:status 200
          :body {:teleporter/uuid uuid}})
       {:status 400

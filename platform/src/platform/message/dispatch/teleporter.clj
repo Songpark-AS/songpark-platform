@@ -1,5 +1,6 @@
 (ns platform.message.dispatch.teleporter
   (:require [platform.message.dispatch.interface :as message]
+            [platform.tpstatus :as tpstatus]
             [taoensso.timbre :as log]))
 
 
@@ -19,7 +20,9 @@
   #_(.publish mqtt-manager topics body))
 
 
-
+(defmethod message/dispatch :teleporter/heartbeat [{:message/keys [body]}]
+  (let [tp-id (:teleporter/id body)]
+    (tpstatus/handle-teleporter-heartbeat tp-id)))
 
 
 (comment

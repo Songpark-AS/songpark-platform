@@ -13,4 +13,5 @@
                  :port 1883
                  :client-id "songpark-platform-be7a"
                  :connect-options {:auto-reconnect true
-                                   :keep-alive-interval 60}}}}
+                                   :keep-alive-interval 60}}}
+ :teleporter {:offline-timeout 6000}}

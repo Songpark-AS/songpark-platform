@@ -32,4 +32,5 @@
                    ;; TODO: change this based on mac address of other tp
                    #uuid "1d84be2b-44d1-5da8-91ae-a9b97f133c00" {:name :tp-02
                                                                  :voip/username "9112"
-                                                                 :voip/password "sT-hjjd?kd"}}}}
+                                                                 :voip/password "sT-hjjd?kd"}}}
+ :teleporter {:offline-timeout 6000}}
