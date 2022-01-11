@@ -97,7 +97,7 @@
                  ;; utils
                  [danlentz/clj-uuid "0.1.9"]
                  [com.cemerick/url "0.1.1"]
-                 [tick "0.4.23-alpha"]
+                 [tick "0.4.30-alpha"]
 
                  ;; [emil0r/clj-oauth2 "0.6.0"]
 

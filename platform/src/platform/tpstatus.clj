@@ -1,22 +1,22 @@
 (ns platform.tpstatus
-  (:require [platform.config :refer [config]]))
+  (:require [platform.config :refer [config]]
+            [platform.db.store :as db]
+            [taoensso.timbre :as log]
+            [tick.alpha.api :as t]))
 
-(defonce teleporter-statuses (atom {}))
+(defn- get-tp-mac-from-uuid [uuid]
+  (:teleporter/mac (last (first (filter (fn[[_ v]] (= (str uuid) (str (:teleporter/uuid v)))) (db/rd [:teleporter]))))))
 
 (defn handle-teleporter-heartbeat [tp-id]
-  (let [offline-timeout (get-in config [:teleporter :offline-timeout])]
-
-    ;; cancel previous offline-timeout if exist
-    (when-let [offline-timer (get-in @teleporter-statuses [tp-id :offline-timer])]
-      (future-cancel offline-timer))
-
-    ;; set online-status to online for this teleporter
-    (swap! teleporter-statuses assoc-in [tp-id :online?] true)
-
-    ;; create new offline-timeout that changes status to offline
-    (swap! teleporter-statuses assoc-in [tp-id :offline-timer] (future
-                                                                 (Thread/sleep offline-timeout)
-                                                                 (swap! teleporter-statuses assoc-in [tp-id :online?] false)))))
+  (let [tp-mac (get-tp-mac-from-uuid tp-id)
+        now (t/now)]
+    ;; store timestamp
+    (db/wr [:teleporter tp-mac :teleporter/heartbeat-timestamp] now)))
 
 (defn teleporter-online? [tp-id]
-  (get-in @teleporter-statuses [(str tp-id) :online?]))
+  (let [tp-mac (get-tp-mac-from-uuid tp-id)
+        teleporter (db/rd [:teleporter tp-mac])
+        now (t/now)]
+    (if-let [heartbeat-timestamp (:teleporter/heartbeat-timestamp teleporter)]
+      (t/< now (t/>> heartbeat-timestamp (t/new-duration (get-in config [:teleporter :offline-timeout]) :seconds)))
+      false)))
