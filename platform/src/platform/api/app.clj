@@ -15,8 +15,7 @@
                               :teleporter/online? (tpstatus/teleporter-online? (:teleporter/uuid v))}))
                   (db/rd [:teleporter]))]
     {:status 200
-     :body tps})
-  )
+     :body tps}))
 
 
 
