@@ -16,7 +16,8 @@
 (defn teleporter-online? [tp-id]
   (let [tp-mac (get-tp-mac-from-uuid tp-id)
         teleporter (db/rd [:teleporter tp-mac])
-        now (t/now)]
+        now (t/now)
+        timeout (get-in config [:teleporter :offline-timeout] (* 60 1000))]
     (if-let [heartbeat-timestamp (:teleporter/heartbeat-timestamp teleporter)]
-      (t/< now (t/>> heartbeat-timestamp (t/new-duration (get-in config [:teleporter :offline-timeout]) :seconds)))
+      (t/< now (t/>> heartbeat-timestamp (t/new-duration timeout :millis)))
       false)))
