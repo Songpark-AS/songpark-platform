@@ -1,0 +1,37 @@
+{:http {:server-settings {:port 3000
+                          :join? false
+                          :http/cookies {:http-only true}}}
+ :logger {:sentry-settings {:log? false
+                            :dsn ""}}
+ :mqtt {:config {:scheme "tcp"
+                 :host "10.100.200.8"
+                 :port 1883
+                 :client-id "songpark-platform-be7a"
+                 :connect-options {:auto-reconnect true
+                                   :keep-alive-interval 60
+                                   ;; :username "tpx"
+                                   ;;:password "SecretPass"
+                                   }}}
+ :sips {#uuid "e35fd384-5c62-5ade-b66b-f3fafc0e08ad" "sip:9100@voip1.inonit.no",
+        #uuid "ad6fc5b7-c52c-5941-bfb7-cf4fb4189775" "sip:9102@voip1.inonit.no",
+        #uuid "7fdf0551-b5fc-557d-bddc-2ca5b1cdfaa6" "sip:9104@voip1.inonit.no",
+        #uuid "cffa01d3-fbf3-5c84-af4f-3c54550e2e4f" "sip:9106@voip1.inonit.no",
+        #uuid "c700abce-c109-58fc-a3e7-86bff412a872" "sip:9108@voip1.inonit.no"}
+
+ :database {:datasource {:kamailio {:maximum-pool-size 3
+                                    :adapter "mysql"
+                                    :username "kamailio_admin"
+                                    :password "mysql"
+                                    :database-name ""
+                                    :server-name "localhost"
+                                    :port-number 3306}}}
+ :voip {:server "voip1.inonit.no"
+        :accounts {#uuid "1d84be2b-44d1-5da8-91ae-a9b97f133cb9" {:name :tp-01
+                                                                 :voip/username "9111"
+                                                                 :voip/password "ufd682?7"}
+                   ;; TODO: change this based on mac address of other tp
+                   #uuid "1d84be2b-44d1-5da8-91ae-a9b97f133c00" {:name :tp-02
+                                                                 :voip/username "9112"
+                                                                 :voip/password "sT-hjjd?kd"}}}
+ :teleporter {;; milliseconds
+              :offline-timeout 60000}}
