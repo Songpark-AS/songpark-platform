@@ -172,7 +172,7 @@ kube-deploy-debug: kube-prep-debug
 	kubectl apply -f $(DEPLOYMENTDIR)/$(PROJECT_NAME).yaml
 
 
-all-staging: build-staging kube-deploy-staging
-all-production: build-production kube-deploy-production
-all-dev: build-dev kube-deploy-dev
-all-debug: build-debug kube-deploy-debug
+deploy-staging: build-staging kube-deploy-staging
+deploy-production: build-production kube-deploy-production
+deploy-dev: build-dev kube-deploy-dev
+deploy-debug: build-debug kube-deploy-debug
