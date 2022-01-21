@@ -7,8 +7,10 @@
 (defn get-version [_request]
   (try
     {:status 200
-     :body {:version (str/trim (slurp (io/resource "VERSION.git")))}}
+     :body {:version (str/trim (slurp (io/resource "VERSION")))
+            :sha (str/trim (slurp (io/resource "VERSION.git")))}}
     (catch Exception e
       (log/warn "No version found in resources")
       {:status 200
-       :body {:version "NO VERSION FOUND"}})))
+       :body {:version "Unknown"
+              :sha "Unknown"}})))

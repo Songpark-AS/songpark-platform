@@ -7,7 +7,8 @@ PROJECT_NAME=songpark-platform
 echo "Copying configuration files"
 cp $DEPLOYMENT_DIR/config.staging.edn $PROJECT_DIR/resources/config.edn
 
-echo "Copying VERSION.git to resources folder"
+echo "Copying VERSION and VERSION.git to resources folder"
+cp VERSION $PROJECT_DIR/resources/VERSION
 cp VERSION.git $PROJECT_DIR/resources/VERSION.git
 
 echo "Compiling $PROJECT_NAME"

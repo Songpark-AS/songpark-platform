@@ -11,6 +11,7 @@ DEPLOYMENTDIR=deployment
 
 
 $(shell git rev-parse HEAD > VERSION.git)
+$(shell date '+%Y-%m-%d' > VERSION)
 
 default:
 	@echo "Check commands"
