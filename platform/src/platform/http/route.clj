@@ -101,6 +101,12 @@
        {:get {:responses {200 {:body map?}}
               :handler #'api.version/get-version}}]]
 
+     ["/latest-available-version"
+      {:swagger {:tags ["version"]}}
+      [""
+       {:get {:responses {200 {:body any?}}
+              :handler #'api.version/get-latest-available-version}}]]
+
      ;; auth     
      ["/api"
       ;; everything under /api needs to be authenticated
