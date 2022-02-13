@@ -1,4 +1,6 @@
 VERSION.git
+VERSION
+platform/resources/VERSION
 logs/
 
 # platform
