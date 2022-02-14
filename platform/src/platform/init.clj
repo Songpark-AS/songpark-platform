@@ -6,7 +6,8 @@
             [platform.http.server :as http.server]
             [platform.logger :as logger]
             [platform.message :as message]
-            [platform.mqtt :as mqtt]            
+            [platform.mqtt :as mqtt]
+            [platform.versionrefresher :as versionrefresher]
             [platform.api :as api]))
 
 (defn- system-map [extra-components]
@@ -15,10 +16,12 @@
         ;; for all the other modules
         core-config (component/start (platform.config/config-manager {}))
         logger (component/start (logger/logger (:logger config)))
+        versionrefresher (component/start (versionrefresher/versionrefresher {}))
         mqtt-config (:mqtt config)]
     (apply component/system-map
            (into [:logger logger
                   :config core-config
+                  :versionrefresher versionrefresher
                   :http-server (http.server/http-server (:http config))
                   :message-service (message/message-service (:message config))
                   :mqtt-manager (component/using
