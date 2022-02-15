@@ -21,24 +21,25 @@
                   (fn [time]
                     (set-teleporter-fw-version (get-apt-package-version "teleporter-fw")))))
 
-(defrecord VersionRefresher [started? config]
+(defrecord VersionRefresher [started? config closeable]
   component/Lifecycle
   (start [this]
     (if started?
       this
       (do
         (log/debug "Starting VersionRefresher")
-        (let [new-this (assoc this
-                              :started? true
-                              :closeable (init-chime-schedule))]
-          new-this))))
+        (assoc this
+               :started? true
+               :closeable (init-chime-schedule)))))
   (stop [this]
     (if-not started?
       this
       (do
         (log/debug "Stopping VersionRefresher")
-        (.close (:closeable this))
-        (let [new-this (assoc this :started? false)]
-          new-this)))))
+        (.close closeable)
+        (assoc this
+               :started? false
+               :closeable nil)))))
+
 (defn versionrefresher [settings]
   (map->VersionRefresher settings))
