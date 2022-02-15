@@ -10,7 +10,7 @@
   (uuid/v5 uuid/+namespace-url+ name))
 
 (defn init [{:keys [data parameters]}]
-  (let [{:teleporter/keys [mac nickname tpx-version bp-version fpga-version]} (:body parameters)
+  (let [{:teleporter/keys [mac nickname tpx-version bp-version fpga-version apt-version]} (:body parameters)
         uuid (ns-uuid<- mac)
         sips (:sips config)]
     (if mac
@@ -21,7 +21,8 @@
                                   :teleporter/nickname nickname
                                   :teleporter/tpx-version tpx-version
                                   :teleporter/bp-version bp-version
-                                  :teleporter/fpga-version fpga-version})
+                                  :teleporter/fpga-version fpga-version
+                                  :teleporter/apt-version apt-version})
         (send-message! {:message/type :platform.cmd/subscribe
                         :message/meta {:mqtt/topics {(str uuid) 0 (str uuid "/heartbeat") 0}}})
         {:status 200
