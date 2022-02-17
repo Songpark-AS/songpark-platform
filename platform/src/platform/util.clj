@@ -32,5 +32,5 @@
   (let [apt-show-command (str "apt-cache show " package-name)
         apt-string (:out (sh "bash" "-c" apt-show-command))
         version-line (first (filter (fn [line] (re-matches #"Version.*" line))
-                                    (str/split apt-string #"\r\n")))]
-    (last (str/split version-line #": "))))
+                                    (str/split apt-string #"\n")))]
+    (last (str/split (or version-line "Unknown") #": "))))
