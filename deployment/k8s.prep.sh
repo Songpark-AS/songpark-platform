@@ -5,7 +5,7 @@ TEMPLATE_FILE=songpark-platform.template.yaml
 YAML_FILE=songpark-platform.yaml
 TAG=$1
 VERSION=$2
-NAMESPACE=internal
+NAMESPACE=songpark
 HOSTNAME=spp.inonit.no
 
 echo "Copying template file"
