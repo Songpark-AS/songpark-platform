@@ -15,4 +15,4 @@
                  :connect-options {:auto-reconnect true
                                    :keep-alive-interval 60}}}
  :teleporter {;; milliseconds
-              :offline-timeout (* 60 1000)}}
+              :offline-timeout 60000}}

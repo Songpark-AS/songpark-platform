@@ -98,7 +98,7 @@
                  [danlentz/clj-uuid "0.1.9"]
                  [com.cemerick/url "0.1.1"]
                  [tick "0.4.30-alpha"]
-
+                 [jarohen/chime "0.3.3"]
                  ;; [emil0r/clj-oauth2 "0.6.0"]
 
                  ;; Feide SAML

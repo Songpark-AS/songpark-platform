@@ -11,6 +11,7 @@ DEPLOYMENTDIR=deployment
 
 
 $(shell git rev-parse HEAD > VERSION.git)
+$(shell date '+%Y-%m-%d' > VERSION)
 
 default:
 	@echo "Check commands"
@@ -50,10 +51,10 @@ push-dev: aws-login
 
 # builds
 
-build-staging: prebuild-staging docker-build docker-tag-version docker-tag-staging
-build-debug: prebuild-debug docker-build docker-tag-version docker-tag-debug
-build-dev: prebuild-dev docker-build docker-tag-version docker-tag-dev
-build-production: prebuild-production docker-build docker-tag-version docker-tag-production
+build-staging: prebuild-staging docker-build docker-tag-version docker-tag-staging docker-tag-latest
+build-debug: prebuild-debug docker-build docker-tag-version docker-tag-debug docker-tag-latest
+build-dev: prebuild-dev docker-build docker-tag-version docker-tag-dev docker-tag-latest
+build-production: prebuild-production docker-build docker-tag-version docker-tag-production docker-tag-latest
 
 
 # prebuilds
@@ -172,7 +173,7 @@ kube-deploy-debug: kube-prep-debug
 	kubectl apply -f $(DEPLOYMENTDIR)/$(PROJECT_NAME).yaml
 
 
-deploy-staging: build-staging kube-deploy-staging
-deploy-production: build-production kube-deploy-production
-deploy-dev: build-dev kube-deploy-dev
-deploy-debug: build-debug kube-deploy-debug
+deploy-staging: build-staging push-staging kube-deploy-staging
+deploy-production: build-production push-production kube-deploy-production
+deploy-dev: build-dev push-dev kube-deploy-dev
+deploy-debug: build-debug push-debug kube-deploy-debug

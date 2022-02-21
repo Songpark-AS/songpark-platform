@@ -1,4 +1,6 @@
-(ns platform.util)
+(ns platform.util
+  (:require [clojure.java.shell :refer [sh]]
+            [clojure.string :as str]))
 
 (defn kw->str [x]
   (if (keyword? x)
@@ -21,3 +23,14 @@
   (keyword idp-name id))
 
 (def http-ok {:result :success})
+
+(defn get-apt-package-version
+  "Returns the latest version number available based on an apt package name.
+  Requires apt to be installed"
+  [package-name]
+  (sh "bash" "-c" "apt update")
+  (let [apt-show-command (str "apt-cache show " package-name)
+        apt-string (:out (sh "bash" "-c" apt-show-command))
+        version-line (first (filter (fn [line] (re-matches #"Version.*" line))
+                                    (str/split apt-string #"\n")))]
+    (last (str/split (or version-line "Unknown") #": "))))
