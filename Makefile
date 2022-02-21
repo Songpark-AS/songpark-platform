@@ -51,10 +51,10 @@ push-dev: aws-login
 
 # builds
 
-build-staging: prebuild-staging docker-build docker-tag-version docker-tag-staging
-build-debug: prebuild-debug docker-build docker-tag-version docker-tag-debug
-build-dev: prebuild-dev docker-build docker-tag-version docker-tag-dev
-build-production: prebuild-production docker-build docker-tag-version docker-tag-production
+build-staging: prebuild-staging docker-build docker-tag-version docker-tag-staging docker-tag-latest
+build-debug: prebuild-debug docker-build docker-tag-version docker-tag-debug docker-tag-latest
+build-dev: prebuild-dev docker-build docker-tag-version docker-tag-dev docker-tag-latest
+build-production: prebuild-production docker-build docker-tag-version docker-tag-production docker-tag-latest
 
 
 # prebuilds
