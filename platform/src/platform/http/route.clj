@@ -12,8 +12,10 @@
             [clojure.spec.alpha :as spec]
             [cognitect.transit :as transit]
             [muuntaja.core :as m]
-            [songpark.common.taxonomy.error]
-            [songpark.common.taxonomy.http]
+            [songpark.taxonomy.error]
+            [songpark.taxonomy.http]
+            [songpark.taxonomy.jam]
+            [songpark.taxonomy.teleporter]
             [ring.middleware.content-type :refer [wrap-content-type]]
             [ring.middleware.cookies :refer [wrap-cookies]]
             [ring.middleware.cors :refer [wrap-cors]]
@@ -121,33 +123,31 @@
       ["/teleporter"
        {:swagger {:tags ["teleporter"]}}
        [""
-        {:put {:responses {200 {:body (spec/keys :req [:teleporter/uuid])}
+        {:put {:responses {200 {:body (spec/keys :req [:teleporter/id])}
                            400 {:body :error/error}}
-               :parameters {:body any? ;;:teleporter/init
-                            }
-               :handler #'api.teleporter/init}
-         :delete {:responses {200 {:body :http/empty?}
-                              400 {:body :error/error}}
-                  :parameters {:body (spec/keys :req [:teleporter/mac])}
-                  :handler #'api.teleporter/terminate}}]]
+               :parameters {:body any?}
+               :handler #'api.teleporter/init}}]]
       ["/app"
        {:swagger {:tags ["app"]}}
        [""
-        {:get {:responses {200 {:body any? #_(spec/keys :req [:teleporter/uuid
-                                                              :teleporter/nickname])}}               
+        {:get {:responses {200 {:body any?}}               
                :handler #'api.app/connect}}]]
       ["/jam"
        {:swagger {:tags ["jam"]}}
        [""
-        {:put {:responses {201 {:body :jam/response}
-                           400 {:body :error/error}}
-               :parameters {:body :teleporter/uuids}
-               :handler #'api.jam/start}
-         :delete {:responses {204 {:body :http/empty?}
+        {:delete {:responses {200 {:body :jam/stopped}
                               400 {:body :error/error}}
-                  :parameters {:body (spec/keys :req [:jam/uuid])}
-                  :handler #'api.jam/stop}}]]
-      ]]
+                  :parameters {:body :jam/stop}
+                  :handler #'api.jam/stop}}]
+       ["/ask"
+        {:put {:responses {200 {:body :jam/asked}
+                           400 {:body :error/error}}
+               :parameters {:body :jam/ask}
+               :handler #'api.jam/ask}
+         :delete {:responses {200 {:body :jam/obviated}
+                              400 {:body :error/error}}
+                  :parameters {:body :jam/obviate}
+                  :handler #'api.jam/ask}}]]]]
 
     {:exception pretty/exception
      ;;:compile r.coercion/compile-request-coercers
@@ -162,7 +162,7 @@
                          #_[wrap-session {:store (:store settings)
                                           :cookie-attrs (:http/cookies settings)}]
 
-                         [middleware/wrap-debug-inject {:session {:identity {:teleporter/id 1
+                         #_[middleware/wrap-debug-inject {:session {:identity {:teleporter/id 1
                                                                              :authz/credentials #{:teleporter}}}}]
 
                          ;; swagger feature

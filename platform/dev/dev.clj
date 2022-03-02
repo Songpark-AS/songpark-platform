@@ -1,7 +1,5 @@
 (ns dev
   (:require [platform.init :as init]
-            #_[platform.test.util :refer [seed-db!]]
-            #_[ez-database.core :as db]
             [taoensso.timbre :as log]))
 
 (defn restart
@@ -11,28 +9,21 @@
   ;; significantly slowing down responses
   (log/merge-config! {:min-level :debug
                       :ns-filter {:deny #{"org.eclipse.jetty.*"
-                                          "io.grpc.netty.shaded.io.netty.*"
-                                          "org.opensaml.*"}
+                                          "io.grpc.netty.shaded.io.netty.*"}
                                   :allow #{"*"}}})
   (init/stop)
   (init/init))
 
-#_(defn reseed
-    ";; seed database"
-    []
-    (let [db (get-in @init/system [:database])]
-      (seed-db! db)))
-
-(comment  
+(comment
   ;; stop and start songpark
   (init/stop)
   (restart)
-  ;; seed database
-  ;;(reseed)
 
-  ;; how to quickly test something in the database
-  (let [db (get-in @init/system [:database])]
-    (db/query db {:select [:*] :from [:assignment_assignment]}))
+  (let [db (get-in @init/system [:http-server :db])]
+    (-> db :kv-map deref :jam))
+
+  (let [db (get-in @init/system [:http-server :db])]
+    (songpark.jam.platform.protocol/delete-db db [:jam]))
 
 
   

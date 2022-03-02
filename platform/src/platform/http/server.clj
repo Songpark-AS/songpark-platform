@@ -14,7 +14,7 @@
 (defn stop-server [server]
   (.stop server))
 
-(defrecord HTTPServer [started? server-settings server]
+(defrecord HTTPServer [started? server-settings server mqtt-client db jam-manager]
   component/Lifecycle
   (start [this]
     (if started?
@@ -26,7 +26,9 @@
                                        ;;:authz.backend/session session-backend
                                        :http/cookies (:http/cookies server-settings)
                                        ;;:frontend (:frontend config)
-                                       :songpark/data {}})]
+                                       :songpark/data {:mqtt-client mqtt-client
+                                                       :db db
+                                                       :jam-manager jam-manager}})]
             (assoc this
                    :started? true
                    :server server)))))

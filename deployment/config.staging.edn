@@ -8,11 +8,13 @@
         #uuid "7fdf0551-b5fc-557d-bddc-2ca5b1cdfaa6" "sip:9104@voip1.inonit.no",
         #uuid "cffa01d3-fbf3-5c84-af4f-3c54550e2e4f" "sip:9106@voip1.inonit.no",
         #uuid "c700abce-c109-58fc-a3e7-86bff412a872" "sip:9108@voip1.inonit.no"}
+ :scheduler {;; every 1 minute
+             :interval-ms 60000}
  :mqtt {:config {:scheme "tcp"
                  :host "127.0.0.1"
                  :port 1883
                  :client-id "songpark-platform-be7a"
                  :connect-options {:auto-reconnect true
                                    :keep-alive-interval 60}}}
- :teleporter {;; milliseconds
+ :teleporter {;; milliseconds. every minute
               :offline-timeout 60000}}

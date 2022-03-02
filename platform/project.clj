@@ -30,9 +30,10 @@
 
                  ;; songpark
                  [songpark/common "0.1.1-SNAPSHOT"]
-
-                 ;; mqtt
-                 [clojurewerkz/machine_head "1.0.0"]
+                 [songpark/jam "0.1.0-SNAPSHOT"]
+                 [songpark/taxonomy "0.2.0-SNAPSHOT"]
+                 [songpark/mqtt "1.0.1-alpha1"]
+                 
 
                  ;; routing
                  [metosin/reitit "0.4.2"]
@@ -45,10 +46,6 @@
                  [ring/ring-jetty-adapter "1.9.4"]
                  [ring-cors "0.1.13"]
 
-                 ;; data format
-                 [com.cognitect/transit-clj "1.0.324"]
-                 [cheshire "5.10.0"]
-
                  ;; structure
                  [com.stuartsierra/component "1.0.0"]
 
@@ -58,7 +55,7 @@
                  ;; logging
                  [com.taoensso/timbre "5.1.2"]
                  [com.fzakaria/slf4j-timbre "0.3.21"]
-                 [raven-clj "1.6.0"]                 
+                 [raven-clj "1.6.0"]
                  
                  ;; configuration
                  [cprop "0.1.11"]
@@ -75,7 +72,7 @@
 
                  ;; database
                  [ez-database "0.8.2"]
-                 [seancorfield/next.jdbc "1.2.659"]                 
+                 [seancorfield/next.jdbc "1.2.659"]
                  [org.postgresql/postgresql "42.2.8"]
                  [mysql/mysql-connector-java "8.0.26"]
                  [hikari-cp "2.9.0"]
@@ -91,21 +88,10 @@
                  ;; html
                  [hiccup "1.0.5"]
 
-                 ;; aws
-                 ;; [amazonica "0.3.153"]
-
                  ;; utils
                  [danlentz/clj-uuid "0.1.9"]
                  [com.cemerick/url "0.1.1"]
-                 [tick "0.4.30-alpha"]
-                 [jarohen/chime "0.3.3"]
-                 ;; [emil0r/clj-oauth2 "0.6.0"]
-
-                 ;; Feide SAML
-                                        ;[metabase/saml20-clj "1.0.2" :exclusions [org.clojure/data.zip]]
-                 ;; since saml20-clj's version is obsolete
-                                        ;[org.clojure/data.zip "1.0.0"]
-                 ]
+                 [jarohen/chime "0.3.3"]]
 
   :uberjar-name "platform.jar"
 

@@ -1,14 +1,14 @@
 (ns platform.init
   (:require [com.stuartsierra.component :as component]
-            [taoensso.timbre :as log]
             [platform.config :refer [config]]
-            [platform.db.store :refer [rd wr]]
             [platform.http.server :as http.server]
             [platform.logger :as logger]
-            [platform.message :as message]
-            [platform.mqtt :as mqtt]
+            [platform.mqtt.handler.teleporter]
+            [platform.scheduler :as scheduler]
             [platform.versionrefresher :as versionrefresher]
-            [platform.api :as api]))
+            [songpark.jam.platform :refer [mem-db jam-manager]]
+            [songpark.mqtt :as mqtt]
+            [taoensso.timbre :as log]))
 
 (defn- system-map [extra-components]
   (let [;; logger and config are started this way so that we can ensure
@@ -16,21 +16,23 @@
         ;; for all the other modules
         core-config (component/start (platform.config/config-manager {}))
         logger (component/start (logger/logger (:logger config)))
-        versionrefresher (component/start (versionrefresher/versionrefresher {}))
-        mqtt-config (:mqtt config)]
+        db (mem-db {:teleporter {}
+                    :jam {}
+                    :waiting {}})
+        ;; start mqtt client first in order to let it connect
+        mqtt-client (component/start (mqtt/mqtt-client (assoc-in (:mqtt config) [:config :id] "platform")))]
     (apply component/system-map
            (into [:logger logger
                   :config core-config
-                  :versionrefresher versionrefresher
-                  :http-server (http.server/http-server (:http config))
-                  :message-service (message/message-service (:message config))
-                  :mqtt-manager (component/using
-                                 (mqtt/mqtt-manager (merge (:mqtt config)
-                                                           {:injection-ks [:message-service]}))
-                                 [:message-service])                  
-                  :api-manager (component/using (api/api-manager
-                                                 {:injection-ks [:message-service :mqtt-manager]})
-                                                [:message-service :mqtt-manager])]
+                  :versionrefresher  (versionrefresher/versionrefresher (:versionrefresher config))
+                  :http-server (component/using (http.server/http-server (merge (:http config)
+                                                                                {:db db}))
+                                                [:mqtt-client :jam-manager])
+                  :jam-manager (component/using (jam-manager {:db db})
+                                                [:mqtt-client])
+                  :scheduler (component/using (scheduler/scheduler (:scheduler config))
+                                              [:jam-manager])
+                  :mqtt-client mqtt-client]
                  extra-components))))
 
 (defonce system (atom nil))

@@ -1,27 +1,32 @@
 (ns platform.api.app
-  (:require [clj-uuid :as uuid]
-            [taoensso.timbre :as log]
-            [songpark.common.taxonomy.teleporter]
-            [platform.util.mock :refer [random-teleporters]]
-            [platform.db.store :as db]
-            [platform.tpstatus :as tpstatus]
-            [platform.api :refer [send-message!]]))
+  (:require [platform.tpstatus :as tpstatus]
+            [songpark.jam.platform.protocol :as proto]
+            [songpark.taxonomy.teleporter]
+            [taoensso.timbre :as log]))
 
 
 ;; Highly ad hoc!
-(defn connect [request]
-  (let [tps (mapv (fn [[k v]]
-                    (merge v {:teleporter/mac k
-                              :teleporter/online? (tpstatus/teleporter-online? (:teleporter/uuid v))}))
-                  (db/rd [:teleporter]))]
+(defn connect [{{db :db} :data :as request}]
+  (let [jams (->> (proto/read-db db [:jam])
+                  (vals)
+                  (map #(select-keys % [:jam/id :jam/members])))
+        tps (mapv (fn [[k v]]
+                    (merge
+                     (dissoc v
+                             :teleporter/heartbeat-timestamp
+                             :teleporter/mac
+                             :teleporter/sip)
+                     {:teleporter/online? (tpstatus/teleporter-online? k)}))
+                  (proto/read-db db [:teleporter]))]
     {:status 200
-     :body tps}))
+     :body {:teleporters tps
+            :jams jams}}))
 
 
 
 (comment
 
-  (db/rd [:teleporter])
-  (db/rd [:jam]) 
+  (let [db (get-in @platform.init/system [:http-server :db])]
+    (connect {:data {:db db}}))
   
   )
