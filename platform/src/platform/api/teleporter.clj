@@ -11,21 +11,16 @@
   (uuid/v5 uuid/+namespace-url+ name))
 
 (defn init [{:keys [data parameters]}]
-  (let [{:teleporter/keys [mac nickname tpx-version bp-version fpga-version apt-version]} (:body parameters)
+  (let [{:teleporter/keys [mac] :as teleporter} (:body parameters)
         id (ns-uuid<- mac)
         sips (:sips config)
         db (:db data)]
     (if mac
       (do
-        (proto/write-db db [:teleporters id] {:teleporter/id id
-                                              :teleporter/mac mac
-                                              :teleporter/heartbeat-timestamp (t/now)
-                                              :teleporter/sip (sips id)
-                                              :teleporter/nickname nickname
-                                              :teleporter/tpx-version tpx-version
-                                              :teleporter/bp-version bp-version
-                                              :teleporter/fpga-version fpga-version
-                                              :teleporter/apt-version apt-version})
+        (proto/write-db db [:teleporter id] (assoc teleporter
+                                                   :teleporter/id id
+                                                   :teleporter/heartbeat-timestamp (t/now)
+                                                   :teleporter/sip (sips id)))
         (let [topic (heartbeat-topic id)
               mqtt-client (:mqtt-client data)]
           (mqtt/subscribe mqtt-client topic 0))

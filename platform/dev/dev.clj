@@ -20,10 +20,10 @@
   (restart)
 
   (let [db (get-in @init/system [:http-server :db])]
-    (-> db :kv-map deref :jam))
+    (-> db :kv-map deref))
 
   (let [db (get-in @init/system [:http-server :db])]
-    (songpark.jam.platform.protocol/delete-db db [:jam]))
+    (songpark.jam.platform.protocol/delete-db db [:teleporters]))
 
 
   
