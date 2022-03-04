@@ -54,6 +54,10 @@
       ;; start the system
       (reset! system (component/start (system-map extra-components)))
 
+      (let [mqtt-client (:mqtt-client @system)
+            jam-manager (:jam-manager @system)]
+        (mqtt/add-injection mqtt-client :jam-manager jam-manager))
+
       ;; log uncaught exceptions in threads
       (Thread/setDefaultUncaughtExceptionHandler
        (reify Thread$UncaughtExceptionHandler

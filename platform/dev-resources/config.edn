@@ -12,8 +12,8 @@
                                    ;; :username "tpx"
                                    ;;:password "SecretPass"
                                    }}}
- :scheduler {;; every 1 minute
-             :interval-ms 60000}
+ :scheduler {;; every one second
+             :interval-ms 1000}
  :sips {#uuid "e35fd384-5c62-5ade-b66b-f3fafc0e08ad" "sip:9100@voip1.inonit.no",
         #uuid "ad6fc5b7-c52c-5941-bfb7-cf4fb4189775" "sip:9102@voip1.inonit.no",
         #uuid "7fdf0551-b5fc-557d-bddc-2ca5b1cdfaa6" "sip:9104@voip1.inonit.no",

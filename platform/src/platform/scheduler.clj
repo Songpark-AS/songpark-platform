@@ -11,7 +11,6 @@
    (chime/periodic-seq (Instant/now)
                        (Duration/ofMillis interval-ms))
    (fn [time]
-     (log/debug "Running jobs at" time)
      (doseq [job jobs]
        (job time)))))
 
@@ -25,7 +24,7 @@
           (assoc this
                  :chimed (start-jobs [(fn [_]
                                         (jam.platform/check-for-timeouts jam-manager))]
-                                     (or interval-ms (* 60 1000)))
+                                     (or interval-ms (* 1 1000)))
                  :started? true))))
   (stop [this]
     (if-not started?

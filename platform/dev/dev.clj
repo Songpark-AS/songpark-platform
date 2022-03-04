@@ -19,12 +19,13 @@
   (init/stop)
   (restart)
 
+  (-> @init/system
+      :mqtt-client
+      :topics
+      deref)
+
   (let [db (get-in @init/system [:http-server :db])]
     (-> db :kv-map deref))
 
   (let [db (get-in @init/system [:http-server :db])]
-    (songpark.jam.platform.protocol/delete-db db [:teleporters]))
-
-
-  
-  )
+    (songpark.jam.platform.protocol/delete-db db [:teleporters])))
