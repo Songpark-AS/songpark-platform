@@ -24,7 +24,9 @@
     (apply component/system-map
            (into [:logger logger
                   :config core-config
-                  :versionrefresher  (versionrefresher/versionrefresher (:versionrefresher config))
+                  :versionrefresher (versionrefresher/versionrefresher
+                                     (assoc (:versionrefresher config)
+                                            :db db))
                   :http-server (component/using (http.server/http-server (merge (:http config)
                                                                                 {:db db}))
                                                 [:mqtt-client :jam-manager])

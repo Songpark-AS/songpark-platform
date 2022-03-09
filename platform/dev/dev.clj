@@ -1,5 +1,6 @@
 (ns dev
   (:require [platform.init :as init]
+            [songpark.jam.platform.protocol :as proto]
             [taoensso.timbre :as log]))
 
 (defn restart
@@ -25,7 +26,10 @@
       deref)
 
   (let [db (get-in @init/system [:http-server :db])]
-    (-> db :kv-map deref))
+    (-> db :kv-map deref :teleporter-fw-version))
+
+  (let [db (get-in @init/system [:http-server :db])]
+    (proto/write-db db [:teleporter-fw-version] "0.0.10"))
 
   (let [db (get-in @init/system [:http-server :db])]
     (songpark.jam.platform.protocol/delete-db db [:teleporters])))
