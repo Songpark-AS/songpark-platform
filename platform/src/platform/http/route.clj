@@ -147,7 +147,7 @@
          :delete {:responses {200 {:body :jam/obviated}
                               400 {:body :error/error}}
                   :parameters {:body :jam/obviate}
-                  :handler #'api.jam/ask}}]]]]
+                  :handler #'api.jam/obviate}}]]]]
 
     {:exception pretty/exception
      ;;:compile r.coercion/compile-request-coercers
