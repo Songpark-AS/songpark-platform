@@ -29,6 +29,17 @@
       {:status 400
        :body {:error/message "Illegal MAC address"}})))
 
+(defn update [{:keys [data parameters]}]
+  (let [{:teleporter/keys [id settings] :as teleporter} (:body parameters)
+        db (:db data)]
+    (if id
+      (let [teleporter (proto/read-db db [:teleporter id])]
+        (proto/write-db db [:teleporter id] (merge teleporter settings))
+        {:status 200
+         :body {:teleporter/id id}})
+      {:status 400
+       :body {:error/message "Unable to update the Teleporter"}})))
+
 
 (comment
   (log/debug (db/rd [:teleporter]))

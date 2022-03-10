@@ -126,7 +126,11 @@
         {:put {:responses {200 {:body (spec/keys :req [:teleporter/id])}
                            400 {:body :error/error}}
                :parameters {:body any?}
-               :handler #'api.teleporter/init}}]]
+               :handler #'api.teleporter/init}
+         :post {:responses {200 {:body (spec/keys :req [:teleporter/id])}
+                            400 {:body :error/error}}
+                :parameters {:body any?}
+                :handler #'api.teleporter/update}}]]
       ["/app"
        {:swagger {:tags ["app"]}}
        [""
