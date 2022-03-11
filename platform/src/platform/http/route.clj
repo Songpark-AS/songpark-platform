@@ -33,7 +33,7 @@
             [reitit.ring.middleware.multipart :as multipart]
             [reitit.ring.middleware.parameters :as parameters]
             [reitit.ring.spec]
-            [tick.alpha.api :as t]
+            [tick.core :as t]
             [taoensso.timbre :as log]))
 
 

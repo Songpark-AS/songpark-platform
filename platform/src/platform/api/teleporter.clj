@@ -5,7 +5,7 @@
             [songpark.mqtt :as mqtt]
             [songpark.mqtt.util :refer [heartbeat-topic]]
             [taoensso.timbre :as log]
-            [tick.alpha.api :as t]))
+            [tick.core :as t]))
 
 (defn- ns-uuid<- [name]
   (uuid/v5 uuid/+namespace-url+ name))
