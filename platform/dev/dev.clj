@@ -31,7 +31,14 @@
     (proto/write-db db [:waiting] {}))
 
   (let [db (get-in @init/system [:http-server :db])]
-    (proto/read-db db [:waiting]))
+    (->> (proto/read-db db [:teleporter])
+         (vals)
+         (map #(select-keys % [:teleporter/nickname
+                               :volume/global-volume
+                               :volume/local-volume
+                               :volume/network-volume
+                               :jam/playout-delay]))
+         (clojure.pprint/pprint)))
 
   (let [db (get-in @init/system [:http-server :db])]
     (proto/read-db db [:jam]))
