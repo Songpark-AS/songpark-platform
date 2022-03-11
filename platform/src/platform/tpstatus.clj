@@ -2,7 +2,7 @@
   (:require [platform.config :refer [config]]
             [platform.db.store :as db]
             [taoensso.timbre :as log]
-            [tick.alpha.api :as t]))
+            [tick.core :as t]))
 
 (defn handle-teleporter-heartbeat [tp-id]
   (let [now (t/now)]
