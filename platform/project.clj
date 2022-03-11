@@ -29,10 +29,10 @@
                  [org.clojure/core.memoize "1.0.236"]
 
                  ;; songpark
-                 [songpark/common "0.1.1-SNAPSHOT"]
-                 [songpark/jam "0.1.0-SNAPSHOT"]
-                 [songpark/taxonomy "0.2.0-SNAPSHOT"]
-                 [songpark/mqtt "1.0.1-alpha1"]
+                 [songpark/common "0.2.0"]
+                 [songpark/jam "1.0.0"]
+                 [songpark/taxonomy "0.2.0"]
+                 [songpark/mqtt "1.0.1"]
                  
 
                  ;; routing
