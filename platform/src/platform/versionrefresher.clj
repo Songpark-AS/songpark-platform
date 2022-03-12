@@ -1,27 +1,25 @@
 (ns platform.versionrefresher
-  (:require [com.stuartsierra.component :as component]
-            [taoensso.timbre :as log]
-            [chime.core :as chime]
+  (:require [chime.core :as chime]
+            [com.stuartsierra.component :as component]
             [platform.util :refer [get-apt-package-version]]
-            [platform.db.store :as store])
+            [songpark.jam.platform.protocol :as proto]
+            [taoensso.timbre :as log])
   (:import (java.time Instant Duration)))
 
 ;; System component to refresh teleporter-fw version
 ;; Uses chime to fetch what the latest version of the teleporter firmware is, and stores that information in the database
 
-(defn- set-teleporter-fw-version [version]
-  (store/wr [:teleporter-fw-version] version))
+(defn- set-teleporter-fw-version [db version]
+  (proto/write-db db [:teleporter-fw-version] version))
 
-(defn- init-chime-schedule []
-  ;; Don't wait for 5 minutes initially
-  (set-teleporter-fw-version (get-apt-package-version "teleporter-fw"))
-
-  (chime/chime-at (-> (chime/periodic-seq (Instant/now) (Duration/ofMinutes 5))
-                      rest)
+(defn- init-chime-schedule [db]
+  (chime/chime-at (chime/periodic-seq (Instant/now)
+                                      (Duration/ofMinutes 5))
                   (fn [time]
-                    (set-teleporter-fw-version (get-apt-package-version "teleporter-fw")))))
+                    (set-teleporter-fw-version db
+                                               (get-apt-package-version "teleporter-fw")))))
 
-(defrecord VersionRefresher [started? config closeable]
+(defrecord VersionRefresher [started? config closeable db]
   component/Lifecycle
   (start [this]
     (if started?
@@ -30,7 +28,7 @@
         (log/debug "Starting VersionRefresher")
         (assoc this
                :started? true
-               :closeable (init-chime-schedule)))))
+               :closeable (init-chime-schedule db)))))
   (stop [this]
     (if-not started?
       this

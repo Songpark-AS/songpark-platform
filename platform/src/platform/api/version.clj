@@ -1,7 +1,7 @@
 (ns platform.api.version
   (:require [clojure.java.io :as io]
             [clojure.string :as str]
-            [platform.db.store :as store]
+            [songpark.jam.platform.protocol :as proto]
             [taoensso.timbre :as log]))
 
 
@@ -16,10 +16,10 @@
        :body {:version "Unknown"
               :sha "Unknown"}})))
 
-(defn get-latest-available-version [_request]
+(defn get-latest-available-version [{{db :db} :data :as _request}]
   (try
     {:status 200
-     :body {:version (str (store/rd [:teleporter-fw-version]))}}
+     :body {:version (str (proto/read-db db [:teleporter-fw-version]))}}
     (catch Exception e
       (log/error ::get-latest-available-version "Exception" e)
       {:status 500})))

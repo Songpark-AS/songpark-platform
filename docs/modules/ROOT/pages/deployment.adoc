@@ -1,3 +1,12 @@
 == Deployment
 
-Nothing yet.
+=== Important notes
+
+In order to deploy you need to get access to the `apt_auth.conf` file that contains credentials used to access the apt repository on nexus.
+
+It is available on AWS Parameter Store under `/secret/songpark/apt_auth.conf`
+
+If you don't have access to AWS Parameter Store, ask to get the file from someone who does.
+
+Once you have it, place it in the root of the project.
+

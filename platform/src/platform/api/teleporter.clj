@@ -1,37 +1,44 @@
 (ns platform.api.teleporter
   (:require [clj-uuid :as uuid]
-            [taoensso.timbre :as log]
-            [songpark.common.taxonomy.teleporter]
-            [platform.api :refer [send-message!]]
             [platform.config :refer [config]]
-            [platform.db.store :as db]))
+            [songpark.jam.platform.protocol :as proto]
+            [songpark.mqtt :as mqtt]
+            [songpark.mqtt.util :refer [heartbeat-topic]]
+            [taoensso.timbre :as log]
+            [tick.core :as t]))
 
 (defn- ns-uuid<- [name]
   (uuid/v5 uuid/+namespace-url+ name))
 
 (defn init [{:keys [data parameters]}]
-  (let [{:teleporter/keys [mac nickname tpx-version bp-version fpga-version apt-version]} (:body parameters)
-        uuid (ns-uuid<- mac)
-        sips (:sips config)]
+  (let [{:teleporter/keys [mac] :as teleporter} (:body parameters)
+        id (ns-uuid<- mac)
+        sips (:sips config)
+        db (:db data)]
     (if mac
       (do
-        (db/wr [:teleporter mac] {:teleporter/uuid uuid
-                                  :teleporter/mac mac
-                                  :teleporter/sip (sips uuid)
-                                  :teleporter/nickname nickname
-                                  :teleporter/tpx-version tpx-version
-                                  :teleporter/bp-version bp-version
-                                  :teleporter/fpga-version fpga-version
-                                  :teleporter/apt-version apt-version})
-        (send-message! {:message/type :platform.cmd/subscribe
-                        :message/meta {:mqtt/topics {(str uuid) 0 (str uuid "/heartbeat") 0}}})
+        (proto/write-db db [:teleporter id] (assoc teleporter
+                                                   :teleporter/id id
+                                                   :teleporter/heartbeat-timestamp (t/now)
+                                                   :teleporter/sip (sips id)))
+        (let [topic (heartbeat-topic id)
+              mqtt-client (:mqtt-client data)]
+          (mqtt/subscribe mqtt-client topic 0))
         {:status 200
-         :body {:teleporter/uuid uuid}})
+         :body {:teleporter/id id}})
       {:status 400
        :body {:error/message "Illegal MAC address"}})))
 
-(defn terminate [{:keys [mac]} teleporter]
-  (db/wr [:teleporter] mac dissoc))
+(defn update [{:keys [data parameters]}]
+  (let [{:teleporter/keys [id settings] :as teleporter} (:body parameters)
+        db (:db data)]
+    (if id
+      (let [teleporter (proto/read-db db [:teleporter id])]
+        (proto/write-db db [:teleporter id] (merge teleporter settings))
+        {:status 200
+         :body {:teleporter/id id}})
+      {:status 400
+       :body {:error/message "Unable to update the Teleporter"}})))
 
 
 (comment

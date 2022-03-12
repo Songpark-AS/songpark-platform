@@ -1,27 +1,64 @@
 (ns platform.api.app
-  (:require [clj-uuid :as uuid]
-            [taoensso.timbre :as log]
-            [songpark.common.taxonomy.teleporter]
-            [platform.util.mock :refer [random-teleporters]]
-            [platform.db.store :as db]
-            [platform.tpstatus :as tpstatus]
-            [platform.api :refer [send-message!]]))
+  (:require [platform.tpstatus :as tpstatus]
+            [songpark.jam.platform.protocol :as proto]
+            [songpark.taxonomy.teleporter]
+            [taoensso.timbre :as log]))
 
+
+(defn- get-jam-jam-status [{:jam/keys [members status]} tp-id]
+  (if ((set members) tp-id)
+    status
+    nil))
+
+(defn- get-jam-status [jams waiting tp-id]
+  (let [status (->> jams
+                    (map #(get-jam-jam-status % tp-id))
+                    (remove nil?)
+                    first)]
+    (cond
+      (and waiting
+           (waiting tp-id))
+      :jam/waiting
+
+      status
+      status
+
+      :else
+      :idle)))
+
+(comment
+  (let [db (get-in @platform.init/system [:http-server :db])
+        jams (->> (proto/read-db db [:jam])
+                  (vals))
+        waiting (proto/read-db db [:waiting])
+        tp-id #uuid "7fdf0551-b5fc-557d-bddc-2ca5b1cdfaa6"]
+    (get-jam-status jams waiting tp-id))
+  )
 
 ;; Highly ad hoc!
-(defn connect [request]
-  (let [tps (mapv (fn [[k v]]
-                    (merge v {:teleporter/mac k
-                              :teleporter/online? (tpstatus/teleporter-online? (:teleporter/uuid v))}))
-                  (db/rd [:teleporter]))]
+(defn connect [{{db :db} :data :as request}]
+  (let [jams (->> (proto/read-db db [:jam])
+                  (vals)
+                  (map #(select-keys % [:jam/id :jam/members :jam/status])))
+        waiting (proto/read-db db [:waiting])
+        tps (mapv (fn [[k v]]
+                    (merge
+                     (dissoc v
+                             :teleporter/heartbeat-timestamp
+                             :teleporter/mac
+                             :teleporter/sip)
+                     {:teleporter/online? (tpstatus/teleporter-online? k)
+                      :jam/status (get-jam-status jams waiting k)}))
+                  (proto/read-db db [:teleporter]))]
     {:status 200
-     :body tps}))
+     :body {:teleporters tps
+            :jams jams}}))
 
 
 
 (comment
 
-  (db/rd [:teleporter])
-  (db/rd [:jam]) 
+  (let [db (get-in @platform.init/system [:http-server :db])]
+    (connect {:data {:db db}}))
   
   )

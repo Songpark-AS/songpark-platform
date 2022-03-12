@@ -1,7 +1,6 @@
 (ns dev
   (:require [platform.init :as init]
-            #_[platform.test.util :refer [seed-db!]]
-            #_[ez-database.core :as db]
+            [songpark.jam.platform.protocol :as proto]
             [taoensso.timbre :as log]))
 
 (defn restart
@@ -11,29 +10,41 @@
   ;; significantly slowing down responses
   (log/merge-config! {:min-level :debug
                       :ns-filter {:deny #{"org.eclipse.jetty.*"
-                                          "io.grpc.netty.shaded.io.netty.*"
-                                          "org.opensaml.*"}
+                                          "io.grpc.netty.shaded.io.netty.*"}
                                   :allow #{"*"}}})
   (init/stop)
   (init/init))
 
-#_(defn reseed
-    ";; seed database"
-    []
-    (let [db (get-in @init/system [:database])]
-      (seed-db! db)))
-
-(comment  
+(comment
   ;; stop and start songpark
   (init/stop)
   (restart)
-  ;; seed database
-  ;;(reseed)
 
-  ;; how to quickly test something in the database
-  (let [db (get-in @init/system [:database])]
-    (db/query db {:select [:*] :from [:assignment_assignment]}))
+  (-> @init/system
+      :mqtt-client
+      :topics
+      deref)
 
+  (let [db (get-in @init/system [:http-server :db])]
+    (proto/read-db db [:teleporter #uuid "7fdf0551-b5fc-557d-bddc-2ca5b1cdfaa6" :volume/global-volume]))
+  (let [db (get-in @init/system [:http-server :db])]
+    (proto/write-db db [:waiting] {}))
 
-  
-  )
+  (let [db (get-in @init/system [:http-server :db])]
+    (->> (proto/read-db db [:teleporter])
+         (vals)
+         (map #(select-keys % [:teleporter/nickname
+                               :volume/global-volume
+                               :volume/local-volume
+                               :volume/network-volume
+                               :jam/playout-delay]))
+         (clojure.pprint/pprint)))
+
+  (let [db (get-in @init/system [:http-server :db])]
+    (proto/read-db db [:jam]))
+
+  (let [db (get-in @init/system [:http-server :db])]
+    (proto/write-db db [:teleporter-fw-version] "0.0.10"))
+
+  (let [db (get-in @init/system [:http-server :db])]
+    (songpark.jam.platform.protocol/delete-db db [:teleporters])))

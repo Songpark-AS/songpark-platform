@@ -2,20 +2,15 @@
   (:require [platform.config :refer [config]]
             [platform.db.store :as db]
             [taoensso.timbre :as log]
-            [tick.alpha.api :as t]))
-
-(defn- get-tp-mac-from-uuid [uuid]
-  (:teleporter/mac (last (first (filter (fn[[_ v]] (= (str uuid) (str (:teleporter/uuid v)))) (db/rd [:teleporter]))))))
+            [tick.core :as t]))
 
 (defn handle-teleporter-heartbeat [tp-id]
-  (let [tp-mac (get-tp-mac-from-uuid tp-id)
-        now (t/now)]
+  (let [now (t/now)]
     ;; store timestamp
-    (db/wr [:teleporter tp-mac :teleporter/heartbeat-timestamp] now)))
+    (db/wr [:teleporter tp-id :teleporter/heartbeat-timestamp] now)))
 
 (defn teleporter-online? [tp-id]
-  (let [tp-mac (get-tp-mac-from-uuid tp-id)
-        teleporter (db/rd [:teleporter tp-mac])
+  (let [teleporter (db/rd [:teleporter tp-id])
         now (t/now)
         timeout (get-in config [:teleporter :offline-timeout] (* 60 1000))]
     (if-let [heartbeat-timestamp (:teleporter/heartbeat-timestamp teleporter)]
