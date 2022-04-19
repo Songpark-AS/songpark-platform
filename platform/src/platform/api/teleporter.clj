@@ -23,7 +23,7 @@
                                                    :teleporter/sip (sips id)))
         (let [topic (heartbeat-topic id)
               mqtt-client (:mqtt-client data)]
-          (mqtt/subscribe mqtt-client topic 0))
+          (mqtt/subscribe mqtt-client topic 2))
         {:status 200
          :body {:teleporter/id id}})
       {:status 400
