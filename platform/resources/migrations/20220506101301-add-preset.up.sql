@@ -7,6 +7,7 @@ CREATE TABLE fx_key (
 --;;
 -- the table holding the values
 CREATE TABLE fx_value (
+  id serial primary key,
   fx_key integer references fx_key(id),
   value integer not null
 );
@@ -21,7 +22,7 @@ CREATE TABLE fx_preset (
 --;;
 CREATE TABLE fx_preset_values (
   value_id integer references fx_value(id),
-  preset_id integer references fx_present(id)
+  preset_id integer references fx_preset(id)
 );
 --;;
 CREATE TRIGGER fx_preset_trigger_updated_at
