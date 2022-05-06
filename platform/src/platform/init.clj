@@ -1,9 +1,11 @@
 (ns platform.init
   (:require [com.stuartsierra.component :as component]
             [platform.config :refer [config]]
+            [platform.database :as database]
             [platform.http.server :as http.server]
-            [platform.logger :as logger]
+            [platform.migrator :as migrator]
             [platform.mqtt.handler.teleporter]
+            [platform.logger :as logger]
             [platform.scheduler :as scheduler]
             [platform.versionrefresher :as versionrefresher]
             [songpark.jam.platform :refer [mem-db jam-manager]]
@@ -16,6 +18,7 @@
         ;; for all the other modules
         core-config (component/start (platform.config/config-manager {}))
         logger (component/start (logger/logger (:logger config)))
+        datasource (get-in config [:database :datasource])
         db (mem-db {:teleporter {}
                     :jam {}
                     :waiting {}})
@@ -24,6 +27,10 @@
     (apply component/system-map
            (into [:logger logger
                   :config core-config
+                  :migration-manager (component/using (migrator/migration-manager (:migration config))
+                                                      [:database])
+                  :database (database/database {:db-specs {:default {}}
+                                                :ds-specs datasource})
                   :versionrefresher (versionrefresher/versionrefresher
                                      (assoc (:versionrefresher config)
                                             :db db))
