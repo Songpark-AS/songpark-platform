@@ -12,43 +12,32 @@
 (defn post
   ([path data]
    (post path data nil))
-  ([path data c]
-   (let [api-key (get-in config [:mailchimp :api :key])
+  ([path data ?cb]
+   (let [api-key (get-in config [:mailchimp :api-key])
          [key dc] (str/split api-key #"-")
          url (str "https://" dc ".api.mailchimp.com/3.0" path)
          data {:timeout 2000
                :headers {"Authorization" (str "Bearer " key)}
                :body (json/generate-string data)
                :user-agent "Songpark"}]
-     (if (nil? c)
+     (if (nil? ?cb)
        (client/post url data)
-       ;;(client/post url data #(go (>! c %)))
-       nil
-       ))))
+       (client/post url data ?cb)))))
 
 (defn get
   ([path data]
    (get path data nil))
-  ([path data c]
-   (let [api-key (get-in config [:mailchimp :api :key])
+  ([path data ?cb]
+   (let [api-key (get-in config [:mailchimp :api-key])
          [key dc] (str/split api-key #"-")
          url (str "https://" dc ".api.mailchimp.com/3.0" path)
          data {:timeout 2000
                :headers {"Authorization" (str "Bearer " key)}
                :query-params data
                :user-agent "Songpark"}]
-     (if (nil? c)
+     (if (nil? ?cb)
        (client/get url data)
-       ;;(client/post url data #(go (>! c %)))
-       nil
-       ))))
-
-(map (juxt :name :tag)
-     (-> @(get (str "/lists/" (get-in config [:mailchimp :list-id]) "/merge-fields")
-               {})
-         :body
-         (json/parse-string true)
-         :merge_fields))
+       (client/get url data ?cb)))))
 
 (defn- adapt-merge-fields [merge-fields]
   (->> merge-fields

@@ -31,4 +31,5 @@
               :offline-timeout 60000}
 
  :mailchimp {:list-id "0921d6896d"
-             :api {:key "69453a78d3038090954193502c44e569-us9"}}}
+             :api-key "69453a78d3038090954193502c44e569-us9"}
+ :mandrill {:api-key "V7Y8RmfxZJdaqQquDXTHFg"}}

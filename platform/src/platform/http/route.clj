@@ -3,7 +3,6 @@
             [platform.api.jam :as api.jam]
             [platform.api.teleporter :as api.teleporter]
             [platform.api.version :as api.version]
-            
             [platform.http.html :refer [home]]
             [platform.http.middleware :as middleware :refer [wrap-authn
                                                              wrap-authz]]
@@ -64,7 +63,7 @@
 (defn get-routes [settings]
   (ring/ring-handler
    (ring/router
-    [     
+    [
      ["/"
       {:get {:no-doc true
              :handler (fn [_]
@@ -109,7 +108,7 @@
        {:get {:responses {200 {:body any?}}
               :handler #'api.version/get-latest-available-version}}]]
 
-     ;; auth     
+     ;; auth
      ["/api"
       ;; everything under /api needs to be authenticated
       ;;{:middleware [[wrap-authn]]}
@@ -134,7 +133,7 @@
       ["/app"
        {:swagger {:tags ["app"]}}
        [""
-        {:get {:responses {200 {:body any?}}               
+        {:get {:responses {200 {:body any?}}
                :handler #'api.app/connect}}]]
       ["/jam"
        {:swagger {:tags ["jam"]}}
