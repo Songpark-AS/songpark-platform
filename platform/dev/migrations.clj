@@ -12,16 +12,7 @@
 
 (comment
 
-  (migratus/create (migratus-config) "add-profile")
+  (migratus/create (migratus-config) "update-auth-user-with-verified-email-token")
   (migratus/migrate (migratus-config))
   (migratus/rollback (migratus-config))
   )
-
-
-name text,
-location text,
-bio text,
-image_url text,
--- decide this in code
--- 0 is unknown
-pronoun integer not null default 0
