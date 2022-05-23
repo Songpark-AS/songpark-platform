@@ -1,25 +1,11 @@
 (defproject songpark/platform "0.1.0-SNAPSHOT"
 
-  :description "platform for songpark"
+  :description "Platform for songpark"
 
-  :url "https://git.inonit.no/inonit/cantavi/songpark-platform"
+  :url "https://github.com/Songpark-AS/songpark-platform"
 
   :license {:name ""
             :url ""}
-
-  :repositories [["songpark" {:url "https://nexus.inonit.no/repository/songpark"
-                              :username [:gpg :env/nexus_username]
-                              :password [:gpg :env/nexus_password]}]
-                 ["external" {:url "https://nexus.inonit.no/repository/maven-external"
-                              :username [:gpg :env/nexus_username]
-                              :password [:gpg :env/nexus_password]}]]
-
-  :deploy-repositories [["releases" {:url "https://nexus.inonit.no/repository/songpark-platform-releases"
-                                     :username [:gpg :env/nexus_username]
-                                     :password [:gpg :env/nexus_password]}]
-                        ["snapshots" {:url "https://nexus.inonit.no/repository/songpark-platform-snapshots"
-                                      :username [:gpg :env/nexus_username]
-                                      :password [:gpg :env/nexus_password]}]]
 
   :dependencies [[org.clojure/clojure "1.10.1"]
                  [org.clojure/core.match "1.0.0"]
@@ -29,9 +15,9 @@
                  [org.clojure/core.memoize "1.0.236"]
 
                  ;; songpark
-                 [songpark/common "0.2.0"]
+                 [songpark/common "0.3.0-SNAPSHOT"]
                  [songpark/jam "1.0.0"]
-                 [songpark/taxonomy "0.2.0"]
+                 [songpark/taxonomy "0.3.0-SNAPSHOT"]
                  [songpark/mqtt "1.0.1"]
 
                  ;; routing
@@ -61,7 +47,6 @@
 
                  ;; encryption
                  [buddy/buddy-core "1.5.0" :exclusions [org.clojure/clojure]]
-                 [buddy/buddy-auth "2.1.0" :exclusions [org.clojure/clojure]]
                  [buddy/buddy-hashers "1.3.0" :exclusions [org.clojure/clojure]]
                  [buddy/buddy-sign "3.0.0" :exclusions [org.clojure/clojure]]
                  [buddy/buddy-auth "2.2.0" :exclusions [org.clojure/clojure]]
@@ -81,7 +66,7 @@
                  [migratus "1.2.6"]
 
                  ;; http
-                 [http-kit "2.3.0"]
+                 [http-kit "2.5.3"]
 
                  ;; html
                  [hiccup "1.0.5"]
@@ -107,8 +92,6 @@
                    :resource-paths ["dev-resources" "resources"]
                    :dependencies [[midje "1.9.9"]
                                   [ring/ring-mock "0.4.0"]
-                                  [http-kit "2.3.0"]
-                                  [hashp "0.2.0"]
                                   [clj-commons/spyscope "0.1.48"]]
                    :injections [(require 'spyscope.core)]
                    :plugins [[lein-midje "3.1.3"]
@@ -119,8 +102,7 @@
              :test {:source-paths ["src"]
                     :resource-paths ["dev-resources" "resources"]
                     :dependencies [[midje "1.9.4"]
-                                   [ring/ring-mock "0.4.0"]
-                                   [http-kit "2.3.0"]]
+                                   [ring/ring-mock "0.4.0"]]
                     :plugins [[lein-midje "3.1.3"]]}
 
              :tester {:source-paths ["src" "dev" "test"]
