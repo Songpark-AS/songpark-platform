@@ -1,7 +1,9 @@
 (ns platform.http.route
   (:require [platform.api.app :as api.app]
+            [platform.api.auth :as api.auth]
             [platform.api.jam :as api.jam]
             [platform.api.teleporter :as api.teleporter]
+            [platform.api.signup :as api.signup]
             [platform.api.version :as api.version]
             [platform.http.html :refer [home]]
             [platform.http.middleware :as middleware :refer [wrap-authn
@@ -118,6 +120,39 @@
                :handler (fn [req]
                           {:status 200
                            :body (or (:body-params req) {:failed true})})}}]
+      ["/auth"
+       ["/signup"
+        {:swagger {:tags ["auth"]}
+         :post {:responses {200 {:body :http/ok}
+                            400 {:body :error/error}
+                            500 {:body :error/error}}
+                :parameters {:body :auth/signup}
+                :handler #'api.auth/signup}}]
+       ["/login"
+        {:swagger {:tags ["auth"]}
+         :post {:responses {200 {:body :auth/user}
+                            500 {:body :error/error}}
+                :parameters {:body :auth/login}
+                :handler #'api.auth/login}}]
+       ["/logout"
+        {:swagger {:tags ["auth"]}
+         :post {:responses {200 {:body :http/ok}}
+                :handler #'api.auth/logout}}]
+       ["/verify-email"
+        {:swagger {:tags ["auth"]}
+         :post {:responses {200 {:body :http/ok}}
+                :parameters {:body :auth/verify-email}
+                :handler #'api.auth/verify-email}}]
+       ["/forgotten-password"
+        {:swagger {:tags ["auth"]}
+         :post {:responses {200 {:body :http/ok}}
+                :parameters {:body :auth/forgotten-password}
+                :handler #'api.auth/forgotten-password}}]
+       ["/reset-password"
+        {:swagger {:tags ["auth"]}
+         :post {:responses {200 {:body :http/ok}}
+                :parameters {:body :auth/reset-password}
+                :handler #'api.auth/reset-password}}]]
 
       ["/teleporter"
        {:swagger {:tags ["teleporter"]}}

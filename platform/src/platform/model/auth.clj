@@ -2,7 +2,54 @@
   (:require [buddy.hashers]
             [ez-database.core :as db]
             [ez-database.transform :as transform]
+            [platform.email.mandrill :as mandrill]
+            [platform.util :refer [get-url]]
+            [taoensso.timbre :as log]
             [tick.core :as t]))
+
+
+(defn signup [db {:auth.user/keys [email password]
+                  :profile/keys [name]}]
+  (try
+    (db/with-transaction [db :default]
+      (let [token (java.util.UUID/randomUUID)
+            user (->> {:insert-into :auth_user
+                       :values [{:email email
+                                 :password (buddy.hashers/derive password)
+                                 :verified_email_token token}]}
+                      (db/query<! db)
+                      first)]
+        (db/query! db {:insert-into :profile_profile
+                       :values [{:user_id (:id user)
+                                 :name name
+                                 :bio ""
+                                 :image_url ""
+                                 :location ""}]})
+        ;; send out email for verification of email
+        (mandrill/post "/messages/send-template"
+                       {:template_name "verification-of-email"
+                        :template_content []
+                        :message {:to [{:email email :type "to"}]
+                                  :merge true
+                                  :merge_vars [{:rcpt email
+                                                :vars [{:name "NAME"
+                                                        :content name}
+                                                       {:name "VERIFICATION_URL"
+                                                        :content (get-url "/email-verification" {:token token})}]}]}})))
+    true
+    (catch Exception e
+      (log/warn "Failed to create a user" {:email email})
+      false)))
+
+(comment
+
+  (let [db (:database @platform.init/system)
+        data {:auth.user/email "emil0r@gmail.com"
+              :auth.user/password "foobar"
+              :profile/name "Emil Bengtsson"}]
+    (signup db data))
+  )
+
 
 (transform/add :user :auth/user
                [:id               :auth.user/id]
@@ -53,10 +100,28 @@
       false)))
 
 (defn forgotten-password [db {:auth.user/keys [email]}]
-  (db/query! db {:update :auth_user
-                 :set {:token (java.util.UUID/randomUUID)
-                       :token_at (t/now)}
-                 :where [:= :email email]}))
+  (let [token (java.util.UUID/randomUUID)
+        username (->> {:select [:p.name]
+                       :from [[:profile_profile :p]]
+                       :join [[:auth_user :u] [:= :p.user_id :u.id]]
+                       :where [:= :u.email email]}
+                      (db/query db)
+                      first
+                      :name)]
+    (db/query! db {:update :auth_user
+                   :set {:token token
+                         :token_at (t/now)}
+                   :where [:= :email email]})
+    (mandrill/post "/messages/send-template"
+                   {:template_name "forgotten-password"
+                    :template_content []
+                    :message {:to [{:email email :type "to"}]
+                              :merge true
+                              :merge_vars [{:rcpt email
+                                            :vars [{:name "NAME"
+                                                    :content username}
+                                                   {:name "REACTIVATION_URL"
+                                                    :content (get-url "/forgotten-password" {:token token})}]}]}})))
 
 (defn reset-password [db {:auth.user/keys [new-password token]}]
   (let [user (->> {:select [:id]
@@ -89,11 +154,11 @@
   (let [db (:database @platform.init/system)]
     #_(login db {:auth.user/email "emil0r@gmail.com"
                  :auth.user/password "foobar"})
-    (verify-email db {:auth.user/token #uuid "8149af03-09ea-4548-a78f-b39ff9cb0952"})
+    #_(verify-email db {:auth.user/token #uuid "8149af03-09ea-4548-a78f-b39ff9cb0952"})
     #_(change-password db {:auth.user/id 1
                          :auth.user/password "exam"
                            :auth.user/new-password "foobar"})
-    #_(forgotten-password db {:auth.user/email "emil0r@gmail.com"})
+    (forgotten-password db {:auth.user/email "emil0r@gmail.com"})
     #_(reset-password db {:auth.user/token #uuid "cde67abf-ed21-4997-9fcc-b37b82ce1520"
                         :auth.user/new-password "meh"})
     )

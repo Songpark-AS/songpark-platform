@@ -32,6 +32,3 @@
     (jam.platform/obviate jam-manager tp-id)
     {:status 200
      :body {:jam.ask/status false}}))
-
-
-
