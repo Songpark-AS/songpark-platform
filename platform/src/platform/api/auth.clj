@@ -5,7 +5,7 @@
             [taoensso.timbre :as log]))
 
 
-(defn signup [{{db :db} :data {data :body} :parameters :as request}]
+(defn signup [{{db :database} :data {data :body} :parameters :as request}]
   (let [{:auth.user/keys [password repeat-password]} data]
     (cond (str/blank? password)
           {:status 400
@@ -24,32 +24,33 @@
                :body {:error/message "Unable to signup"}})))))
 
 
-(defn login [{{db :db} :data {data :body} :parameters :as request}]
+(defn login [{{db :database} :data {data :body} :parameters :as request}]
   (let [user (model.auth/login db data)]
-    {:status 200
-     :session {:identity {:auth.user/id (:auth.user/id user)}}
-     :body user}
-    {:status 500
-     :body {:error/message "Unable to login"}}))
+    (if user
+      {:status 200
+      :session {:identity {:auth.user/id (:auth.user/id user)}}
+       :body user}
+      {:status 500
+       :body {:error/message "Unable to login"}})))
 
 (defn logout [_]
   {:status 200
    :session nil
    :body {:result :success}})
 
-(defn verify-email [{{db :db} :data {data :body} :parameters :as request}]
+(defn verify-email [{{db :database} :data {data :body} :parameters :as request}]
   (let [result (model.auth/verify-email db data)]
     {:status 200
      :body {:result (if result
                       :success
                       :failure)}}))
 
-(defn forgotten-password [{{db :db} :data {data :body} :parameters :as request}]
+(defn forgotten-password [{{db :database} :data {data :body} :parameters :as request}]
   (model.auth/forgotten-password db data)
   {:status 200
    :body {:result :success}})
 
-(defn reset-password [{{db :db} :data {data :body} :parameters :as request}]
+(defn reset-password [{{db :database} :data {data :body} :parameters :as request}]
   (let [result (model.auth/reset-password db data)]
     {:status 200
      :body {:result (if result

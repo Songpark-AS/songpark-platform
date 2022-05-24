@@ -15,11 +15,5 @@
      (merge data
             (select-keys identity ks)))))
 
-(defn teacher? [request]
-  (contains? (get-in request [:session :identity]) :teacher/id))
-
-(defn student? [request]
-  (contains? (get-in request [:session :identity]) :student/id))
-
 (defn auth-user? [request]
   (contains? (get-in request [:session :identity]) :auth.user/id))

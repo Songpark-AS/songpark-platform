@@ -10,6 +10,8 @@
             [platform.versionrefresher :as versionrefresher]
             [songpark.jam.platform :refer [mem-db jam-manager]]
             [songpark.mqtt :as mqtt]
+            [taoensso.carmine]
+            [taoensso.carmine.ring :as carmine.ring]
             [taoensso.timbre :as log]))
 
 (defn- system-map [extra-components]
@@ -23,7 +25,8 @@
                     :jam {}
                     :waiting {}})
         ;; start mqtt client first in order to let it connect
-        mqtt-client (component/start (mqtt/mqtt-client (assoc-in (:mqtt config) [:config :id] "platform")))]
+        mqtt-client (component/start (mqtt/mqtt-client (assoc-in (:mqtt config) [:config :id] "platform")))
+        store (carmine.ring/carmine-store (:carmine config))]
     (apply component/system-map
            (into [:logger logger
                   :config core-config
@@ -35,8 +38,9 @@
                                      (assoc (:versionrefresher config)
                                             :db db))
                   :http-server (component/using (http.server/http-server (merge (:http config)
-                                                                                {:db db}))
-                                                [:mqtt-client :jam-manager])
+                                                                                {:db db
+                                                                                 :store store}))
+                                                [:mqtt-client :jam-manager :database])
                   :jam-manager (component/using (jam-manager {:db db})
                                                 [:mqtt-client])
                   :scheduler (component/using (scheduler/scheduler (:scheduler config))

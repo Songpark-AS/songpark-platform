@@ -152,13 +152,13 @@
 (comment
 
   (let [db (:database @platform.init/system)]
-    #_(login db {:auth.user/email "emil0r@gmail.com"
+    (login db {:auth.user/email "emil0r@gmail.com"
                  :auth.user/password "foobar"})
     #_(verify-email db {:auth.user/token #uuid "8149af03-09ea-4548-a78f-b39ff9cb0952"})
     #_(change-password db {:auth.user/id 1
                          :auth.user/password "exam"
                            :auth.user/new-password "foobar"})
-    (forgotten-password db {:auth.user/email "emil0r@gmail.com"})
+    #_(forgotten-password db {:auth.user/email "emil0r@gmail.com"})
     #_(reset-password db {:auth.user/token #uuid "cde67abf-ed21-4997-9fcc-b37b82ce1520"
                         :auth.user/new-password "meh"})
     )

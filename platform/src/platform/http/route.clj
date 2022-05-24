@@ -3,7 +3,6 @@
             [platform.api.auth :as api.auth]
             [platform.api.jam :as api.jam]
             [platform.api.teleporter :as api.teleporter]
-            [platform.api.signup :as api.signup]
             [platform.api.version :as api.version]
             [platform.http.html :refer [home]]
             [platform.http.middleware :as middleware :refer [wrap-authn
@@ -110,17 +109,7 @@
        {:get {:responses {200 {:body any?}}
               :handler #'api.version/get-latest-available-version}}]]
 
-     ;; auth
-     ["/api"
-      ;; everything under /api needs to be authenticated
-      ;;{:middleware [[wrap-authn]]}
-      ["/echo"
-       {:swagger {:tags ["testing"]}
-        :post {:responses {200 {:body any?}}
-               :handler (fn [req]
-                          {:status 200
-                           :body (or (:body-params req) {:failed true})})}}]
-      ["/auth"
+     ["/auth"
        ["/signup"
         {:swagger {:tags ["auth"]}
          :post {:responses {200 {:body :http/ok}
@@ -154,6 +143,19 @@
                 :parameters {:body :auth/reset-password}
                 :handler #'api.auth/reset-password}}]]
 
+     ["/echo"
+      {:swagger {:tags ["testing"]}
+       :post {:responses {200 {:body any?}}
+              :handler (fn [{:keys [session] :as req}]
+                         ;; (log/debug session)
+                         ;; (log/debug (:identity req))
+                         {:status 200
+                          :body (or (:body-params req) {:failed true})})}}]
+     ;; auth
+     ["/api"
+      ;; everything under /api needs to be authenticated
+      {:middleware [[wrap-authn]
+                    #_[wrap-authz #{:auth.user/id}]]}
       ["/teleporter"
        {:swagger {:tags ["teleporter"]}}
        [""
@@ -197,8 +199,8 @@
                           :access-control-allow-methods [:get :post :options :put :delete]]
 
                          [middleware/inject-data (:songpark/data settings)]
-                         #_[wrap-session {:store (:store settings)
-                                          :cookie-attrs (:http/cookies settings)}]
+                         [wrap-session {:store (:store settings)
+                                        :cookie-attrs (:http/cookies settings)}]
 
                          #_[middleware/wrap-debug-inject {:session {:identity {:teleporter/id 1
                                                                              :authz/credentials #{:teleporter}}}}]
@@ -214,8 +216,8 @@
                          ;; exception handling
                          ;;exception/exception-middleware
                          middleware/wrap-exceptions
-                         #_[wrap-authentication (:authz.platform/session settings)]
-                         #_[wrap-authorization (:authz.platform/session settings)]
+                         [wrap-authentication (:authz.backend/session settings)]
+                         [wrap-authorization (:authz.backend/session settings)]
 
                          ;; decoding request body
                          muuntaja/format-request-middleware

@@ -14,7 +14,10 @@
 (defn stop-server [server]
   (.stop server))
 
-(defrecord HTTPServer [started? server-settings server mqtt-client db jam-manager]
+
+;; db is a protococol based in-memory db
+;; datababase is postgres
+(defrecord HTTPServer [started? server-settings server store mqtt-client db database jam-manager]
   component/Lifecycle
   (start [this]
     (if started?
@@ -22,12 +25,12 @@
       (do (log/info "Starting HTTPServer")
           (let [session-backend (backends/session {:unauthorized-handler unauthorized-handler})
                 server (create-server server-settings
-                                      {;;:store store
-                                       ;;:authz.backend/session session-backend
+                                      {:store store
+                                       :authz.backend/session session-backend
                                        :http/cookies (:http/cookies server-settings)
-                                       ;;:frontend (:frontend config)
                                        :songpark/data {:mqtt-client mqtt-client
                                                        :db db
+                                                       :database database
                                                        :jam-manager jam-manager}})]
             (assoc this
                    :started? true

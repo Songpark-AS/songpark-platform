@@ -21,3 +21,9 @@ services:
         - "9001:9001"
       volumes:
         - .docker/mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf
+    redis:
+      image: redis:alpine
+      ports:
+        - '6379:6379'
+      volumes:
+        - .docker/redis/data:/data

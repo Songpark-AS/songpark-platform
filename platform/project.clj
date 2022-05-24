@@ -35,7 +35,7 @@
                  [com.stuartsierra/component "1.0.0"]
 
                  ;; redis support
-                 ;; [com.taoensso/carmine "2.19.1"]
+                 [com.taoensso/carmine "2.19.1"]
 
                  ;; logging
                  [com.taoensso/timbre "5.1.2"]

@@ -44,5 +44,3 @@
   nil
   (allow? [user roles]
     (throw-exception (:authz/super user) (:authz/credentials user) roles)))
-
-
