@@ -5,7 +5,6 @@
             [platform.config :refer [config]]
             [taoensso.timbre :as log]))
 
-
 (defn post
   ([path data]
    (post path data nil))
@@ -24,18 +23,30 @@
        (client/post url data ?cb)))))
 
 (comment
-  @(post "/messages/send" {:message {:from_email "no-reply@live.songpark.com"
-                                     :from_name "Songpark Live"
-                                     :subject "This is a test email"
-                                     :text "nt my dear friend *|NAME|* with user id *|USERID|* and token *|TOKEN|*"
-                                     :to [{:email "emil0r@gmail.com" :type "to"}]
-                                     :merge true
-                                     :merge_vars [{:rcpt "emil0r@gmail.com"
-                                                   :vars [{:name "NAME"
-                                                           :content "Emil Bengtsson"}
-                                                          {:name "USERID"
-                                                           :content "1"}
-                                                          {:name "TOKEN"
-                                                           :content (str (java.util.UUID/randomUUID))}]}]}}
+  @(post "/messages/send"
+         {:message {:from_email "no-reply@live.songpark.com"
+                    :from_name "Songpark Live"
+                    :subject "This is a test email"
+                    :text "nt my dear friend *|NAME|* with user id *|USERID|* and token *|TOKEN|*"
+                    :to [{:email "emil0r@gmail.com" :type "to"}]
+                    :merge true
+                    :merge_vars [{:rcpt "emil0r@gmail.com"
+                                  :vars [{:name "NAME"
+                                          :content "Emil Bengtsson"}
+                                         {:name "USERID"
+                                          :content "1"}
+                                         {:name "TOKEN"
+                                          :content (str (java.util.UUID/randomUUID))}]}]}}
+         println)
+  @(post "/messages/send-template"
+         {:template_name "verification-of-email"
+          :template_content []
+          :message {:to [{:email "emil0r@gmail.com" :type "to"}]
+                    :merge true
+                    :merge_vars [{:rcpt "emil0r@gmail.com"
+                                  :vars [{:name "NAME"
+                                          :content "Emil Bengtsson"}
+                                         {:name "VERIFICATION_URL"
+                                          :content (platform.util/get-url "email-verification" {:token (java.util.UUID/randomUUID)})}]}]}}
          println)
   )
