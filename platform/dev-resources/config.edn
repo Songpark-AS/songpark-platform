@@ -1,4 +1,5 @@
-{:http {:server-settings {:port 3000
+{:http {:url "http://localhost:3000"
+        :server-settings {:port 3000
                           :join? false
                           :http/cookies {:http-only true}}}
  :logger {:sentry-settings {:log? false

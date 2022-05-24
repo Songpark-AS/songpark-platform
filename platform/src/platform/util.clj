@@ -1,6 +1,8 @@
 (ns platform.util
   (:require [clojure.java.shell :refer [sh]]
-            [clojure.string :as str]))
+            [clojure.string :as str]
+            [platform.config :refer [config]])
+  (:import [java.net URLEncoder]))
 
 (defn kw->str [x]
   (if (keyword? x)
@@ -34,3 +36,27 @@
         version-line (first (filter (fn [line] (re-matches #"Version.*" line))
                                     (str/split apt-string #"\n")))]
     (last (str/split (or version-line "Unknown") #": "))))
+
+
+(defn- encode-query-param [x]
+  (cond (keyword? x) (URLEncoder/encode (name x))
+        (boolean? x) (URLEncoder/encode (str x))
+        (uuid? x)    (URLEncoder/encode (str x))
+        :else (URLEncoder/encode (name x))))
+
+(defn get-url
+  ([path]
+   (get-url path nil))
+  ([path query-params]
+   (let [url (if (str/starts-with? path "/")
+               (str (get-in config [:http :url]) path)
+               (str (get-in config [:http :url]) "/" path))]
+     (if query-params
+       (str url (reduce (fn [query-string [k v]]
+                          (let [k (encode-query-param k)
+                                v (encode-query-param v)]
+                           (if (str/blank? query-string)
+                             (str query-string "?" k "=" v)
+                             (str query-string "&" k "=" v))))
+                        "" query-params))
+       url))))
