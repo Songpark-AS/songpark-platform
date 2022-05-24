@@ -1,5 +1,6 @@
 (ns platform.api.auth
-  (:require [platform.model.auth :as model.auth]
+  (:require [clojure.string :as str]
+            [platform.model.auth :as model.auth]
             [songpark.taxonomy.auth]
             [taoensso.timbre :as log]))
 
@@ -26,7 +27,7 @@
 (defn login [{{db :db} :data {data :body} :parameters :as request}]
   (let [user (model.auth/login db data)]
     {:status 200
-     :session {:auth.user/id (:auth.user/id user)}
+     :session {:identity {:auth.user/id (:auth.user/id user)}}
      :body user}
     {:status 500
      :body {:error/message "Unable to login"}}))
