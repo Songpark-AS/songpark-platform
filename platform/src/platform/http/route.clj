@@ -2,6 +2,7 @@
   (:require [platform.api.app :as api.app]
             [platform.api.auth :as api.auth]
             [platform.api.jam :as api.jam]
+            [platform.api.profile :as api.profile]
             [platform.api.teleporter :as api.teleporter]
             [platform.api.version :as api.version]
             [platform.http.html :refer [home]]
@@ -110,38 +111,51 @@
               :handler #'api.version/get-latest-available-version}}]]
 
      ["/auth"
-       ["/signup"
-        {:swagger {:tags ["auth"]}
-         :post {:responses {200 {:body :http/ok}
-                            400 {:body :error/error}
-                            500 {:body :error/error}}
-                :parameters {:body :auth/signup}
-                :handler #'api.auth/signup}}]
-       ["/login"
-        {:swagger {:tags ["auth"]}
-         :post {:responses {200 {:body :auth/user}
-                            500 {:body :error/error}}
-                :parameters {:body :auth/login}
-                :handler #'api.auth/login}}]
-       ["/logout"
-        {:swagger {:tags ["auth"]}
-         :post {:responses {200 {:body :http/ok}}
-                :handler #'api.auth/logout}}]
-       ["/verify-email"
-        {:swagger {:tags ["auth"]}
-         :post {:responses {200 {:body :http/ok}}
-                :parameters {:body :auth/verify-email}
-                :handler #'api.auth/verify-email}}]
-       ["/forgotten-password"
-        {:swagger {:tags ["auth"]}
-         :post {:responses {200 {:body :http/ok}}
-                :parameters {:body :auth/forgotten-password}
-                :handler #'api.auth/forgotten-password}}]
-       ["/reset-password"
-        {:swagger {:tags ["auth"]}
-         :post {:responses {200 {:body :http/ok}}
-                :parameters {:body :auth/reset-password}
-                :handler #'api.auth/reset-password}}]]
+      [""
+       {:swagger {:tags ["auth"]}
+        :get {:responses {200 {:body :auth/whoami}
+                          500 {:body :error/error}}
+              :handler #'api.auth/whoami}}]
+      ["/signup"
+       {:swagger {:tags ["auth"]}
+        :post {:responses {200 {:body :auth/user}
+                           400 {:body :error/error}
+                           500 {:body :error/error}}
+               :parameters {:body :auth/signup}
+               :handler #'api.auth/signup}}]
+      ["/login"
+       {:swagger {:tags ["auth"]}
+        :post {:responses {200 {:body :auth/user}
+                           400 {:body :error/error}
+                           500 {:body :error/error}}
+               :parameters {:body :auth/login}
+               :handler #'api.auth/login}}]
+      ["/logout"
+       {:swagger {:tags ["auth"]}
+        :post {:responses {200 {:body :http/ok}}
+               :handler #'api.auth/logout}}]
+      ["/verify-email"
+       {:swagger {:tags ["auth"]}
+        :post {:responses {200 {:body :http/ok}
+                           400 {:body :error/error}}
+               :parameters {:body :auth/verify-email}
+               :handler #'api.auth/verify-email}}]
+      ["/send-verify-email"
+       {:swagger {:tags ["auth"]}
+        :post {:responses {200 {:body :http/ok}
+                           400 {:body :error/error}}
+               :parameters {:body :auth/send-verify-email}
+               :handler #'api.auth/send-verify-email}}]
+      ["/forgotten-password"
+       {:swagger {:tags ["auth"]}
+        :post {:responses {200 {:body :http/ok}}
+               :parameters {:body :auth/forgotten-password}
+               :handler #'api.auth/forgotten-password}}]
+      ["/reset-password"
+       {:swagger {:tags ["auth"]}
+        :post {:responses {200 {:body :http/ok}}
+               :parameters {:body :auth/reset-password}
+               :handler #'api.auth/reset-password}}]]
 
      ["/echo"
       {:swagger {:tags ["testing"]}
@@ -154,8 +168,7 @@
      ;; auth
      ["/api"
       ;; everything under /api needs to be authenticated
-      {:middleware [[wrap-authn]
-                    #_[wrap-authz #{:auth.user/id}]]}
+      {:middleware [[wrap-authn]]}
       ["/teleporter"
        {:swagger {:tags ["teleporter"]}}
        [""
@@ -167,6 +180,19 @@
                             400 {:body :error/error}}
                 :parameters {:body any?}
                 :handler #'api.teleporter/update}}]]
+      ["/profile"
+       {:swagger {:tags ["profile"]}}
+       [""
+        {:get {:responses {200 {:body :profile/profile}}
+               :handler #'api.profile/get-profile}
+         :post {:responses {200 {:body :http/ok}
+                            400 {:body :error/error}
+                            500 {:body :error/error}}
+                :parameters {:body :profile/profile}
+                :handler #'api.profile/save-profile}}]
+       ["/pronouns"
+        {:get {:responses {200 {:body :profile/pronouns}}
+               :handler #'api.profile/get-pronouns}}]]
       ["/app"
        {:swagger {:tags ["app"]}}
        [""

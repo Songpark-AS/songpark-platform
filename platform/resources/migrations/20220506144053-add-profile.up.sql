@@ -10,7 +10,7 @@ CREATE TABLE profile_profile (
   created_at timestamp default now(),
   updated_at timestamp default now(),
   user_id integer references auth_user(id) not null,
-  name text not null,
+  name text not null UNIQUE,
   location text not null,
   bio text not null,
   image_url text not null,
