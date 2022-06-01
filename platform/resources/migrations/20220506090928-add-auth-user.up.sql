@@ -2,7 +2,7 @@ CREATE TABLE auth_user (
   id serial primary key,
   created_at timestamp default now(),
   updated_at timestamp default now(),
-  email text,
+  email text NOT NULL UNIQUE,
   password text not null
 
 );

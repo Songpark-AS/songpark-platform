@@ -1,5 +1,10 @@
 (ns platform.auth)
 
+(defn get-token []
+  (->> (repeat 6 nil)
+       (map (fn [_] (rand-int 10)))
+       (apply str)))
+
 (defn get-credentials
   ([request]
    (get-in request [:session :identity]))

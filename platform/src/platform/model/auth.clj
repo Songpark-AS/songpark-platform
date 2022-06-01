@@ -2,21 +2,83 @@
   (:require [buddy.hashers]
             [ez-database.core :as db]
             [ez-database.transform :as transform]
+            [platform.auth :as auth]
+            [platform.config :refer [config]]
             [platform.email.mandrill :as mandrill]
             [platform.util :refer [get-url]]
             [taoensso.timbre :as log]
             [tick.core :as t]))
 
+(transform/add :user :auth/user
+               [:id               :auth.user/id]
+               [:email            :auth.user/email]
+               [:verified_email_p :auth.user/verified-email?]
+               [:name             :profile/name]
+               [:bio              :profile/bio]
+               [:location         :profile/location])
+
+
+(defn- get-email-hours []
+  (get-in config [:auth :email-token-hours] (* 365 24 10)))
+
+(defn- get-password-hours []
+  (get-in config [:auth :password-token-hours] 2))
+
+(defn get-user [db user-id]
+  (->> {:select [:u.id :u.email :u.verified_email_p
+                 :p.name :p.location :p.bio :p.pronoun_id]
+        :from [[:auth_user :u]]
+        :left-join [[:profile_profile :p] [:= :p.user_id :u.id]]
+        :where [:= :u.id user-id]}
+       (db/query db ^:opts {[:transformation :post]
+                            [:user :auth/user]})
+       first))
+
+(defn user-exists? [db email]
+  (->> {:select [:id]
+        :from [:auth_user]
+        :where [:= :email email]}
+       (db/query db)
+       first
+       some?))
+
+(defn send-verified-email! [db user-id]
+  (let [token (auth/get-token)
+        {username :name
+         email :email} (->> {:select [:p.name :u.email]
+                             :from [[:auth_user :u]]
+                             :join [[:profile_profile :p] [:= :p.user_id :u.id]]
+                             :where [:= :u.id user-id]}
+                            (db/query db)
+                            first)]
+    (do
+      (->> {:update :auth_user
+            :set {:verified_email_token token
+                  :verified_email_token_at (t/now)}
+            :where [:= :id user-id]}
+           (db/query! db))
+      ;; send out email for verification of email
+      (log/debug {:email email
+                  :username username
+                  :token token})
+      (mandrill/post "/messages/send-template"
+                     {:template_name "verification-of-email"
+                      :template_content []
+                      :message {:to [{:email email :type "to"}]
+                                :merge true
+                                :merge_vars [{:rcpt email
+                                              :vars [{:name "NAME"
+                                                      :content username}
+                                                     {:name "TOKEN"
+                                                      :content token}]}]}}))))
 
 (defn signup [db {:auth.user/keys [email password]
                   :profile/keys [name]}]
   (try
     (db/with-transaction [db :default]
-      (let [token (java.util.UUID/randomUUID)
-            user (->> {:insert-into :auth_user
+      (let [user (->> {:insert-into :auth_user
                        :values [{:email email
-                                 :password (buddy.hashers/derive password)
-                                 :verified_email_token token}]}
+                                 :password (buddy.hashers/derive password)}]}
                       (db/query<! db)
                       first)]
         (db/query! db {:insert-into :profile_profile
@@ -25,20 +87,13 @@
                                  :bio ""
                                  :image_url ""
                                  :location ""}]})
-        ;; send out email for verification of email
-        (mandrill/post "/messages/send-template"
-                       {:template_name "verification-of-email"
-                        :template_content []
-                        :message {:to [{:email email :type "to"}]
-                                  :merge true
-                                  :merge_vars [{:rcpt email
-                                                :vars [{:name "NAME"
-                                                        :content name}
-                                                       {:name "VERIFICATION_URL"
-                                                        :content (get-url "/email-verification" {:token token})}]}]}})))
-    true
+        (send-verified-email! db (:id user))
+        (get-user db (:id user))))
     (catch Exception e
-      (log/warn "Failed to create a user" {:email email})
+      (log/warn "Failed to create a user" {:email email
+                                           :exception e
+                                           :message (ex-message e)
+                                           :data (ex-data e)})
       false)))
 
 (comment
@@ -50,14 +105,6 @@
     (signup db data))
   )
 
-
-(transform/add :user :auth/user
-               [:id               :auth.user/id]
-               [:email            :auth.user/email]
-               [:verified_email_p :auth.user/verified-email?]
-               [:name             :profile/name]
-               [:bio              :profile/bio]
-               [:location         :profile/location])
 
 (defn login [db {:auth.user/keys [email password]}]
   (let [user (->> {:select [:u.id :u.email :u.verified_email_p :u.password
@@ -71,24 +118,39 @@
       (transform/transform :user :auth/user user)
       false)))
 
+
 (defn verify-email [db {:auth.user/keys [token]}]
-  (assert (uuid? token) "token must be a UUID")
-  (if-not (->> {:update :auth_user
-                :set {:verified_email_p true
-                      :verified_email_token nil}
-                :where [:= :verified_email_token token]}
-               (db/query! db)
-               first
-               zero?)
-    true
-    false))
+  (let [token-at (t/<< (t/now)
+                       (t/new-duration (get-email-hours) :hours))]
+    (if-not (->> {:update :auth_user
+                  :set {:verified_email_p true
+                        :verified_email_token_at nil
+                        :verified_email_token nil}
+                  :where [:and
+                          [:= :verified_email_token token]
+                          [:>= :verified_email_token_at token-at]]}
+                 (db/query! db)
+                 first
+                 zero?)
+      true
+      false)))
+
+(defn send-verify-email [db {:auth.user/keys [email]}]
+  (let [user-id (->> {:select [:id]
+                      :from [:auth_user]
+                      :where [:= :email email]}
+                     (db/query db)
+                     first
+                     :id)]
+    (send-verified-email! db user-id)
+    true))
 
 (defn change-password [db {:auth.user/keys [id password new-password]}]
-  (let [user (->> {:select [:id :password :email]
-                      :from [:auth_user]
-                      :where [:= :id id]}
-                     (db/query db)
-                     first)
+  (let [user (->> {:select [:password]
+                   :from [:auth_user]
+                   :where [:= :id id]}
+                  (db/query db)
+                  first)
         same-password? (if user
                          (buddy.hashers/check password (:password user))
                          false)]
@@ -100,7 +162,7 @@
       false)))
 
 (defn forgotten-password [db {:auth.user/keys [email]}]
-  (let [token (java.util.UUID/randomUUID)
+  (let [token (auth/get-token)
         username (->> {:select [:p.name]
                        :from [[:profile_profile :p]]
                        :join [[:auth_user :u] [:= :p.user_id :u.id]]
@@ -120,16 +182,17 @@
                               :merge_vars [{:rcpt email
                                             :vars [{:name "NAME"
                                                     :content username}
-                                                   {:name "REACTIVATION_URL"
-                                                    :content (get-url "/forgotten-password" {:token token})}]}]}})))
+                                                   {:name "TOKEN"
+                                                    :content token}]}]}})))
 
 (defn reset-password [db {:auth.user/keys [new-password token]}]
-  (let [user (->> {:select [:id]
+  (let [token-at (t/<< (t/now)
+                       (t/new-duration (get-password-hours) :hours))
+        user (->> {:select [:id]
                    :from [:auth_user]
                    :where [:and
                            [:= :token token]
-                           [:>= :token_at (t/<< (t/now)
-                                                (t/new-duration 2 :hours))]]}
+                           [:>= :token_at token-at]]}
                   (db/query db)
                   first)]
     (if user
@@ -152,16 +215,14 @@
 (comment
 
   (let [db (:database @platform.init/system)]
-    (login db {:auth.user/email "emil0r@gmail.com"
+    #_(login db {:auth.user/email "emil0r@gmail.com"
                  :auth.user/password "foobar"})
-    #_(verify-email db {:auth.user/token #uuid "8149af03-09ea-4548-a78f-b39ff9cb0952"})
-    #_(change-password db {:auth.user/id 1
-                         :auth.user/password "exam"
-                           :auth.user/new-password "foobar"})
+    #_(verify-email db {:auth.user/token "165827"})
+    (change-password db {:auth.user/id 1
+                         :auth.user/password "foobar"
+                         :auth.user/new-password "foobar"})
     #_(forgotten-password db {:auth.user/email "emil0r@gmail.com"})
-    #_(reset-password db {:auth.user/token #uuid "cde67abf-ed21-4997-9fcc-b37b82ce1520"
+    #_(reset-password db {:auth.user/token "409348"
                         :auth.user/new-password "meh"})
     )
   )
-
-(defn update-password [db {:auth.user/keys [id password]}])
