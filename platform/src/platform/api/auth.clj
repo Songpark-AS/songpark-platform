@@ -87,3 +87,18 @@
      :body {:result (if result
                       :success
                       :failure)}}))
+
+
+(defn change-password [{{db :database} :data
+                        {user-id :auth.user/id} :identity
+                        {data :body} :parameters
+                        :as request}]
+  (let [result (model.auth/change-password db user-id data)]
+    (if result
+      {:status 200
+       :body {:result (if result
+                        :success
+                        :failure)}}
+      {:status 400
+       :body {:error/message "Password is incorrect"
+              :error/key :auth.user/password}})))

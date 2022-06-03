@@ -145,10 +145,10 @@
     (send-verified-email! db user-id)
     true))
 
-(defn change-password [db {:auth.user/keys [id password new-password]}]
+(defn change-password [db user-id {:auth.user/keys [password new-password]}]
   (let [user (->> {:select [:password]
                    :from [:auth_user]
-                   :where [:= :id id]}
+                   :where [:= :id user-id]}
                   (db/query db)
                   first)
         same-password? (if user
@@ -157,7 +157,7 @@
     (if (and user same-password?)
       (do (db/query! db {:update :auth_user
                          :set {:password (buddy.hashers/derive new-password)}
-                         :where [:= :id id]})
+                         :where [:= :id user-id]})
           true)
       false)))
 
@@ -218,9 +218,8 @@
     #_(login db {:auth.user/email "emil0r@gmail.com"
                  :auth.user/password "foobar"})
     #_(verify-email db {:auth.user/token "165827"})
-    (change-password db {:auth.user/id 1
-                         :auth.user/password "foobar"
-                         :auth.user/new-password "foobar"})
+    (change-password db 1 {:auth.user/password "foobar"
+                           :auth.user/new-password "foobar"})
     #_(forgotten-password db {:auth.user/email "emil0r@gmail.com"})
     #_(reset-password db {:auth.user/token "409348"
                         :auth.user/new-password "meh"})

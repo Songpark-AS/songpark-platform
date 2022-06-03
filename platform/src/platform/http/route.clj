@@ -155,7 +155,13 @@
        {:swagger {:tags ["auth"]}
         :post {:responses {200 {:body :http/ok}}
                :parameters {:body :auth/reset-password}
-               :handler #'api.auth/reset-password}}]]
+               :handler #'api.auth/reset-password}}]
+      ["/change-password"
+       {:middleware [[wrap-authn]]
+        :swagger {:tags ["auth"]}
+        :post {:responses {200 {:body :http/ok}}
+               :parameters {:body :auth/change-password}
+               :handler #'api.auth/change-password}}]]
 
      ["/echo"
       {:swagger {:tags ["testing"]}
