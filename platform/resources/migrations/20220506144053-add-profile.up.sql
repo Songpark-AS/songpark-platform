@@ -3,7 +3,7 @@ CREATE TABLE profile_pronoun (
   name text not null
 );
 --;;
-INSERT INTO profile_pronoun VALUES (-1, '');
+INSERT INTO profile_pronoun VALUES (-1, 'Unknown');
 --;;
 CREATE TABLE profile_profile (
   id serial primary key,

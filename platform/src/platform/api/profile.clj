@@ -15,15 +15,17 @@
                      {data :body} :parameters
                      {user-id :auth.user/id} :identity
                      :as request}]
-  (if-let [exists? (model.profile/name-exists? db (:profile/name data))]
+  (if-let [exists? (model.profile/name-exists? db user-id (:profile/name data))]
     {:status 400
-     :body {:error/message "Name already exists"}}
+     :body {:error/message "Name already exists"
+            :error/key :profile/name}}
     (let [result (model.profile/save-profile db user-id data)]
       (if result
         {:status 200
-         :body {:result :success}}
+         :body (model.profile/get-profile db user-id)}
         {:status 500
-         :body {:error/message "Unable to save profile. Please contact the administrator"}}))))
+         :body {:error/message "Unable to save profile. Please contact the administrator"
+                :error/key :profile/location}}))))
 
 (defn get-pronouns [{{db :database} :data
                      :as request}]

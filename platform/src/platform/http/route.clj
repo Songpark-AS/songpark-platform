@@ -185,10 +185,10 @@
        [""
         {:get {:responses {200 {:body :profile/profile}}
                :handler #'api.profile/get-profile}
-         :post {:responses {200 {:body :http/ok}
+         :post {:responses {200 {:body :profile/profile}
                             400 {:body :error/error}
                             500 {:body :error/error}}
-                :parameters {:body :profile/profile}
+                :parameters {:body :profile/save}
                 :handler #'api.profile/save-profile}}]
        ["/pronouns"
         {:get {:responses {200 {:body :profile/pronouns}}

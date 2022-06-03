@@ -35,13 +35,24 @@
                [:id :profile.pronoun/id]
                [:name :profile.pronoun/name])
 
-(defn name-exists? [db name]
-  (->> {:select [:id]
-        :from [:profile_profile]
-        :where [:= :name name]}
-       (db/query db)
-       first
-       some?))
+(defn name-exists?
+  "Check if the name exists for a given profile name"
+  ([db name]
+   (->> {:select [:id]
+         :from [:profile_profile]
+         :where [:= :name name]}
+        (db/query db)
+        first
+        some?))
+  ([db exclude-user-id name]
+   (->> {:select [:id]
+         :from [:profile_profile]
+         :where [:and
+                 [:= :name name]
+                 [:<> :id exclude-user-id]]}
+        (db/query db)
+        first
+        some?)))
 
 (defn get-profile [db user-id]
   (->> {:select [:p.*, [:pr.name :pronoun_name]]
@@ -54,14 +65,15 @@
                  )
        first))
 
-(defn save-profile [db user-id {:profile/keys [id] :as data}]
+(defn save-profile [db user-id data]
   (try
-    (let [old-image (->> {:select [:image_url]
-                          :from [:profile_profile]
-                          :where [:= :id id]}
-                         (db/query db)
-                         first
-                         :image_url)
+    (let [{old-image :image_url
+           id        :id       } (->> {:select [:p.image_url :p.id]
+                                       :from [[:profile_profile :p]]
+                                       :join [[:auth_user :u] [:= :u.id :p.user_id]]
+                                       :where [:= :u.id user-id]}
+                                      (db/query db)
+                                      first)
           img-base64 (:profile.image/base64 data)
           img-path (if img-base64
                      (str (java.util.UUID/randomUUID)
@@ -71,9 +83,7 @@
           to-save (-> (transform/transform {:nil false
                                             [:remove-ks :pre] #{:profile.pronoun/name}}
                                            :profile/profile :profile data)
-                      (assoc :image_url img-path)
-                      (dissoc :id))]
-
+                      (assoc :image_url img-path))]
       ;; if base64 image is provided, we clean up any old image and
       ;; save the new image to the hd
       (when img-base64
@@ -112,8 +122,7 @@
       (.toByteArray out)))
 
   (let [db (:database @platform.init/system)]
-    (save-profile db 1 {:profile/id 1
-                        :profile/name "Emilius"
+    (save-profile db 1 {:profile/name "Emilius"
                         :profile/bio "My bio"
                         :profile/location "Ski, Norway"
                         :profile.image/type "png"
