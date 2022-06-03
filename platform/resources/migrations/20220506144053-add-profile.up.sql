@@ -11,8 +11,7 @@ CREATE TABLE profile_profile (
   updated_at timestamp default now(),
   user_id integer references auth_user(id) not null,
   name text not null UNIQUE,
-  location text not null,
-  bio text not null,
+  position text not null,
   image_url text not null,
   pronoun_id integer references profile_pronoun(id) not null default -1
 );

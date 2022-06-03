@@ -25,8 +25,7 @@
 (transform/add :profile :profile/profile
                [:id :profile/id]
                [:name :profile/name]
-               [:bio :profile/bio]
-               [:location :profile/location]
+               [:position :profile/position]
                [:pronoun_id :profile.pronoun/id]
                [:pronoun_name :profile.pronoun/name]
                [:image_url ->image-url <-image-url :profile/image-url])
@@ -123,8 +122,7 @@
 
   (let [db (:database @platform.init/system)]
     (save-profile db 1 {:profile/name "Emilius"
-                        :profile/bio "My bio"
-                        :profile/location "Ski, Norway"
+                        :profile/position "My bio"
                         :profile.image/type "png"
                         :profile.image/base64 (-> (slurp-bytes "assets/logo-black.png")
                                                   (base64/encode true))

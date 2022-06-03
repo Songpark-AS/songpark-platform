@@ -14,8 +14,7 @@
                [:email            :auth.user/email]
                [:verified_email_p :auth.user/verified-email?]
                [:name             :profile/name]
-               [:bio              :profile/bio]
-               [:location         :profile/location])
+               [:position         :profile/position])
 
 
 (defn- get-email-hours []
@@ -26,7 +25,7 @@
 
 (defn get-user [db user-id]
   (->> {:select [:u.id :u.email :u.verified_email_p
-                 :p.name :p.location :p.bio :p.pronoun_id]
+                 :p.name :p.position :p.pronoun_id]
         :from [[:auth_user :u]]
         :left-join [[:profile_profile :p] [:= :p.user_id :u.id]]
         :where [:= :u.id user-id]}
@@ -84,9 +83,8 @@
         (db/query! db {:insert-into :profile_profile
                        :values [{:user_id (:id user)
                                  :name name
-                                 :bio ""
-                                 :image_url ""
-                                 :location ""}]})
+                                 :position ""
+                                 :image_url ""}]})
         (send-verified-email! db (:id user))
         (get-user db (:id user))))
     (catch Exception e
@@ -108,7 +106,7 @@
 
 (defn login [db {:auth.user/keys [email password]}]
   (let [user (->> {:select [:u.id :u.email :u.verified_email_p :u.password
-                            :p.name :p.location :p.bio :p.pronoun_id]
+                            :p.name :p.position :p.pronoun_id]
                    :from [[:auth_user :u]]
                    :left-join [[:profile_profile :p] [:= :p.user_id :u.id]]
                    :where [:= :u.email email]}
@@ -215,10 +213,10 @@
 (comment
 
   (let [db (:database @platform.init/system)]
-    #_(login db {:auth.user/email "emil0r@gmail.com"
-                 :auth.user/password "foobar"})
+    (login db {:auth.user/email "emil0r@gmail.com"
+                 :auth.user/password "asdf"})
     #_(verify-email db {:auth.user/token "165827"})
-    (change-password db 1 {:auth.user/password "foobar"
+    #_(change-password db 1 {:auth.user/password "foobar"
                            :auth.user/new-password "foobar"})
     #_(forgotten-password db {:auth.user/email "emil0r@gmail.com"})
     #_(reset-password db {:auth.user/token "409348"
