@@ -3,6 +3,7 @@
             [platform.api.auth :as api.auth]
             [platform.api.jam :as api.jam]
             [platform.api.profile :as api.profile]
+            [platform.api.room :as api.room]
             [platform.api.teleporter :as api.teleporter]
             [platform.api.version :as api.version]
             [platform.http.html :refer [home]]
@@ -174,7 +175,7 @@
      ;; auth
      ["/api"
       ;; everything under /api needs to be authenticated
-      {:middleware [[wrap-authn]]}
+      ;;{:middleware [[wrap-authn]]}
       ["/teleporter"
        {:swagger {:tags ["teleporter"]}}
        [""
@@ -186,6 +187,19 @@
                             400 {:body :error/error}}
                 :parameters {:body any?}
                 :handler #'api.teleporter/update}}]]
+      ["/room"
+       {:swagger {:tags ["room"]}}
+       [""
+        {:get {:responses {200 {:body :room/rooms}}
+               :handler #'api.room/get-rooms}
+         :post {:responses {200 {:body :room/room}
+                            400 {:body :error/error}}
+                :parameters {:body :room/update}
+                :handler #'api.room/update-room}
+         :put {:responses {200 {:body :room/room}
+                           400 {:body :error/error}}
+               :parameters {:body :room/save}
+               :handler #'api.room/save-room}}]]
       ["/profile"
        {:swagger {:tags ["profile"]}}
        [""

@@ -60,3 +60,13 @@
                              (str query-string "&" k "=" v))))
                         "" query-params))
        url))))
+
+
+(defn trim-string [s]
+  (str/trim s))
+
+(defn get-compare-string [s]
+  (-> s
+      (str/trim)
+      (str/lower-case)
+      (str/replace #"\s" "")))

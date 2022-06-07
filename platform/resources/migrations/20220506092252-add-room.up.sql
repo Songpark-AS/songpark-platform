@@ -1,6 +1,6 @@
 CREATE TABLE room_room (
   id serial primary key,
-  name text,
+  name text NOT NULL UNIQUE,
   created_at timestamp default now(),
   updated_at timestamp default now()
 );
