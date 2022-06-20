@@ -28,6 +28,8 @@
   (let [db (get-in @init/system [:http-server :db])]
     (proto/read-db db [:teleporter #uuid "7fdf0551-b5fc-557d-bddc-2ca5b1cdfaa6" :volume/global-volume]))
   (let [db (get-in @init/system [:http-server :db])]
+    (proto/read-db db [:teleporter]))
+  (let [db (get-in @init/system [:http-server :db])]
     (proto/write-db db [:waiting] {}))
 
   (let [db (get-in @init/system [:http-server :db])]
