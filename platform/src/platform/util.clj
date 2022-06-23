@@ -1,8 +1,20 @@
 (ns platform.util
-  (:require [clojure.java.shell :refer [sh]]
+  (:require [clj-uuid :as uuid]
+            [clojure.java.shell :refer [sh]]
             [clojure.string :as str]
             [platform.config :refer [config]])
   (:import [java.net URLEncoder]))
+
+
+(def ^:private +namespace-serial+ #uuid "52df9e07-4aed-4eb6-82c6-d542cccd9e88")
+(defn serial->uuid [serial]
+  (assert (string? serial) "Serial needs to be a string")
+  (uuid/v5 +namespace-serial+ serial))
+
+(def ^:private +namespace-id+ #uuid "e4c97a2e-bf78-491b-9040-7263e22b84b0")
+(defn id->uuid [id]
+  (assert (number? id) "id needs to be a number")
+  (uuid/v5 +namespace-id+ id))
 
 (defn kw->str [x]
   (if (keyword? x)

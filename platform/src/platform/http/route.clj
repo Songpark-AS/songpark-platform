@@ -2,6 +2,7 @@
   (:require [platform.api.app :as api.app]
             [platform.api.auth :as api.auth]
             [platform.api.jam :as api.jam]
+            [platform.api.pairing :as api.pairing]
             [platform.api.profile :as api.profile]
             [platform.api.room :as api.room]
             [platform.api.teleporter :as api.teleporter]
@@ -186,7 +187,18 @@
          :post {:responses {200 {:body (spec/keys :req [:teleporter/id])}
                             400 {:body :error/error}}
                 :parameters {:body any?}
-                :handler #'api.teleporter/update}}]]
+                :handler #'api.teleporter/update}}]
+       ["/pair"
+        {:get {:responses {200 {:body :pairing/pairs}}
+               :handler #'api.pairing/get-pairs}
+         :put {:responses {200 {:body :http/ok}
+                           400 {:body :error/error}}
+               :parameters {:body :pairing/pair}
+               :handler #'api.pairing/pair}
+         :delete {:responses {200 {:body :http/ok}
+                              400 {:body :error/error}}
+                  :parameters {:body :pairing/unpair}
+                  :handler #'api.pairing/unpair}}]]
       ["/room"
        {:swagger {:tags ["room"]}}
        [""

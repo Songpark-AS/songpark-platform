@@ -1,33 +1,28 @@
 (ns platform.api.teleporter
-  (:require [clj-uuid :as uuid]
-            [platform.config :refer [config]]
+  (:require [platform.config :refer [config]]
+            [platform.util :refer [serial->uuid]]
             [songpark.jam.platform.protocol :as proto]
             [songpark.mqtt :as mqtt]
             [songpark.mqtt.util :refer [heartbeat-topic]]
             [taoensso.timbre :as log]
             [tick.core :as t]))
 
-(defn- ns-uuid<- [name]
-  (uuid/v5 uuid/+namespace-url+ name))
-
 (defn init [{:keys [data parameters]}]
-  (let [{:teleporter/keys [mac] :as teleporter} (:body parameters)
-        id (ns-uuid<- mac)
-        sips (:sips config)
+  (let [{:teleporter/keys [serial] :as teleporter} (:body parameters)
+        id (serial->uuid serial)
         db (:db data)]
-    (if mac
+    (if serial
       (do
         (proto/write-db db [:teleporter id] (assoc teleporter
                                                    :teleporter/id id
-                                                   :teleporter/heartbeat-timestamp (t/now)
-                                                   :teleporter/sip (sips id)))
+                                                   :teleporter/heartbeat-timestamp (t/now)))
         (let [topic (heartbeat-topic id)
               mqtt-client (:mqtt-client data)]
           (mqtt/subscribe mqtt-client topic 2))
         {:status 200
          :body {:teleporter/id id}})
       {:status 400
-       :body {:error/message "Illegal MAC address"}})))
+       :body {:error/message "Teleporter is missing a serial"}})))
 
 (defn update [{:keys [data parameters]}]
   (let [{:teleporter/keys [id settings] :as teleporter} (:body parameters)

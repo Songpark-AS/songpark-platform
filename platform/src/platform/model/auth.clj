@@ -5,7 +5,8 @@
             [platform.auth :as auth]
             [platform.config :refer [config]]
             [platform.email.mandrill :as mandrill]
-            [platform.util :refer [get-url]]
+            [platform.util :refer [id->uuid
+                                   get-url]]
             [taoensso.timbre :as log]
             [tick.core :as t]))
 
@@ -24,14 +25,15 @@
   (get-in config [:auth :password-token-hours] 2))
 
 (defn get-user [db user-id]
-  (->> {:select [:u.id :u.email :u.verified_email_p
-                 :p.name :p.position :p.pronoun_id]
-        :from [[:auth_user :u]]
-        :left-join [[:profile_profile :p] [:= :p.user_id :u.id]]
-        :where [:= :u.id user-id]}
-       (db/query db ^:opts {[:transformation :post]
-                            [:user :auth/user]})
-       first))
+  (let [user (->> {:select [:u.id :u.email :u.verified_email_p
+                            :p.name :p.position :p.pronoun_id]
+                   :from [[:auth_user :u]]
+                   :left-join [[:profile_profile :p] [:= :p.user_id :u.id]]
+                   :where [:= :u.id user-id]}
+                  (db/query db ^:opts {[:transformation :post]
+                                       [:user :auth/user]})
+                  first)]
+    (assoc user :auth.user/channel (id->uuid (:auth.user/id user)))))
 
 (defn user-exists? [db email]
   (->> {:select [:id]
@@ -113,7 +115,8 @@
                   (db/query db)
                   first)]
     (if (buddy.hashers/check password (:password user))
-      (transform/transform :user :auth/user user)
+      (assoc (transform/transform :user :auth/user user)
+             :auth.user/channel (id->uuid (:id user)))
       false)))
 
 
@@ -213,7 +216,8 @@
 (comment
 
   (let [db (:database @platform.init/system)]
-    (login db {:auth.user/email "emil0r@gmail.com"
+    (get-user db 1)
+    #_(login db {:auth.user/email "emil0r@gmail.com"
                  :auth.user/password "asdf"})
     #_(verify-email db {:auth.user/token "165827"})
     #_(change-password db 1 {:auth.user/password "foobar"
