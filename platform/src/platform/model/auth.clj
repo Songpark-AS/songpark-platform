@@ -215,8 +215,14 @@
 
 (comment
 
-  (let [db (:database @platform.init/system)]
-    (get-user db 1)
+  (let [db (:database @platform.init/system)
+        {:keys [auth.user/id] :as user} (get-user db 1)]
+    [user
+     (type id)
+     (id->uuid id)
+     (type 1)
+     (id->uuid 1)]
+    #_(get-user db 1)
     #_(login db {:auth.user/email "emil0r@gmail.com"
                  :auth.user/password "asdf"})
     #_(verify-email db {:auth.user/token "165827"})

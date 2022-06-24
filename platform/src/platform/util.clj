@@ -14,7 +14,7 @@
 (def ^:private +namespace-id+ #uuid "e4c97a2e-bf78-491b-9040-7263e22b84b0")
 (defn id->uuid [id]
   (assert (number? id) "id needs to be a number")
-  (uuid/v5 +namespace-id+ id))
+  (uuid/v5 +namespace-id+ (long id)))
 
 (defn kw->str [x]
   (if (keyword? x)
