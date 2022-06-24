@@ -61,9 +61,8 @@
                               [:pairing :pairing/paired]})
          first)))
 
-(defn pair [db user-id {:teleporter/keys [serial]}]
-  (let [teleporter-id (serial->uuid serial)
-        settings? (settings-exists? db user-id teleporter-id)]
+(defn pair [db user-id teleporter-id]
+  (let [settings? (settings-exists? db user-id teleporter-id)]
     (db/with-transaction [db :default]
       (db/query! db {:delete-from :teleporter_pairing
                      :where [:= :teleporter_id teleporter-id]})
@@ -71,21 +70,35 @@
                      :values [{:user_id user-id
                                :teleporter_id teleporter-id}]})
       (when-not settings?
-        (db/query! db {:insert-into :teleporter_settings
-                       :values [{:teleporter_id teleporter-id
-                                 :user_id user-id
-                                 :name (str "TP" serial)}]})))
+        (let [serial (->> {:select [:serial]
+                           :from [:teleporter_teleporter]
+                           :where [:= :id teleporter-id]}
+                          (db/query db)
+                          first
+                          :serial)]
+          (db/query! db {:insert-into :teleporter_settings
+                         :values [{:teleporter_id teleporter-id
+                                   :user_id user-id
+                                   :name (str "TP" serial)}]}))))
     (get-pair db user-id teleporter-id)))
+
+(defn unpair [db user-id]
+  (db/query! db {:delete-from :teleporter_pairing
+                 :where [:= :user_id user-id]}))
+
 
 (comment
   (let [db (:database @platform.init/system)]
     (get-pairs db 1))
 
   (let [db (:database @platform.init/system)]
-    (pair db 1 {:teleporter/serial "0001"}))
+    (pair db 1 (serial->uuid "0001")))
 
   (let [db (:database @platform.init/system)]
     (get-pairs db 1))
+
+  (let [db (:database @platform.init/system)]
+    (unpair db 1))
 
   (let [db (:database @platform.init/system)]
     (already-paired? db 1 "0001"))

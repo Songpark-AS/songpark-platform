@@ -191,6 +191,9 @@
        ["/pair"
         {:get {:responses {200 {:body :pairing/pairs}}
                :handler #'api.pairing/get-pairs}
+         :post {:responses {200 {:body :http/ok}}
+                :parameters {:body :pairing.teleporter/paired}
+                :handler #'api.pairing/paired}
          :put {:responses {200 {:body :http/ok}
                            400 {:body :error/error}}
                :parameters {:body :pairing/pair}
