@@ -16,9 +16,9 @@
 
                  ;; songpark
                  [songpark/common "0.3.0-SNAPSHOT"]
-                 [songpark/jam "1.0.0"]
+                 [songpark/jam "1.0.3"]
                  [songpark/taxonomy "0.3.0-SNAPSHOT"]
-                 [songpark/mqtt "1.0.1"]
+                 [songpark/mqtt "1.0.4-SNAPSHOT"]
 
                  ;; routing
                  [metosin/reitit "0.4.2"]
