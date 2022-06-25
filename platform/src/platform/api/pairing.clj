@@ -78,4 +78,4 @@
                        :teleporter/id teleporter-id
                        :auth.user/id user-id})))
     {:status 200
-     :body {:result :success}}))
+     :body {:teleporter/id teleporter-id}}))

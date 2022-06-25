@@ -198,7 +198,7 @@
                            400 {:body :error/error}}
                :parameters {:body :pairing/pair}
                :handler #'api.pairing/pair}
-         :delete {:responses {200 {:body :http/ok}
+         :delete {:responses {200 {:body :pairing/unpair}
                               400 {:body :error/error}}
                   :parameters {:body :pairing/unpair}
                   :handler #'api.pairing/unpair}}]]

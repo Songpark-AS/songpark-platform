@@ -86,6 +86,18 @@
   (db/query! db {:delete-from :teleporter_pairing
                  :where [:= :user_id user-id]}))
 
+(defn cut-pairing
+  "Cut all pairing to a teleporter to all users"
+  [db teleporter-id]
+  (let [user-ids (->> {:select [:user_id]
+                       :from [:teleporter_pairing]
+                       :where [:= :teleporter_id teleporter-id]}
+                      (db/query db)
+                      (map :user_id))]
+    (db/query! db {:delete-from :teleporter_pairing
+                   :where [:= :teleporter_id teleporter-id]})
+    user-ids))
+
 
 (comment
   (let [db (:database @platform.init/system)]
