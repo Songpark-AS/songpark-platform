@@ -201,7 +201,14 @@
          :delete {:responses {200 {:body :pairing/unpair}
                               400 {:body :error/error}}
                   :parameters {:body :pairing/unpair}
-                  :handler #'api.pairing/unpair}}]]
+                  :handler #'api.pairing/unpair}}]
+       ["/settings"
+        {:swagger {:tags ["teleporter" "settings"]}}
+        [""
+         {:post {:responses {200 {:body :teleporter/settings}
+                             400 {:body :error/error}}
+                 :parameters {:body :teleporter/settings}
+                 :handler #'api.teleporter/settings}}]]]
       ["/room"
        {:swagger {:tags ["room"]}}
        [""
