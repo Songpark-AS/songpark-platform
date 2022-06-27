@@ -1,6 +1,7 @@
 (ns platform.api.pairing
   (:require [platform.model.app :as model.app]
             [platform.model.pairing :as model.pairing]
+            [platform.mqtt.action.pairing :refer [publish-unpaired]]
             [platform.util :refer [id->uuid
                                    serial->uuid]]
             [songpark.mqtt :as mqtt]
@@ -67,15 +68,18 @@
                {data :body} :parameters
                {user-id :auth.user/id} :identity
                :as request}]
-  (let [{teleporter-id :teleporter/id} data
-        result (model.pairing/unpair db user-id)]
-    ;; we deleted a pairing
-    (when-not (empty? result)
-      (let [topic (teleporter-topic teleporter-id)]
-        (mqtt/publish mqtt-client
-                      topic
-                      {:message/type :pairing/unpair
-                       :teleporter/id teleporter-id
-                       :auth.user/id user-id})))
+  (let [{teleporter-id :teleporter/id} data]
+    (if user-id
+      (let [result (model.pairing/unpair db user-id)]
+        ;; we deleted a pairing
+        (when-not (empty? result)
+          (let [topic (teleporter-topic teleporter-id)]
+            (mqtt/publish mqtt-client
+                          topic
+                          {:message/type :pairing/unpair
+                           :teleporter/id teleporter-id
+                           :auth.user/id user-id}))))
+      (let [user-ids (model.pairing/cut-pairing db teleporter-id)]
+        (publish-unpaired mqtt-client teleporter-id user-ids)))
     {:status 200
      :body {:teleporter/id teleporter-id}}))
