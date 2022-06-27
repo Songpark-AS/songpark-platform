@@ -1,8 +1,9 @@
 (ns platform.api.teleporter
   (:require [platform.config :refer [config]]
             [platform.model.pairing :as model.pairing]
-            [platform.util :refer [id->uuid
-                                   serial->uuid]]
+            [platform.model.teleporter :as model.teleporter]
+            [platform.mqtt.action.pairing :refer [publish-unpaired]]
+            [platform.util :refer [serial->uuid]]
             [songpark.jam.platform.protocol :as proto]
             [songpark.mqtt :as mqtt]
             [songpark.mqtt.util :refer [heartbeat-topic]]
@@ -29,11 +30,7 @@
         ;; cut any previous pairing
         (let [user-ids (model.pairing/cut-pairing db id)]
           ;; inform any application listening that the teleporter has been unpaired
-          (doseq [user-id user-ids]
-            (mqtt/publish mqtt-client
-                          (id->uuid user-id)
-                          {:message/type :pairing/unpaired
-                           :teleporter/id id})))
+          (publish-unpaired mqtt-client id user-ids))
 
         {:status 200
          :body {:teleporter/id id}})
@@ -50,6 +47,17 @@
          :body {:teleporter/id id}})
       {:status 400
        :body {:error/message "Unable to update the Teleporter"}})))
+
+(defn settings [{{db :database} :data
+                 {data :body} :parameters
+                 {user-id :auth.user/id} :identity
+                 :as request}]
+  (let [result (model.teleporter/save-settings db user-id data)]
+    (if result
+      {:status 200
+       :body result}
+      {:status 400
+       :body {:error/message "Unable to save the settings for the Teleporter"}})))
 
 
 (comment

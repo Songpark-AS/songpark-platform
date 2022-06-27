@@ -12,11 +12,3 @@
   (let [result (model.app/app-status db memdb user-id)]
     {:status 200
      :body result}))
-
-
-
-(comment
-
-  (let [db (get-in @platform.init/system [:http-server :db])]
-    (connect {:data {:db db}}))
-  )

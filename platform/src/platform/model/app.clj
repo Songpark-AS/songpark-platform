@@ -72,5 +72,6 @@
 
   (let [db (:database @platform.init/system)
         memdb (get-in @platform.init/system [:http-server :db])]
-    (get-teleporters db memdb 1))
+    (get-teleporters db memdb 1)
+    #_(proto/read-db memdb [:teleporter]))
   )
