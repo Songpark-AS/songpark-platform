@@ -6,16 +6,12 @@
 
 
 (defn kw->fx-key [k]
-  (let [ns* (str/split (namespace k) #"\.")
+  (let [ns* (namespace k)
         n* (name k)]
-    (str (str/join "__" ns*)
-         "_" n*)))
+    (str ns* "/" n*)))
 
 (defn fx-key->kw [k]
-  (-> k
-      (str/replace #"__" ".")
-      (str/replace #"_" "/")
-      (keyword)))
+  (keyword k))
 
 
 (defn prepare-presets [preset-id kvs]
@@ -27,20 +23,21 @@
                          n* (last parts)]
                      (keyword ns* n*))))
        (mapv (fn [[fx-type values]]
-               (merge {:fx/type fx-type}
+               (merge {:fx/type (keyword fx-type)}
                       (->> values
                            (map (fn [{:keys [fx_key value]}]
                                   {(fx-key->kw fx_key) value}))
                            (into {})))))))
 
 (comment
+  (kw->fx-key :fx.input.amplify/drive)
   (let [preset-id 4
-        kvs [{:preset_id 4, :fx_key "fx__input1__amplify_drive", :value 1}
-             {:preset_id 4, :fx_key "fx__input1__amplify_tone", :value 1}
-             {:preset_id 4, :fx_key "fx__input1__echo_delay-time", :value 100}
-             {:preset_id 4, :fx_key "fx__input1__echo_level", :value 50}
-             {:preset_id 5, :fx_key "fx__input1__echo_delay-time", :value 123}
-             {:preset_id 5, :fx_key "fx__input1__echo_level", :value 45}]]
+        kvs [{:preset_id 4, :fx_key "fx.input1.amplify/drive", :value 1}
+             {:preset_id 4, :fx_key "fx.input1.amplify/tone", :value 1}
+             {:preset_id 4, :fx_key "fx.input1.echo/delay-time", :value 100}
+             {:preset_id 4, :fx_key "fx.input1.echo/level", :value 50}
+             {:preset_id 5, :fx_key "fx.input1.echo/delay-time", :value 123}
+             {:preset_id 5, :fx_key "fx.input1.echo/level", :value 45}]]
     (prepare-presets preset-id kvs))
   )
 
@@ -120,16 +117,23 @@
     (preset db user-id id)))
 
 (defn delete-preset [db user-id {:fx.preset/keys [id]}]
-  (db/with-transaction [db :default]
-    (db/query! db {:delete-from :fx_value
-                   :where [:= :preset_id id]})
-    (db/query! db {:delete-from :fx_preset
-                   :where [:= :id id]})))
+  (try
+    (db/with-transaction [db :default]
+     (db/query! db {:delete-from :fx_value
+                    :where [:= :preset_id id]})
+     (db/query! db {:delete-from :fx_preset
+                    :where [:= :id id]}))
+    true
+    (catch Exception e
+      (log/error ::delete-preset {:exception e
+                                  :message (ex-message e)
+                                  :data (ex-data e)})
+      false)))
 
 
 (comment
   (let [db (:database @platform.init/system)]
-    #_(save-preset db 1 {:fx.preset/name "test 1"
+    (save-preset db 1 {:fx.preset/name "test 1"
                        :fx/presets [{:fx.input1.amplify/drive 1
                                      :fx.input1.amplify/tone 1}
 
@@ -146,7 +150,7 @@
 
                                       {:fx.input1.echo/delay-time 100
                                        :fx.input1.echo/level 50}]})
-    (delete-preset db 1 {:fx.preset/id 2})
+    #_(delete-preset db 1 {:fx.preset/id 2})
     #_(presets db 1)
     #_(preset db 1 4))
 

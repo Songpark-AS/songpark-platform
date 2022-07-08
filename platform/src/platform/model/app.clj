@@ -70,8 +70,10 @@
 
 (comment
 
-  (let [db (:database @platform.init/system)
-        memdb (get-in @platform.init/system [:http-server :db])]
-    (get-teleporters db memdb 1)
-    #_(proto/read-db memdb [:teleporter]))
+  (->>
+   (let [db (:database @platform.init/system)
+         memdb (get-in @platform.init/system [:http-server :db])]
+     (get-teleporters db memdb 1)
+     #_(proto/read-db memdb [:teleporter]))
+   (map (juxt :fx.input1/gain)))
   )

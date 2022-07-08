@@ -1,6 +1,7 @@
 (ns platform.http.route
   (:require [platform.api.app :as api.app]
             [platform.api.auth :as api.auth]
+            [platform.api.fx :as api.fx]
             [platform.api.jam :as api.jam]
             [platform.api.pairing :as api.pairing]
             [platform.api.profile :as api.profile]
@@ -209,6 +210,24 @@
                              400 {:body :error/error}}
                  :parameters {:body :teleporter/settings}
                  :handler #'api.teleporter/settings}}]]]
+      ["/fx"
+       {:swagger {:tags ["fx"]}}
+       [""
+        {:get {:responses {200 {:body :fx.preset/presets}
+                           400 {:body :error/error}}
+               :handler #'api.fx/get-presets}
+         :put {:responses {200 {:body :fx.preset/preset}
+                           400 {:body :error/error}}
+               :parameters {:body :fx.preset/save}
+               :handler #'api.fx/save-preset}
+         :post {:responses {200 {:body :fx.preset/preset}
+                            400 {:body :error/error}}
+                :parameters {:body :fx.preset/update}
+                :handler #'api.fx/update-preset}
+         :delete {:responses {200 {:body :http/ok}
+                              400 {:body :error/error}}
+                  :parameters {:body :fx.preset/delete}
+                  :handler #'api.fx/delete-preset}}]]
       ["/room"
        {:swagger {:tags ["room"]}}
        [""
@@ -271,7 +290,7 @@
                                         :cookie-attrs (:http/cookies settings)}]
 
                          #_[middleware/wrap-debug-inject {:session {:identity {:teleporter/id 1
-                                                                             :authz/credentials #{:teleporter}}}}]
+                                                                               :authz/credentials #{:teleporter}}}}]
 
                          ;; swagger feature
                          swagger/swagger-feature
