@@ -14,26 +14,12 @@
                                    }}}
  :scheduler {;; every one second
              :interval-ms 1000}
- :sips {#uuid "e35fd384-5c62-5ade-b66b-f3fafc0e08ad" "sip:9100@voip1.inonit.no",
-        #uuid "ad6fc5b7-c52c-5941-bfb7-cf4fb4189775" "sip:9102@voip1.inonit.no",
-        #uuid "7fdf0551-b5fc-557d-bddc-2ca5b1cdfaa6" "sip:9104@voip1.inonit.no",
-        #uuid "cffa01d3-fbf3-5c84-af4f-3c54550e2e4f" "sip:9106@voip1.inonit.no",
-        #uuid "c700abce-c109-58fc-a3e7-86bff412a872" "sip:9108@voip1.inonit.no"}
+ :sips {#uuid "e35fd384-5c62-5ade-b66b-f3fafc0e08ad" "sip:9100@voip1.songpark.com",
+        #uuid "ad6fc5b7-c52c-5941-bfb7-cf4fb4189775" "sip:9102@voip1.songpark.com",
+        #uuid "7fdf0551-b5fc-557d-bddc-2ca5b1cdfaa6" "sip:9104@voip1.songpark.com",
+        #uuid "cffa01d3-fbf3-5c84-af4f-3c54550e2e4f" "sip:9106@voip1.songpark.com",
+        #uuid "c700abce-c109-58fc-a3e7-86bff412a872" "sip:9108@voip1.songpark.com"
+        #uuid "c3526228-697d-550b-a5ef-9f5d40868794" "sip:9120@voip1.songpark.com"}
 
- :database {:datasource {:kamailio {:maximum-pool-size 3
-                                    :adapter "mysql"
-                                    :username "kamailio_admin"
-                                    :password "mysql"
-                                    :database-name ""
-                                    :server-name "localhost"
-                                    :port-number 3306}}}
- :voip {:server "voip1.inonit.no"
-        :accounts {#uuid "1d84be2b-44d1-5da8-91ae-a9b97f133cb9" {:name :tp-01
-                                                                 :voip/username "9111"
-                                                                 :voip/password "ufd682?7"}
-                   ;; TODO: change this based on mac address of other tp
-                   #uuid "1d84be2b-44d1-5da8-91ae-a9b97f133c00" {:name :tp-02
-                                                                 :voip/username "9112"
-                                                                 :voip/password "sT-hjjd?kd"}}}
  :teleporter {;; milliseconds
               :offline-timeout 60000}}

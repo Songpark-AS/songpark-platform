@@ -24,6 +24,7 @@ logs/
 /platform/resources/config.edn
 /platform/resources/public/js
 /platform/resources/public/css
+/platform/resources/public/images
 
 # lib
 /lib/*/target
