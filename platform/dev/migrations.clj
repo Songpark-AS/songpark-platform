@@ -14,29 +14,29 @@
 
 (defn generate-fx-keys []
   (->> [;; gate
-        [:fx.input1.gate/threshold :fx.input2.gate/threshold]
-        [:fx.input1.gate/attack :fx.input2.gate/attack]
-        [:fx.input1.gate/release :fx.input2.gate/release]
+        [:fx.gate/threshold]
+        [:fx.gate/attack]
+        [:fx.gate/release]
         ;; reverb
-        [:fx.input1.reverb/mix :fx.input2.reverb/mix]
-        [:fx.input1.reverb/damp :fx.input2.reverb/damp]
-        [:fx.input1.reverb/room-size :fx.input2.reverb/room-size]
+        [:fx.reverb/mix]
+        [:fx.reverb/damp]
+        [:fx.reverb/room-size]
         ;; amplify
-        [:fx.input1.amplify/drive :fx.input2.amplify/drive]
-        [:fx.input1.amplify/tone :fx.input2.amplify/tone]
+        [:fx.amplify/drive]
+        [:fx.amplify/tone]
         ;; equalizer
-        [:fx.input1.equalizer/low :fx.input2.equalizer/low]
-        [:fx.input1.equalizer/medium-low :fx.input2.equalizer/medium-low]
-        [:fx.input1.equalizer/medium-high :fx.input2.equalizer/medium-high]
-        [:fx.input1.equalizer/high :fx.input2.equalizer/high]
+        [:fx.equalizer/low]
+        [:fx.equalizer/medium-low]
+        [:fx.equalizer/medium-high]
+        [:fx.equalizer/high]
         ;; echo
-        [:fx.input1.echo/delay-time :fx.input2.echo/delay-time]
-        [:fx.input1.echo/level :fx.input2.echo/level]
+        [:fx.echo/delay-time]
+        [:fx.echo/level]
         ;; compressor
-        [:fx.input1.compressor/threshold :fx.input2.compressor/threshold]
-        [:fx.input1.compressor/ratio :fx.input2.compressor/ratio]
-        [:fx.input1.compressor/attack :fx.input2.compressor/attack]
-        [:fx.input1.compressor/release :fx.input2.compressor/release]]
+        [:fx.compressor/threshold]
+        [:fx.compressor/ratio]
+        [:fx.compressor/attack]
+        [:fx.compressor/release]]
        (flatten)
        (map kw->fx-key)))
 

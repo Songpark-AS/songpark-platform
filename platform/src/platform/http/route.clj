@@ -213,14 +213,14 @@
       ["/fx"
        {:swagger {:tags ["fx"]}}
        [""
-        {:get {:responses {200 {:body :fx.preset/presets}
+        {:get {:responses {200 {:body :fx/presets}
                            400 {:body :error/error}}
                :handler #'api.fx/get-presets}
-         :put {:responses {200 {:body :fx.preset/preset}
+         :put {:responses {200 {:body :fx/preset}
                            400 {:body :error/error}}
                :parameters {:body :fx.preset/save}
                :handler #'api.fx/save-preset}
-         :post {:responses {200 {:body :fx.preset/preset}
+         :post {:responses {200 {:body :fx/preset}
                             400 {:body :error/error}}
                 :parameters {:body :fx.preset/update}
                 :handler #'api.fx/update-preset}

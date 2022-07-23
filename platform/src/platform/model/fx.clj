@@ -52,7 +52,7 @@
     (reduce (fn [out {:keys [id name]}]
               (conj out {:fx.preset/id id
                          :fx.preset/name name
-                         :fx/presets (prepare-presets id kvs)}))
+                         :fx/fxs (prepare-presets id kvs)}))
             [] presets)))
 
 (defn preset [db user-id preset-id]
@@ -68,23 +68,23 @@
                           :where [:= :preset_id preset-id]})]
     {:fx.preset/id (:id preset)
      :fx.preset/name (:name preset)
-     :fx/presets (prepare-presets (:id preset) kvs)}))
+     :fx/fxs (prepare-presets (:id preset) kvs)}))
 
 (defn save-preset [db user-id {:fx.preset/keys [name]
-                               :keys [fx/presets]}]
+                               :keys [fx/fxs]}]
   (db/with-transaction [db :default]
     (let [{preset-id :id :as _saved} (->> {:insert-into :fx_preset
                                            :values [{:name name
                                                      :user_id user-id}]}
                                           (db/query<! db)
                                           first)]
-      (let [values (->> presets
+      (let [values (->> fxs
                         (map (fn [coll]
                                (map (fn [[k v]]
                                       {:preset_id preset-id
                                        :fx_key (kw->fx-key k)
                                        :value v})
-                                    coll)))
+                                    (dissoc coll :fx/type))))
                         (flatten))]
         (when-not (empty? values)
           (db/query! db {:insert-into :fx_value
@@ -92,7 +92,7 @@
       (preset db user-id preset-id))))
 
 (defn update-preset [db user-id {:fx.preset/keys [id name]
-                                 :keys [fx/presets]}]
+                                 :keys [fx/fxs]}]
   (db/with-transaction [db :default]
     (->> {:update :fx_preset
           :set {:name name}
@@ -103,13 +103,13 @@
     (db/query! db {:delete-from :fx_value
                    :where [:and
                            [:= :preset_id id]]})
-    (let [values (->> presets
+    (let [values (->> fxs
                       (map (fn [coll]
                              (map (fn [[k v]]
                                     {:preset_id id
                                      :fx_key (kw->fx-key k)
                                      :value v})
-                                  coll)))
+                                  (dissoc coll :fx/type))))
                       (flatten))]
       (when-not (empty? values)
         (db/query! db {:insert-into :fx_value
@@ -133,7 +133,7 @@
 
 (comment
   (let [db (:database @platform.init/system)]
-    (save-preset db 1 {:fx.preset/name "test 1"
+    #_(save-preset db 1 {:fx.preset/name "test 1"
                        :fx/presets [{:fx.input1.amplify/drive 1
                                      :fx.input1.amplify/tone 1}
 
@@ -152,7 +152,7 @@
                                        :fx.input1.echo/level 50}]})
     #_(delete-preset db 1 {:fx.preset/id 2})
     #_(presets db 1)
-    #_(preset db 1 4))
+    (preset db 1 13))
 
   (let [preset-id 1
         presets [{:fx.input1.amplify/drive 1
