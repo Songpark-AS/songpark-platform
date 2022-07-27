@@ -11,7 +11,7 @@
                       :as request}]
   (if-let [result (model.fx/delete-preset db user-id data)]
     {:status 200
-     :body {:result :success}}
+     :body data}
     {:status 400
      :body {:error/message "Unable to delete the preset"}}))
 

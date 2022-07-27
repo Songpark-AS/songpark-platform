@@ -94,12 +94,13 @@
 (defn update-preset [db user-id {:fx.preset/keys [id name]
                                  :keys [fx/fxs]}]
   (db/with-transaction [db :default]
-    (->> {:update :fx_preset
-          :set {:name name}
-          :where [:and
-                  [:= :id id]
-                  [:= :user_id user-id]]}
-         (db/query! db))
+    (when name
+      (->> {:update :fx_preset
+            :set {:name name}
+            :where [:and
+                    [:= :id id]
+                    [:= :user_id user-id]]}
+           (db/query! db)))
     (db/query! db {:delete-from :fx_value
                    :where [:and
                            [:= :preset_id id]]})

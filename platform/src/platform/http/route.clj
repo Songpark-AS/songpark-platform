@@ -224,7 +224,7 @@
                             400 {:body :error/error}}
                 :parameters {:body :fx.preset/update}
                 :handler #'api.fx/update-preset}
-         :delete {:responses {200 {:body :http/ok}
+         :delete {:responses {200 {:body :fx.preset/deleted}
                               400 {:body :error/error}}
                   :parameters {:body :fx.preset/delete}
                   :handler #'api.fx/delete-preset}}]]
