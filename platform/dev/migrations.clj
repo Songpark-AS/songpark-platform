@@ -42,7 +42,7 @@
 
 (comment
 
-  (migratus/create (migratus-config) "add-preset-keys")
+  (migratus/create (migratus-config) "remove-pronouns")
   (migratus/migrate (migratus-config))
   (migratus/rollback (migratus-config))
 

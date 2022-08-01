@@ -250,10 +250,7 @@
                             400 {:body :error/error}
                             500 {:body :error/error}}
                 :parameters {:body :profile/save}
-                :handler #'api.profile/save-profile}}]
-       ["/pronouns"
-        {:get {:responses {200 {:body :profile/pronouns}}
-               :handler #'api.profile/get-pronouns}}]]
+                :handler #'api.profile/save-profile}}]]
       ["/app"
        {:swagger {:tags ["app"]}}
        [""

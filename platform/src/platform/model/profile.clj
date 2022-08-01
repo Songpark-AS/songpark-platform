@@ -26,13 +26,7 @@
                [:id :profile/id]
                [:name :profile/name]
                [:position :profile/position]
-               [:pronoun_id :profile.pronoun/id]
-               [:pronoun_name :profile.pronoun/name]
                [:image_url ->image-url <-image-url :profile/image-url])
-
-(transform/add :pronoun :profile/pronoun
-               [:id :profile.pronoun/id]
-               [:name :profile.pronoun/name])
 
 (defn name-exists?
   "Check if the name exists for a given profile name"
@@ -54,9 +48,8 @@
         some?)))
 
 (defn get-profile [db user-id]
-  (->> {:select [:p.*, [:pr.name :pronoun_name]]
+  (->> {:select [:p.*]
         :from [[:profile_profile :p]]
-        :join [[:profile_pronoun :pr] [:= :p.pronoun_id :pr.id]]
         :where [:= :p.user_id user-id]}
        (db/query db
                  ^:opts {[:transformation :post]
@@ -79,8 +72,7 @@
                           "."
                           (:profile.image/type data))
                      old-image)
-          to-save (-> (transform/transform {:nil false
-                                            [:remove-ks :pre] #{:profile.pronoun/name}}
+          to-save (-> (transform/transform {:nil false}
                                            :profile/profile :profile data)
                       (assoc :image_url img-path))]
       ;; if base64 image is provided, we clean up any old image and
@@ -103,14 +95,6 @@
                                 :data (ex-data e)})
       false)))
 
-(defn get-pronouns [db]
-  (->> {:select [:*]
-        :from [:profile_pronoun]}
-       (db/query db
-                 ^:opts {[:transformation :post]
-                         [:pronoun :profile/pronoun]})))
-
-
 (comment
 
   (defn slurp-bytes
@@ -122,19 +106,15 @@
 
   (let [db (:database @platform.init/system)]
     (save-profile db 1 {:profile/name "Emilius"
-                        :profile/position "My bio"
+                        :profile/position "Guitarr"
                         :profile.image/type "png"
                         :profile.image/base64 (-> (slurp-bytes "assets/logo-black.png")
-                                                  (base64/encode true))
-                        :profile.pronoun/id -1}))
+                                                  (base64/encode true))}))
 
   (let [db (:database @platform.init/system)]
     (get-profile db 1))
 
-  (let [db (:database @platform.init/system)]
-    (get-pronouns db))
-
-  (let [data (slurp-bytes "assets/logo-black.png")]
+    (let [data (slurp-bytes "assets/logo-black.png")]
     (with-open [out (io/output-stream "tmp.png")]
       (.write out data)))
 

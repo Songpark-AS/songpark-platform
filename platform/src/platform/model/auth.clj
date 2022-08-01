@@ -26,7 +26,7 @@
 
 (defn get-user [db user-id]
   (let [user (->> {:select [:u.id :u.email :u.verified_email_p
-                            :p.name :p.position :p.pronoun_id]
+                            :p.name :p.position]
                    :from [[:auth_user :u]]
                    :left-join [[:profile_profile :p] [:= :p.user_id :u.id]]
                    :where [:= :u.id user-id]}
@@ -108,7 +108,7 @@
 
 (defn login [db {:auth.user/keys [email password]}]
   (let [user (->> {:select [:u.id :u.email :u.verified_email_p :u.password
-                            :p.name :p.position :p.pronoun_id]
+                            :p.name :p.position]
                    :from [[:auth_user :u]]
                    :left-join [[:profile_profile :p] [:= :p.user_id :u.id]]
                    :where [:= :u.email email]}
