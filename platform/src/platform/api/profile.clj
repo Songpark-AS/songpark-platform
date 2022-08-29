@@ -26,9 +26,3 @@
         {:status 500
          :body {:error/message "Unable to save profile. Please contact the administrator"
                 :error/key :profile/location}}))))
-
-(defn get-pronouns [{{db :database} :data
-                     :as request}]
-  (let [result (model.profile/get-pronouns db)]
-    {:status 200
-     :body result}))

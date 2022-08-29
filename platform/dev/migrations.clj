@@ -42,7 +42,7 @@
 
 (comment
 
-  (migratus/create (migratus-config) "remove-pronouns")
+  (migratus/create (migratus-config) "room-session")
   (migratus/migrate (migratus-config))
   (migratus/rollback (migratus-config))
 

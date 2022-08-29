@@ -88,6 +88,8 @@
 
   :plantuml [["../docs/UML/*.puml" :png "../docs/modules/ROOT/assets/images/UML/"]]
 
+  :jvm-opts ["-Djava.awt.headless=true"]
+
   :profiles {:dev {:source-paths ["src" "dev"]
                    :resource-paths ["dev-resources" "resources"]
                    :dependencies [[midje "1.9.9"]
