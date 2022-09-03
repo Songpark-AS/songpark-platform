@@ -6,6 +6,7 @@
             [platform.api.pairing :as api.pairing]
             [platform.api.profile :as api.profile]
             [platform.api.room :as api.room]
+            [platform.api.room-session :as api.room-session]
             [platform.api.teleporter :as api.teleporter]
             [platform.api.version :as api.version]
             [platform.http.html :refer [home]]
@@ -240,7 +241,43 @@
          :put {:responses {200 {:body :room/room}
                            400 {:body :error/error}}
                :parameters {:body :room/save}
-               :handler #'api.room/save-room}}]]
+               :handler #'api.room/save-room}}]
+       ["/session"
+        ["/host"
+         {:post {:responses {200 {:body :http/ok}
+                             400 {:body :error/error}}
+                 :parameters {:body :room.session/host}
+                 :handler #'api.room-session/host}}]
+        ["/knock"
+         {:post {:responses {200 {:body :room.session/knocked}
+                             400 {:body :error/error}}
+                 :parameters {:body :room.session/knock}
+                 :handler #'api.room-session/knock}}]
+        ["/accept"
+         {:post {:responses {200 {:body :http/ok}
+                             400 {:body :error/error}}
+                 :parameters {:body :room.session/accept}
+                 :handler #'api.room-session/accept}}]
+        ["/decline"
+         {:post {:responses {200 {:body :http/ok}
+                             400 {:body :error/error}}
+                 :parameters {:body :room.session/decline}
+                 :handler #'api.room-session/decline}}]
+        ["/leave"
+         {:post {:responses {200 {:body :http/ok}
+                             400 {:body :error/error}}
+                 :parameters {:body :room.session/leave}
+                 :handler #'api.room-session/leave}}]
+        ["/remove"
+         {:post {:responses {200 {:body :http/ok}
+                             400 {:body :error/error}}
+                 :parameters {:body :room.session/remove}
+                 :handler #'api.room-session/remove}}]
+        ["/close"
+         {:post {:responses {200 {:body :http/ok}
+                             400 {:body :error/error}}
+                 :parameters {:body :room.session/close}
+                 :handler #'api.room-session/close}}]]]
       ["/profile"
        {:swagger {:tags ["profile"]}}
        [""

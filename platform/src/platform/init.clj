@@ -6,6 +6,7 @@
             [platform.migrator :as migrator]
             [platform.mqtt.handler.teleporter]
             [platform.logger :as logger]
+            [platform.room :as room]
             [platform.scheduler :as scheduler]
             [platform.versionrefresher :as versionrefresher]
             [songpark.jam.platform :refer [mem-db jam-manager]]
@@ -40,9 +41,11 @@
                   :http-server (component/using (http.server/http-server (merge (:http config)
                                                                                 {:db db
                                                                                  :store store}))
-                                                [:mqtt-client :jam-manager :database])
+                                                [:mqtt-client :jam-manager :database :roomdb])
                   :jam-manager (component/using (jam-manager {:db db})
                                                 [:mqtt-client])
+                  :roomdb (component/using (room/room-db {})
+                                           [:mqtt-client :jam-manager :database])
                   :scheduler (component/using (scheduler/scheduler (:scheduler config))
                                               [:jam-manager])
                   :mqtt-client mqtt-client]

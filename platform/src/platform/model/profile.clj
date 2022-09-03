@@ -53,8 +53,7 @@
         :where [:= :p.user_id user-id]}
        (db/query db
                  ^:opts {[:transformation :post]
-                         [:profile :profile/profile]}
-                 )
+                         [:profile :profile/profile]})
        first))
 
 (defn save-profile [db user-id data]
