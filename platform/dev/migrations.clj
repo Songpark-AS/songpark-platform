@@ -42,7 +42,7 @@
 
 (comment
 
-  (migratus/create (migratus-config) "room-session")
+  (migratus/create (migratus-config) "room-room-normalized-name")
   (migratus/migrate (migratus-config))
   (migratus/rollback (migratus-config))
 

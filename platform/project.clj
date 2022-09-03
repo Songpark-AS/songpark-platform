@@ -16,7 +16,7 @@
 
                  ;; songpark
                  [songpark/common "0.3.0-SNAPSHOT"]
-                 [songpark/jam "1.0.3"]
+                 [songpark/jam "1.0.4-SNAPSHOT"]
                  [songpark/taxonomy "0.3.0-SNAPSHOT"]
                  [songpark/mqtt "1.0.4-SNAPSHOT"]
 
