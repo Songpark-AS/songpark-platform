@@ -77,8 +77,8 @@
 (defn trim-string [s]
   (str/trim s))
 
-(defn get-compare-string [s]
+(defn normalize-string [s]
   (-> s
       (str/trim)
       (str/lower-case)
-      (str/replace #"\s" "")))
+      (str/replace #"\s" "-")))
