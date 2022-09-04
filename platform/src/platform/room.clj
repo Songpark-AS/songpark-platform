@@ -4,6 +4,7 @@
             [platform.model.profile :as model.profile]
             [platform.util :refer [id->uuid]]
             [songpark.jam.platform :as jam.platform]
+            [songpark.jam.platform.protocol :as proto]
             [songpark.mqtt :as mqtt]
             [taoensso.timbre :as log]
             [tick.core :as t]))
@@ -51,6 +52,24 @@
               (reduced true)
               false))
           false (vals @roomdb)))
+
+(defn- get-teleporter-ids [ezdb user-id-1 user-id-2]
+  (->> {:select [:teleporter_id]
+        :from [:teleporter_pairing]
+        :where [:in :user_id [user-id-1 user-id-2]]}
+       (db/query ezdb)
+       (map :teleporter_id)
+       (into #{})))
+
+(defn get-jam-id [jam-manager tp-id-1 tp-id-2]
+  (let [{:keys [db]} jam-manager
+        jams (vals (proto/read-db db [:jam]))
+        check-for-members #{tp-id-1 tp-id-2}]
+    (reduce (fn [_ {:jam/keys [members id]}]
+              (if (= (set members) check-for-members)
+                (reduced id)
+                nil))
+            nil jams)))
 
 (defn- db-host* [{:keys [data database] :as this} room-id owner-id]
   (let [room (get @data room-id nil)]
@@ -152,12 +171,21 @@
             (mqtt/publish mqtt-client (id->uuid user-id) {:message/type :room.session/accepted
                                                           :room/id room-id})
 
-            ;; TODO: add jam phoning
-            ;; (jam.platform/phone )
+            (let [owner-id (:owner room)
+                  [from-tp-id to-tp-id] (mapv identity (get-teleporter-ids database owner-id user-id))]
+              (if (and from-tp-id
+                       to-tp-id)
+                (do (jam.platform/phone jam-manager from-tp-id to-tp-id)
+                    (if-let [jam-id (get-jam-id jam-manager from-tp-id to-tp-id)]
+                      (do
+                        (swap! data update room-id merge {:jam-id jam-id})
+                        true)
+                      {:error/key :room/no-jam-id
+                       :error/message "Unable to find a jam id for the room"}))
+                {:error/key :room/no-paired-teleporter
+                 :error/message "One or more teleporters are not paired with a user in the room"}))))))
 
-            true))))
-
-(defn- db-leave* [{:keys [data database mqtt-client] :as this} room-id user-id]
+(defn- db-leave* [{:keys [data database mqtt-client jam-manager] :as this} room-id user-id]
   (let [room (get @data room-id nil)]
     (cond (nil? room)
           {:error/key :room/does-not-exist
@@ -184,10 +212,13 @@
            :error/message "The user does not exist"}
 
           :else
-          (do (swap! data update room-id merge {:participant nil
-                                                :waiting #{}
-                                                :status :waiting})
-              (when-let [session-id (:session-id room)]
+          (let [{:keys [session-id jam-id]} room]
+            (swap! data update room-id merge {:participant nil
+                                              :waiting #{}
+                                              :session-id nil
+                                              :jam-id nil
+                                              :status :waiting})
+              (when session-id
                 (db/query! database {:update :room_session_users
                                      :set {:left_at (t/now)}
                                      :where [:and
@@ -195,7 +226,9 @@
                                              [:= :user_id user-id]]}))
               (mqtt/publish mqtt-client (id->uuid (:owner room)) {:message/type :room.session/left
                                                                   :room.session/participant user-id})
-              ;; TODO: add jam leaving
+              (when jam-id
+                (jam.platform/stop jam-manager jam-id)
+                (swap! data update room-id dissoc :jam-id))
               true))))
 
 (defn- db-knock* [{:keys [data database mqtt-client] :as this} room-id user-id]
@@ -255,7 +288,7 @@
                 (swap! data update room-id merge {:waiting (disj waiting user-id)}))
             true))))
 
-(defn- db-remove* [{:keys [data database mqtt-client] :as this} room-id user-id]
+(defn- db-remove* [{:keys [data database mqtt-client jam-manager] :as this} room-id user-id]
   (let [room (get @data room-id nil)]
     (cond (nil? room)
           {:error/key :room/does-not-exist
@@ -278,20 +311,23 @@
            :error/message "The user does not exist"}
 
           :else
-          (do (swap! data update room-id merge {:participant nil
-                                                :status :waiting})
-              (when-let [session-id (:session-id room)]
-                (db/query! database {:update :room_session_users
-                                     :set {:left_at (t/now)}
-                                     :where [:and
-                                             [:= :room_session_id session-id]
-                                             [:= :user_id user-id]]}))
-              (mqtt/publish mqtt-client (id->uuid user-id) {:message/type :room.session/removed
-                                                            :room/id room-id})
-              ;; TODO: add jam ending
-              true))))
+          (let [{:keys [session-id jam-id]} room]
+            (swap! data update room-id merge {:participant nil
+                                              :status :waiting})
+            (when session-id
+              (db/query! database {:update :room_session_users
+                                   :set {:left_at (t/now)}
+                                   :where [:and
+                                           [:= :room_session_id session-id]
+                                           [:= :user_id user-id]]}))
+            (mqtt/publish mqtt-client (id->uuid user-id) {:message/type :room.session/removed
+                                                          :room/id room-id})
+            (when jam-id
+              (jam.platform/stop jam-manager jam-id)
+              (swap! data update room-id dissoc :jam-id))
+            true))))
 
-(defn- db-close* [{:keys [data database mqtt-client]} room-id owner-id]
+(defn- db-close* [{:keys [data database mqtt-client jam-manager]} room-id owner-id]
   (let [room (get @data room-id nil)]
     (cond (nil? room)
           {:error/key :room/does-not-exist
@@ -310,21 +346,23 @@
            :error/message "Owner does not exist"}
 
           :else
-          (do (when-let [session-id (:session-id room)]
-                (db/with-transaction [database :default]
-                  (db/query! database {:update :room_session
-                                       :set {:closed_at (t/now)}
-                                       :where [:= :id session-id]})
-                  (db/query! database {:update :room_session_users
-                                       :set {:left_at (t/now)}
-                                       :where [:and
-                                               [:= :room_session_id session-id]
-                                               [:is :left_at nil]]})))
+          (let [{:keys [session-id jam-id]} room]
+            (when session-id
+              (db/with-transaction [database :default]
+                (db/query! database {:update :room_session
+                                     :set {:closed_at (t/now)}
+                                     :where [:= :id session-id]})
+                (db/query! database {:update :room_session_users
+                                     :set {:left_at (t/now)}
+                                     :where [:and
+                                             [:= :room_session_id session-id]
+                                             [:is :left_at nil]]})))
               (swap! data dissoc room-id)
               (when-let [participant (:participant room)]
                 (mqtt/publish mqtt-client (id->uuid participant) {:message/type :room.session/closed
                                                                   :room/id room-id}))
-              ;; TODO: add jam stopping
+              (when jam-id
+                (jam.platform/stop jam-manager jam-id))
               true))))
 
 ;; we want to use SQL for storing information about when a session started

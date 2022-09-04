@@ -64,6 +64,7 @@
 (defn pair [db user-id teleporter-id]
   (let [settings? (settings-exists? db user-id teleporter-id)]
     (db/with-transaction [db :default]
+      ;; only allow one pairing at a time
       (db/query! db {:delete-from :teleporter_pairing
                      :where [:= :teleporter_id teleporter-id]})
       (db/query! db {:insert-into :teleporter_pairing

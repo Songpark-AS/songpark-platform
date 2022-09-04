@@ -34,7 +34,9 @@
     (get-jam-status jams waiting tp-id))
   )
 
-(defn get-teleporters [db memdb user-id]
+(defn get-teleporters
+  "For now it is assumed that a teleporter paired in here, is the only one that is paired"
+  [db memdb user-id]
   (let [pairs (->> (model.pairing/get-pairs db user-id)
                    (map (juxt :teleporter/id identity))
                    (into {}))

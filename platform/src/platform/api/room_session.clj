@@ -41,8 +41,7 @@
          room-id :room/id} data
         result (room/db-accept roomdb room-id user-id)]
     (if (true? result)
-      (do ;; TODO: Add songpark jam start here
-        http-ok)
+      http-ok
       {:status 400
        :body result})))
 
@@ -64,9 +63,7 @@
   (let [{room-id :room/id} data
         result (room/db-leave roomdb room-id user-id)]
     (if (true? result)
-      (do ;; TODO: inform the host the participant has left
-        ;; TODO: stop jam
-        http-ok)
+      http-ok
       {:status 400
        :body result})))
 
@@ -78,10 +75,7 @@
          room-id :room/id} data
         result (room/db-remove roomdb room-id user-id)]
     (if (true? result)
-      (do
-        ;; TODO: inform the participant that they have been removed
-        ;; TODO: stop jam
-        http-ok)
+      http-ok
       {:status 400
        :body result})))
 (defn close [{{roomdb :roomdb} :data
@@ -92,9 +86,6 @@
         {:keys [participant]} (room/db-get-room-by-id roomdb room-id)
         result (room/db-close roomdb room-id user-id)]
     (if (true? result)
-      (do
-        ;; TODO: stop jam
-        ;; TODO: inform participant of the end of the session
-        http-ok)
+      http-ok
       {:status 400
        :body result})))
