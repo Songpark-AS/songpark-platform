@@ -49,6 +49,3 @@
 
   (let [db (get-in @init/system [:http-server :db])]
     (proto/write-db db [:teleporter-fw-version] "0.0.10")))
-
-(let [db (get-in @init/system [:http-server :db])]
-  (songpark.jam.platform.protocol/delete-db db [:teleporters]))

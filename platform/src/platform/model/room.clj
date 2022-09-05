@@ -3,15 +3,18 @@
             [ez-database.core :as db]
             [ez-database.transform :as transform]
             [platform.util :as util]
-            [taoensso.timbre :as log]))
+            [taoensso.timbre :as log]
+            [yesql.core :refer [defqueries]]))
 
-
+(defqueries "queries/room.sql")
 
 (transform/add :room :room/room
                [:id :room/id]
                [:name :room/name]
                [:name_normalized :room/name-normalized]
-               [:user_id :room/owner])
+               [:user_id :room/owner]
+               [:last_jammed :room/last-jammed]
+               [:jammers :room/last-jammers])
 
 (defn name-exists?
   ([db name]
@@ -45,14 +48,10 @@
        first
        some?))
 
-
 (defn get-rooms [db user-id]
-  (->> {:select [:r.* :ru.user_id]
-        :from [[:room_room :r]]
-        :join [[:room_user :ru] [:= :r.id :ru.room_id]]
-        :where [:= :ru.user_id user-id]}
+  (->> {:user_id user-id}
        (db/query db ^:opts {[:transformation :post]
-                            [:room :room/room]})))
+                            [:room :room/room {:nil false}]} sql-get-rooms)))
 
 (defn get-room [db room-id]
   (->> {:select [:r.* :ru.user_id]
@@ -99,11 +98,12 @@
 (comment
   (let [db (:database @platform.init/system)]
     ;;(is-owner? db 19 1)
-    (get-room-by-name db "asdf")
+    #_(get-room-by-name db "asdf")
     #_(save-room db 1 {:room/name "My awesome meh "})
     #_(update-room db {:room/id 19
                      :room/name "foobar"})
     #_(-rooms db 1)
     #_(get-room db 17)
-    #_(name-exists? db "My AWESOME foobar ! "))
+    #_(name-exists? db "My AWESOME foobar ! ")
+    (get-rooms db 1))
   )
