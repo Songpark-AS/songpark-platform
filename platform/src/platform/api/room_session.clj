@@ -15,7 +15,8 @@
   (let [{room-id :room/id} data
         result (room/db-host roomdb room-id user-id)]
     (if (true? result)
-      http-ok
+      {:status 200
+       :body {:room/id room-id}}
       {:status 400
        :body result})))
 
@@ -37,7 +38,7 @@
 (defn accept [{{roomdb :roomdb} :data
                {data :body} :parameters
                :as request}]
-  (let [{user-id :room.session/participant
+  (let [{user-id :room.jammer/id
          room-id :room/id} data
         result (room/db-accept roomdb room-id user-id)]
     (if (true? result)
@@ -48,7 +49,7 @@
 (defn decline [{{roomdb :roomdb} :data
                 {data :body} :parameters
                 :as request}]
-  (let [{user-id :room.session/participant
+  (let [{user-id :room.jammer/id
          room-id :room/id} data
         result (room/db-decline roomdb room-id user-id)]
     (if (true? result)
@@ -71,7 +72,7 @@
                {user-id :auth.user/id} :identity
                {data :body} :parameters
                :as request}]
-  (let [{user-id :room.session/participant
+  (let [{user-id :room.jammer/id
          room-id :room/id} data
         result (room/db-remove roomdb room-id user-id)]
     (if (true? result)

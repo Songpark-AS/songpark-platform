@@ -25,13 +25,13 @@
   (rs/knock (get-request 2 {:room/name "foobar"}))
   (rs/knock (get-request 2 {:room/name "My fantastic room 2"}))
   (rs/decline (get-request 2 {:room/id 2
-                              :room.session/participant 2}))
+                              :room.jammer/id 2}))
   (rs/accept (get-request 1 {:room/id 2
-                             :room.session/participant 2}))
+                             :room.jammer/id 2}))
   (rs/close (get-request 1 {:room/id 2}))
   (rs/leave (get-request 2 {:room/id 2}))
   (rs/remove (get-request 2 {:room/id 2
-                             :room.session/participant 2}))
+                             :room.jammer/id 2}))
 
   (let [jam-manager (-> @platform.init/system
                         :http-server

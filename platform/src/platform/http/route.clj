@@ -244,7 +244,7 @@
                :handler #'api.room/save-room}}]
        ["/session"
         ["/host"
-         {:post {:responses {200 {:body :http/ok}
+         {:post {:responses {200 {:body :room.session/hosted}
                              400 {:body :error/error}}
                  :parameters {:body :room.session/host}
                  :handler #'api.room-session/host}}]
