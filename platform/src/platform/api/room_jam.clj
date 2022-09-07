@@ -1,4 +1,4 @@
-(ns platform.api.room-session
+(ns platform.api.room-jam
   (:refer-clojure :exclude [remove])
   (:require [platform.model.room :as model.room]
             [platform.room :as room]
@@ -8,7 +8,8 @@
 (def http-ok {:status 200
               :body {:result :success}})
 
-(defn host [{{roomdb :roomdb} :data
+(defn host [{{roomdb :roomdb
+              db :database} :data
              {data :body} :parameters
              {user-id :auth.user/id} :identity
              :as request}]
@@ -16,7 +17,7 @@
         result (room/db-host roomdb room-id user-id)]
     (if (true? result)
       {:status 200
-       :body {:room/id room-id}}
+       :body (model.room/get-room db room-id)}
       {:status 400
        :body result})))
 

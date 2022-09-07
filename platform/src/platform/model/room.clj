@@ -59,7 +59,7 @@
         :join [[:room_user :ru] [:= :r.id :ru.room_id]]
         :where [:= :ru.room_id room-id]}
        (db/query db ^:opts {[:transformation :post]
-                            [:room :room/room]})
+                            [:room :room/room {:nil false}]})
        first))
 
 (defn get-room-by-name [db room-name]
@@ -105,5 +105,5 @@
     #_(-rooms db 1)
     #_(get-room db 17)
     #_(name-exists? db "My AWESOME foobar ! ")
-    (get-rooms db 1))
+    (get-room db 2))
   )

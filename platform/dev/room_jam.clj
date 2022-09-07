@@ -1,4 +1,4 @@
-(ns room-session
+(ns room-jam
   (:require [platform.api.room-session :as rs]
             [platform.init :as init]
             [songpark.jam.platform :as jam.platform]
