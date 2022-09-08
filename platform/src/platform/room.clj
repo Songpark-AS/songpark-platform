@@ -2,6 +2,7 @@
   (:require [com.stuartsierra.component :as component]
             [ez-database.core :as db]
             [platform.model.profile :as model.profile]
+            [platform.model.room :as model.room]
             [platform.util :refer [id->uuid]]
             [songpark.jam.platform :as jam.platform]
             [songpark.jam.platform.protocol :as proto]
@@ -33,8 +34,15 @@
   (db-remove [database room-id jammer-id] "Remove a jammer from a room")
   (db-close [database room-id owner-id] "Close a room")
   (db-get-room-by-host [database owner-id] "Get a specific room based on the owner's id")
+  (db-get-room-by-user-id [database user-id] "Get a specific room based on either the owner, a jammer or a knocker")
   (db-get-room-by-id [database room-id])
   (db-get-rooms [database] "Get all the rooms"))
+
+(defn- get-jammer [database jammer-id status]
+  (-> (model.profile/get-profile database jammer-id)
+      (dissoc :profile/id)
+      (assoc :auth.user/id jammer-id
+             :jammer/status status)))
 
 (defn- can-host? [database room-id owner-id]
   (->> {:select [:rr.id]
@@ -168,8 +176,10 @@
                                                     :status :full}))))
             ;; send out an update to our jammer that the they have
             ;; been accepted into the jam
-            (mqtt/publish mqtt-client (id->uuid jammer-id) {:message/type :room.session/accepted
-                                                            :room/id room-id})
+            (mqtt/publish mqtt-client (id->uuid jammer-id) {:message/type :room.jam/accepted
+                                                            ;; for consistency
+                                                            :room/id room-id
+                                                            :room/jam (db-get-room-by-id this room-id)})
 
             (let [owner-id (:owner room)
                   [from-tp-id to-tp-id] (mapv identity (get-teleporter-ids database owner-id jammer-id))]
@@ -191,11 +201,12 @@
           {:error/key :room/does-not-exist
            :error/message "The room does not exist"}
 
-          (= (:status room) :waiting)
-          {:error/key :room/user-not-in-the-room
-           :error/message "User is not in the room"}
+          (nil? jammer-id)
+          {:error/key :room/no-jammer
+           :error/message "The user does not exist"}
 
-          (not= (:jammer room) jammer-id)
+          (and (not= (:jammer room) jammer-id)
+               (not ((:waiting room) jammer-id)))
           {:error/key :room/user-not-in-the-room
            :error/message "User is not in the room"}
 
@@ -206,10 +217,6 @@
           (nil? (:owner room))
           {:error/key :room/no-owner
            :error/message "No owner is present for this room"}
-
-          (nil? jammer-id)
-          {:error/key :room/no-jammer
-           :error/message "The user does not exist"}
 
           :else
           (let [{:keys [session-id jam-id]} room]
@@ -224,8 +231,9 @@
                                    :where [:and
                                            [:= :room_session_id session-id]
                                            [:= :user_id jammer-id]]}))
-            (mqtt/publish mqtt-client (id->uuid (:owner room)) {:message/type :room.session/left
-                                                                :room.session/jammer jammer-id})
+            (mqtt/publish mqtt-client (id->uuid (:owner room)) {:message/type :room.jam/left
+                                                                :room/id room-id
+                                                                :auth.user/id jammer-id})
             (when jam-id
               (jam.platform/stop jam-manager jam-id)
               (swap! data update room-id dissoc :jam-id))
@@ -252,9 +260,9 @@
           :else
           (let [waiting (:waiting room)]
             (let [profile (model.profile/get-profile database jammer-id)]
-              (mqtt/publish mqtt-client (id->uuid (:owner room)) {:message/type :room.session/knocked
-                                                                  :room.session/jammer jammer-id
-                                                                  :room.session.jammer/profile profile})
+              (mqtt/publish mqtt-client (id->uuid (:owner room)) {:message/type :room.jam/knocked
+                                                                  :room/id room-id
+                                                                  :room/jammer (get-jammer database jammer-id :knocking)})
               (swap! data update room-id merge {:waiting (conj waiting jammer-id)}))
             true))))
 
@@ -283,7 +291,7 @@
           :else
           (let [waiting (:waiting room)]
             ;; inform the jammer that they have been declined
-            (do (mqtt/publish mqtt-client (id->uuid jammer-id) {:message/type :room.session/declined
+            (do (mqtt/publish mqtt-client (id->uuid jammer-id) {:message/type :room.jam/declined
                                                                 :room/id room-id})
                 (swap! data update room-id merge {:waiting (disj waiting jammer-id)}))
             true))))
@@ -320,7 +328,7 @@
                                    :where [:and
                                            [:= :room_session_id session-id]
                                            [:= :user_id jammer-id]]}))
-            (mqtt/publish mqtt-client (id->uuid jammer-id) {:message/type :room.session/removed
+            (mqtt/publish mqtt-client (id->uuid jammer-id) {:message/type :room.jam/removed
                                                             :room/id room-id})
             (when jam-id
               (jam.platform/stop jam-manager jam-id)
@@ -359,11 +367,50 @@
                                              [:is :left_at nil]]})))
             (swap! data dissoc room-id)
             (when-let [jammer (:jammer room)]
-              (mqtt/publish mqtt-client (id->uuid jammer) {:message/type :room.session/closed
+              (mqtt/publish mqtt-client (id->uuid jammer) {:message/type :room.jam/closed
                                                            :room/id room-id}))
             (when jam-id
               (jam.platform/stop jam-manager jam-id))
             true))))
+
+(defn- db-get-room-by-id* [{:keys [data database] :as _this} room-id]
+  (let [room (get @data room-id nil)]
+    (if room
+      (let [{:keys [waiting] owner-id :owner jammer-id :jammer} room
+            room (model.room/get-room database room-id)
+            owner (get-jammer database owner-id :jamming)
+            jammer (if jammer-id
+                     (get-jammer database jammer-id :jamming))
+            knockers (map #(get-jammer database % :waiting) waiting)]
+        (assoc room :room/jammers (->> (into knockers [owner jammer])
+                                       (remove nil?)
+                                       (vec)
+                                       (map (juxt :auth.user/id identity))
+                                       (into {}))))
+      nil)))
+
+(defn- db-get-room-by-user-id* [{:keys [data database] :as this} user-id]
+  (let [room-id (reduce (fn [_ [room-id {:keys [owner jammer waiting] :as _room}]]
+                          (let [result (cond (= owner user-id)
+                                             true
+                                             (= jammer user-id)
+                                             true
+                                             (waiting user-id)
+                                             true
+                                             :else
+                                             nil)]
+                            (if (true? result)
+                              (reduced room-id)
+                              nil)))
+                        nil @data)])
+  (db-get-room-by-id this room-id))
+
+(defn- db-get-room-by-host* [{:keys [data] :as _this} owner-id]
+  (reduce (fn [_ [room-id {:keys [owner] :as room}]]
+            (if (= owner owner-id)
+              (reduced (assoc room :id room-id))
+              nil))
+          nil @data))
 
 ;; we want to use SQL for storing information about when a session started
 (defrecord RoomDB [started? data database mqtt-client jam-manager]
@@ -398,13 +445,11 @@
   (db-close [this room-id owner-id]
     (db-close* this room-id owner-id))
   (db-get-room-by-host [this owner-id]
-    (reduce (fn [_ [room-id {:keys [owner] :as room}]]
-              (if (= owner owner-id)
-                (reduced (assoc room :id room-id))
-                nil))
-            nil @data))
+    (db-get-room-by-host* this owner-id))
+  (db-get-room-by-user-id [this user-id]
+    (db-get-room-by-user-id* this user-id))
   (db-get-room-by-id [this room-id]
-    (get @data room-id nil))
+    (db-get-room-by-id* this room-id))
   (db-get-rooms [this]
     @data))
 
@@ -416,7 +461,9 @@
 (comment
 
   (def rooms (map->RoomDB {:data (atom {})
-                           :database (:database @platform.init/system)}))
+                           :database (:database @platform.init/system)
+                           :jam-manager (:jam-manager @platform.init/system)
+                           :mqtt-client (:mqtt-client @platform.init/system)}))
 
 
   (def room-id 2)
@@ -424,11 +471,17 @@
   (def jammer-id 3)
   (db-host rooms room-id owner-id)
   (db-knock rooms room-id jammer-id)
+  (db-knock rooms room-id 2)
   (db-decline rooms room-id jammer-id)
   (db-accept rooms room-id jammer-id)
   (db-remove rooms room-id jammer-id)
   (db-leave rooms room-id jammer-id)
   (db-close rooms room-id owner-id)
+
+  (db-get-room-by-id rooms room-id)
+  (db-get-room-by-user-id rooms owner-id)
+  (db-get-room-by-user-id rooms jammer-id)
+  (db-get-room-by-user-id rooms 2)
 
   ;; room id 2
   (db-host rooms 2 1)
@@ -452,4 +505,9 @@
   (let [database (:database @platform.init/system)]
     ;;(can-host? database 2 2)
     (model.profile/get-profile database 2))
+
+  (let [roomdb (:roomdb @platform.init/system)]
+    ;;(db-knock roomdb room-id jammer-id)
+    (db-leave roomdb room-id jammer-id)
+    )
   )

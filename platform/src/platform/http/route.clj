@@ -243,6 +243,11 @@
                :parameters {:body :room/save}
                :handler #'api.room/save-room}}]
        ["/jam"
+        [""
+         {:get {:respones {200 {:body (spec/or :jam :room/jam
+                                               :http-ok :http/ok)}
+                           400 {:body :error/error}}
+                :handler #'api.room-jam/current}}]
         ["/host"
          {:post {:responses {200 {:body :room.jam/hosted}
                              400 {:body :error/error}}

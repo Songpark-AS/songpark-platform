@@ -8,8 +8,19 @@
 (def http-ok {:status 200
               :body {:result :success}})
 
-(defn host [{{roomdb :roomdb
-              db :database} :data
+(defn current [{{roomdb :roomdb} :data
+                {user-id :auth.user/id} :identity
+                :as request}]
+  (if user-id
+    (if-let [result (room/db-get-room-by-user-id roomdb user-id)]
+      {:status 200
+       :body result}
+      {:status 200
+       :body http-ok})
+    {:status 200
+     :body http-ok}))
+
+(defn host [{{roomdb :roomdb} :data
              {data :body} :parameters
              {user-id :auth.user/id} :identity
              :as request}]
@@ -17,7 +28,7 @@
         result (room/db-host roomdb room-id user-id)]
     (if (true? result)
       {:status 200
-       :body (model.room/get-room db room-id)}
+       :body (room/db-get-room-by-id roomdb room-id)}
       {:status 400
        :body result})))
 
