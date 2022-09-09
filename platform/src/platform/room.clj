@@ -508,6 +508,9 @@
 
   (let [roomdb (:roomdb @platform.init/system)]
     ;;(db-knock roomdb room-id jammer-id)
-    (db-leave roomdb room-id jammer-id)
+    ;;(db-leave roomdb room-id jammer-id)
+    ;;(db-close roomdb room-id owner-id)
+    ;;(db-host roomdb room-id owner-id)
+    (db-accept roomdb room-id jammer-id)
     )
   )

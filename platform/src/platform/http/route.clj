@@ -259,12 +259,12 @@
                  :parameters {:body :room.jam/knock}
                  :handler #'api.room-jam/knock}}]
         ["/accept"
-         {:post {:responses {200 {:body :http/ok}
+         {:post {:responses {200 {:body :room.jam/accepted}
                              400 {:body :error/error}}
                  :parameters {:body :room.jam/accept}
                  :handler #'api.room-jam/accept}}]
         ["/decline"
-         {:post {:responses {200 {:body :http/ok}
+         {:post {:responses {200 {:body :room.jam/declined}
                              400 {:body :error/error}}
                  :parameters {:body :room.jam/decline}
                  :handler #'api.room-jam/decline}}]
@@ -274,7 +274,7 @@
                  :parameters {:body :room.jam/leave}
                  :handler #'api.room-jam/leave}}]
         ["/remove"
-         {:post {:responses {200 {:body :http/ok}
+         {:post {:responses {200 {:body :room.jam/removed}
                              400 {:body :error/error}}
                  :parameters {:body :room.jam/remove}
                  :handler #'api.room-jam/remove}}]
