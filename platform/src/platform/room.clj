@@ -485,8 +485,9 @@
 
   ;; room id 2
   (db-host rooms 2 1)
-  (db-join rooms 2 2)
-  (db-join rooms 2 3)
+  (db-knock rooms 2 2)
+  (db-accept rooms 2 2)
+  (db-close rooms 2 1)
 
   ;; room id 3
   (db-host rooms 3 1)

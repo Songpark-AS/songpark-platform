@@ -53,6 +53,11 @@
        (db/query db ^:opts {[:transformation :post]
                             [:room :room/room {:nil false}]} sql-get-rooms)))
 
+(defn get-jammed [db user-id]
+  (->> {:user_id user-id}
+       (db/query db ^:opts {[:transformation :post]
+                            [:room :room/room {:nil false}]} sql-get-jammed)))
+
 (defn get-room [db room-id]
   (->> {:select [:r.* :ru.user_id]
         :from [[:room_room :r]]
@@ -105,5 +110,6 @@
     #_(-rooms db 1)
     #_(get-room db 17)
     #_(name-exists? db "My AWESOME foobar ! ")
-    (get-room db 2))
+    ;;(get-room db 2)
+    (get-jammed db 3))
   )

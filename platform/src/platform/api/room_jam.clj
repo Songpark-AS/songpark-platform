@@ -20,6 +20,15 @@
     {:status 200
      :body http-ok}))
 
+(defn jammed [{{db :database} :data
+               {user-id :auth.user/id} :identity
+               :as request}]
+  (if-let [result (model.room/get-jammed db user-id)]
+    {:status 200
+     :body result}
+    {:status 400
+     :body {:error/message "Uknown error"}}))
+
 (defn host [{{roomdb :roomdb} :data
              {data :body} :parameters
              {user-id :auth.user/id} :identity
