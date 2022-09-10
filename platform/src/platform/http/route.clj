@@ -242,17 +242,16 @@
                            400 {:body :error/error}}
                :parameters {:body :room/save}
                :handler #'api.room/save-room}}]
-       ["/jammed"
-        [""
-         {:get {:responses {200 {:body :room/jams}
-                            400 {:body :error/error}}
-                :handler #'api.room-jam/jammed}}]]
        ["/jam"
         [""
          {:get {:respones {200 {:body (spec/or :jam :room/jam
                                                :http-ok :http/ok)}
                            400 {:body :error/error}}
                 :handler #'api.room-jam/current}}]
+        ["/history"
+         {:get {:responses {200 {:body :room.jam/history}
+                            400 {:body :error/error}}
+                :handler #'api.room-jam/jam-history}}]
         ["/host"
          {:post {:responses {200 {:body :room.jam/hosted}
                              400 {:body :error/error}}

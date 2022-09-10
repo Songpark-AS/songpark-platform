@@ -46,14 +46,18 @@
                       :from [:fx_preset]
                       :where [:= :user_id user-id]}
                      (db/query db))
-        kvs (db/query db {:select [:preset_id :fx_key :value]
-                          :from [:fx_value]
-                          :where [:in :preset_id (map :id presets)]})]
-    (reduce (fn [out {:keys [id name]}]
-              (conj out {:fx.preset/id id
-                         :fx.preset/name name
-                         :fx/fxs (prepare-presets id kvs)}))
-            [] presets)))
+        kvs (if (seq presets)
+              (db/query db {:select [:preset_id :fx_key :value]
+                            :from [:fx_value]
+                            :where [:in :preset_id (map :id presets)]})
+              nil)]
+    (if kvs
+      (reduce (fn [out {:keys [id name]}]
+                (conj out {:fx.preset/id id
+                           :fx.preset/name name
+                           :fx/fxs (prepare-presets id kvs)}))
+              [] presets)
+      [])))
 
 (defn preset [db user-id preset-id]
   (let [preset (->> {:select [:id :name]

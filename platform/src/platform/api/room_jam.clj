@@ -20,10 +20,10 @@
     {:status 200
      :body http-ok}))
 
-(defn jammed [{{db :database} :data
-               {user-id :auth.user/id} :identity
-               :as request}]
-  (if-let [result (model.room/get-jammed db user-id)]
+(defn jam-history [{{db :database} :data
+                    {user-id :auth.user/id} :identity
+                    :as request}]
+  (if-let [result (model.room/get-jam-history db user-id)]
     {:status 200
      :body result}
     {:status 400

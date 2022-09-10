@@ -32,9 +32,7 @@ WITH session_details AS (
    GROUP BY rs.room_id, rs.created_at, rs.id
 )
 SELECT DISTINCT rr.id,
-                rr.name_normalized,
                 rr.name,
-                ru.user_id,
                 sd.last_jammed,
                 sd.jammers
   FROM room_room rr

@@ -14,7 +14,7 @@
                [:name_normalized :room/name-normalized]
                [:user_id :room/owner]
                [:last_jammed :room/last-jammed]
-               [:jammers :room/last-jammers])
+               [:jammers :room/jammer-names])
 
 (defn name-exists?
   ([db name]
@@ -53,7 +53,7 @@
        (db/query db ^:opts {[:transformation :post]
                             [:room :room/room {:nil false}]} sql-get-rooms)))
 
-(defn get-jammed [db user-id]
+(defn get-jam-history [db user-id]
   (->> {:user_id user-id}
        (db/query db ^:opts {[:transformation :post]
                             [:room :room/room {:nil false}]} sql-get-jammed)))
@@ -111,5 +111,5 @@
     #_(get-room db 17)
     #_(name-exists? db "My AWESOME foobar ! ")
     ;;(get-room db 2)
-    (get-jammed db 3))
+    (get-jam-history db 3))
   )
