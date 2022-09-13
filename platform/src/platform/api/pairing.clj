@@ -22,16 +22,18 @@
              :as request}]
   (let [serial (:teleporter/serial data)
         serial-exists? (model.pairing/serial-exists? db serial)
-        already-paired? (model.pairing/already-paired? db user-id serial)]
+        ;;already-paired? (model.pairing/already-paired? db user-id serial)
+        ]
+    (model.pairing/cut-pairing db (serial->uuid serial))
     (cond (not serial-exists?)
           {:status 400
            :body {:error/message "Serial does not exist"
                   :error/key :teleporter/serial}}
 
-          already-paired?
-          {:status 400
-           :body {:error/message "Teleporter is already paired"
-                  :error/key :teleporter/serial}}
+          ;; already-paired?
+          ;; {:status 400
+          ;;  :body {:error/message "Teleporter is already paired"
+          ;;         :error/key :teleporter/serial}}
 
           :else
           (let [teleporter-id (-> data

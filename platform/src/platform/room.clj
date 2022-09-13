@@ -185,13 +185,19 @@
                   [from-tp-id to-tp-id] (mapv identity (get-teleporter-ids database owner-id jammer-id))]
               (if (and from-tp-id
                        to-tp-id)
-                (do (jam.platform/phone jam-manager from-tp-id to-tp-id)
-                    (if-let [jam-id (get-jam-id jam-manager from-tp-id to-tp-id)]
-                      (do
-                        (swap! data update room-id merge {:jam-id jam-id})
-                        true)
-                      {:error/key :room/no-jam-id
-                       :error/message "Unable to find a jam id for the room"}))
+                (do
+                  (let [db (:db jam-manager)]
+                    (proto/write-db db [:teleporter from-tp-id :teleporter/sip]
+                                    (str "sip:" from-tp-id "@voip1.songpark.com"))
+                    (proto/write-db db [:teleporter to-tp-id :teleporter/sip]
+                                    (str "sip:" to-tp-id "@voip1.songpark.com")))
+                  (jam.platform/phone jam-manager from-tp-id to-tp-id)
+                  (if-let [jam-id (get-jam-id jam-manager from-tp-id to-tp-id)]
+                    (do
+                      (swap! data update room-id merge {:jam-id jam-id})
+                      true)
+                    {:error/key :room/no-jam-id
+                     :error/message "Unable to find a jam id for the room"}))
                 {:error/key :room/no-paired-teleporter
                  :error/message "One or more teleporters are not paired with a user in the room"}))))))
 
@@ -402,8 +408,8 @@
                             (if (true? result)
                               (reduced room-id)
                               nil)))
-                        nil @data)])
-  (db-get-room-by-id this room-id))
+                        nil @data)]
+    (db-get-room-by-id this room-id)))
 
 (defn- db-get-room-by-host* [{:keys [data] :as _this} owner-id]
   (reduce (fn [_ [room-id {:keys [owner] :as room}]]
@@ -510,8 +516,23 @@
   (let [roomdb (:roomdb @platform.init/system)]
     ;;(db-knock roomdb room-id jammer-id)
     ;;(db-leave roomdb room-id jammer-id)
-    ;;(db-close roomdb room-id owner-id)
-    (db-host roomdb room-id owner-id)
+    (db-close roomdb room-id owner-id)
+    ;;(db-host roomdb room-id owner-id)
     ;;(db-accept roomdb room-id jammer-id)
     )
+  (def jammed (atom nil))
+  (let [jam (:jam-manager @platform.init/system)
+        tp1 #uuid "39d04c2c-7214-5e2c-a9ae-32ff15405b7f"
+        tp2 #uuid "77756ff0-bb05-5e6a-b7d9-28086f3a07fd"
+        db (:db jam)]
+    (proto/read-db db [:jam])
+    ;; (proto/write-db db [:teleporter tp1 :teleporter/sip]
+    ;;                 (str tp1 "@voip1.songpark.com"))
+    ;; (proto/write-db db [:teleporter tp2 :teleporter/sip]
+    ;;                 (str tp2 "@voip1.songpark.com"))
+    ;; (jam.platform/phone jam tp1 tp2)
+    ;;(jam.platform/stop jam )
+    ;;(proto/write-db db [:jam] nil)
+    )
+
   )

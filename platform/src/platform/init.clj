@@ -4,6 +4,7 @@
             [platform.database :as database]
             [platform.http.server :as http.server]
             [platform.migrator :as migrator]
+            [platform.mqtt.handler.jam]
             [platform.mqtt.handler.teleporter]
             [platform.logger :as logger]
             [platform.room :as room]
@@ -71,8 +72,11 @@
       (reset! system (component/start (system-map extra-components)))
 
       (let [mqtt-client (:mqtt-client @system)
-            jam-manager (:jam-manager @system)]
-        (mqtt/add-injection mqtt-client :jam-manager jam-manager))
+            jam-manager (:jam-manager @system)
+            database (:database @system)]
+        (mqtt/subscribe mqtt-client "jam" 2)
+        (mqtt/add-injection mqtt-client :jam-manager jam-manager)
+        (mqtt/add-injection mqtt-client :database database))
 
       ;; log uncaught exceptions in threads
       (Thread/setDefaultUncaughtExceptionHandler

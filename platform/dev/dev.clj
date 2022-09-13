@@ -22,8 +22,9 @@
 
   (-> @init/system
       :mqtt-client
-      :topics
-      deref)
+      :injections
+      deref
+      keys)
 
   (let [db (get-in @init/system [:http-server :db])]
     (proto/read-db db [:teleporter #uuid "7fdf0551-b5fc-557d-bddc-2ca5b1cdfaa6" :volume/global-volume]))
