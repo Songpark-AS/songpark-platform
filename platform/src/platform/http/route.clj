@@ -9,9 +9,11 @@
             [platform.api.room-jam :as api.room-jam]
             [platform.api.teleporter :as api.teleporter]
             [platform.api.version :as api.version]
+            [platform.config :refer [config]]
             [platform.http.html :refer [home]]
             [platform.http.middleware :as middleware :refer [wrap-authn
-                                                             wrap-authz]]
+                                                             wrap-authz
+                                                             wrap-exceptions]]
             [buddy.auth.middleware :refer [wrap-authentication
                                            wrap-authorization]]
             [clojure.spec.alpha :as spec]
@@ -87,6 +89,17 @@
        :get {:handler (fn [request]
                         (let [path (first (vals (:path-params request)))]
                           (ring.response/resource-response path {:root "public"})))}}]
+     ["/media/*"
+      {:middleware [[middleware/wrap-allow-credentials true]
+                    [wrap-cors
+                     :access-control-allow-origin [#".*"]
+                     :access-control-allow-methods [:get]]
+                    [wrap-not-modified]
+                    [wrap-content-type]]
+       :get {:handler (fn [request]
+                        (let [path (first (vals (:path-params request)))]
+                          (ring.response/file-response path {:root (get-in config [:storage :directory])
+                                                             :index-files? false})))}}]
 
      ["/swagger.json"
       {:get {:no-doc true
@@ -323,7 +336,8 @@
      ;;:compile r.coercion/compile-request-coercers
      :data {:coercion reitit.coercion.spec/coercion
             :muuntaja muuntaja-instance
-            :middleware [[middleware/wrap-allow-credentials true]
+            :middleware [wrap-exceptions
+                         [middleware/wrap-allow-credentials true]
                          [wrap-cors
                           :access-control-allow-origin [#".*"]
                           :access-control-allow-methods [:get :post :options :put :delete]]
