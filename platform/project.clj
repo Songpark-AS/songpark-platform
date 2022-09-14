@@ -38,6 +38,7 @@
                  [com.taoensso/carmine "2.19.1"]
 
                  ;; logging
+                 [com.taoensso/encore "3.24.0"]
                  [com.taoensso/timbre "5.1.2"]
                  [com.fzakaria/slf4j-timbre "0.3.21"]
                  [raven-clj "1.6.0"]
