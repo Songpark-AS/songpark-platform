@@ -19,7 +19,7 @@
        first))
 
 (defn save-settings [db user-id data]
-  (let [result #dbg (db/query! db {:update :teleporter_settings
+  (let [result (db/query! db {:update :teleporter_settings
                               :set {:name (:teleporter/nickname data)}
                               :where [:and
                                       [:= :teleporter_id (:teleporter/id data)]
