@@ -41,5 +41,5 @@ SELECT DISTINCT rr.id,
        INNER JOIN room_session_users rsu ON rs.id = rsu.room_session_id
        INNER JOIN session_details sd ON sd.room_id = rr.id AND sd.room_session_id = rs.id
  WHERE rsu.user_id = :user_id
- ORDER BY sd.last_jammed desc
+ ORDER BY sd.last_jammed DESC
  LIMIT 5;

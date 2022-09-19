@@ -375,6 +375,9 @@
             (when-let [jammer (:jammer room)]
               (mqtt/publish mqtt-client (id->uuid jammer) {:message/type :room.jam/closed
                                                            :room/id room-id}))
+            (doseq [knocker (:waiting room)]
+              (mqtt/publish mqtt-client (id->uuid knocker) {:message/type :room.jam/closed
+                                                            :room/id room-id}))
             (when jam-id
               (jam.platform/stop jam-manager jam-id))
             true))))
@@ -513,11 +516,14 @@
     ;;(can-host? database 2 2)
     (model.profile/get-profile database 2))
 
-  (let [roomdb (:roomdb @platform.init/system)]
+  (let [room-id 2
+        owner-id 1
+        jammer-id 3
+        roomdb (:roomdb @platform.init/system)]
     ;;(db-knock roomdb room-id jammer-id)
     ;;(db-leave roomdb room-id jammer-id)
     (db-close roomdb room-id owner-id)
-    ;;(db-host roomdb room-id owner-id)
+    ;; (db-host roomdb room-id owner-id)
     ;;(db-accept roomdb room-id jammer-id)
     )
   (def jammed (atom nil))
