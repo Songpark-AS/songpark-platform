@@ -2,8 +2,8 @@
         :server-settings {:port 3000
                           :join? false
                           :http/cookies {:http-only true}}}
- :storage {:directory "resources/public/images/"
-           :url "http://localhost:3000/static/images/"}
+ :storage {:directory "resources/public"
+           :url "http://localhost:3000/media/images/"}
  :logger {:sentry-settings {:log? false
                             :dsn ""}}
  :mqtt {:config {:scheme "tcp"

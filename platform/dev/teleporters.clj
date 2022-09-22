@@ -14,6 +14,14 @@
                            (let [serial (get-serial n)]
                              {:serial serial
                               :id (serial->uuid serial)}))))]
-    (db/query! db {:insert-into :teleporter_teleporter
-                   :values values}))
+    #_(db/query! db {:insert-into :teleporter_teleporter
+                     :values values})
+    (spit
+     "teleporters.sql"
+     (clojure.string/join
+      "\n"
+      (map (fn [{:keys [serial id]}]
+             (format "INSERT INTO teleporter_teleporter (id, serial) VALUES ('%s', '%s');" id serial))
+           values)))
+    )
   )
