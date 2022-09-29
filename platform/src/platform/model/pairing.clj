@@ -40,7 +40,9 @@
 (defn get-pairs [db user-id]
   (->> {:select [:p.*, :s.name]
         :from [[:teleporter_pairing :p]]
-        :join [[:teleporter_settings :s] [:= :p.user_id :s.user_id]]
+        :join [[:teleporter_settings :s] [:and
+                                          [:= :p.user_id :s.user_id]
+                                          [:= :p.teleporter_id :s.teleporter_id]]]
         :where [:= :p.user_id user-id]}
        (db/query db ^:opts {[:transformation :post]
                             [:pairing :pairing/paired]})))
@@ -102,7 +104,7 @@
 
 (comment
   (let [db (:database @platform.init/system)]
-    (get-pairs db 1))
+    (get-pairs db 3))
 
   (let [db (:database @platform.init/system)]
     (pair db 1 (serial->uuid "0001")))
