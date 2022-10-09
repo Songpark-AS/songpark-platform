@@ -32,8 +32,7 @@
                  [songpark/common "0.2.0"]
                  [songpark/jam "1.0.0"]
                  [songpark/taxonomy "0.2.0"]
-                 [songpark/mqtt "1.0.1"]
-                 
+                 [songpark/mqtt "1.0.3"]
 
                  ;; routing
                  [metosin/reitit "0.4.2"]
@@ -56,7 +55,7 @@
                  [com.taoensso/timbre "5.1.2"]
                  [com.fzakaria/slf4j-timbre "0.3.21"]
                  [raven-clj "1.6.0"]
-                 
+
                  ;; configuration
                  [cprop "0.1.11"]
 
@@ -115,16 +114,16 @@
                    :injections [(require 'spyscope.core)]
                    :plugins [[lein-midje "3.1.3"]
                              [lein-plantuml "0.1.22"]]}
-             
+
              :uberjar {:aot [platform.core]}
-             
+
              :test {:source-paths ["src"]
                     :resource-paths ["dev-resources" "resources"]
                     :dependencies [[midje "1.9.4"]
                                    [ring/ring-mock "0.4.0"]
                                    [http-kit "2.3.0"]]
                     :plugins [[lein-midje "3.1.3"]]}
-             
+
              :tester {:source-paths ["src" "dev" "test"]
                       :main tester
                       :aot [tester]
