@@ -42,7 +42,7 @@
          :from [:profile_profile]
          :where [:and
                  [:= :name name]
-                 [:<> :id exclude-user-id]]}
+                 [:<> :user_id exclude-user-id]]}
         (db/query db)
         first
         some?)))

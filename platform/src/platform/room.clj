@@ -112,7 +112,7 @@
   (let [room (get @data room-id nil)]
     (cond (nil? room)
           {:error/key :room/does-not-exist
-           :error/message "The room does not exist"}
+           :error/message "The room is not available"}
 
           (= (:jammer room) jammer-id)
           {:error/key :room/already-joined
@@ -205,7 +205,7 @@
   (let [room (get @data room-id nil)]
     (cond (nil? room)
           {:error/key :room/does-not-exist
-           :error/message "The room does not exist"}
+           :error/message "The room is not available"}
 
           (nil? jammer-id)
           {:error/key :room/no-jammer
@@ -249,7 +249,7 @@
   (let [room (get @data room-id nil)]
     (cond (nil? room)
           {:error/key :room/does-not-exist
-           :error/message "The room does not exist"}
+           :error/message "The room is not available"}
 
           (= (:owner room) jammer-id)
           {:error/key :room/owner-is-trying-to-leave
@@ -276,7 +276,7 @@
   (let [{:keys [waiting] :as room} (get @data room-id nil)]
     (cond (nil? room)
           {:error/key :room/does-not-exist
-           :error/message "The room does not exist"}
+           :error/message "The room is not available"}
 
           (not (waiting jammer-id))
           {:error/key :room/user-not-waiting
@@ -306,7 +306,7 @@
   (let [room (get @data room-id nil)]
     (cond (nil? room)
           {:error/key :room/does-not-exist
-           :error/message "The room does not exist"}
+           :error/message "The room is not available"}
 
           (not= (:jammer room) jammer-id)
           {:error/key :room/user-not-in-the-room
@@ -345,7 +345,7 @@
   (let [room (get @data room-id nil)]
     (cond (nil? room)
           {:error/key :room/does-not-exist
-           :error/message "The room does not exist"}
+           :error/message "The room is not available"}
 
           (not= (:owner room) owner-id)
           {:error/key :room/not-the-owner
