@@ -24,8 +24,7 @@
         logger (component/start (logger/logger (:logger config)))
         datasource (get-in config [:database :datasource])
         db (mem-db {:teleporter {}
-                    :jam {}
-                    :waiting {}})
+                    :jams {}})
         ;; start mqtt client first in order to let it connect
         mqtt-client (component/start (mqtt/mqtt-client (assoc-in (:mqtt config) [:config :id] "platform")))
         store (carmine.ring/carmine-store (:carmine config))]

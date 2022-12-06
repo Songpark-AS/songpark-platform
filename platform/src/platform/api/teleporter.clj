@@ -10,8 +10,8 @@
             [taoensso.timbre :as log]
             [tick.core :as t]))
 
-(defn init [{:keys [data parameters]}]
-  (let [{:teleporter/keys [serial] :as teleporter} (:body parameters)
+(defn init [{:keys [data parameters remote-addr] :as _request}]
+  (let [{:teleporter/keys [serial local-ip] :as teleporter} (:body parameters)
         id (serial->uuid serial)
         {memdb :db
          db :database
@@ -21,6 +21,8 @@
         ;; write to our in memory db
         (proto/write-db memdb [:teleporter id] (assoc teleporter
                                                       :teleporter/id id
+                                                      :teleporter/public-ip remote-addr
+                                                      :teleporter/local-ip local-ip
                                                       :teleporter/heartbeat-timestamp (t/now)))
         ;; subscribe to the heartbeat topic
         (let [topic (heartbeat-topic id)
@@ -33,7 +35,8 @@
           (publish-unpaired mqtt-client id user-ids))
 
         {:status 200
-         :body {:teleporter/id id}})
+         :body {:teleporter/id id
+                :teleporter/ip remote-addr}})
       {:status 400
        :body {:error/message "Teleporter is missing a serial"}})))
 

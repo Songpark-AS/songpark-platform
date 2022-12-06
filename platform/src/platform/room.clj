@@ -186,12 +186,7 @@
               (if (and from-tp-id
                        to-tp-id)
                 (do
-                  (let [db (:db jam-manager)]
-                    (proto/write-db db [:teleporter from-tp-id :teleporter/sip]
-                                    (str "sip:" from-tp-id "@voip1.songpark.com"))
-                    (proto/write-db db [:teleporter to-tp-id :teleporter/sip]
-                                    (str "sip:" to-tp-id "@voip1.songpark.com")))
-                  (jam.platform/phone jam-manager from-tp-id to-tp-id)
+                  (jam.platform/start jam-manager [from-tp-id to-tp-id])
                   (if-let [jam-id (get-jam-id jam-manager from-tp-id to-tp-id)]
                     (do
                       (swap! data update room-id merge {:jam-id jam-id})

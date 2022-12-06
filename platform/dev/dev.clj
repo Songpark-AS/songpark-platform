@@ -29,9 +29,11 @@
   (let [db (get-in @init/system [:http-server :db])]
     (proto/read-db db [:teleporter #uuid "7fdf0551-b5fc-557d-bddc-2ca5b1cdfaa6" :volume/global-volume]))
   (let [db (get-in @init/system [:http-server :db])]
-    (proto/read-db db [:teleporter]))
+    (->> (proto/read-db db [:teleporter])
+         (vals)
+         (map (juxt :teleporter/serial :teleporter/local-ip :teleporter/public-ip))))
   (let [db (get-in @init/system [:http-server :db])]
-    (proto/read-db db [:jam]))
+    (proto/read-db db [:jams]))
   (let [db (get-in @init/system [:http-server :db])]
     (proto/write-db db [:waiting] {}))
 
@@ -46,7 +48,7 @@
          (clojure.pprint/pprint)))
 
   (let [db (get-in @init/system [:http-server :db])]
-    (proto/read-db db [:jam]))
+    (proto/read-db db [:jams]))
 
   (let [db (get-in @init/system [:http-server :db])]
     (proto/write-db db [:teleporter-fw-version] "0.0.10")))

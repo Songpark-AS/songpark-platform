@@ -2,7 +2,6 @@
   (:require [platform.api.app :as api.app]
             [platform.api.auth :as api.auth]
             [platform.api.fx :as api.fx]
-            [platform.api.jam :as api.jam]
             [platform.api.pairing :as api.pairing]
             [platform.api.profile :as api.profile]
             [platform.api.room :as api.room]
@@ -195,7 +194,7 @@
       ["/teleporter"
        {:swagger {:tags ["teleporter"]}}
        [""
-        {:put {:responses {200 {:body (spec/keys :req [:teleporter/id])}
+        {:put {:responses {200 {:body :teleporter.init/response}
                            400 {:body :error/error}}
                :parameters {:body any?}
                :handler #'api.teleporter/init}
@@ -314,23 +313,7 @@
        {:swagger {:tags ["app"]}}
        [""
         {:get {:responses {200 {:body any?}}
-               :handler #'api.app/connect}}]]
-      ["/jam"
-       {:swagger {:tags ["jam"]}}
-       [""
-        {:delete {:responses {200 {:body :jam/stopped}
-                              400 {:body :error/error}}
-                  :parameters {:body :jam/stop}
-                  :handler #'api.jam/stop}}]
-       ["/ask"
-        {:put {:responses {200 {:body :jam/asked}
-                           400 {:body :error/error}}
-               :parameters {:body :jam/ask}
-               :handler #'api.jam/ask}
-         :delete {:responses {200 {:body :jam/obviated}
-                              400 {:body :error/error}}
-                  :parameters {:body :jam/obviate}
-                  :handler #'api.jam/obviate}}]]]]
+               :handler #'api.app/connect}}]]]]
 
     {:exception pretty/exception
      ;;:compile r.coercion/compile-request-coercers
