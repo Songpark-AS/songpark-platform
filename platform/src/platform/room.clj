@@ -71,12 +71,15 @@
 
 (defn get-jam-id [jam-manager tp-id-1 tp-id-2]
   (let [{:keys [db]} jam-manager
-        jams (vals (proto/read-db db [:jam]))
+        jams (vals (proto/read-db db [:jams]))
         check-for-members #{tp-id-1 tp-id-2}]
     (reduce (fn [_ {:jam/keys [members id]}]
-              (if (= (set members) check-for-members)
-                (reduced id)
-                nil))
+              (let [members (->> members
+                                 (map :teleporter/id)
+                                 (into #{}))]
+               (if (= members check-for-members)
+                 (reduced id)
+                 nil)))
             nil jams)))
 
 (defn- db-host* [{:keys [data database] :as this} room-id owner-id]
@@ -235,9 +238,10 @@
             (mqtt/publish mqtt-client (id->uuid (:owner room)) {:message/type :room.jam/left
                                                                 :room/id room-id
                                                                 :auth.user/id jammer-id})
-            (when jam-id
-              (jam.platform/stop jam-manager jam-id)
-              (swap! data update room-id dissoc :jam-id))
+            (if jam-id
+              (do (jam.platform/stop jam-manager jam-id)
+                  (swap! data update room-id dissoc :jam-id))
+              (log/error "Missing jam id when trying to stop a jam"))
             true))))
 
 (defn- db-knock* [{:keys [data database mqtt-client] :as this} room-id jammer-id]
@@ -331,9 +335,10 @@
                                            [:= :user_id jammer-id]]}))
             (mqtt/publish mqtt-client (id->uuid jammer-id) {:message/type :room.jam/removed
                                                             :room/id room-id})
-            (when jam-id
-              (jam.platform/stop jam-manager jam-id)
-              (swap! data update room-id dissoc :jam-id))
+            (if jam-id
+              (do (jam.platform/stop jam-manager jam-id)
+                  (swap! data update room-id dissoc :jam-id))
+              (log/error "Missing jam id when trying to stop a jam"))
             true))))
 
 (defn- db-close* [{:keys [data database mqtt-client jam-manager]} room-id owner-id]
@@ -373,8 +378,9 @@
             (doseq [knocker (:waiting room)]
               (mqtt/publish mqtt-client (id->uuid knocker) {:message/type :room.jam/closed
                                                             :room/id room-id}))
-            (when jam-id
-              (jam.platform/stop jam-manager jam-id))
+            (if jam-id
+              (jam.platform/stop jam-manager jam-id)
+              (log/error "Missing jam id when trying to stop a jam"))
             true))))
 
 (defn- db-get-room-by-id* [{:keys [data database] :as _this} room-id]
@@ -526,7 +532,7 @@
         tp1 #uuid "39d04c2c-7214-5e2c-a9ae-32ff15405b7f"
         tp2 #uuid "77756ff0-bb05-5e6a-b7d9-28086f3a07fd"
         db (:db jam)]
-    (proto/read-db db [:jam])
+    (proto/read-db db [:jams])
     ;; (proto/write-db db [:teleporter tp1 :teleporter/sip]
     ;;                 (str tp1 "@voip1.songpark.com"))
     ;; (proto/write-db db [:teleporter tp2 :teleporter/sip]
