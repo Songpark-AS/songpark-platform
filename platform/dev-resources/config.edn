@@ -29,7 +29,7 @@
                                    :password "postgres"
                                    :database-name "postgres"
                                    :server-name "localhost"
-                                   :port-number 5432}}}
+                                   :port-number 15432}}}
  :teleporter {;; milliseconds
               :offline-timeout 60000}
 
