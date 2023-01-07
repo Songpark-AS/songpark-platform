@@ -34,8 +34,6 @@
          (map (juxt :teleporter/serial :teleporter/local-ip :teleporter/public-ip))))
   (let [db (get-in @init/system [:http-server :db])]
     (proto/read-db db [:jams]))
-  (let [db (get-in @init/system [:http-server :db])]
-    (proto/write-db db [:waiting] {}))
 
   (let [db (get-in @init/system [:http-server :db])]
     (->> (proto/read-db db [:teleporter])

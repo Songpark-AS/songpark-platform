@@ -6,6 +6,8 @@
             [platform.util :refer [id->uuid]]
             [songpark.jam.platform :as jam.platform]
             [songpark.jam.platform.protocol :as proto]
+            [songpark.jam.util :refer [get-jam-topic
+                                       get-id]]
             [songpark.mqtt :as mqtt]
             [taoensso.timbre :as log]
             [tick.core :as t]))
@@ -61,28 +63,53 @@
               false))
           false (vals @roomdb)))
 
-(defn- get-teleporter-ids [ezdb user-id-1 user-id-2]
-  (->> {:select [:teleporter_id]
+(defn- get-teleporter-by-users [ezdb & user-ids]
+  (->> {:select [:user_id :teleporter_id]
         :from [:teleporter_pairing]
-        :where [:in :user_id [user-id-1 user-id-2]]}
+        :where [:in :user_id user-ids]}
        (db/query ezdb)
-       (map :teleporter_id)
-       (into #{})))
+       (map (juxt :user_id :teleporter_id))
+       (into {})))
 
-(defn get-jam-id [jam-manager tp-id-1 tp-id-2]
-  (let [{:keys [db]} jam-manager
-        jams (vals (proto/read-db db [:jams]))
-        check-for-members #{tp-id-1 tp-id-2}]
-    (reduce (fn [_ {:jam/keys [members id]}]
-              (let [members (->> members
-                                 (map :teleporter/id)
-                                 (into #{}))]
-               (if (= members check-for-members)
-                 (reduced id)
-                 nil)))
-            nil jams)))
+(defn get-jam-id
+  ([jam-manager tp-id]
+   (let [{:keys [db]} jam-manager
+         jams (vals (proto/read-db db [:jams]))]
+     (reduce (fn [_ {:jam/keys [members id]}]
+               (let [members (->> members
+                                  (map :teleporter/id)
+                                  (into #{}))]
+                 (if (members tp-id)
+                   (reduced id)
+                   nil)))
+             nil jams)))
+  ([jam-manager tp-id-1 tp-id-2]
+   (let [{:keys [db]} jam-manager
+         jams (vals (proto/read-db db [:jams]))
+         check-for-members #{tp-id-1 tp-id-2}]
+     (reduce (fn [_ {:jam/keys [members id]}]
+               (let [members (->> members
+                                  (map :teleporter/id)
+                                  (into #{}))]
+                 (if (= members check-for-members)
+                   (reduced id)
+                   nil)))
+             nil jams))))
 
-(defn- db-host* [{:keys [data database] :as this} room-id owner-id]
+(defn get-jam [jam-manager jam-id]
+  (let [{:keys [db]} jam-manager]
+    (proto/read-db db [:jams jam-id])))
+
+(defn publish-stopped-jam [mqtt-client jam-manager jam-id]
+  (let [topic (get-jam-topic jam-id)
+        jam (get-jam jam-manager jam-id)]
+    (mqtt/publish mqtt-client topic
+                  {:message/type :jam/stopped
+                   :jam/id (:jam/id jam)
+                   :jam/members (mapv :teleporter/id (:jam/members jam))})))
+
+(defn- db-host* [{:keys [data database jam-manager] :as this} room-id owner-id]
+  (when-let [jam (get-jam-by-owner )])
   (let [room (get @data room-id nil)]
     (cond (not (can-host? database room-id owner-id))
           {:error/key :room/cannot-host
@@ -177,25 +204,29 @@
                   (swap! data update room-id merge {:jammer jammer-id
                                                     :waiting #{}
                                                     :status :full}))))
-            ;; send out an update to our jammer that the they have
-            ;; been accepted into the jam
-            (mqtt/publish mqtt-client (id->uuid jammer-id) {:message/type :room.jam/accepted
-                                                            ;; for consistency
-                                                            :room/id room-id
-                                                            :room/jam (db-get-room-by-id this room-id)})
-
             (let [owner-id (:owner room)
-                  [from-tp-id to-tp-id] (mapv identity (get-teleporter-ids database owner-id jammer-id))]
+                  jam-id (get-id)
+                  teleporters (get-teleporter-by-users database owner-id jammer-id)
+                  [from-tp-id to-tp-id] (vals teleporters)
+                  msg-jammer {:message/type :room.jam/accepted
+                              ;; for consistency
+                              :room/id room-id
+                              :room/jam (db-get-room-by-id this room-id)}
+                  msg-jam-info {:message/type :jam/started
+                                :jam/id jam-id
+                                :jam/members (vals teleporters)
+                                :jam/teleporters teleporters}]
               (if (and from-tp-id
                        to-tp-id)
                 (do
-                  (jam.platform/start jam-manager [from-tp-id to-tp-id])
-                  (if-let [jam-id (get-jam-id jam-manager from-tp-id to-tp-id)]
-                    (do
-                      (swap! data update room-id merge {:jam-id jam-id})
-                      true)
-                    {:error/key :room/no-jam-id
-                     :error/message "Unable to find a jam id for the room"}))
+                  ;; send out an update to our jammer that the they have
+                  ;; been accepted into the jam
+                  (mqtt/publish mqtt-client (id->uuid jammer-id) msg-jammer)
+                  (doseq [user-id (keys teleporters)]
+                    (mqtt/publish mqtt-client (id->uuid user-id) msg-jam-info))
+                  (jam.platform/start jam-manager jam-id [from-tp-id to-tp-id])
+                  (swap! data update room-id merge {:jam-id jam-id})
+                  true)
                 {:error/key :room/no-paired-teleporter
                  :error/message "One or more teleporters are not paired with a user in the room"}))))))
 
@@ -239,8 +270,10 @@
                                                                 :room/id room-id
                                                                 :auth.user/id jammer-id})
             (if jam-id
-              (do (jam.platform/stop jam-manager jam-id)
-                  (swap! data update room-id dissoc :jam-id))
+              (do
+                (publish-stopped-jam mqtt-client jam-manager jam-id)
+                (jam.platform/stop jam-manager jam-id)
+                (swap! data update room-id dissoc :jam-id))
               (log/error "Missing jam id when trying to stop a jam"))
             true))))
 
@@ -336,7 +369,8 @@
             (mqtt/publish mqtt-client (id->uuid jammer-id) {:message/type :room.jam/removed
                                                             :room/id room-id})
             (if jam-id
-              (do (jam.platform/stop jam-manager jam-id)
+              (do (publish-stopped-jam mqtt-client jam-manager jam-id)
+                  (jam.platform/stop jam-manager jam-id)
                   (swap! data update room-id dissoc :jam-id))
               (log/error "Missing jam id when trying to stop a jam"))
             true))))
@@ -360,7 +394,12 @@
            :error/message "Owner does not exist"}
 
           :else
-          (let [{:keys [session-id jam-id]} room]
+          (let [{:keys [session-id jam-id]} room
+                tp-id (->> (get-teleporter-by-users database owner-id)
+                           (vals)
+                           first)
+                jam-id (or jam-id
+                           (get-jam-id jam-manager tp-id))]
             (when session-id
               (db/with-transaction [database :default]
                 (db/query! database {:update :room_session
@@ -379,7 +418,8 @@
               (mqtt/publish mqtt-client (id->uuid knocker) {:message/type :room.jam/closed
                                                             :room/id room-id}))
             (if jam-id
-              (jam.platform/stop jam-manager jam-id)
+              (do (publish-stopped-jam mqtt-client jam-manager jam-id)
+                  (jam.platform/stop jam-manager jam-id))
               (log/error "Missing jam id when trying to stop a jam"))
             true))))
 
