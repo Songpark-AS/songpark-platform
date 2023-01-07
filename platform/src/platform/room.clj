@@ -109,7 +109,6 @@
                    :jam/members (mapv :teleporter/id (:jam/members jam))})))
 
 (defn- db-host* [{:keys [data database jam-manager] :as this} room-id owner-id]
-  (when-let [jam (get-jam-by-owner )])
   (let [room (get @data room-id nil)]
     (cond (not (can-host? database room-id owner-id))
           {:error/key :room/cannot-host
