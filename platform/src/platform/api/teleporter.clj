@@ -1,5 +1,6 @@
 (ns platform.api.teleporter
   (:require [platform.config :refer [config]]
+            [platform.room :as room]
             [platform.model.pairing :as model.pairing]
             [platform.model.teleporter :as model.teleporter]
             [platform.mqtt.action.pairing :refer [publish-unpaired]]
@@ -19,6 +20,7 @@
         {:teleporter/keys [serial local-ip] :as teleporter} (:body parameters)
         id (serial->uuid serial)
         {memdb :db
+         roomdb :roomdb
          db :database
          mqtt-client :mqtt-client} data]
     (if serial
@@ -38,6 +40,10 @@
         (let [user-ids (model.pairing/cut-pairing db id)]
           ;; inform any application listening that the teleporter has been unpaired
           (publish-unpaired mqtt-client id user-ids))
+
+        ;; close any rooms
+        (let [room-id (room/get-room-id roomdb id)]
+          (room/db-close roomdb room-id))
 
         {:status 200
          :body {:teleporter/id id

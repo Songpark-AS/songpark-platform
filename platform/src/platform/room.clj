@@ -34,7 +34,7 @@
   (db-decline [database room-id jammer-id] "Decline someone knocking on a room")
   (db-leave [database room-id jammer-id] "Leave a room")
   (db-remove [database room-id jammer-id] "Remove a jammer from a room")
-  (db-close [database room-id owner-id] "Close a room")
+  (db-close [database room-id] [database room-id owner-id] "Close a room")
   (db-get-room-by-host [database owner-id] "Get a specific room based on the owner's id")
   (db-get-room-by-user-id [database user-id] "Get a specific room based on either the owner, a jammer or a knocker")
   (db-get-room-by-id [database room-id])
@@ -95,6 +95,16 @@
                    (reduced id)
                    nil)))
              nil jams))))
+
+(defn get-room-id
+  [roomdb tp-id]
+  (let [rooms @(:data roomdb)]
+    (reduce (fn [_ [room-id {owner-tp-id :owner/teleporter jammer-tp-id :jammer/teleporter}]]
+              (if (or (= tp-id jammer-tp-id)
+                      (= tp-id owner-tp-id))
+                (reduced room-id)
+                nil))
+            nil rooms)))
 
 (defn get-jam [jam-manager jam-id]
   (let [{:keys [db]} jam-manager]
@@ -224,7 +234,9 @@
                   (doseq [user-id (keys teleporters)]
                     (mqtt/publish mqtt-client (id->uuid user-id) msg-jam-info))
                   (jam.platform/start jam-manager jam-id [from-tp-id to-tp-id])
-                  (swap! data update room-id merge {:jam-id jam-id})
+                  (swap! data update room-id merge {:jam-id jam-id
+                                                    :jammer/teleporter (get teleporters jammer-id)
+                                                    :owner/teleporter (get teleporters owner-id)})
                   true)
                 {:error/key :room/no-paired-teleporter
                  :error/message "One or more teleporters are not paired with a user in the room"}))))))
@@ -374,53 +386,83 @@
               (log/error "Missing jam id when trying to stop a jam"))
             true))))
 
-(defn- db-close* [{:keys [data database mqtt-client jam-manager]} room-id owner-id]
-  (let [room (get @data room-id nil)]
-    (cond (nil? room)
-          {:error/key :room/does-not-exist
-           :error/message "The room is not available"}
+(defn- db-close*
+  ([{:keys [data database mqtt-client jam-manager]} room-id]
+   (let [room (get @data room-id nil)]
+     (log/debug ::db-close*-room room)
+     (when room
+       (let [{:keys [session-id jam-id owner jammer]} room]
+         (when session-id
+           (db/with-transaction [database :default]
+             (db/query! database {:update :room_session
+                                  :set {:closed_at (t/now)}
+                                  :where [:= :id session-id]})
+             (db/query! database {:update :room_session_users
+                                  :set {:left_at (t/now)}
+                                  :where [:and
+                                          [:= :room_session_id session-id]
+                                          [:is :left_at nil]]})))
+         (swap! data dissoc room-id)
+         (log/debug ::users [jammer owner])
+         (doseq [user [jammer owner]]
+           (when user
+             (mqtt/publish mqtt-client (id->uuid user) {:message/type :room.jam/closed
+                                                        :room/id room-id})))
+         (doseq [knocker (:waiting room)]
+           (mqtt/publish mqtt-client (id->uuid knocker) {:message/type :room.jam/closed
+                                                         :room/id room-id}))
+         (if jam-id
+           (do (publish-stopped-jam mqtt-client jam-manager jam-id)
+               (jam.platform/stop jam-manager jam-id))
+           (log/error "Missing jam id when trying to stop a jam"))
+         true))))
+  ([{:keys [data database mqtt-client jam-manager]} room-id owner-id]
+   (let [room (get @data room-id nil)]
+     (cond (nil? room)
+           {:error/key :room/does-not-exist
+            :error/message "The room is not available"}
 
-          (not= (:owner room) owner-id)
-          {:error/key :room/not-the-owner
-           :error/message "User is not the owner"}
+           (not= (:owner room) owner-id)
+           {:error/key :room/not-the-owner
+            :error/message "User is not the owner"}
 
-          (nil? (:owner room))
-          {:error/key :room/no-owner
-           :error/message "No owner is present for this room"}
+           (nil? (:owner room))
+           {:error/key :room/no-owner
+            :error/message "No owner is present for this room"}
 
-          (nil? owner-id)
-          {:error/key :room/no-jammer
-           :error/message "Owner does not exist"}
+           (nil? owner-id)
+           {:error/key :room/no-jammer
+            :error/message "Owner does not exist"}
 
-          :else
-          (let [{:keys [session-id jam-id]} room
-                tp-id (->> (get-teleporter-by-users database owner-id)
-                           (vals)
-                           first)
-                jam-id (or jam-id
-                           (get-jam-id jam-manager tp-id))]
-            (when session-id
-              (db/with-transaction [database :default]
-                (db/query! database {:update :room_session
-                                     :set {:closed_at (t/now)}
-                                     :where [:= :id session-id]})
-                (db/query! database {:update :room_session_users
-                                     :set {:left_at (t/now)}
-                                     :where [:and
-                                             [:= :room_session_id session-id]
-                                             [:is :left_at nil]]})))
-            (swap! data dissoc room-id)
-            (when-let [jammer (:jammer room)]
-              (mqtt/publish mqtt-client (id->uuid jammer) {:message/type :room.jam/closed
-                                                           :room/id room-id}))
-            (doseq [knocker (:waiting room)]
-              (mqtt/publish mqtt-client (id->uuid knocker) {:message/type :room.jam/closed
+           :else
+           (let [{:keys [session-id jam-id]} room
+                 tp-id (->> (get-teleporter-by-users database owner-id)
+                            (vals)
+                            first)
+                 jam-id (or jam-id
+                            (get-jam-id jam-manager tp-id))]
+             (when session-id
+               (db/with-transaction [database :default]
+                 (db/query! database {:update :room_session
+                                      :set {:closed_at (t/now)}
+                                      :where [:= :id session-id]})
+                 (db/query! database {:update :room_session_users
+                                      :set {:left_at (t/now)}
+                                      :where [:and
+                                              [:= :room_session_id session-id]
+                                              [:is :left_at nil]]})))
+             (swap! data dissoc room-id)
+             (when-let [jammer (:jammer room)]
+               (mqtt/publish mqtt-client (id->uuid jammer) {:message/type :room.jam/closed
                                                             :room/id room-id}))
-            (if jam-id
-              (do (publish-stopped-jam mqtt-client jam-manager jam-id)
-                  (jam.platform/stop jam-manager jam-id))
-              (log/error "Missing jam id when trying to stop a jam"))
-            true))))
+             (doseq [knocker (:waiting room)]
+               (mqtt/publish mqtt-client (id->uuid knocker) {:message/type :room.jam/closed
+                                                             :room/id room-id}))
+             (if jam-id
+               (do (publish-stopped-jam mqtt-client jam-manager jam-id)
+                   (jam.platform/stop jam-manager jam-id))
+               (log/error "Missing jam id when trying to stop a jam"))
+             true)))))
 
 (defn- db-get-room-by-id* [{:keys [data database] :as _this} room-id]
   (let [room (get @data room-id nil)]
@@ -491,6 +533,8 @@
     (db-decline* this room-id jammer-id))
   (db-remove [this room-id jammer-id]
     (db-remove* this room-id jammer-id))
+  (db-close [this room-id]
+    (db-close* this room-id))
   (db-close [this room-id owner-id]
     (db-close* this room-id owner-id))
   (db-get-room-by-host [this owner-id]
