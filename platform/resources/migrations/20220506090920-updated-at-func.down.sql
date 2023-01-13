@@ -1,0 +1,1 @@
+DROP FUNCTION updated_at_trigger_func;

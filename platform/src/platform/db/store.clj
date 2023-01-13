@@ -8,7 +8,7 @@
 (defn rd [ks]
   (get-in @state ks))
 
-(defn wr 
+(defn wr
   ([ks v] (swap! state assoc-in ks v))
   ([ks v f] (swap! state update-in ks f v)))
 

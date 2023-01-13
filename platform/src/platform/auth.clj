@@ -1,5 +1,10 @@
 (ns platform.auth)
 
+(defn get-token []
+  (->> (repeat 6 nil)
+       (map (fn [_] (rand-int 10)))
+       (apply str)))
+
 (defn get-credentials
   ([request]
    (get-in request [:session :identity]))
@@ -14,12 +19,6 @@
    (let [identity (get-in request [:session :identity])]
      (merge data
             (select-keys identity ks)))))
-
-(defn teacher? [request]
-  (contains? (get-in request [:session :identity]) :teacher/id))
-
-(defn student? [request]
-  (contains? (get-in request [:session :identity]) :student/id))
 
 (defn auth-user? [request]
   (contains? (get-in request [:session :identity]) :auth.user/id))

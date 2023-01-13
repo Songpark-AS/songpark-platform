@@ -1,15 +1,26 @@
 version: '3'
 services:
     postgres:
-        image: postgres
-        volumes:
-          - .docker/postgresql:/var/lib/postgresql/data
-          - ./scripts/postgres:/docker-entrypoint-initdb.d
-        ports:
-          - '5432:5432'
-        environment:
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
+      image: postgres:10
+      volumes:
+        - .docker/postgresql:/var/lib/postgresql/data
+        - ./scripts/postgres:/docker-entrypoint-initdb.d
+      ports:
+        - '15432:5432'
+      environment:
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: postgres
+    mqtt:
+      image: eclipse-mosquitto
+      expose:
+        - "1883"
+        - "9001"
+      ports:
+        - "1883:1883"
+        - "8000:8000"
+        - "9001:9001"
+      volumes:
+        - .docker/mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf
     redis:
       image: redis:alpine
       ports:
