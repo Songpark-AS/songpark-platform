@@ -40,11 +40,11 @@
                         :jam-manager)
         ezdb (:database @platform.init/system)
         jam-id (platform.room/get-jam-id jam-manager
-                                         #uuid "39d04c2c-7214-5e2c-a9ae-32ff15405b7f")]
+                                         #uuid "adc95eec-9d7d-528b-9021-a464096c05b1")]
     ;;(proto/read-db (:db jam-manager) [:jam])
     (platform.room/get-jam-id jam-manager
-                              #uuid "39d04c2c-7214-5e2c-a9ae-32ff15405b7f"
-                              #uuid "77756ff0-bb05-5e6a-b7d9-28086f3a07fd")
+                              #uuid "adc95eec-9d7d-528b-9021-a464096c05b1"
+                              #uuid "aa813234-4202-5734-b49c-ce8e618501cc")
     (platform.room/get-jam jam-manager jam-id))
 
   (let [roomdb (-> @platform.init/system
@@ -53,7 +53,7 @@
                    :songpark/data
                    :roomdb)
         room-id (platform.room/get-room-id roomdb
-                                           #uuid "39d04c2c-7214-5e2c-a9ae-32ff15405b7f")]
+                                           #uuid "adc95eec-9d7d-528b-9021-a464096c05b1")]
     ;;(platform.room/db-close roomdb jam-id)
     room-id
     )
@@ -63,7 +63,7 @@
       :middleware-data
       :songpark/data
       :roomdb
-      :data
+      ;;:data
       ;;keys
       )
 

@@ -228,11 +228,15 @@
               (if (and from-tp-id
                        to-tp-id)
                 (do
+                  ;; inform the apps about the jam
+                  (doseq [user-id (keys teleporters)]
+                    (log/debug "updating" user-id "about the jam" msg-jam-info)
+                    (mqtt/publish mqtt-client (id->uuid user-id) msg-jam-info))
+
                   ;; send out an update to our jammer that the they have
                   ;; been accepted into the jam
                   (mqtt/publish mqtt-client (id->uuid jammer-id) msg-jammer)
-                  (doseq [user-id (keys teleporters)]
-                    (mqtt/publish mqtt-client (id->uuid user-id) msg-jam-info))
+
                   (jam.platform/start jam-manager jam-id [from-tp-id to-tp-id])
                   (swap! data update room-id merge {:jam-id jam-id
                                                     :jammer/teleporter (get teleporters jammer-id)

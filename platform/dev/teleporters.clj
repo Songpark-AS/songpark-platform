@@ -24,4 +24,9 @@
              (format "INSERT INTO teleporter_teleporter (id, serial) VALUES ('%s', '%s');" id serial))
            values)))
     )
+
+  (doseq [n [9001 9002]]
+    (let [serial (get-serial n)
+          id (serial->uuid serial)]
+      (println (format "INSERT INTO teleporter_teleporter (id, serial) VALUES ('%s', '%s');" id serial))))
   )

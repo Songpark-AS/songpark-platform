@@ -42,7 +42,8 @@
                                                                                 {:db db
                                                                                  :store store}))
                                                 [:mqtt-client :jam-manager :database :roomdb])
-                  :jam-manager (component/using (jam-manager {:db db})
+                  :jam-manager (component/using (jam-manager (assoc (:jam-manager config)
+                                                                    :db db))
                                                 [:mqtt-client])
                   :roomdb (component/using (room/room-db {})
                                            [:mqtt-client :jam-manager :database])

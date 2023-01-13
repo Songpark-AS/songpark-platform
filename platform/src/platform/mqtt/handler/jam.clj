@@ -46,7 +46,7 @@
                                            :event/type
                                            :event/value]))
   (condp = event-type
-    :sync/timeout (jam.platform/timed-out jam-manager jam-id teleporter-id)
+    ;; :sync/timeout (jam.platform/timed-out jam-manager jam-id teleporter-id)
     :else nil))
 
 

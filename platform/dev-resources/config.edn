@@ -5,7 +5,8 @@
  :storage {:directory "resources/public"
            :url "http://localhost:3000/media/images/"}
  :logger {:sentry-settings {:log? false
-                            :dsn ""}}
+                            :dsn ""}
+          :level :debug}
  :mqtt {:config {:scheme "tcp"
                  :host "10.100.200.8"
                  :port 1883
@@ -32,6 +33,8 @@
                                    :port-number 15432}}}
  :teleporter {;; milliseconds
               :offline-timeout 60000}
+ ;; wait 2 minutes before timing out and shutting down a jam
+ :jam-manager {:timeout-ms-jam-eol 120000}
 
  :mailchimp {:list-id "0921d6896d"
              :api-key "69453a78d3038090954193502c44e569-us9"}
