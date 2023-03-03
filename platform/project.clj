@@ -20,6 +20,9 @@
                  [songpark/taxonomy "0.3.0-SNAPSHOT"]
                  [songpark/mqtt "1.0.4"]
 
+                 ;; http basic auth
+                 [ring-basic-authentication "1.1.1"]
+
                  ;; routing
                  [metosin/reitit "0.4.2"]
 

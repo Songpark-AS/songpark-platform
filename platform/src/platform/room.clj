@@ -579,6 +579,7 @@
   (db-get-room-by-user-id rooms owner-id)
   (db-get-room-by-user-id rooms jammer-id)
   (db-get-room-by-user-id rooms 2)
+  (db-get-rooms rooms)
 
   ;; room id 2
   (db-host rooms 2 1)

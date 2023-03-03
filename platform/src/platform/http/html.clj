@@ -26,14 +26,34 @@
     [:link {:rel "stylesheet" :href (media "/static/css/vendor/antd.css")}]
     [:link {:rel "stylesheet" :href (media "/static/css/app.css")}]
     [:link {:rel "icon" :type "image/png" :href "/static/img/logo.png"}]
-    [:title "Songpark - Backoffice"]]
+    [:title "Songpark - Backoffice"]
+    [:style {:type "text/css"}
+     "body {
+display: flex;
+flex-direction: column;
+align-items: center;
+gap: 20px;
+padding-top: 150px;
+}"]]
    [:body
-    [:div {:id "app"}]
-    [:script {:src (media "/static/js/main.js") :type "text/javascript"}]
+    [:div "Reset all rooms"]
+    [:div
+     [:button {:onclick "resetRooms();"}
+      "Reset!"]]
     [:script {:type "text/javascript"}
-     (str "backoffice.core.init("
-          (json/generate-string options)
-          ");")]]))
+     "var resetRooms = function () {
+fetch('/admin/reset-rooms',
+ {method: 'POST'})
+.then((resp) => resp.json()
+.then((data) => {
+  if (data.result == 'success') {
+    alert('The rooms have been reset. Give it a bit of time to let the Teleproters close any ongoing jams.');
+  } else {
+    alert('Something went wrong. Contact the administrator');
+  }
+}))
+};"]
+    ]))
 
 (defn auth-page []
   (html5

@@ -1,5 +1,6 @@
 (ns platform.http.route
-  (:require [platform.api.app :as api.app]
+  (:require [platform.api.admin :as api.admin]
+            [platform.api.app :as api.app]
             [platform.api.auth :as api.auth]
             [platform.api.fx :as api.fx]
             [platform.api.pairing :as api.pairing]
@@ -10,7 +11,8 @@
             [platform.api.version :as api.version]
             [platform.config :refer [config]]
             [platform.http.html :refer [home]]
-            [platform.http.middleware :as middleware :refer [wrap-authn
+            [platform.http.middleware :as middleware :refer [http-basic-authenticated?
+                                                             wrap-authn
                                                              wrap-authz
                                                              wrap-exceptions]]
             [buddy.auth.middleware :refer [wrap-authentication
@@ -22,6 +24,7 @@
             [songpark.taxonomy.http]
             [songpark.taxonomy.jam]
             [songpark.taxonomy.teleporter]
+            [ring.middleware.basic-authentication :refer [wrap-basic-authentication]]
             [ring.middleware.content-type :refer [wrap-content-type]]
             [ring.middleware.cookies :refer [wrap-cookies]]
             [ring.middleware.cors :refer [wrap-cors]]
@@ -40,7 +43,8 @@
             [reitit.ring.middleware.parameters :as parameters]
             [reitit.ring.spec]
             [tick.core :as t]
-            [taoensso.timbre :as log]))
+            [taoensso.timbre :as log]
+            [platform.api.admin :as admin]))
 
 
 (defn time-fn [o]
@@ -72,7 +76,8 @@
    (ring/router
     [
      ["/"
-      {:get {:no-doc true
+      {:middleware [[wrap-basic-authentication http-basic-authenticated?]]
+       :get {:no-doc true
              :handler (fn [_]
                         {:status 200
                          :headers {"Content-Type" "text/html; charset=utf-8"}
@@ -104,6 +109,10 @@
       {:get {:no-doc true
              :swagger {:info {:title "Songpark API"}}
              :handler (swagger/create-swagger-handler)}}]
+
+     ["/admin/reset-rooms"
+      {:middleware [[wrap-basic-authentication http-basic-authenticated?]]
+       :post {:handler #'api.admin/reset-rooms}}]
 
      ;; health check
      ["/health"

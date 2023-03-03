@@ -1,9 +1,14 @@
 (ns platform.http.middleware
   (:require [platform.auth.authz :as authz]
+            [platform.config :refer [config]]
             [buddy.auth :refer [authenticated?]]
             [reitit.ring.middleware.exception :as exception]
             [taoensso.timbre :as log]))
 
+
+(defn http-basic-authenticated? [username password]
+  (and (= username (get-in config [:http :basic-auth :username]))
+       (= password (get-in config [:http :basic-auth :password]))))
 
 (defrecord SongparkData [])
 

@@ -1,4 +1,6 @@
 {:http {:url "http://localhost:3000"
+        :basic-auth {:username "songpark"
+                     :password "songpark"}
         :server-settings {:port 3000
                           :join? false
                           :http/cookies {:http-only true}}}
