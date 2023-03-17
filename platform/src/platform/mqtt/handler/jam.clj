@@ -46,7 +46,10 @@
                                            :event/type
                                            :event/value]))
   (condp = event-type
+    ;; sync/timeout is run when a teleporter runs out of time trying to sync
     ;; :sync/timeout (jam.platform/timed-out jam-manager jam-id teleporter-id)
+    ;; sync/end is run when a teleporter stops waiting for a sync response
+    ;; :sync/end
     :else nil))
 
 

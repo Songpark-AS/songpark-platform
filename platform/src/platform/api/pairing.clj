@@ -20,6 +20,7 @@
              {data :body} :parameters
              {user-id :auth.user/id} :identity
              :as request}]
+  (log/debug "Pair")
   (let [serial (:teleporter/serial data)
         serial-exists? (model.pairing/serial-exists? db serial)
         already-paired? (model.pairing/already-paired? db user-id serial)]
